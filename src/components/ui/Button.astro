@@ -1,0 +1,45 @@
+---
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
+export type ButtonSize = 'sm' | 'lg';
+
+export interface Props {
+  href?: string;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  type?: 'button' | 'submit' | 'reset';
+  target?: string;
+  rel?: string;
+  class?: string;
+  ariaLabel?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size,
+  type = 'button',
+  target,
+  rel,
+  class: className = '',
+  ariaLabel,
+} = Astro.props as Props;
+
+const classes = [
+  'btn',
+  variant ? `btn-${variant}` : '',
+  size ? `btn-${size}` : '',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+{href ? (
+  <a class={classes} href={href} target={target} rel={rel} aria-label={ariaLabel}>
+    <slot />
+  </a>
+) : (
+  <button class={classes} type={type} aria-label={ariaLabel}>
+    <slot />
+  </button>
+)}

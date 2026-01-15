@@ -94,13 +94,13 @@ body.page--subpage #header {
 }
 
 #rules .rules .rules-list .rule {
-    color: var(--description-color);
+    color: var(--white-color);
     font-size: 17px;
     line-height: 1.6;
 }
 
 #rules .rules .rules-list .rule span {
-    color: var(--main-color);
+    color: inherit;
 }
 
 /*Server Join*/

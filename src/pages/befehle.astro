@@ -2,344 +2,65 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('commands', 'list');
+if (!entry) throw new Error('Missing commands content: src/content/commands/list.json');
+const categories = entry.data.categories;
 ---
 
 <BaseLayout
-  title={"Minecraft Gilde - Server-Befehle"}
-  canonical={"https://minecraft-gilde.de/befehle.html"}
-  description={undefined}
-  keywords={undefined}
-  author={undefined}
-  bodyClass={"page--sticky-footer page--subpage page--content"}
+  title="Minecraft Gilde - Server-Befehle"
+  canonical="https://minecraft-gilde.de/befehle.html"
+  bodyClass="page--sticky-footer page--subpage page--content"
   styles={["/css/content-page.css", "/css/befehle.css"]}
   scripts={["/js/befehle.js"]}
 >
-  <Navbar active={"befehle"} />
+  <Navbar active="befehle" />
 
   <main id="main-content" tabindex="-1">
-<!--Header-->
-<section id="header">
-<div class="content">
-<div class="info">
-<p class="minecraft-server-ip">Minecraft-Gilde.de</p>
-<h1 class="title">Server <span>Befehle</span></h1>
-</div>
-</div>
-</section>
-<!--Inhalt-->
-<section id="page-content">
-<div class="content">
-<div class="search-wrapper search-wrapper--commands">
-<i aria-hidden="true" class="fa-solid fa-magnifying-glass"></i>
-<input aria-label="Suche" id="searchInput" placeholder="Befehl oder Beschreibung suchen..." type="text"/>
-</div>
-<div class="table-wrapper">
-<table id="commandsTable">
-<thead>
-<tr>
-<th>Kategorie</th>
-<th>Befehl</th>
-<th>Beschreibung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Basisbefehle</td>
-<td>/getpos</td>
-<td>Zeigt euch eure aktuelle Position (Koordinaten) und die Welt in der ihr seit an</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/help</td>
-<td>Mit diesem Befehl könnt ihr euch alle Befehle anzeigen lassen</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/helpop &lt;nachricht&gt;</td>
-<td>Mit diesem Befehl schreibt ihr einen Admin an</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/afk</td>
-<td>
-                  Mit diesem Befehl setzt ihr euch abwesend (Achtung: Monster können euch immer noch angreifen!)
-                  Hinweis: Wenn ihr Abwesend seit können andere Spieler schlafen gehen, ohne dass ihr schlafen gehen
-                  müsst
-                </td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/back</td>
-<td>Teleportiert dich an deinen letzten Standort vor dem Tp- oder Spawn-Befehl</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/discord</td>
-<td>Zeigt euch den Discord-Einladungslink an</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/list</td>
-<td>Zeigt euch alle Spieler, die aktuell online auf dem Server sind</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/map</td>
-<td>Zeigt dir den Link zur DynMap an</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/motd</td>
-<td>Zeigt euch die Willkommensnachricht an</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/msg &lt;spieler&gt; &lt;nachricht&gt;</td>
-<td>Sendet eine Private Nachricht an einen Spieler</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/r</td>
-<td>Schnelle Antwort auf die letzte Nachricht</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/rtp</td>
-<td>Teleportiert dich an eine zufällige Stelle auf der Karte</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/rules</td>
-<td>Zeigt die Serverregeln an</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/seen</td>
-<td>Zeigt die letzte Logout-Zeit eines Spielers an</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/spawn</td>
-<td>Teleportiert dich zum Spawn</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/time</td>
-<td>Zeigt euch die Ingame-Uhrzeit an</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/tpa &lt;spieler&gt;</td>
-<td>Stellt eine Anfrage, um sich zu einem Spieler zu teleportieren</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/tpahere &lt;spieler&gt;</td>
-<td>Bittet den angegebenen Spieler, sich zu dir zu teleportieren</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/tpaccept</td>
-<td>Eine Teleportanfrage annehmen</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/tpauto</td>
-<td>Teleportanfragen automatisch annehmen</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/tpcancel</td>
-<td>Eine Teleportanfrage abbrechen</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/tpdeny</td>
-<td>Eine Teleportanfrage ablehnen</td>
-</tr>
-<tr>
-<td>Basisbefehle</td>
-<td>/tutorial</td>
-<td>Mit diesem Befehl öffnest du unser Tutorial</td>
-</tr>
-<tr>
-<td>Homes</td>
-<td>/sethome &lt;name&gt;</td>
-<td>Setzt ein Home auf die aktuelle Position</td>
-</tr>
-<tr>
-<td>Homes</td>
-<td>/delhome &lt;name&gt;</td>
-<td>Löscht ein Home</td>
-</tr>
-<tr>
-<td>Homes</td>
-<td>/home &lt;name&gt;</td>
-<td>Teleportiert dich zu dem angegebenen Home</td>
-</tr>
-<tr>
-<td>Homes</td>
-<td>/homes</td>
-<td>Zeigt deine Home-Punkte an</td>
-</tr>
-<tr>
-<td>Homes</td>
-<td>/renamehome</td>
-<td>Benennt ein Home-Punkt um</td>
-</tr>
-<tr>
-<td>Grundstücke</td>
-<td>/abandonclaim</td>
-<td>Löscht den Claim, in dem du stehst</td>
-</tr>
-<tr>
-<td>Grundstücke</td>
-<td>/abandonallclaims</td>
-<td>Löscht alle deine Grundstücke (Muss Bestätigt werden)</td>
-</tr>
-<tr>
-<td>Grundstücke</td>
-<td>/claimexplosions</td>
-<td>Schaltet um, ob Explosionen im Claim erlaubt sind</td>
-</tr>
-<tr>
-<td>Grundstücke</td>
-<td>/trust &lt;spieler&gt;</td>
-<td>Erteilt einem anderen Spieler die Erlaubnis, Ihren Claim zu bearbeiten</td>
-</tr>
-<tr>
-<td>Grundstücke</td>
-<td>/untrust &lt;spieler&gt;</td>
-<td>Widerruft alle Berechtigungen, die einem Spieler in Ihrem Claim gewährt wurden</td>
-</tr>
-<tr>
-<td>Grundstücke</td>
-<td>/untrust all</td>
-<td>Entfernt alle Berechtigungen für alle Spieler in Ihrem Claim</td>
-</tr>
-<tr>
-<td>Grundstücke</td>
-<td>/accesstrust &lt;spieler&gt;</td>
-<td>Gibt einem Spieler die Erlaubnis, Ihre Tasten, Hebel und Betten zu benutzen</td>
-</tr>
-<tr>
-<td>Grundstücke</td>
-<td>/containertrust &lt;spieler&gt;</td>
-<td>
-                  Gibt einem Spieler die Erlaubnis, deine Knöpfe, Hebel, Betten, Handwerksgeräte, Container und Tiere zu
-                  benutzen
-                </td>
-</tr>
-<tr>
-<td>Grundstücke</td>
-<td>/trustlist</td>
-<td>Listet die Berechtigungen für den Claim auf, in dem Sie sich befinden</td>
-</tr>
-<tr>
-<td>Grundstücke</td>
-<td>/permissiontrust &lt;spieler&gt;</td>
-<td>Erlaubt einem Spieler, seine Berechtigungsstufe mit anderen zu teilen</td>
-</tr>
-<tr>
-<td>Grundstücke</td>
-<td>/claimslist</td>
-<td>Listet die Claims und Claim-Block-Details eines Spielers auf</td>
-</tr>
-<tr>
-<td>Grundstücke</td>
-<td>/trapped</td>
-<td>Befreit dich aus einem Claim, in dem du gefangen bist</td>
-</tr>
-<tr>
-<td>Grundstücke</td>
-<td>/expandclaim &lt;+/- wert&gt;</td>
-<td>
-                  Erweitert den Claim um die angegebene Distanz (Der Befehl ist nur möglich, wenn eine Holz-Schaufel in
-                  der Hand gehalten wird)
-                </td>
-</tr>
-<tr>
-<td>Grundstücke</td>
-<td>/subdivideclaims</td>
-<td>
-                  Schaltet deine Holz-Schaufel in den Unterteilungsmodus, damit du deine Claims unterteilen kannst
-                </td>
-</tr>
-<tr>
-<td>Farmwelten</td>
-<td>/farmwelt</td>
-<td>Teleportiert dich in die normale Farmwelt</td>
-</tr>
-<tr>
-<td>Farmwelten</td>
-<td>/netherfarm</td>
-<td>Teleportiert dich in die Nether-Farmwelt</td>
-</tr>
-<tr>
-<td>Farmwelten</td>
-<td>/endfarm</td>
-<td>Teleportiert dich in die End-Farmwelt</td>
-</tr>
-<tr>
-<td>Voting</td>
-<td>/vote</td>
-<td>Zeigt dir alle Vote-Links an</td>
-</tr>
-<tr>
-<td>Voting</td>
-<td>/votegui</td>
-<td>Öffnet die Vote-Oberfläche</td>
-</tr>
-<tr>
-<td>Voting</td>
-<td>/voteshop</td>
-<td>Öffnet den Vote-Shop</td>
-</tr>
-<tr>
-<td>Voting</td>
-<td>/votepoints</td>
-<td>Zeigt dir deinen aktuellen Punktestand an</td>
-</tr>
-<tr>
-<td>Voting</td>
-<td>/votenext</td>
-<td>Zeigt dir die nächsten möglichen Vote-Seiten an</td>
-</tr>
-<tr>
-<td>Voting</td>
-<td>/votetop</td>
-<td>Zeigt dir deine Bestenliste an</td>
-</tr>
-<tr>
-<td>Voting</td>
-<td>/votetoday</td>
-<td>Zeigt an, wer heute alles gevotet hat</td>
-</tr>
-<tr>
-<td>Voting</td>
-<td>/votetotal</td>
-<td>Zeigt an, wie oft du gevotet hast</td>
-</tr>
-<tr>
-<td>Voting</td>
-<td>/votebest</td>
-<td>Zeigt dir deine Voting-Bestwerte an</td>
-</tr>
-<tr>
-<td>Voting</td>
-<td>/votehelp &lt;seite&gt;</td>
-<td>Zeigt dir die Hilfeseiten des Vote-Plug-in an</td>
-</tr>
-<tr>
-<td>Voting</td>
-<td>/votetogglereminders</td>
-<td>Vote-Erinnerungen aktivieren/deaktivieren</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-</main>
+    <!--Header-->
+    <SectionHeader titleHtml="Server <span>Befehle</span>" />
 
-  <Footer /></BaseLayout>
+    <!--Inhalt-->
+    <section id="page-content">
+      <div class="content">
+        <div class="search-wrapper search-wrapper--commands">
+          <i aria-hidden="true" class="fa-solid fa-magnifying-glass"></i>
+          <input
+            aria-label="Suche"
+            id="searchInput"
+            placeholder="Befehl oder Beschreibung suchen..."
+            type="text"
+          />
+        </div>
+
+        <div class="table-wrapper">
+          <table id="commandsTable">
+            <thead>
+              <tr>
+                <th>Kategorie</th>
+                <th>Befehl</th>
+                <th>Beschreibung</th>
+              </tr>
+            </thead>
+            <tbody>
+              {categories.map((cat) =>
+                cat.commands.map((cmd) => (
+                  <tr>
+                    <td>{cat.name}</td>
+                    <td>{cmd.command}</td>
+                    <td>{cmd.description}</td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

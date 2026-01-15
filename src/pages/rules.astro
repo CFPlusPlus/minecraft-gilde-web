@@ -2,205 +2,138 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import Callout from '../components/ui/Callout.astro';
+import Button from '../components/ui/Button.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('rules', 'main');
+if (!entry) throw new Error('Missing rules content: src/content/rules/main.json');
+const data = entry.data;
 ---
 
 <BaseLayout
-  title={"Minecraft Gilde - Unser Regelwerk"}
-  canonical={"https://minecraft-gilde.de/rules.html"}
-  description={"Alle Regeln für den Minecraft Vanilla Server der Gilde – fair, klar und verständlich. Griefing, Hacks, Spam & Werbung verboten. Jetzt Regelwerk lesen!"}
-  keywords={"Minecraft Regeln, Serverregeln, Minecraft Vanilla Regeln, Survival Server Regeln, Discord Regeln, deutscher Minecraft Server, Freebuild Regeln, griefing verboten, afk farmen erlaubt, Minecraft Gilde Regeln"}
-  author={"Christian Falkner"}
-  bodyClass={"page--sticky-footer page--subpage"}
-  styles={["/css/rules.css"]}
-  scripts={[]}
+  title={'Minecraft Gilde - Unser Regelwerk'}
+  canonical={'https://minecraft-gilde.de/rules.html'}
+  description={'Alle Regeln für den Minecraft Vanilla Server der Gilde – fair, klar und verständlich. Griefing, Hacks, Spam & Werbung verboten. Jetzt Regelwerk lesen!'}
+  keywords={'Minecraft Regeln, Serverregeln, Minecraft Vanilla Regeln, Survival Server Regeln, Discord Regeln, deutscher Minecraft Server, Freebuild Regeln, griefing verboten, afk farmen erlaubt, Minecraft Gilde Regeln'}
+  author={'Christian Falkner'}
+  bodyClass={'page--sticky-footer page--subpage'}
+  styles={['/css/rules.css']}
 >
-  <meta content="Minecraft Gilde - Unser Regelwerk" property="og:title" slot="head"/>
-  <meta content="Lies das offizielle Regelwerk der Minecraft Gilde. Klare Regeln für Freebuild, Survival und Discord. Griefing und Hacks sind verboten." property="og:description" slot="head"/>
-  <meta content="https://minecraft-gilde.de/images/logo.webp" property="og:image" slot="head"/>
-  <meta content="https://minecraft-gilde.de/rules.html" property="og:url" slot="head"/>
-  <meta content="website" property="og:type" slot="head"/>
-  <meta content="summary_large_image" name="twitter:card" slot="head"/>
-  <meta content="Minecraft Gilde - Unser Regelwerk" name="twitter:title" slot="head"/>
-  <meta content="Faire Regeln für Freebuild, Survival und Discord. AFK-Farmen erlaubt, Griefing verboten. Erfahre, was bei uns gilt!" name="twitter:description" slot="head"/>
-  <meta content="https://minecraft-gilde.de/images/logo.webp" name="twitter:image" slot="head"/>
-  <Navbar active={"rules"} />
+  <meta slot="head" property="og:title" content="Minecraft Gilde - Unser Regelwerk" />
+  <meta slot="head" property="og:description" content="Lies das offizielle Regelwerk der Minecraft Gilde. Klare Regeln für Freebuild, Survival und Discord. Griefing und Hacks sind verboten." />
+  <meta slot="head" property="og:image" content="https://minecraft-gilde.de/images/logo.webp" />
+  <meta slot="head" property="og:url" content="https://minecraft-gilde.de/rules.html" />
+  <meta slot="head" property="og:type" content="website" />
+  <meta slot="head" name="twitter:card" content="summary_large_image" />
+  <meta slot="head" name="twitter:title" content="Minecraft Gilde - Unser Regelwerk" />
+  <meta slot="head" name="twitter:description" content="Faire Regeln für Freebuild, Survival und Discord. AFK-Farmen erlaubt, Griefing verboten. Erfahre, was bei uns gilt!" />
+  <meta slot="head" name="twitter:image" content="https://minecraft-gilde.de/images/logo.webp" />
+
+  <Navbar active={'rules'} />
 
   <main id="main-content" tabindex="-1">
-<!--Header-->
-<section id="header">
-<div class="content">
-<div class="info">
-<p class="minecraft-server-ip">mc.example.com</p>
-<h1 class="title">Unser <span>Regelwerk</span></h1>
-</div>
-<p class="description">Liste aller Minecraft- und Discord-Serverregeln.</p>
-</div>
-</section>
-<!--Rules-->
-<section id="rules">
-<div class="content">
-<div aria-label="Wichtiger Hinweis" class="notice notice--warning notice--compact" role="note">
-<i aria-hidden="true" class="fa-solid fa-triangle-exclamation"></i>
-<p>Die Unwissenheit über die Regeln ist keine Entschuldigung und kann zum Bann führen!</p>
-</div>
-<div class="minecraft-rules rules">
-<h2 class="minecraft-rules-title rules-title">Server Regeln</h2>
-<ol class="rules-list">
-<li class="rule">
-<b>Respekt und Fairness</b> <br/>Seid stets respektvoll, freundlich und fair zueinander. Diskriminierung,
-              Beleidigungen oder Provokationen sind nicht erlaubt.
-            </li>
-<li class="rule">
-<b>Keine Beeinträchtigung anderer Spieler</b> <br/>Jeder Spieler darf frei agieren, solange andere nicht
-              direkt oder indirekt beeinträchtigt werden. Dazu zählen Zerstörungen, Diebstahl oder Umweltzerstörung in
-              der Hauptwelt.
-            </li>
-<li class="rule">
-<b>Verbot von Griefing</b> <br/>Griefing ist streng verboten. Dazu zählt die Zerstörung oder Veränderung
-              von Bauwerken anderer Spieler sowie die Sabotage von Eigentum wie Haustieren oder Farmen.
-            </li>
-<li class="rule">
-<b>Ressourcenabbau in Farmwelten</b> <br/>Ressourcen dürfen ausschließlich in den dafür vorgesehenen
-              Farmwelten abgebaut werden. Verstöße führen zum Verlust der gesammelten Materialien.
-            </li>
-<li class="rule">
-<b>Kommunikation ohne Spam oder Werbung</b> <br/>Spam, Caps Lock, Eigenwerbung, Affiliate-Links und
-              Fremdwerbung sind in allen Kanälen untersagt. Dies gilt auch für private Nachrichten.
-              <br/><b>Hinweis:</b> Private Nachrichten unterliegen denselben Regeln wie der öffentliche Chat und können
-              vom
-              Serverteam zur Überprüfung von Regelverstößen eingesehen werden.
-            </li>
-<li class="rule">
-<b>Keine persönlichen Daten</b> <br>Das Teilen von personenbezogenen oder sensiblen Daten, wie auch
-              Screenshots mit vertraulichen Informationen, ist verboten.
-            </br></li>
-<li class="rule">
-<b>Verbot von Hacks, unfairen Mods und Auto‑Klickern</b> <br/>Die Nutzung von Hacks, unfairen
-              Modifikationen sowie jeglichen externen Automatisierungshilfen (z. B. Auto‑Klicker, Makro‑Skripte oder
-              Rapid‑Fire‑Tasten) ist untersagt. Erlaubt bleiben ausschließlich Mods, die die Performance oder das
-              Aussehen des Spiels verbessern (z. B. OptiFine, Breakneck) oder Minimaps, die keinen spielerischen Vorteil
-              gewähren.
-            </li>
-<li class="rule">
-<b>AFK-Farmen</b> <br/>AFK‑Farmen sind erlaubt, solange sie die Server‑Performance nicht merklich
-              beeinträchtigen. Der Einsatz von Auto‑Klickern oder anderen externen Automatisierungen innerhalb solcher
-              Farmen ist strikt verboten. Spieler sind dafür verantwortlich, dass ihre Farmen keine Server‑Lags
-              verursachen und keinen unfairen Vorteil gegenüber aktiv spielenden Personen bieten.
-            </li>
-<li class="rule">
-<b>Faires Handeln</b> <br/>Betrug oder unfaire Praktiken im Ingame-Handel sind verboten. Der Handel soll
-              transparent und vertrauensvoll ablaufen.
-            </li>
-<li class="rule">
-<b>Verbot von Bugs und Exploits</b> <br/>Das Ausnutzen von Bugs oder Exploits, um sich spielerische
-              Vorteile zu verschaffen, ist strengstens untersagt.
-            </li>
-<li class="rule">
-<b>Weisungsrecht der Admins und Moderatoren</b> <br/>Die Admins und Moderatoren haben das Weisungsrecht,
-              um einen geordneten und respektvollen Ablauf auf dem Server sicherzustellen. Ihren Anweisungen ist
-              unbedingt Folge zu leisten. Wiederholte Missachtung oder Diskussionen über getroffene Entscheidungen
-              können zu Verwarnungen oder Sanktionen führen.
-            </li>
-<li class="rule">
-<b>Redstone-Maschinen</b> <br/>Redstone-Maschinen sind auf dem Server erlaubt, sofern sie die Performance
-              des Servers nicht merklich beeinträchtigen. Spieler sind dafür verantwortlich, dass solche Maschinen mit
-              einem Mechanismus ausgestattet sind, der sie vollständig abschaltbar macht, falls Probleme auftreten.
-              Redstone-Maschinen, die Serverlags oder andere Störungen verursachen, müssen deaktiviert werden.
-            </li>
-<li class="rule">
-<b>Konsequenzen bei Regelverstößen</b> <br/>Regelverstöße werden je nach Schwere sanktioniert. Mögliche
-              Konsequenzen sind Verwarnungen, temporäre Banns, der Verlust von unrechtmäßig erlangten Gegenständen oder
-              ein permanenter Bann.
-            </li>
-</ol>
-</div>
-<div class="discord-rules rules">
-<h2 class="discord-rules-title rules-title">Discord Regeln</h2>
-<ol class="rules-list">
-<li class="rule">
-<b>Einhaltung der Discord-Richtlinien</b> <br/>Haltet euch an die offiziellen Discord-<a href="https://discord.com/terms" rel="noopener" target="_blank">Nutzungsbedingungen</a>
-              und <a href="https://discord.com/guidelines" rel="noopener" target="_blank">Richtlinien</a>.
-            </li>
-<li class="rule">
-<b>Verbot von unangemessenen Inhalten</b> <br/>Pornografische, rassistische, gewaltverherrlichende oder
-              gewaltzeigende Inhalte sind streng verboten.
-            </li>
-<li class="rule">
-<b>Kein grundloses Taggen</b> <br/>Das grundlose Taggen, Pingen oder Markieren von Nutzern ist untersagt,
-              um Störungen zu vermeiden.
-            </li>
-<li class="rule">
-<b>Verwendung der richtigen Kanäle</b> <br/>Achtet darauf, die Kanäle entsprechend ihrer Beschreibung und
-              Funktion zu nutzen.
-            </li>
-<li class="rule">
-<b>Regelkonforme Benutzernamen und Avatare</b> <br/>Benutzernamen, Nicknamen und Avatare müssen
-              regelkonform sein. Leere Namen, ungewöhnliche Unicode-Zeichen oder übermäßig lange Namen sind nicht
-              erlaubt.
-            </li>
-<li class="rule">
-<b>Verhalten im Voice-Chat</b> <br/>Vermeidet Stör- und Hintergrundgeräusche, um die Kommunikation im
-              Voice-Chat nicht zu beeinträchtigen. Zudem ist die Nutzung von Soundboards, Stimmverzerrern oder ähnlicher
-              Software nicht erlaubt.
-            </li>
-</ol>
-</div>
-</div>
-</section>
-<!--Server Join-->
-<section id="join-server">
-<div class="content">
-<h2 class="section-title">
+    <SectionHeader
+      serverIp={data.serverIp}
+      description="Liste aller Minecraft- und Discord-Serverregeln."
+      titleHtml="Unser <span>Regelwerk</span>"
+    />
+
+    <section id="rules">
+      <div class="content">
+        <Callout variant="warning" compact ariaLabel="Wichtiger Hinweis" iconClass="fa-solid fa-triangle-exclamation">
+          <p>{data.warning}</p>
+        </Callout>
+
+        <div class="minecraft-rules rules">
+          <h2 class="minecraft-rules-title rules-title">{data.minecraft.title}</h2>
+          <ol class="rules-list">
+            {data.minecraft.items.map((item) => (
+              <li class="rule">
+                <b>{item.title}</b> <br />
+                <span set:html={item.html} />
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div class="discord-rules rules">
+          <h2 class="discord-rules-title rules-title">{data.discord.title}</h2>
+          <ol class="rules-list">
+            {data.discord.items.map((item) => (
+              <li class="rule">
+                <b>{item.title}</b> <br />
+                <span set:html={item.html} />
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="join-server">
+      <div class="content">
+        <h2 class="section-title">
           Alle <span>Regeln</span> durchgelesen? Super, dann kann der <span>Spaß</span> auf unserem Server beginnen!
         </h2>
-<div class="buttons">
-<button class="btn btn-primary copy-ip">IP Kopieren</button>
-<a class="discord-link btn btn-secondary join-discord" href="https://discord.minecraft-gilde.de" rel="noopener" target="_blank">Discord beitreten</a>
-</div>
-<p class="ip-copied">IP erfolgreich kopiert!</p>
-</div>
-</section>
-</main>
+        <div class="buttons">
+          <Button variant="primary" class="copy-ip">IP Kopieren</Button>
+          <Button
+            href="https://discord.minecraft-gilde.de"
+            variant="secondary"
+            class="discord-link join-discord"
+            target="_blank"
+            rel="noopener"
+          >
+            Discord beitreten
+          </Button>
+        </div>
+        <p class="ip-copied">IP erfolgreich kopiert!</p>
+      </div>
+    </section>
+  </main>
 
   <Footer />
+
   <script slot="afterScripts" type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Darf ich Redstone-Maschinen auf dem Server bauen?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Ja, Redstone-Maschinen sind erlaubt, solange sie die Serverperformance nicht merklich beeinträchtigen und abschaltbar sind."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Sind AFK-Farmen auf dem Server erlaubt?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "AFK-Farmen sind erlaubt, solange sie keine Lags verursachen oder automatisierte Systeme mit unfairen Vorteilen beinhalten."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Ist Griefing erlaubt?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Nein, Griefing ist streng verboten. Dazu zählt das Zerstören oder Verändern von fremden Bauwerken oder Eigentum."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Was passiert bei Regelverstößen?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Je nach Schwere des Verstoßes kann es Verwarnungen, Banns oder den Verlust von Gegenständen geben. Admins haben das letzte Wort."
-            }
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Darf ich Redstone-Maschinen auf dem Server bauen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja, Redstone-Maschinen sind erlaubt, solange sie die Serverperformance nicht merklich beeinträchtigen und abschaltbar sind."
           }
-        ]
-      }
-    </script>
+        },
+        {
+          "@type": "Question",
+          "name": "Sind AFK-Farmen auf dem Server erlaubt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AFK-Farmen sind erlaubt, solange sie keine Lags verursachen oder automatisierte Systeme mit unfairen Vorteilen beinhalten."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ist Griefing erlaubt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nein, Griefing ist streng verboten. Dazu zählt das Zerstören oder Verändern von fremden Bauwerken oder Eigentum."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Was passiert bei Regelverstößen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Je nach Schwere des Verstoßes kann es Verwarnungen, Banns oder den Verlust von Gegenständen geben. Admins haben das letzte Wort."
+          }
+        }
+      ]
+    }
+  </script>
 </BaseLayout>

@@ -1,0 +1,253 @@
+{
+  "categories": [
+    {
+      "name": "Basisbefehle",
+      "commands": [
+        {
+          "command": "/getpos",
+          "description": "Zeigt euch eure aktuelle Position (Koordinaten) und die Welt in der ihr seit an"
+        },
+        {
+          "command": "/help",
+          "description": "Mit diesem Befehl könnt ihr euch alle Befehle anzeigen lassen"
+        },
+        {
+          "command": "/helpop <nachricht>",
+          "description": "Mit diesem Befehl schreibt ihr einen Admin an"
+        },
+        {
+          "command": "/afk",
+          "description": "Mit diesem Befehl setzt ihr euch abwesend (Achtung: Monster können euch immer noch angreifen!) Hinweis: Wenn ihr Abwesend seit können andere Spieler schlafen gehen, ohne dass ihr schlafen gehen müsst"
+        },
+        {
+          "command": "/back",
+          "description": "Teleportiert dich an deinen letzten Standort vor dem Tp- oder Spawn-Befehl"
+        },
+        {
+          "command": "/discord",
+          "description": "Zeigt euch den Discord-Einladungslink an"
+        },
+        {
+          "command": "/list",
+          "description": "Zeigt euch alle Spieler, die aktuell online auf dem Server sind"
+        },
+        {
+          "command": "/map",
+          "description": "Zeigt dir den Link zur DynMap an"
+        },
+        {
+          "command": "/motd",
+          "description": "Zeigt euch die Willkommensnachricht an"
+        },
+        {
+          "command": "/msg <spieler> <nachricht>",
+          "description": "Sendet eine Private Nachricht an einen Spieler"
+        },
+        {
+          "command": "/r",
+          "description": "Schnelle Antwort auf die letzte Nachricht"
+        },
+        {
+          "command": "/rtp",
+          "description": "Teleportiert dich an eine zufällige Stelle auf der Karte"
+        },
+        {
+          "command": "/rules",
+          "description": "Zeigt die Serverregeln an"
+        },
+        {
+          "command": "/seen",
+          "description": "Zeigt die letzte Logout-Zeit eines Spielers an"
+        },
+        {
+          "command": "/spawn",
+          "description": "Teleportiert dich zum Spawn"
+        },
+        {
+          "command": "/time",
+          "description": "Zeigt euch die Ingame-Uhrzeit an"
+        },
+        {
+          "command": "/tpa <spieler>",
+          "description": "Stellt eine Anfrage, um sich zu einem Spieler zu teleportieren"
+        },
+        {
+          "command": "/tpahere <spieler>",
+          "description": "Bittet den angegebenen Spieler, sich zu dir zu teleportieren"
+        },
+        {
+          "command": "/tpaccept",
+          "description": "Eine Teleportanfrage annehmen"
+        },
+        {
+          "command": "/tpauto",
+          "description": "Teleportanfragen automatisch annehmen"
+        },
+        {
+          "command": "/tpcancel",
+          "description": "Eine Teleportanfrage abbrechen"
+        },
+        {
+          "command": "/tpdeny",
+          "description": "Eine Teleportanfrage ablehnen"
+        },
+        {
+          "command": "/tutorial",
+          "description": "Mit diesem Befehl öffnest du unser Tutorial"
+        }
+      ]
+    },
+    {
+      "name": "Homes",
+      "commands": [
+        {
+          "command": "/sethome <name>",
+          "description": "Setzt ein Home auf die aktuelle Position"
+        },
+        {
+          "command": "/delhome <name>",
+          "description": "Löscht ein Home"
+        },
+        {
+          "command": "/home <name>",
+          "description": "Teleportiert dich zu dem angegebenen Home"
+        },
+        {
+          "command": "/homes",
+          "description": "Zeigt deine Home-Punkte an"
+        },
+        {
+          "command": "/renamehome",
+          "description": "Benennt ein Home-Punkt um"
+        }
+      ]
+    },
+    {
+      "name": "Grundstücke",
+      "commands": [
+        {
+          "command": "/abandonclaim",
+          "description": "Löscht den Claim, in dem du stehst"
+        },
+        {
+          "command": "/abandonallclaims",
+          "description": "Löscht alle deine Grundstücke (Muss Bestätigt werden)"
+        },
+        {
+          "command": "/claimexplosions",
+          "description": "Schaltet um, ob Explosionen im Claim erlaubt sind"
+        },
+        {
+          "command": "/trust <spieler>",
+          "description": "Erteilt einem anderen Spieler die Erlaubnis, Ihren Claim zu bearbeiten"
+        },
+        {
+          "command": "/untrust <spieler>",
+          "description": "Widerruft alle Berechtigungen, die einem Spieler in Ihrem Claim gewährt wurden"
+        },
+        {
+          "command": "/untrust all",
+          "description": "Entfernt alle Berechtigungen für alle Spieler in Ihrem Claim"
+        },
+        {
+          "command": "/accesstrust <spieler>",
+          "description": "Gibt einem Spieler die Erlaubnis, Ihre Tasten, Hebel und Betten zu benutzen"
+        },
+        {
+          "command": "/containertrust <spieler>",
+          "description": "Gibt einem Spieler die Erlaubnis, deine Knöpfe, Hebel, Betten, Handwerksgeräte, Container und Tiere zu benutzen"
+        },
+        {
+          "command": "/trustlist",
+          "description": "Listet die Berechtigungen für den Claim auf, in dem Sie sich befinden"
+        },
+        {
+          "command": "/permissiontrust <spieler>",
+          "description": "Erlaubt einem Spieler, seine Berechtigungsstufe mit anderen zu teilen"
+        },
+        {
+          "command": "/claimslist",
+          "description": "Listet die Claims und Claim-Block-Details eines Spielers auf"
+        },
+        {
+          "command": "/trapped",
+          "description": "Befreit dich aus einem Claim, in dem du gefangen bist"
+        },
+        {
+          "command": "/expandclaim <+/- wert>",
+          "description": "Erweitert den Claim um die angegebene Distanz (Der Befehl ist nur möglich, wenn eine Holz-Schaufel in der Hand gehalten wird)"
+        },
+        {
+          "command": "/subdivideclaims",
+          "description": "Schaltet deine Holz-Schaufel in den Unterteilungsmodus, damit du deine Claims unterteilen kannst"
+        }
+      ]
+    },
+    {
+      "name": "Farmwelten",
+      "commands": [
+        {
+          "command": "/farmwelt",
+          "description": "Teleportiert dich in die normale Farmwelt"
+        },
+        {
+          "command": "/netherfarm",
+          "description": "Teleportiert dich in die Nether-Farmwelt"
+        },
+        {
+          "command": "/endfarm",
+          "description": "Teleportiert dich in die End-Farmwelt"
+        }
+      ]
+    },
+    {
+      "name": "Voting",
+      "commands": [
+        {
+          "command": "/vote",
+          "description": "Zeigt dir alle Vote-Links an"
+        },
+        {
+          "command": "/votegui",
+          "description": "Öffnet die Vote-Oberfläche"
+        },
+        {
+          "command": "/voteshop",
+          "description": "Öffnet den Vote-Shop"
+        },
+        {
+          "command": "/votepoints",
+          "description": "Zeigt dir deinen aktuellen Punktestand an"
+        },
+        {
+          "command": "/votenext",
+          "description": "Zeigt dir die nächsten möglichen Vote-Seiten an"
+        },
+        {
+          "command": "/votetop",
+          "description": "Zeigt dir deine Bestenliste an"
+        },
+        {
+          "command": "/votetoday",
+          "description": "Zeigt an, wer heute alles gevotet hat"
+        },
+        {
+          "command": "/votetotal",
+          "description": "Zeigt an, wie oft du gevotet hast"
+        },
+        {
+          "command": "/votebest",
+          "description": "Zeigt dir deine Voting-Bestwerte an"
+        },
+        {
+          "command": "/votehelp <seite>",
+          "description": "Zeigt dir die Hilfeseiten des Vote-Plug-in an"
+        },
+        {
+          "command": "/votetogglereminders",
+          "description": "Vote-Erinnerungen aktivieren/deaktivieren"
+        }
+      ]
+    }
+  ]
+}

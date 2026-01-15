@@ -1,0 +1,90 @@
+{
+  "serverIp": "Minecraft-Gilde.de",
+  "warning": "Die Unwissenheit über die Regeln ist keine Entschuldigung und kann zum Bann führen!",
+  "minecraft": {
+    "title": "Server Regeln",
+    "items": [
+      {
+        "title": "Respekt und Fairness",
+        "html": "Seid stets respektvoll, freundlich und fair zueinander. Diskriminierung, Beleidigungen oder Provokationen sind nicht erlaubt."
+      },
+      {
+        "title": "Keine Beeinträchtigung anderer Spieler",
+        "html": "Jeder Spieler darf frei agieren, solange andere nicht direkt oder indirekt beeinträchtigt werden. Dazu zählen Zerstörungen, Diebstahl oder Umweltzerstörung in der Hauptwelt."
+      },
+      {
+        "title": "Verbot von Griefing",
+        "html": "Griefing ist streng verboten. Dazu zählt die Zerstörung oder Veränderung von Bauwerken anderer Spieler sowie die Sabotage von Eigentum wie Haustieren oder Farmen."
+      },
+      {
+        "title": "Ressourcenabbau in Farmwelten",
+        "html": "Ressourcen dürfen ausschließlich in den dafür vorgesehenen Farmwelten abgebaut werden. Verstöße führen zum Verlust der gesammelten Materialien."
+      },
+      {
+        "title": "Kommunikation ohne Spam oder Werbung",
+        "html": "Spam, Caps Lock, Eigenwerbung, Affiliate-Links und Fremdwerbung sind in allen Kanälen untersagt. Dies gilt auch für private Nachrichten. <br/><b>Hinweis:</b> Private Nachrichten unterliegen denselben Regeln wie der öffentliche Chat und können vom Serverteam zur Überprüfung von Regelverstößen eingesehen werden."
+      },
+      {
+        "title": "Keine persönlichen Daten",
+        "html": "Das Teilen von personenbezogenen oder sensiblen Daten, wie auch Screenshots mit vertraulichen Informationen, ist verboten."
+      },
+      {
+        "title": "Verbot von Hacks, unfairen Mods und Auto‑Klickern",
+        "html": "Die Nutzung von Hacks, unfairen Modifikationen sowie jeglichen externen Automatisierungshilfen (z. B. Auto‑Klicker, Makro‑Skripte oder Rapid‑Fire‑Tasten) ist untersagt. Erlaubt bleiben ausschließlich Mods, die die Performance oder das Aussehen des Spiels verbessern (z. B. OptiFine, Breakneck) oder Minimaps, die keinen spielerischen Vorteil gewähren."
+      },
+      {
+        "title": "AFK-Farmen",
+        "html": "AFK‑Farmen sind erlaubt, solange sie die Server‑Performance nicht merklich beeinträchtigen. Der Einsatz von Auto‑Klickern oder anderen externen Automatisierungen innerhalb solcher Farmen ist strikt verboten. Spieler sind dafür verantwortlich, dass ihre Farmen keine Server‑Lags verursachen und keinen unfairen Vorteil gegenüber aktiv spielenden Personen bieten."
+      },
+      {
+        "title": "Faires Handeln",
+        "html": "Betrug oder unfaire Praktiken im Ingame-Handel sind verboten. Der Handel soll transparent und vertrauensvoll ablaufen."
+      },
+      {
+        "title": "Verbot von Bugs und Exploits",
+        "html": "Das Ausnutzen von Bugs oder Exploits, um sich spielerische Vorteile zu verschaffen, ist strengstens untersagt."
+      },
+      {
+        "title": "Weisungsrecht der Admins und Moderatoren",
+        "html": "Die Admins und Moderatoren haben das Weisungsrecht, um einen geordneten und respektvollen Ablauf auf dem Server sicherzustellen. Ihren Anweisungen ist unbedingt Folge zu leisten. Wiederholte Missachtung oder Diskussionen über getroffene Entscheidungen können zu Verwarnungen oder Sanktionen führen."
+      },
+      {
+        "title": "Redstone-Maschinen",
+        "html": "Redstone-Maschinen sind auf dem Server erlaubt, sofern sie die Performance des Servers nicht merklich beeinträchtigen. Spieler sind dafür verantwortlich, dass solche Maschinen mit einem Mechanismus ausgestattet sind, der sie vollständig abschaltbar macht, falls Probleme auftreten. Redstone-Maschinen, die Serverlags oder andere Störungen verursachen, müssen deaktiviert werden."
+      },
+      {
+        "title": "Konsequenzen bei Regelverstößen",
+        "html": "Regelverstöße werden je nach Schwere sanktioniert. Mögliche Konsequenzen sind Verwarnungen, temporäre Banns, der Verlust von unrechtmäßig erlangten Gegenständen oder ein permanenter Bann."
+      }
+    ]
+  },
+  "discord": {
+    "title": "Discord Regeln",
+    "items": [
+      {
+        "title": "Einhaltung der Discord-Richtlinien",
+        "html": "Haltet euch an die offiziellen Discord-<a href=\"https://discord.com/terms\" rel=\"noopener\" target=\"_blank\">Nutzungsbedingungen</a> und <a href=\"https://discord.com/guidelines\" rel=\"noopener\" target=\"_blank\">Richtlinien</a>."
+      },
+      {
+        "title": "Verbot von unangemessenen Inhalten",
+        "html": "Pornografische, rassistische, gewaltverherrlichende oder gewaltzeigende Inhalte sind streng verboten."
+      },
+      {
+        "title": "Kein grundloses Taggen",
+        "html": "Das grundlose Taggen, Pingen oder Markieren von Nutzern ist untersagt, um Störungen zu vermeiden."
+      },
+      {
+        "title": "Verwendung der richtigen Kanäle",
+        "html": "Achtet darauf, die Kanäle entsprechend ihrer Beschreibung und Funktion zu nutzen."
+      },
+      {
+        "title": "Regelkonforme Benutzernamen und Avatare",
+        "html": "Benutzernamen, Nicknamen und Avatare müssen regelkonform sein. Leere Namen, ungewöhnliche Unicode-Zeichen oder übermäßig lange Namen sind nicht erlaubt."
+      },
+      {
+        "title": "Verhalten im Voice-Chat",
+        "html": "Vermeidet Stör- und Hintergrundgeräusche, um die Kommunikation im Voice-Chat nicht zu beeinträchtigen. Zudem ist die Nutzung von Soundboards, Stimmverzerrern oder ähnlicher Software nicht erlaubt."
+      }
+    ]
+  }
+}

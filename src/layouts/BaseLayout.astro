@@ -1,4 +1,17 @@
 ---
+export interface Props {
+  title?: string;
+  canonical?: string;
+  description?: string;
+  keywords?: string;
+  author?: string;
+  bodyClass?: string;
+  styles?: string[];
+  scripts?: string[];
+  includeGlobalScript?: boolean;
+  includeFontAwesome?: boolean;
+}
+
 const {
   title = 'Minecraft Gilde',
   canonical,
@@ -10,7 +23,7 @@ const {
   scripts = [],
   includeGlobalScript = true,
   includeFontAwesome = true,
-} = Astro.props;
+} = Astro.props as Props;
 ---
 
 <!doctype html>
