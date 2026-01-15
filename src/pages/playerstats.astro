@@ -12,9 +12,20 @@ import Footer from '../components/Footer.astro';
   author={undefined}
   bodyClass={"page--sticky-footer page--subpage page--content"}
   styles={["/css/content-page.css", "/css/header-default.css", "/css/stats.css", "/css/playerstats.css"]}
-  scripts={["/js/playerstats.core.js"]}
 >
+  <link slot="head" rel="modulepreload" href="/js/skin-modal.js" />
+
   <Navbar active={""} />
+
+  <!-- Header (wird von playerstats.core.js erwartet: #player-name) -->
+  <section id="header">
+    <div class="content">
+      <div class="info">
+        <p class="minecraft-server-ip">Minecraft-Gilde.de</p>
+        <h1 class="title">Spieler <span id="player-name">Lädt…</span></h1>
+      </div>
+    </div>
+  </section>
 
   <main class="content">
 <div class="tabs" role="tablist">
@@ -118,5 +129,29 @@ import Footer from '../components/Footer.astro';
             </div>
 </section>
 </main>
+
+  <!-- Skin Viewer Modal (wird von skin-modal.js erwartet) -->
+  <div class="skin-modal-overlay" id="skin-modal-overlay" inert>
+    <div class="skin-modal" role="dialog" aria-modal="true" aria-labelledby="skin-modal-title">
+      <header>
+        <h3 id="skin-modal-title">Spielerskin</h3>
+        <button type="button" id="skin-modal-close" aria-label="Schließen">×</button>
+      </header>
+      <div class="body">
+        <div class="skin-canvas-wrap">
+          <canvas id="skin-canvas" width="800" height="800" aria-label="3D Skin"></canvas>
+        </div>
+      </div>
+      <footer>
+        <span class="hint"><i class="fa-solid fa-circle-info"></i> Ziehen/zoomen zum Drehen und Vergrößern. Drücke ESC zum Schließen.</span>
+        <button class="btn btn-secondary btn-sm" type="button" id="skin-modal-reset">
+          <i class="fa-solid fa-rotate-left"></i> Reset
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- playerstats.core.js nutzt dynamic import -> als Module laden wie im Original -->
+  <script slot="afterScripts" type="module" src="/js/playerstats.core.js"></script>
 
   <Footer /></BaseLayout>
