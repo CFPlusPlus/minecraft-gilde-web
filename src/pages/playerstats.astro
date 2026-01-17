@@ -5,17 +5,22 @@ import Footer from '../components/Footer.astro';
 ---
 
 <BaseLayout
-  title={"Minecraft Gilde - Spielerstatistik"}
-  canonical={"https://minecraft-gilde.de/playerstats.html"}
+  title={'Minecraft Gilde - Spielerstatistik'}
+  canonical={'https://minecraft-gilde.de/playerstats.html'}
   description={undefined}
   keywords={undefined}
   author={undefined}
-  bodyClass={"page--sticky-footer page--subpage page--content"}
-  styles={["/css/content-page.css", "/css/header-default.css", "/css/stats.css", "/css/playerstats.css"]}
+  bodyClass={'page--sticky-footer page--subpage page--content'}
+  styles={[
+    '/css/content-page.css',
+    '/css/header-default.css',
+    '/css/stats.css',
+    '/css/playerstats.css',
+  ]}
 >
   <link slot="head" rel="modulepreload" href="/js/skin-modal.js" />
 
-  <Navbar active={""} />
+  <Navbar active={''} />
 
   <!-- Header (wird von playerstats.core.js erwartet: #player-name) -->
   <section id="header">
@@ -28,107 +33,134 @@ import Footer from '../components/Footer.astro';
   </section>
 
   <main class="content">
-<div class="tabs" role="tablist">
-<button aria-controls="tab-allgemein" class="tab-btn active" data-tab="tab-allgemein" role="tab">
-                ALLGEMEIN
-            </button>
-<button aria-controls="tab-items" class="tab-btn" data-tab="tab-items" role="tab">GEGENSTÄNDE</button>
-<button aria-controls="tab-mobs" class="tab-btn" data-tab="tab-mobs" role="tab">KREATUREN</button>
-</div>
-<!-- Pillenleiste -->
-<div class="pill-row container-pad">
-<a aria-label="Zurück zur Statistik" class="btn btn-primary btn-sm back-btn" href="stats.html">
-<i aria-hidden="true" class="fa-solid fa-arrow-left"></i>
-<span>Zurück zur Statistik</span>
-</a>
-<span class="badge muted" id="player-uuid"></span>
-<div class="muted" id="generated-ts"></div>
-</div>
-<div class="player-hero container-pad">
-<div class="card">
-<img alt="" id="player-skin"/>
-</div>
-</div>
-<!-- Filterleiste -->
-<div class="controls container-pad">
-<div class="search-wrapper">
-<i class="fa-solid fa-magnifying-glass"></i>
-<input class="search-inp" id="filter" placeholder='Filtern… (z. B. dirt, "zombie", "diamond")' type="search"/>
-</div>
-<span class="tip"><i class="fa-solid fa-circle-info"></i> Klicke auf die Spaltenköpfe zum
-                Sortieren.</span>
-<button aria-pressed="true" class="btn btn-ghost btn-sm back-btn" id="i18n-toggle" title="Zwischen Deutsch und Original wechseln" type="button">
-<i class="fa-solid fa-language"></i>
-<span class="label">DE</span>
-</button>
-</div>
-<!-- PANELS -->
-<section aria-labelledby="Allgemein" class="tab-panel active" id="tab-allgemein">
-<div class="table-wrapper">
-<table class="player-table" data-sortkey="stat" id="tbl-general">
-<thead>
-<tr>
-<th data-key="label">Eintrag</th>
-<th data-key="value">Wert</th>
-<th class="muted" data-key="raw">Technischer Schlüssel</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
-</div>
-<div class="notice notice--danger notice--compact no-results container-pad">
-<i class="fa-solid fa-circle-exclamation"></i>
-                Keine Ergebnisse gefunden.
-            </div>
-<div class="notice notice--info notice--compact container-pad">
-<i class="fa-solid fa-circle-info"></i>
-<span>Einige Werte werden zur besseren Lesbarkeit formatiert (z. B. Spielzeit in Stunden,
-                    <em>one_cm</em> in Kilometern).</span>
-</div>
-</section>
-<section aria-labelledby="Gegenstände" class="tab-panel" id="tab-items">
-<div class="table-wrapper">
-<table class="player-table" data-sortkey="item" id="tbl-items">
-<thead>
-<tr>
-<th data-key="label">Item</th>
-<th data-key="mined">Abgebaut</th>
-<th data-key="broken">Verbraucht</th>
-<th data-key="crafted">Hergestellt</th>
-<th data-key="used">Benutzt</th>
-<th data-key="picked_up">Aufgesammelt</th>
-<th data-key="dropped">Fallen gelassen</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
-</div>
-<!-- Meldung -->
-<div class="notice notice--danger notice--compact no-results container-pad">
-<i class="fa-solid fa-circle-exclamation"></i>
-                Keine Ergebnisse gefunden.
-            </div>
-</section>
-<section aria-labelledby="Kreaturen" class="tab-panel" id="tab-mobs">
-<div class="table-wrapper">
-<table class="player-table" data-sortkey="mob" id="tbl-mobs">
-<thead>
-<tr>
-<th data-key="label">Kreatur</th>
-<th data-key="killed">Getötet</th>
-<th data-key="killed_by">Gestorben durch</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
-</div>
-<!-- Meldung -->
-<div class="notice notice--danger notice--compact no-results container-pad">
-<i class="fa-solid fa-circle-exclamation"></i>
-                Keine Ergebnisse gefunden.
-            </div>
-</section>
-</main>
+    <div class="tabs" role="tablist">
+      <button
+        aria-controls="tab-allgemein"
+        class="tab-btn active"
+        data-tab="tab-allgemein"
+        role="tab"
+      >
+        ALLGEMEIN
+      </button>
+      <button aria-controls="tab-items" class="tab-btn" data-tab="tab-items" role="tab"
+        >GEGENSTÄNDE</button
+      >
+      <button aria-controls="tab-mobs" class="tab-btn" data-tab="tab-mobs" role="tab"
+        >KREATUREN</button
+      >
+    </div>
+    <!-- Pillenleiste -->
+    <div class="pill-row container-pad">
+      <a
+        aria-label="Zurück zur Statistik"
+        class="btn btn-primary btn-sm back-btn"
+        href="stats.html"
+      >
+        <i aria-hidden="true" class="fa-solid fa-arrow-left"></i>
+        <span>Zurück zur Statistik</span>
+      </a>
+      <span class="badge muted" id="player-uuid"></span>
+      <div class="muted" id="generated-ts"></div>
+    </div>
+    <div class="player-hero container-pad">
+      <div class="card">
+        <img alt="" id="player-skin" />
+      </div>
+    </div>
+    <!-- Filterleiste -->
+    <div class="controls container-pad">
+      <div class="search-wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          class="search-inp"
+          id="filter"
+          placeholder='Filtern… (z. B. dirt, "zombie", "diamond")'
+          type="search"
+        />
+      </div>
+      <span class="tip"
+        ><i class="fa-solid fa-circle-info"></i> Klicke auf die Spaltenköpfe zum Sortieren.</span
+      >
+      <button
+        aria-pressed="true"
+        class="btn btn-ghost btn-sm back-btn"
+        id="i18n-toggle"
+        title="Zwischen Deutsch und Original wechseln"
+        type="button"
+      >
+        <i class="fa-solid fa-language"></i>
+        <span class="label">DE</span>
+      </button>
+    </div>
+    <!-- PANELS -->
+    <section aria-labelledby="Allgemein" class="tab-panel active" id="tab-allgemein">
+      <div class="table-wrapper">
+        <table class="player-table" data-sortkey="stat" id="tbl-general">
+          <thead>
+            <tr>
+              <th data-key="label">Eintrag</th>
+              <th data-key="value">Wert</th>
+              <th class="muted" data-key="raw">Technischer Schlüssel</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="notice notice--danger notice--compact no-results container-pad">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        Keine Ergebnisse gefunden.
+      </div>
+      <div class="notice notice--info notice--compact container-pad">
+        <i class="fa-solid fa-circle-info"></i>
+        <span
+          >Einige Werte werden zur besseren Lesbarkeit formatiert (z. B. Spielzeit in Stunden,
+          <em>one_cm</em> in Kilometern).</span
+        >
+      </div>
+    </section>
+    <section aria-labelledby="Gegenstände" class="tab-panel" id="tab-items">
+      <div class="table-wrapper">
+        <table class="player-table" data-sortkey="item" id="tbl-items">
+          <thead>
+            <tr>
+              <th data-key="label">Item</th>
+              <th data-key="mined">Abgebaut</th>
+              <th data-key="broken">Verbraucht</th>
+              <th data-key="crafted">Hergestellt</th>
+              <th data-key="used">Benutzt</th>
+              <th data-key="picked_up">Aufgesammelt</th>
+              <th data-key="dropped">Fallen gelassen</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <!-- Meldung -->
+      <div class="notice notice--danger notice--compact no-results container-pad">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        Keine Ergebnisse gefunden.
+      </div>
+    </section>
+    <section aria-labelledby="Kreaturen" class="tab-panel" id="tab-mobs">
+      <div class="table-wrapper">
+        <table class="player-table" data-sortkey="mob" id="tbl-mobs">
+          <thead>
+            <tr>
+              <th data-key="label">Kreatur</th>
+              <th data-key="killed">Getötet</th>
+              <th data-key="killed_by">Gestorben durch</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <!-- Meldung -->
+      <div class="notice notice--danger notice--compact no-results container-pad">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        Keine Ergebnisse gefunden.
+      </div>
+    </section>
+  </main>
 
   <!-- Skin Viewer Modal (wird von skin-modal.js erwartet) -->
   <div class="skin-modal-overlay" id="skin-modal-overlay" inert>
@@ -143,7 +175,10 @@ import Footer from '../components/Footer.astro';
         </div>
       </div>
       <footer>
-        <span class="hint"><i class="fa-solid fa-circle-info"></i> Ziehen/zoomen zum Drehen und Vergrößern. Drücke ESC zum Schließen.</span>
+        <span class="hint"
+          ><i class="fa-solid fa-circle-info"></i> Ziehen/zoomen zum Drehen und Vergrößern. Drücke ESC
+          zum Schließen.</span
+        >
         <button class="btn btn-secondary btn-sm" type="button" id="skin-modal-reset">
           <i class="fa-solid fa-rotate-left"></i> Reset
         </button>
@@ -154,4 +189,5 @@ import Footer from '../components/Footer.astro';
   <!-- playerstats.core.js nutzt dynamic import -> als Module laden wie im Original -->
   <script slot="afterScripts" type="module" src="/js/playerstats.core.js"></script>
 
-  <Footer /></BaseLayout>
+  <Footer /></BaseLayout
+>

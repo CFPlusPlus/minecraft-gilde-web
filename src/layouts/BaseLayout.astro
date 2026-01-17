@@ -53,11 +53,13 @@ const {
   <body class={bodyClass}>
     <slot />
 
-    {includeGlobalScript ? <script src="/js/script.js" defer></script> : null}
-    {scripts.map((src) => <script src={src} defer></script>)}
-    {includeFontAwesome ? (
-      <script src="https://kit.fontawesome.com/032e8d1ba8.js" crossorigin="anonymous" defer></script>
-    ) : null}
+    {includeGlobalScript ? <script src="/js/script.js" defer /> : null}
+    {scripts.map((src) => <script src={src} defer />)}
+    {
+      includeFontAwesome ? (
+        <script src="https://kit.fontawesome.com/032e8d1ba8.js" crossorigin="anonymous" defer />
+      ) : null
+    }
 
     <slot name="afterScripts" />
   </body>

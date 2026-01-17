@@ -1,0 +1,13 @@
+# Abhängigkeiten & Build-Artefakte
+node_modules
+.dist
+.dist/**
+dist
+dist/**
+
+# Astro generiert
+.astro
+.astro/**
+
+# Sonstiges
+package-lock.json

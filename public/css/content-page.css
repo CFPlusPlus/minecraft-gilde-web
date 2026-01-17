@@ -32,7 +32,7 @@
 }
 
 #page-content .section-title::before {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -9px;
   left: 0;
@@ -43,7 +43,7 @@
 }
 
 #page-content .section-title::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -10px;
   left: 0;
@@ -64,8 +64,6 @@
 #page-content :where(ul, ol) {
   padding-left: 1em;
 }
-
-
 
 /* Utility: gezielte List-Paddings (z.B. Datenschutz) */
 #page-content .content-list--pad-20 {

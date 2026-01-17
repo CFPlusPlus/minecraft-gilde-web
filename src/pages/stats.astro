@@ -5,155 +5,203 @@ import Footer from '../components/Footer.astro';
 ---
 
 <BaseLayout
-  title={"Minecraft Gilde - Statistik"}
-  canonical={"https://minecraft-gilde.de/stats.html"}
+  title={'Minecraft Gilde - Statistik'}
+  canonical={'https://minecraft-gilde.de/stats.html'}
   description={undefined}
   keywords={undefined}
   author={undefined}
-  bodyClass={"stats-page page--sticky-footer page--subpage page--content"}
-  styles={["/css/content-page.css", "/css/header-default.css", "/css/stats.css"]}
-  scripts={["/js/stats.js"]}
+  bodyClass={'stats-page page--sticky-footer page--subpage page--content'}
+  styles={['/css/content-page.css', '/css/header-default.css', '/css/stats.css']}
+  scripts={['/js/stats.js']}
 >
-  <link crossorigin="" href="https://mineskin.eu" rel="preconnect" slot="head"/>
-  <link href="//mineskin.eu" rel="dns-prefetch" slot="head"/>
-  <Navbar active={"stats"} />
+  <link crossorigin="" href="https://mineskin.eu" rel="preconnect" slot="head" />
+  <link href="//mineskin.eu" rel="dns-prefetch" slot="head" />
+  <Navbar active={'stats'} />
 
   <main id="main-content" tabindex="-1">
-<!--Header-->
-<section id="header">
-<div class="content">
-<div class="info">
-<p class="minecraft-server-ip">Minecraft-Gilde.de</p>
-<h1 class="title">Server <span>Statistiken</span></h1>
-</div>
-</div>
-</section>
-<!-- Tabs -->
-<div aria-label="Statistik Tabs" class="tabs" role="tablist">
-<button aria-controls="tab-uebersicht" class="tab-btn active" data-hash="uebersicht" data-tab="tab-uebersicht" role="tab">ÜBERSICHT</button>
-<button aria-controls="tab-king" class="tab-btn" data-hash="king" data-tab="tab-king" role="tab">SERVER-KÖNIG</button>
-<button aria-controls="tab-ranglisten" class="tab-btn" data-hash="ranglisten" data-tab="tab-ranglisten" role="tab">RANGLISTEN</button>
-<button aria-controls="tab-versus" class="tab-btn" data-hash="versus" data-tab="tab-versus" role="tab">VERSUS</button>
-</div>
-<!-- Topbar: Spielersuche + Badges -->
-<div class="stats-topbar">
-<div class="search-wrapper" id="main-search">
-<i aria-hidden="true" class="fa-solid fa-magnifying-glass"></i>
-<input autocomplete="off" id="search-name" placeholder="Spieler suchen…" type="text"/>
-<div id="autocomplete-container">
-<ul class="autocomplete-list" id="autocomplete-list"></ul>
-</div>
-</div>
-<div class="topbar-badges">
-<span class="badge muted" id="player-count">Spieler: …</span>
-<span class="badge muted" id="generated-ts">Stand: …</span>
-</div>
-</div>
-<!-- PANELS -->
-<section aria-labelledby="Übersicht" class="tab-panel active" id="tab-uebersicht">
-<div class="panel-inner">
-<div class="notice notice--info" id="welcome-box">
-<i aria-hidden="true" class="fa-solid fa-heart heart-icon"></i>
-<span class="warning-text">
-<strong>Willkommen auf der Statistik-Seite der Minecraft Gilde!</strong><br/>
-            Nutze die Suche oben, um direkt zu deiner Spielerstatistik zu springen. In den Ranglisten findest du die
-            Top-Werte je Kategorie – von Spielzeit über Distanz bis zu Kreaturen. Viel Spaß beim Stöbern und
-            Vergleichen!
+    <!--Header-->
+    <section id="header">
+      <div class="content">
+        <div class="info">
+          <p class="minecraft-server-ip">Minecraft-Gilde.de</p>
+          <h1 class="title">Server <span>Statistiken</span></h1>
+        </div>
+      </div>
+    </section>
+    <!-- Tabs -->
+    <div aria-label="Statistik Tabs" class="tabs" role="tablist">
+      <button
+        aria-controls="tab-uebersicht"
+        class="tab-btn active"
+        data-hash="uebersicht"
+        data-tab="tab-uebersicht"
+        role="tab">ÜBERSICHT</button
+      >
+      <button
+        aria-controls="tab-king"
+        class="tab-btn"
+        data-hash="king"
+        data-tab="tab-king"
+        role="tab">SERVER-KÖNIG</button
+      >
+      <button
+        aria-controls="tab-ranglisten"
+        class="tab-btn"
+        data-hash="ranglisten"
+        data-tab="tab-ranglisten"
+        role="tab">RANGLISTEN</button
+      >
+      <button
+        aria-controls="tab-versus"
+        class="tab-btn"
+        data-hash="versus"
+        data-tab="tab-versus"
+        role="tab">VERSUS</button
+      >
+    </div>
+    <!-- Topbar: Spielersuche + Badges -->
+    <div class="stats-topbar">
+      <div class="search-wrapper" id="main-search">
+        <i aria-hidden="true" class="fa-solid fa-magnifying-glass"></i>
+        <input autocomplete="off" id="search-name" placeholder="Spieler suchen…" type="text" />
+        <div id="autocomplete-container">
+          <ul class="autocomplete-list" id="autocomplete-list"></ul>
+        </div>
+      </div>
+      <div class="topbar-badges">
+        <span class="badge muted" id="player-count">Spieler: …</span>
+        <span class="badge muted" id="generated-ts">Stand: …</span>
+      </div>
+    </div>
+    <!-- PANELS -->
+    <section aria-labelledby="Übersicht" class="tab-panel active" id="tab-uebersicht">
+      <div class="panel-inner">
+        <div class="notice notice--info" id="welcome-box">
+          <i aria-hidden="true" class="fa-solid fa-heart heart-icon"></i>
+          <span class="warning-text">
+            <strong>Willkommen auf der Statistik-Seite der Minecraft Gilde!</strong><br />
+            Nutze die Suche oben, um direkt zu deiner Spielerstatistik zu springen. In den Ranglisten
+            findest du die Top-Werte je Kategorie – von Spielzeit über Distanz bis zu Kreaturen. Viel
+            Spaß beim Stöbern und Vergleichen!
           </span>
-<span aria-label="Schließen" class="warning-close">×</span>
-</div>
-<div class="section-title">
-<h2>Die Geschichte unserer Welt – in Zahlen</h2>
-<p class="muted">Von langen Reisen über gefährliche Nächte bis zu großen Projekten: Hier siehst du den Puls
-            des Servers. Die Werte werden zweimal täglich aktualisiert und wachsen mit jedem neuen Abenteuer weiter. Wenn du
-            wissen willst, was du beigetragen hast, spring per Suche direkt zu deiner Übersicht.</p>
-</div>
-<div aria-live="polite" class="kpi-grid" id="kpi-grid"></div>
-</div>
-</section>
-<section aria-labelledby="Server-König" class="tab-panel" id="tab-king">
-<div class="panel-inner">
-<!-- Info-Box: Server-König Berechnung (schließbar, ohne Modal) -->
-<div aria-label="Informationen zur Berechnung des Server-Königs" class="notice notice--info king-info-box" id="king-info-box" role="note">
-<i aria-hidden="true" class="fa-solid fa-circle-info heart-icon"></i>
-<span class="warning-text">
-<strong>So wird der Server-König berechnet</strong><br/>
-            Für jede Rangliste werden Punkte vergeben: <strong>1. Platz = 5</strong>, <strong>2. Platz = 3</strong>,
-            <strong>3. Platz = 1</strong>. Ab Platz 4 gibt es keine Punkte.
-            Die Punkte werden über alle Kategorien addiert – wer insgesamt am meisten sammelt, ist Server-König.
+          <span aria-label="Schließen" class="warning-close">×</span>
+        </div>
+        <div class="section-title">
+          <h2>Die Geschichte unserer Welt – in Zahlen</h2>
+          <p class="muted">
+            Von langen Reisen über gefährliche Nächte bis zu großen Projekten: Hier siehst du den
+            Puls des Servers. Die Werte werden zweimal täglich aktualisiert und wachsen mit jedem
+            neuen Abenteuer weiter. Wenn du wissen willst, was du beigetragen hast, spring per Suche
+            direkt zu deiner Übersicht.
+          </p>
+        </div>
+        <div aria-live="polite" class="kpi-grid" id="kpi-grid"></div>
+      </div>
+    </section>
+    <section aria-labelledby="Server-König" class="tab-panel" id="tab-king">
+      <div class="panel-inner">
+        <!-- Info-Box: Server-König Berechnung (schließbar, ohne Modal) -->
+        <div
+          aria-label="Informationen zur Berechnung des Server-Königs"
+          class="notice notice--info king-info-box"
+          id="king-info-box"
+          role="note"
+        >
+          <i aria-hidden="true" class="fa-solid fa-circle-info heart-icon"></i>
+          <span class="warning-text">
+            <strong>So wird der Server-König berechnet</strong><br />
+            Für jede Rangliste werden Punkte vergeben: <strong>1. Platz = 5</strong>, <strong
+              >2. Platz = 3</strong
+            >,
+            <strong>3. Platz = 1</strong>. Ab Platz 4 gibt es keine Punkte. Die Punkte werden über
+            alle Kategorien addiert – wer insgesamt am meisten sammelt, ist Server-König.
           </span>
-<span aria-label="Schließen" class="warning-close" id="king-info-close">×</span>
-</div>
-<button aria-controls="king-info-box" aria-expanded="true" class="info-box-toggle btn btn-ghost btn-sm" id="king-info-toggle" type="button">
-<i aria-hidden="true" class="fa-solid fa-circle-info"></i>
+          <span aria-label="Schließen" class="warning-close" id="king-info-close">×</span>
+        </div>
+        <button
+          aria-controls="king-info-box"
+          aria-expanded="true"
+          class="info-box-toggle btn btn-ghost btn-sm"
+          id="king-info-toggle"
+          type="button"
+        >
+          <i aria-hidden="true" class="fa-solid fa-circle-info"></i>
           Info zur Berechnung anzeigen
         </button>
-<div class="table-wrapper" id="wrapper-king">
-<table id="tbl-king">
-<caption>
-<i aria-hidden="true" class="fa-solid fa-crown fa-caption-icon"></i>
+        <div class="table-wrapper" id="wrapper-king">
+          <table id="tbl-king">
+            <caption>
+              <i aria-hidden="true" class="fa-solid fa-crown fa-caption-icon"></i>
               Server-König
             </caption>
-<thead>
-<tr>
-<th>Platz</th>
-<th>Spielername</th>
-<th>Punkte</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
-<div class="table-footer">
-<div aria-label="Seiten" class="pagination" id="king-pagination"></div>
-</div>
-</div>
-</div>
-</section>
-<section aria-labelledby="Ranglisten" class="tab-panel" id="tab-ranglisten">
-<div class="panel-inner">
-<div class="notice notice--info notice--compact" id="ranglisten-note">
-<i aria-hidden="true" class="fa-solid fa-circle-info"></i>
-<span>
-            Tipp: Nutze die Spielersuche oben, um direkt zu deiner persönlichen Statistik zu springen.
-            In den <strong>Ranglisten</strong> kannst du jede Kategorie einzeln aufklappen.
+            <thead>
+              <tr>
+                <th>Platz</th>
+                <th>Spielername</th>
+                <th>Punkte</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <div class="table-footer">
+            <div aria-label="Seiten" class="pagination" id="king-pagination"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section aria-labelledby="Ranglisten" class="tab-panel" id="tab-ranglisten">
+      <div class="panel-inner">
+        <div class="notice notice--info notice--compact" id="ranglisten-note">
+          <i aria-hidden="true" class="fa-solid fa-circle-info"></i>
+          <span>
+            Tipp: Nutze die Spielersuche oben, um direkt zu deiner persönlichen Statistik zu
+            springen. In den <strong>Ranglisten</strong> kannst du jede Kategorie einzeln aufklappen.
           </span>
-</div>
-<div class="controls">
-<div class="search-wrapper metric-filter">
-<i aria-hidden="true" class="fa-solid fa-filter"></i>
-<input id="metric-filter" placeholder="Kategorien/Ranglisten filtern… (z. B. creeper, stunden)" type="search"/>
-</div>
-<div class="control-group">
-<label class="entries-label" for="page-size">Einträge</label>
-<select id="page-size">
-<option selected="" value="10">10</option>
-<option value="25">25</option>
-<option value="50">50</option>
-<option value="100">100</option>
-</select>
-</div>
-<span class="tip"><i aria-hidden="true" class="fa-solid fa-circle-info"></i>
-            Öffne eine Rangliste, um die Tabelle zu sehen. Mit <strong>Vorherige</strong>/<strong>Nächste</strong>
+        </div>
+        <div class="controls">
+          <div class="search-wrapper metric-filter">
+            <i aria-hidden="true" class="fa-solid fa-filter"></i>
+            <input
+              id="metric-filter"
+              placeholder="Kategorien/Ranglisten filtern… (z. B. creeper, stunden)"
+              type="search"
+            />
+          </div>
+          <div class="control-group">
+            <label class="entries-label" for="page-size">Einträge</label>
+            <select id="page-size">
+              <option selected="" value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+          <span class="tip"
+            ><i aria-hidden="true" class="fa-solid fa-circle-info"></i>
+            Öffne eine Rangliste, um die Tabelle zu sehen. Mit <strong>Vorherige</strong>/<strong
+              >Nächste</strong
+            >
             kannst du blättern.
           </span>
-</div>
-<div class="notice notice--danger notice--compact" id="no-results-warning">
-<i aria-hidden="true" class="fa-solid fa-triangle-exclamation warning-icon"></i>
-<span class="warning-text">Keine Ranglisten gefunden.</span>
-</div>
-<div aria-live="polite" class="metrics-container" id="metrics-container"></div>
-</div>
-</section>
-<section aria-labelledby="Versus" class="tab-panel" id="tab-versus">
-<div class="panel-inner">
-<div class="notice notice--info">
-<i aria-hidden="true" class="fa-solid fa-wand-magic-sparkles heart-icon"></i>
-<span class="warning-text">
-<strong>Versus</strong> ist geplant, wird aber erst in einem späteren Schritt umgesetzt.
+        </div>
+        <div class="notice notice--danger notice--compact" id="no-results-warning">
+          <i aria-hidden="true" class="fa-solid fa-triangle-exclamation warning-icon"></i>
+          <span class="warning-text">Keine Ranglisten gefunden.</span>
+        </div>
+        <div aria-live="polite" class="metrics-container" id="metrics-container"></div>
+      </div>
+    </section>
+    <section aria-labelledby="Versus" class="tab-panel" id="tab-versus">
+      <div class="panel-inner">
+        <div class="notice notice--info">
+          <i aria-hidden="true" class="fa-solid fa-wand-magic-sparkles heart-icon"></i>
+          <span class="warning-text">
+            <strong>Versus</strong> ist geplant, wird aber erst in einem späteren Schritt umgesetzt.
           </span>
-</div>
-</div>
-</section>
-</main>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <Footer /></BaseLayout>
+  <Footer /></BaseLayout
+>

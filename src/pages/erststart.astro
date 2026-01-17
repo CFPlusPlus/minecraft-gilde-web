@@ -5,321 +5,398 @@ import Footer from '../components/Footer.astro';
 ---
 
 <BaseLayout
-  title={"Minecraft Gilde - Tutorial"}
-  canonical={"https://minecraft-gilde.de/erststart.html"}
+  title={'Minecraft Gilde - Tutorial'}
+  canonical={'https://minecraft-gilde.de/erststart.html'}
   description={undefined}
   keywords={undefined}
   author={undefined}
-  bodyClass={"page--sticky-footer erststart-page page--subpage page--content"}
-  styles={["/css/content-page.css", "/css/erststart.css"]}
-  scripts={["/js/erststart.js"]}
+  bodyClass={'page--sticky-footer erststart-page page--subpage page--content'}
+  styles={['/css/content-page.css', '/css/erststart.css']}
+  scripts={['/js/erststart.js']}
 >
-  <Navbar active={""} />
+  <Navbar active={''} />
 
   <main id="main-content" tabindex="-1">
-<!-- Header -->
-<section id="header">
-<div class="content">
-<div class="info">
-<p class="minecraft-server-ip">Minecraft-Gilde.de</p>
-<h1 class="title">Dein <span>Abenteuerstart</span></h1>
-</div>
-</div>
-</section>
-<!-- Contacts / Tutorial -->
-<section id="page-content">
-<div class="content">
-<div class="layout-with-timeline">
-<aside aria-label="Kapitel-Fortschritt" class="progress-container">
-<ul class="progress-timeline">
-<li data-target="start">
-<i aria-hidden="true" class="fa-solid fa-flag-checkered"></i><span> Abenteuerstart</span>
-</li>
-<li data-target="grundstueck">
-<i aria-hidden="true" class="fa-solid fa-shield-halved"></i><span> Grundstück sichern</span>
-</li>
-<li data-target="befehle"><i aria-hidden="true" class="fa-solid fa-list"></i><span> Befehle</span></li>
-<li data-target="regeln">
-<i aria-hidden="true" class="fa-solid fa-scale-balanced"></i><span> Regeln</span>
-</li>
-<li data-target="rollen">
-<i aria-hidden="true" class="fa-solid fa-user-group"></i><span> Wer ist wer im Chat?</span>
-</li>
-<li data-target="farmwelten">
-<i aria-hidden="true" class="fa-solid fa-earth-americas"></i><span> Farmwelten</span>
-</li>
-<li data-target="dynmap"><i aria-hidden="true" class="fa-solid fa-map"></i><span> Dynmap</span></li>
-<li data-target="vote"><i aria-hidden="true" class="fa-solid fa-gift"></i><span> Voten</span></li>
-</ul>
-</aside>
-<div class="main-content">
-<div class="notice notice--info quickstart">
-<i aria-hidden="true" class="fa-solid fa-bolt"></i>
-<div class="notice-text quickstart-content">
-<h2>Schnellstart für Ungeduldige</h2>
-<ol>
-<li>
-<strong>Platz finden:</strong> Nutze <code>/rtp</code> oder schaue auf die
-                  <a href="https://map.minecraft-gilde.de" rel="noopener noreferrer" target="_blank">Dynmap</a>.
-                </li>
-<li><strong>Grundstück sichern:</strong> Mit einer Holzschaufel zwei Ecken markieren.</li>
-<li>
-<strong>Regeln lesen:</strong>
-<a href="rules.html" rel="noopener noreferrer" target="_blank">Hier
-                    klicken</a>.
-                </li>
-</ol>
-<p class="quickstart-cta">
-<i aria-hidden="true" class="fa-solid fa-hand-point-right"></i> Kehre jetzt ins Spiel zurück und starte
-                dein Abenteuer!
-              </p>
-</div>
-</div>
-<p class="description">
-              Willkommen in der Minecraft Gilde! Dieses Tutorial führt dich durch die ersten Schritte, damit du dich
-              schnell zurechtfindest. Du beginnst am Spawnpunkt; von dort kannst du direkt losziehen oder später mit
+    <!-- Header -->
+    <section id="header">
+      <div class="content">
+        <div class="info">
+          <p class="minecraft-server-ip">Minecraft-Gilde.de</p>
+          <h1 class="title">Dein <span>Abenteuerstart</span></h1>
+        </div>
+      </div>
+    </section>
+    <!-- Contacts / Tutorial -->
+    <section id="page-content">
+      <div class="content">
+        <div class="layout-with-timeline">
+          <aside aria-label="Kapitel-Fortschritt" class="progress-container">
+            <ul class="progress-timeline">
+              <li data-target="start">
+                <i aria-hidden="true" class="fa-solid fa-flag-checkered"></i><span>
+                  Abenteuerstart</span
+                >
+              </li>
+              <li data-target="grundstueck">
+                <i aria-hidden="true" class="fa-solid fa-shield-halved"></i><span>
+                  Grundstück sichern</span
+                >
+              </li>
+              <li data-target="befehle">
+                <i aria-hidden="true" class="fa-solid fa-list"></i><span> Befehle</span>
+              </li>
+              <li data-target="regeln">
+                <i aria-hidden="true" class="fa-solid fa-scale-balanced"></i><span> Regeln</span>
+              </li>
+              <li data-target="rollen">
+                <i aria-hidden="true" class="fa-solid fa-user-group"></i><span>
+                  Wer ist wer im Chat?</span
+                >
+              </li>
+              <li data-target="farmwelten">
+                <i aria-hidden="true" class="fa-solid fa-earth-americas"></i><span>
+                  Farmwelten</span
+                >
+              </li>
+              <li data-target="dynmap">
+                <i aria-hidden="true" class="fa-solid fa-map"></i><span> Dynmap</span>
+              </li>
+              <li data-target="vote">
+                <i aria-hidden="true" class="fa-solid fa-gift"></i><span> Voten</span>
+              </li>
+            </ul>
+          </aside>
+          <div class="main-content">
+            <div class="notice notice--info quickstart">
+              <i aria-hidden="true" class="fa-solid fa-bolt"></i>
+              <div class="notice-text quickstart-content">
+                <h2>Schnellstart für Ungeduldige</h2>
+                <ol>
+                  <li>
+                    <strong>Platz finden:</strong> Nutze <code>/rtp</code> oder schaue auf die
+                    <a
+                      href="https://map.minecraft-gilde.de"
+                      rel="noopener noreferrer"
+                      target="_blank">Dynmap</a
+                    >.
+                  </li>
+                  <li>
+                    <strong>Grundstück sichern:</strong> Mit einer Holzschaufel zwei Ecken markieren.
+                  </li>
+                  <li>
+                    <strong>Regeln lesen:</strong>
+                    <a href="rules.html" rel="noopener noreferrer" target="_blank">Hier klicken</a>.
+                  </li>
+                </ol>
+                <p class="quickstart-cta">
+                  <i aria-hidden="true" class="fa-solid fa-hand-point-right"></i> Kehre jetzt ins Spiel
+                  zurück und starte dein Abenteuer!
+                </p>
+              </div>
+            </div>
+            <p class="description">
+              Willkommen in der Minecraft Gilde! Dieses Tutorial führt dich durch die ersten
+              Schritte, damit du dich schnell zurechtfindest. Du beginnst am Spawnpunkt; von dort
+              kannst du direkt losziehen oder später mit
               <code>/rtp</code>
               in die Wildnis starten.
             </p>
-<h2 class="section-title" id="start">Dein erster Start: Was kann ich in der Minecraft Gilde machen?</h2>
-<p class="description">
-              Schön, dass du den Weg zur Minecraft Gilde gefunden hast!<br/><br/>
-              Die Minecraft Gilde ist ein <strong>Vanilla-SMP-Server</strong> – das heißt, hier spielst du ganz ohne
-              Mods oder Plugins, die das Gameplay verändern. Du kannst dir also völlig frei einen schönen Platz in
-              unserer Welt suchen und sofort mit dem Bauen loslegen.<br/><br/>
+            <h2 class="section-title" id="start">
+              Dein erster Start: Was kann ich in der Minecraft Gilde machen?
+            </h2>
+            <p class="description">
+              Schön, dass du den Weg zur Minecraft Gilde gefunden hast!<br /><br />
+              Die Minecraft Gilde ist ein <strong>Vanilla-SMP-Server</strong> – das heißt, hier spielst
+              du ganz ohne Mods oder Plugins, die das Gameplay verändern. Du kannst dir also völlig frei
+              einen schönen Platz in unserer Welt suchen und sofort mit dem Bauen loslegen.<br /><br
+              />
               Für deinen ersten Start empfehlen wir dir einen Blick auf unsere
-              <a href="https://map.minecraft-gilde.de" rel="noopener noreferrer" target="_blank">Dynmap</a> um einen
-              passenden Bauplatz zu finden.<br/><br/>
-              Wenn du lieber den Zufall entscheiden lassen möchtest, wo deine neue Basis entsteht, nutze einfach den
-              Befehl <code>/rtp</code>, um dich an einen zufälligen Ort in der Welt teleportieren zu lassen.
+              <a href="https://map.minecraft-gilde.de" rel="noopener noreferrer" target="_blank"
+                >Dynmap</a
+              > um einen passenden Bauplatz zu finden.<br /><br />
+              Wenn du lieber den Zufall entscheiden lassen möchtest, wo deine neue Basis entsteht, nutze
+              einfach den Befehl <code>/rtp</code>, um dich an einen zufälligen Ort in der Welt
+              teleportieren zu lassen.
             </p>
-<!-- Folia Hinweisbox -->
-<div class="notice notice--info">
-<i aria-hidden="true" class="fas fa-lightbulb"></i>
-<p>
-                Unser Server nutzt Folia, eine moderne Server-Software, die für bessere Leistung sorgt. Damit alles
-                flüssig bleibt, <strong>baue deine Basis nicht direkt neben anderen Spielern</strong> – besonders, wenn
-                du große Farmen planst. Ein paar hundert Blöcke Abstand helfen schon, um
+            <!-- Folia Hinweisbox -->
+            <div class="notice notice--info">
+              <i aria-hidden="true" class="fas fa-lightbulb"></i>
+              <p>
+                Unser Server nutzt Folia, eine moderne Server-Software, die für bessere Leistung
+                sorgt. Damit alles flüssig bleibt, <strong
+                  >baue deine Basis nicht direkt neben anderen Spielern</strong
+                > – besonders, wenn du große Farmen planst. Ein paar hundert Blöcke Abstand helfen schon,
+                um
                 <strong>Lags zu vermeiden</strong> und die Welt für alle stabil zu halten.
               </p>
-</div>
-<h2 class="section-title" id="grundstueck">So erstellst du ein Grundstück</h2>
-<p class="description">
-              Nachdem du dir einen schönen Platz zum Bauen ausgesucht hast, solltest du dir unbedingt ein
-              <strong>Grundstück</strong> sichern. <br/>
-              Nur mit einem Grundstück sind deine <strong>Bauten, Kisten und Tiere</strong> vor anderen Spielern
-              geschützt.<br/><br/>
+            </div>
+            <h2 class="section-title" id="grundstueck">So erstellst du ein Grundstück</h2>
+            <p class="description">
+              Nachdem du dir einen schönen Platz zum Bauen ausgesucht hast, solltest du dir
+              unbedingt ein
+              <strong>Grundstück</strong> sichern. <br />
+              Nur mit einem Grundstück sind deine <strong>Bauten, Kisten und Tiere</strong> vor anderen
+              Spielern geschützt.<br /><br />
 
-              Die Erstellung ist ganz einfach: <br/>
-<strong>Nimm eine Holzschaufel</strong> und markiere damit die
-              <strong>beiden diagonalen Ecken</strong> deines zukünftigen Grundstücks (z. B. vorne links und hinten
-              rechts). Danach wird das Grundstück automatisch erstellt und dir durch Goldblöcke an den Ecken angezeigt.
-              <br/><br/>Pro Spielstunde erhältst du <strong>1.000 Claim-Blöcke</strong> dazu – insgesamt kannst du
-              maximal <strong>120.000 Claim-Blöcke</strong> besitzen (über alle Grundstücke zusammen).<br/><br/>
+              Die Erstellung ist ganz einfach: <br />
+              <strong>Nimm eine Holzschaufel</strong> und markiere damit die
+              <strong>beiden diagonalen Ecken</strong> deines zukünftigen Grundstücks (z. B. vorne links
+              und hinten rechts). Danach wird das Grundstück automatisch erstellt und dir durch Goldblöcke
+              an den Ecken angezeigt.
+              <br /><br />Pro Spielstunde erhältst du <strong>1.000 Claim-Blöcke</strong> dazu – insgesamt
+              kannst du maximal <strong>120.000 Claim-Blöcke</strong> besitzen (über alle Grundstücke
+              zusammen).<br /><br />
               Du kannst deine Grundstücke anschließend auf unserer
-              <a href="https://map.minecraft-gilde.de" rel="noopener" target="_blank">Dynmap</a> sehen oder mit einem
+              <a href="https://map.minecraft-gilde.de" rel="noopener" target="_blank">Dynmap</a> sehen
+              oder mit einem
               <strong>Stock (Rechtsklick)</strong> überprüfen, wem ein Grundstück gehört.
             </p>
-<!-- Grundstück Hinweisbox -->
-<div class="notice notice--info">
-<i aria-hidden="true" class="fas fa-lightbulb"></i>
-<p>
-                Wenn du dein Grundstück später vergrößern oder verkleinern möchtest, kannst du mit einer Holzschaufel
-                neue Ecken setzen. Achte darauf, dass du genug Anspruchsfläche (Claim-Blöcke) zur Verfügung hast.
+            <!-- Grundstück Hinweisbox -->
+            <div class="notice notice--info">
+              <i aria-hidden="true" class="fas fa-lightbulb"></i>
+              <p>
+                Wenn du dein Grundstück später vergrößern oder verkleinern möchtest, kannst du mit
+                einer Holzschaufel neue Ecken setzen. Achte darauf, dass du genug Anspruchsfläche
+                (Claim-Blöcke) zur Verfügung hast.
               </p>
-</div>
-<!-- YouTube-Video einbetten -->
-<div class="video-container">
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/tK15LgTwvjI" title="YouTube video player">
-</iframe>
-</div>
-<h3 class="section-title section-title--tight">Berechtigungsstufen für Grundstücke</h3>
-<p class="description">
-              Du kannst die Berechtigungen deiner Grundstücke anpassen, damit andere Spieler Zugriff auf dein Grundstück
-              erhalten. Für jeden Spieler lassen sich die Rechte individuell festlegen. Unten findest du eine Übersicht
-              der verfügbaren Berechtigungsstufen:
+            </div>
+            <!-- YouTube-Video einbetten -->
+            <div class="video-container">
+              <iframe
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                src="https://www.youtube-nocookie.com/embed/tK15LgTwvjI"
+                title="YouTube video player"
+              >
+              </iframe>
+            </div>
+            <h3 class="section-title section-title--tight">Berechtigungsstufen für Grundstücke</h3>
+            <p class="description">
+              Du kannst die Berechtigungen deiner Grundstücke anpassen, damit andere Spieler Zugriff
+              auf dein Grundstück erhalten. Für jeden Spieler lassen sich die Rechte individuell
+              festlegen. Unten findest du eine Übersicht der verfügbaren Berechtigungsstufen:
             </p>
-<ul class="info-list info-list--pull-up-lg info-list--pad">
-<li>
-<strong>/trust</strong>: Gibt einem anderen Spieler die Erlaubnis, in deinem Grundstück zu bauen und zu
-                bearbeiten.
+            <ul class="info-list info-list--pull-up-lg info-list--pad">
+              <li>
+                <strong>/trust</strong>: Gibt einem anderen Spieler die Erlaubnis, in deinem
+                Grundstück zu bauen und zu bearbeiten.
               </li>
-<li><strong>/accesstrust</strong>: Erlaubt einem Spieler, Knöpfe, Hebel und Betten zu benutzen.</li>
-<li>
-<strong>/containertrust</strong>: Erlaubt einem Spieler, Knöpfe, Hebel, Betten, Werkbänke, Container
-                (z. B. Kisten) und Tiere zu benutzen.
+              <li>
+                <strong>/accesstrust</strong>: Erlaubt einem Spieler, Knöpfe, Hebel und Betten zu
+                benutzen.
               </li>
-<li>
-<strong>/permissiontrust</strong>: Gibt einem Spieler die Erlaubnis, seine eigene Berechtigungsstufe an
-                andere weiterzugeben.
+              <li>
+                <strong>/containertrust</strong>: Erlaubt einem Spieler, Knöpfe, Hebel, Betten,
+                Werkbänke, Container (z. B. Kisten) und Tiere zu benutzen.
               </li>
-</ul>
-<!-- Hinweisbox -->
-<div class="notice notice--info">
-<i aria-hidden="true" class="fas fa-lightbulb"></i>
-<p>
+              <li>
+                <strong>/permissiontrust</strong>: Gibt einem Spieler die Erlaubnis, seine eigene
+                Berechtigungsstufe an andere weiterzugeben.
+              </li>
+            </ul>
+            <!-- Hinweisbox -->
+            <div class="notice notice--info">
+              <i aria-hidden="true" class="fas fa-lightbulb"></i>
+              <p>
                 Wenn du mehrere Grundstücke besitzt und einem Spieler <strong>auf allen</strong> Grundstücken
-                Berechtigungen geben möchtest, stelle dich <strong>außerhalb</strong> deiner Grundstücke und gib den
-                gewünschten Berechtigungsbefehl ein.<br/><br/>
-                Befindest du dich <strong>innerhalb</strong> eines Grundstücks, erhält der Spieler die Berechtigung
+                Berechtigungen geben möchtest, stelle dich <strong>außerhalb</strong> deiner Grundstücke
+                und gib den gewünschten Berechtigungsbefehl ein.<br /><br />
+                Befindest du dich <strong>innerhalb</strong> eines Grundstücks, erhält der Spieler die
+                Berechtigung
                 <strong>nur für dieses eine Grundstück</strong>.
               </p>
-</div>
-<h2 class="section-title" id="befehle">Alle verfügbaren Befehle</h2>
-<p class="description">
-              Auf unserem Server stehen dir verschiedene <strong>Befehle</strong> zur Verfügung, die dir den Alltag
-              erleichtern und das Spielen angenehmer machen.
+            </div>
+            <h2 class="section-title" id="befehle">Alle verfügbaren Befehle</h2>
+            <p class="description">
+              Auf unserem Server stehen dir verschiedene <strong>Befehle</strong> zur Verfügung, die dir
+              den Alltag erleichtern und das Spielen angenehmer machen.
             </p>
-<ul class="info-list info-list--pull-up-sm">
-<li><strong>/spawn</strong> – Bringt dich zurück zum Spawnpunkt.</li>
-<li><strong>/home</strong> – Teleportiert dich zu deinem Zuhause.</li>
-<li><strong>/sethome</strong> – Setzt den aktuellen Standort als Zuhause.</li>
-<li><strong>/tpa &lt;Spieler&gt;</strong> – Sendet eine Teleport-Anfrage an einen anderen Spieler.</li>
-<li><strong>/msg &lt;Spieler&gt; &lt;Nachricht&gt;</strong> – Sendet eine private Nachricht.</li>
-</ul>
-<p class="description">
-<i aria-hidden="true" class="fas fa-hand-point-right"></i> Eine vollständige Liste
+            <ul class="info-list info-list--pull-up-sm">
+              <li><strong>/spawn</strong> – Bringt dich zurück zum Spawnpunkt.</li>
+              <li><strong>/home</strong> – Teleportiert dich zu deinem Zuhause.</li>
+              <li><strong>/sethome</strong> – Setzt den aktuellen Standort als Zuhause.</li>
+              <li>
+                <strong>/tpa &lt;Spieler&gt;</strong> – Sendet eine Teleport-Anfrage an einen anderen
+                Spieler.
+              </li>
+              <li>
+                <strong>/msg &lt;Spieler&gt; &lt;Nachricht&gt;</strong> – Sendet eine private Nachricht.
+              </li>
+            </ul>
+            <p class="description">
+              <i aria-hidden="true" class="fas fa-hand-point-right"></i> Eine vollständige Liste
               <strong>aller verfügbaren Befehle</strong> findest du
               <a href="befehle.html" rel="noopener noreferrer" target="_blank"> hier</a>.
             </p>
-<h2 class="section-title" id="regeln">Unser Regelwerk</h2>
-<p class="description">
-              Um ein faires und angenehmes Miteinander auf unserem Server zu gewährleisten, lies dir bitte unser
+            <h2 class="section-title" id="regeln">Unser Regelwerk</h2>
+            <p class="description">
+              Um ein faires und angenehmes Miteinander auf unserem Server zu gewährleisten, lies dir
+              bitte unser
               <a href="rules.html" rel="noopener noreferrer" target="_blank">Regelwerk</a>
-              sorgfältig durch. So vermeiden wir Missverständnisse und sorgen für ein entspanntes Spielerlebnis für
-              alle.
+              sorgfältig durch. So vermeiden wir Missverständnisse und sorgen für ein entspanntes Spielerlebnis
+              für alle.
             </p>
-<!-- Hinweisbox -->
-<div class="notice notice--warning">
-<i aria-hidden="true" class="fas fa-exclamation-triangle"></i>
-<p>
-                Achte vor allem am Anfang auf <strong>Regel 4</strong>:<br/>
+            <!-- Hinweisbox -->
+            <div class="notice notice--warning">
+              <i aria-hidden="true" class="fas fa-exclamation-triangle"></i>
+              <p>
+                Achte vor allem am Anfang auf <strong>Regel 4</strong>:<br />
                 Der Abbau von Ressourcen ist <strong>ausschließlich in den Farmwelten</strong> gestattet.
               </p>
-</div>
-<h2 class="section-title" id="rollen">Wer ist wer im Chat?</h2>
-<p class="description">
-              Im Chat kannst du sofort erkennen, welche Rolle ein Spieler auf dem Server hat – dank farbiger Namen im
-              Chat. So weißt du direkt, wer zum Team gehört und wer dir bei Fragen helfen kann.
+            </div>
+            <h2 class="section-title" id="rollen">Wer ist wer im Chat?</h2>
+            <p class="description">
+              Im Chat kannst du sofort erkennen, welche Rolle ein Spieler auf dem Server hat – dank
+              farbiger Namen im Chat. So weißt du direkt, wer zum Team gehört und wer dir bei Fragen
+              helfen kann.
             </p>
-<ul class="role-badges description">
-<li>
-<span class="role-badge admin"> <i aria-hidden="true" class="fa-solid fa-gear"></i> Admin </span>
-                Verantwortlich für den Server, Technik und Verwaltung. Hilft bei größeren Problemen oder technischen
-                Fragen.
-              </li>
-<li>
-<span class="role-badge moderator">
-<i aria-hidden="true" class="fa-solid fa-shield-halved"></i> Moderator
+            <ul class="role-badges description">
+              <li>
+                <span class="role-badge admin">
+                  <i aria-hidden="true" class="fa-solid fa-gear"></i> Admin
                 </span>
-                Unterstützt Spieler, beantwortet Fragen und achtet darauf, dass die Regeln eingehalten werden.
+                Verantwortlich für den Server, Technik und Verwaltung. Hilft bei größeren Problemen oder
+                technischen Fragen.
               </li>
-<li>
-<span class="role-badge streamer">
-<i aria-hidden="true" class="fa-solid fa-tower-broadcast"></i> Streamer
+              <li>
+                <span class="role-badge moderator">
+                  <i aria-hidden="true" class="fa-solid fa-shield-halved"></i> Moderator
+                </span>
+                Unterstützt Spieler, beantwortet Fragen und achtet darauf, dass die Regeln eingehalten
+                werden.
+              </li>
+              <li>
+                <span class="role-badge streamer">
+                  <i aria-hidden="true" class="fa-solid fa-tower-broadcast"></i> Streamer
                 </span>
                 Spieler, die regelmäßig live streamen und deshalb einen besonderen Rang tragen.
               </li>
-<li>
-<span class="role-badge spieler"> <i aria-hidden="true" class="fa-solid fa-user"></i> Spieler </span>
-                Normale Mitglieder der Community – wie du! Jeder kann hier kreativ werden und Teil der Welt sein.
+              <li>
+                <span class="role-badge spieler">
+                  <i aria-hidden="true" class="fa-solid fa-user"></i> Spieler
+                </span>
+                Normale Mitglieder der Community – wie du! Jeder kann hier kreativ werden und Teil der
+                Welt sein.
               </li>
-</ul>
-<div class="notice notice--info">
-<i aria-hidden="true" class="fas fa-comment-dots"></i>
-<p>
-                Du kannst Teammitglieder (Admins und Moderatoren) jederzeit im Chat anschreiben. Für private Fragen oder
-                wenn der Chat sehr voll ist, nutze <code>/msg &lt;Spieler&gt; &lt;Nachricht&gt;</code> oder bei
-                dringender Hilfe <code>/helpop &lt;Nachricht&gt;</code>.
+            </ul>
+            <div class="notice notice--info">
+              <i aria-hidden="true" class="fas fa-comment-dots"></i>
+              <p>
+                Du kannst Teammitglieder (Admins und Moderatoren) jederzeit im Chat anschreiben. Für
+                private Fragen oder wenn der Chat sehr voll ist, nutze <code
+                  >/msg &lt;Spieler&gt; &lt;Nachricht&gt;</code
+                > oder bei dringender Hilfe <code>/helpop &lt;Nachricht&gt;</code>.
               </p>
-</div>
-<p class="description">
+            </div>
+            <p class="description">
               Bei komplexeren Fragen oder längeren Anliegen kannst du dich außerdem auf unserem
-              <a href="https://discord.minecraft-gilde.de" rel="noopener noreferrer" target="_blank">Discord-Server</a>
+              <a href="https://discord.minecraft-gilde.de" rel="noopener noreferrer" target="_blank"
+                >Discord-Server</a
+              >
               melden.
             </p>
-<h2 class="section-title" id="farmwelten">Die Farmwelten</h2>
-<p class="description">
-              Für den Abbau von Ressourcen stehen dir drei spezielle <strong>Farmwelten</strong> zur Verfügung. Hier
-              kannst du nach Herzenslust Rohstoffe sammeln, ohne dass deine Bauwerke gefährdet werden. Nutze dafür
-              einfach die folgenden Befehle:
+            <h2 class="section-title" id="farmwelten">Die Farmwelten</h2>
+            <p class="description">
+              Für den Abbau von Ressourcen stehen dir drei spezielle <strong>Farmwelten</strong> zur Verfügung.
+              Hier kannst du nach Herzenslust Rohstoffe sammeln, ohne dass deine Bauwerke gefährdet werden.
+              Nutze dafür einfach die folgenden Befehle:
             </p>
-<ul class="info-list info-list--pull-up-lg">
-<li><strong>/farmwelt</strong> – normale Farmwelt für Holz, Steine, Erze usw.</li>
-<li><strong>/netherfarm</strong> – Nether-Farmwelt für Netherquarz, Glowstone &amp; Co.</li>
-<li><strong>/endfarm</strong> – End-Farmwelt für Endstone, Elytra-Shulker-Loot usw.</li>
-</ul>
-<!-- Hinweisbox -->
-<div class="notice notice--info">
-<i aria-hidden="true" class="fas fa-lightbulb"></i>
-<p>
-                Die Farmwelten werden regelmäßig <strong>zurückgesetzt</strong>, damit immer genügend Rohstoffe
-                vorhanden sind. Achte darauf, dass du vor einem Reset alle wichtigen Items mitnimmst.
+            <ul class="info-list info-list--pull-up-lg">
+              <li><strong>/farmwelt</strong> – normale Farmwelt für Holz, Steine, Erze usw.</li>
+              <li>
+                <strong>/netherfarm</strong> – Nether-Farmwelt für Netherquarz, Glowstone &amp; Co.
+              </li>
+              <li>
+                <strong>/endfarm</strong> – End-Farmwelt für Endstone, Elytra-Shulker-Loot usw.
+              </li>
+            </ul>
+            <!-- Hinweisbox -->
+            <div class="notice notice--info">
+              <i aria-hidden="true" class="fas fa-lightbulb"></i>
+              <p>
+                Die Farmwelten werden regelmäßig <strong>zurückgesetzt</strong>, damit immer
+                genügend Rohstoffe vorhanden sind. Achte darauf, dass du vor einem Reset alle
+                wichtigen Items mitnimmst.
               </p>
-</div>
-<h2 class="section-title" id="dynmap">Unsere Dynmap</h2>
-<p class="description">
-              Unsere <strong>Dynmap</strong> ist eine interaktive Online-Karte, die sich automatisch aktualisiert. Dort
-              kannst du <strong>alle Welten</strong> – einschließlich der <strong>Farmwelten</strong> – erkunden und dir
-              viele nützliche Informationen anzeigen lassen:
+            </div>
+            <h2 class="section-title" id="dynmap">Unsere Dynmap</h2>
+            <p class="description">
+              Unsere <strong>Dynmap</strong> ist eine interaktive Online-Karte, die sich automatisch aktualisiert.
+              Dort kannst du <strong>alle Welten</strong> – einschließlich der <strong
+                >Farmwelten</strong
+              > – erkunden und dir viele nützliche Informationen anzeigen lassen:
             </p>
-<ul class="info-list info-list--pull-up-sm">
-<li>Grundstücke und geschützte Bereiche</li>
-<li>Positionen von Spieler-Shops</li>
-<li>Sehenswürdigkeiten und besondere Orte</li>
-</ul>
-<p class="description">
-              Über das Hamburger-Menü (<i class="fa-solid fa-bars"></i>) kannst du unter <em>„Marker“</em> alle
-              Zusatzinformationen ganz einfach <strong>ein- oder ausblenden</strong>.
+            <ul class="info-list info-list--pull-up-sm">
+              <li>Grundstücke und geschützte Bereiche</li>
+              <li>Positionen von Spieler-Shops</li>
+              <li>Sehenswürdigkeiten und besondere Orte</li>
+            </ul>
+            <p class="description">
+              Über das Hamburger-Menü (<i class="fa-solid fa-bars"></i>) kannst du unter <em
+                >„Marker“</em
+              > alle Zusatzinformationen ganz einfach <strong>ein- oder ausblenden</strong>.
             </p>
-<div class="notice notice--info">
-<i aria-hidden="true" class="fas fa-lightbulb"></i>
-<p>
-                Wenn du auf der Suche nach einem Bauplatz bist, hilft dir die Dynmap, freie Gebiete oder schöne
-                Landschaften zu entdecken.
+            <div class="notice notice--info">
+              <i aria-hidden="true" class="fas fa-lightbulb"></i>
+              <p>
+                Wenn du auf der Suche nach einem Bauplatz bist, hilft dir die Dynmap, freie Gebiete
+                oder schöne Landschaften zu entdecken.
               </p>
-</div>
-<p class="description">
-<i aria-hidden="true" class="fas fa-hand-point-right"></i>
+            </div>
+            <p class="description">
+              <i aria-hidden="true" class="fas fa-hand-point-right"></i>
               Hier gelangst du zur
-              <a href="https://map.minecraft-gilde.de" rel="noopener noreferrer" target="_blank">Dynmap</a>.
+              <a href="https://map.minecraft-gilde.de" rel="noopener noreferrer" target="_blank"
+                >Dynmap</a
+              >.
             </p>
-<h2 class="section-title" id="vote">Vote für unseren Server</h2>
-<p class="description">
+            <h2 class="section-title" id="vote">Vote für unseren Server</h2>
+            <p class="description">
               Du möchtest unseren Server <strong>unterstützen</strong> und dabei selbst eine
-              <strong>Belohnung</strong> erhalten?<br/><br/>
-              Dann <strong>vote</strong> für unseren Server!<br/><br/>
-              Unser Server ist aktuell auf <strong>drei Vote-Seiten</strong> eingetragen, auf denen du abstimmen kannst.
-              Die Links zu den Vote-Seiten findest du
-              <a href="index.html#vote" rel="noopener noreferrer" target="_blank">hier</a>.<br/><br/>
+              <strong>Belohnung</strong> erhalten?<br /><br />
+              Dann <strong>vote</strong> für unseren Server!<br /><br />
+              Unser Server ist aktuell auf <strong>drei Vote-Seiten</strong> eingetragen, auf denen du
+              abstimmen kannst. Die Links zu den Vote-Seiten findest du
+              <a href="index.html#vote" rel="noopener noreferrer" target="_blank">hier</a>.<br /><br
+              />
               Für <strong>jeden Vote</strong> auf einer dieser Seiten erhältst du eine
-              <strong>Ingame-Belohnung</strong>.<br/><br/>
-              Regelmäßiges Voten lohnt sich besonders: <strong>Jeden Monat</strong> bekommen die Spieler mit den meisten
-              Votes eine <strong>exklusive Extra-Belohnung</strong>.
+              <strong>Ingame-Belohnung</strong>.<br /><br />
+              Regelmäßiges Voten lohnt sich besonders: <strong>Jeden Monat</strong> bekommen die Spieler
+              mit den meisten Votes eine <strong>exklusive Extra-Belohnung</strong>.
             </p>
-<hr/>
-<div class="notice notice--success">
-<i aria-hidden="true" class="fa-solid fa-circle-check"></i>
-<p>
+            <hr />
+            <div class="notice notice--success">
+              <i aria-hidden="true" class="fa-solid fa-circle-check"></i>
+              <p>
                 Vielen Dank, dass du dir die Zeit genommen hast, unser
-                <strong>Tutorial</strong> durchzulesen.<br/><br/>
+                <strong>Tutorial</strong> durchzulesen.<br /><br />
                 Sollten noch Fragen offen sein, kannst du diese gerne auf unserem
-                <strong><a href="https://discord.minecraft-gilde.de" rel="noopener noreferrer" target="_blank">Discord</a></strong>
-                oder direkt <strong>im Spiel</strong> stellen.<br/><br/>
-                Unsere Community ist sehr hilfsbereit und unterstützt dich gerne.<br/><br/>
-                Und nun wünschen wir dir <strong>viel Spaß in der Minecraft Gilde</strong>!<br/><br/>
+                <strong
+                  ><a
+                    href="https://discord.minecraft-gilde.de"
+                    rel="noopener noreferrer"
+                    target="_blank">Discord</a
+                  ></strong
+                >
+                oder direkt <strong>im Spiel</strong> stellen.<br /><br />
+                Unsere Community ist sehr hilfsbereit und unterstützt dich gerne.<br /><br />
+                Und nun wünschen wir dir <strong>viel Spaß in der Minecraft Gilde</strong>!<br /><br
+                />
                 Du kannst diesen Tab jetzt schließen und zurück ins Spiel wechseln.
               </p>
-</div>
-<div class="button-wrapper">
-<a class="btn btn-primary back-button" href="#" onclick="return backToGame();">
-<i aria-hidden="true" class="fas fa-times"></i> Tutorial schließen
+            </div>
+            <div class="button-wrapper">
+              <a class="btn btn-primary back-button" href="#" onclick="return backToGame();">
+                <i aria-hidden="true" class="fas fa-times"></i> Tutorial schließen
               </a>
-</div>
-</div>
-</div>
-</div>
-</section>
-</main>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <Footer /></BaseLayout>
+  <Footer /></BaseLayout
+>

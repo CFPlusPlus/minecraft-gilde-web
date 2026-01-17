@@ -21,15 +21,15 @@
   const getServerIp = () => {
     try {
       // siteConfig ist global (aus script.js)
-      if (typeof siteConfig !== "undefined" && siteConfig?.server?.ip) {
+      if (typeof siteConfig !== 'undefined' && siteConfig?.server?.ip) {
         return siteConfig.server.ip;
       }
     } catch {
       // noop
     }
 
-    const ipFromDom = qs(".minecraft-server-ip")?.textContent?.trim();
-    return ipFromDom || "minecraft-gilde.de";
+    const ipFromDom = qs('.minecraft-server-ip')?.textContent?.trim();
+    return ipFromDom || 'minecraft-gilde.de';
   };
 
   const minotarURL = (uuid, name, size = 100) =>
@@ -45,12 +45,12 @@
   const setCentered = (scrollWrapper, container, playerListElement, text) => {
     if (playerListElement) playerListElement.textContent = text;
     scrollWrapper.innerHTML = playerListElement ? playerListElement.outerHTML : text;
-    scrollWrapper.style.animation = "none";
-    container.style.justifyContent = "center";
+    scrollWrapper.style.animation = 'none';
+    container.style.justifyContent = 'center';
   };
 
   const renderPlayers = (data, scrollWrapper, container) => {
-    const playerListElement = document.getElementById("player-list");
+    const playerListElement = document.getElementById('player-list');
 
     const hasPlayers =
       data?.online &&
@@ -59,15 +59,15 @@
       data.players.list.length > 0;
 
     if (!hasPlayers) {
-      setCentered(scrollWrapper, container, playerListElement, "Keine Spieler online.");
+      setCentered(scrollWrapper, container, playerListElement, 'Keine Spieler online.');
       return;
     }
 
     let html = `<div class="player-header">Spieler online:</div>`;
     html += data.players.list
       .map((player) => {
-        const uuid = player?.uuid || "";
-        const name = player?.name || "Unbekannt";
+        const uuid = player?.uuid || '';
+        const name = player?.name || 'Unbekannt';
 
         return `
         <div class="player" data-uuid="${uuid}" data-name="${name}">
@@ -81,39 +81,39 @@
           <span class="player-name">${name}</span>
         </div>`;
       })
-      .join("");
+      .join('');
 
     scrollWrapper.innerHTML = html;
 
     // Avatar-Fallback + Endlosschleifen-Schutz:
     // 1) Minotar -> 2) mc-heads -> 3) Bild ausblenden
-    scrollWrapper.querySelectorAll("img.player-avatar").forEach((img) => {
-      const parent = img.closest(".player");
-      const uuid = parent?.dataset.uuid || "";
-      const name = parent?.dataset.name || "";
+    scrollWrapper.querySelectorAll('img.player-avatar').forEach((img) => {
+      const parent = img.closest('.player');
+      const uuid = parent?.dataset.uuid || '';
+      const name = parent?.dataset.name || '';
 
       const primary = minotarURL(uuid, name, 100);
       const secondary = mcHeadsURL(uuid, name, 100);
 
       img.src = primary;
 
-      img.addEventListener("error", function onError() {
-        const step = Number(img.dataset.fallbackStep || "0");
+      img.addEventListener('error', function onError() {
+        const step = Number(img.dataset.fallbackStep || '0');
 
         if (step === 0) {
-          img.dataset.fallbackStep = "1";
+          img.dataset.fallbackStep = '1';
           img.src = secondary;
           return;
         }
 
-        img.removeEventListener("error", onError);
-        img.style.display = "none";
+        img.removeEventListener('error', onError);
+        img.style.display = 'none';
       });
     });
 
     // Klickbare Spieler -> Weiterleitung zur Statistik
-    scrollWrapper.querySelectorAll(".player").forEach((el) => {
-      el.addEventListener("click", () => {
+    scrollWrapper.querySelectorAll('.player').forEach((el) => {
+      el.addEventListener('click', () => {
         const uuid = el.dataset.uuid;
         const name = el.dataset.name;
 
@@ -131,16 +131,16 @@
 
     if (contentWidth > containerWidth) {
       scrollWrapper.style.animation = `scroll ${contentWidth / 30}s linear infinite`;
-      container.style.justifyContent = "flex-start";
+      container.style.justifyContent = 'flex-start';
     } else {
-      scrollWrapper.style.animation = "none";
-      container.style.justifyContent = "center";
+      scrollWrapper.style.animation = 'none';
+      container.style.justifyContent = 'center';
     }
   };
 
   const fetchPlayers = async () => {
-    const scrollWrapper = document.getElementById("scroll-wrapper");
-    const container = document.querySelector(".player-container");
+    const scrollWrapper = document.getElementById('scroll-wrapper');
+    const container = document.querySelector('.player-container');
     if (!scrollWrapper || !container) return;
 
     // In-Flight-Guard: keine überlappenden Requests
@@ -153,15 +153,20 @@
 
     try {
       const url = `https://api.mcsrvstat.us/3/${encodeURIComponent(serverIP)}`;
-      const response = await fetch(url, { signal: controller.signal, cache: "no-store" });
+      const response = await fetch(url, { signal: controller.signal, cache: 'no-store' });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
       const data = await response.json();
       renderPlayers(data, scrollWrapper, container);
     } catch (err) {
-      if (err?.name !== "AbortError") console.warn("fetchPlayers Fehler:", err);
-      const playerListElement = document.getElementById("player-list");
-      setCentered(scrollWrapper, container, playerListElement, "Spieleranzeige aktuell nicht verfügbar.");
+      if (err?.name !== 'AbortError') console.warn('fetchPlayers Fehler:', err);
+      const playerListElement = document.getElementById('player-list');
+      setCentered(
+        scrollWrapper,
+        container,
+        playerListElement,
+        'Spieleranzeige aktuell nicht verfügbar.',
+      );
     } finally {
       window.clearTimeout(timeoutId);
       isFetchInFlight = false;
@@ -180,11 +185,10 @@
     return Math.max(0, totalMonths);
   };
 
-  const formatMitEinheit = (wert, singular, plural) =>
-    `${wert} ${wert === 1 ? singular : plural}`;
+  const formatMitEinheit = (wert, singular, plural) => `${wert} ${wert === 1 ? singular : plural}`;
 
   const renderWorldAge = async () => {
-    const span = document.getElementById("world-age");
+    const span = document.getElementById('world-age');
     if (!span) return;
 
     const worldStart = new Date(2024, 1, 26); // 26. Feb 2024 (Monatsindex 1 = Feb)
@@ -192,31 +196,31 @@
 
     try {
       const response = await fetch(window.location.href, {
-        method: "HEAD",
-        cache: "no-store",
+        method: 'HEAD',
+        cache: 'no-store',
       });
-      const dateHeader = response.headers.get("Date");
+      const dateHeader = response.headers.get('Date');
 
       if (dateHeader) {
         const parsed = new Date(dateHeader);
         if (!isNaN(parsed.getTime())) {
           now = parsed;
         } else {
-          console.warn("Date-Header vorhanden, aber konnte nicht geparst werden:", dateHeader);
+          console.warn('Date-Header vorhanden, aber konnte nicht geparst werden:', dateHeader);
         }
       } else {
-        console.warn("Kein Date-Header im Response; nutze Client-Zeit.");
+        console.warn('Kein Date-Header im Response; nutze Client-Zeit.');
       }
     } catch (err) {
-      console.warn("Fehler beim Laden des Server-Headers — benutze Client-Zeit. Fehler:", err);
+      console.warn('Fehler beim Laden des Server-Headers — benutze Client-Zeit. Fehler:', err);
     }
 
     const totalMonths = diffInFullMonths(worldStart, now);
     const years = Math.floor(totalMonths / 12);
     const months = totalMonths % 12;
 
-    const jahreText = formatMitEinheit(years, "Jahr", "Jahren");
-    const monateText = formatMitEinheit(months, "Monat", "Monaten");
+    const jahreText = formatMitEinheit(years, 'Jahr', 'Jahren');
+    const monateText = formatMitEinheit(months, 'Monat', 'Monaten');
 
     span.textContent = months === 0 ? jahreText : `${jahreText} und ${monateText}`;
   };
@@ -227,7 +231,7 @@
     intervalId = window.setInterval(fetchPlayers, POLL_MS);
 
     // Beim Zurückkehren auf den Tab einmal aktualisieren
-    document.addEventListener("visibilitychange", () => {
+    document.addEventListener('visibilitychange', () => {
       if (!document.hidden) fetchPlayers();
     });
 
@@ -235,6 +239,6 @@
     renderWorldAge();
   };
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
 })();

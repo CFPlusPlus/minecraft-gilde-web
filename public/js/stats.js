@@ -78,9 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const fmtNumber = (value, decimals) => {
     const d = typeof decimals === 'number' ? decimals : null;
-    const nf = new Intl.NumberFormat('de-DE', d === null
-      ? undefined
-      : { minimumFractionDigits: d, maximumFractionDigits: d }
+    const nf = new Intl.NumberFormat(
+      'de-DE',
+      d === null ? undefined : { minimumFractionDigits: d, maximumFractionDigits: d },
     );
     return nf.format(value);
   };
@@ -97,15 +97,16 @@ document.addEventListener('DOMContentLoaded', () => {
     return unit ? `${fmtNumber(value, dec)} ${unit}` : fmtNumber(value, dec);
   };
 
-  const escapeHtml = (s) => String(s)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
+  const escapeHtml = (s) =>
+    String(s)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#039;');
 
   const fetchJson = async (url) => {
-    const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    const res = await fetch(url, { headers: { Accept: 'application/json' } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return res.json();
   };
@@ -299,7 +300,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.addEventListener('click', (e) => {
-    const within = e.target && (e.target.closest?.('#main-search') || e.target.closest?.('#autocomplete-container'));
+    const within =
+      e.target &&
+      (e.target.closest?.('#main-search') || e.target.closest?.('#autocomplete-container'));
     if (!within) closeAutocomplete();
   });
 
@@ -341,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (labelEl) labelEl.textContent = label;
       if (valueEl) {
         const v = totals && Object.prototype.hasOwnProperty.call(totals, m) ? totals[m] : null;
-        valueEl.textContent = (v === null || v === undefined) ? '–' : formatMetricValue(v, def);
+        valueEl.textContent = v === null || v === undefined ? '–' : formatMetricValue(v, def);
       }
     }
   };
@@ -375,7 +378,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const ensureMetricsRendered = async () => {
     if (!metricsContainer) return;
     if (!metricDefs) {
-      try { await loadMetrics(); } catch (e) { console.error(e); }
+      try {
+        await loadMetrics();
+      } catch (e) {
+        console.error(e);
+      }
     }
     if (!metricDefs) return;
     if (metricsContainer.dataset.ready === '1') return;
@@ -556,8 +563,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const data = await fetchJson(url);
     setGenerated(data.__generated);
     mergePlayers(data.__players);
-    const list = (data.boards && data.boards[metricId]) ? data.boards[metricId] : [];
-    const next = (data.cursors && data.cursors[metricId]) ? data.cursors[metricId] : null;
+    const list = data.boards && data.boards[metricId] ? data.boards[metricId] : [];
+    const next = data.cursors && data.cursors[metricId] ? data.cursors[metricId] : null;
     return { list, next };
   };
 
@@ -598,7 +605,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const st = metricStates.get(metricId);
     if (!st) return;
     if (!metricDefs) {
-      try { await loadMetrics(); } catch { /* ignore */ }
+      try {
+        await loadMetrics();
+      } catch {
+        /* ignore */
+      }
     }
     if (st.loaded && st.pages.length) {
       updatePager(st);
@@ -682,14 +693,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (noResultsWarning) noResultsWarning.style.display = anyVisible ? 'none' : 'flex';
   };
 
-  metricFilterIn?.addEventListener('input', debounce(() => {
-    applyMetricFilter(metricFilterIn.value);
-  }, 120));
+  metricFilterIn?.addEventListener(
+    'input',
+    debounce(() => {
+      applyMetricFilter(metricFilterIn.value);
+    }, 120),
+  );
 
   // --- Server-König ---
   const ensureKingLoaded = async () => {
     if (!metricDefs) {
-      try { await loadMetrics(); } catch { /* ignore */ }
+      try {
+        await loadMetrics();
+      } catch {
+        /* ignore */
+      }
     }
     if (kingState.loaded && kingState.pages.length) {
       updatePager(kingState);
@@ -734,7 +752,8 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const gotoNextKing = async () => {
-    const atEnd = kingState.pages.length === 0 ? true : kingState.currentPage >= kingState.pages.length - 1;
+    const atEnd =
+      kingState.pages.length === 0 ? true : kingState.currentPage >= kingState.pages.length - 1;
     if (!atEnd) {
       await gotoKingPage(kingState.currentPage + 1);
       return;

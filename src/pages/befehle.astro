@@ -14,8 +14,8 @@ const categories = entry.data.categories;
   title="Minecraft Gilde - Server-Befehle"
   canonical="https://minecraft-gilde.de/befehle.html"
   bodyClass="page--sticky-footer page--subpage page--content"
-  styles={["/css/content-page.css", "/css/befehle.css"]}
-  scripts={["/js/befehle.js"]}
+  styles={['/css/content-page.css', '/css/befehle.css']}
+  scripts={['/js/befehle.js']}
 >
   <Navbar active="befehle" />
 
@@ -46,15 +46,17 @@ const categories = entry.data.categories;
               </tr>
             </thead>
             <tbody>
-              {categories.map((cat) =>
-                cat.commands.map((cmd) => (
-                  <tr>
-                    <td>{cat.name}</td>
-                    <td>{cmd.command}</td>
-                    <td>{cmd.description}</td>
-                  </tr>
-                ))
-              )}
+              {
+                categories.map((cat) =>
+                  cat.commands.map((cmd) => (
+                    <tr>
+                      <td>{cat.name}</td>
+                      <td>{cmd.command}</td>
+                      <td>{cmd.description}</td>
+                    </tr>
+                  )),
+                )
+              }
             </tbody>
           </table>
         </div>

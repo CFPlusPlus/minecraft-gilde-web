@@ -6,7 +6,7 @@
 
 /* ===== Header-Hintergrundbild ===== */
 body.page--subpage #header {
-  background: url("../../images/redstone.webp") no-repeat center;
+  background: url('../../images/redstone.webp') no-repeat center;
   background-size: cover;
 }
 

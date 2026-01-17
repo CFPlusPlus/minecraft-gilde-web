@@ -1,0 +1,12 @@
+{
+  "editor.formatOnSave": true,
+
+  // Prettier als Standard-Formatter (falls installiert)
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Damit .astro sicher über Prettier formatiert wird
+  "prettier.documentSelectors": ["**/*.astro"],
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

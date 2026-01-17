@@ -1,181 +1,181 @@
 /* Header-Bild (Grundlayout liegt in global.css über body.page--subpage) */
 body.page--subpage #header {
-  background: url("../../images/regeln.webp") no-repeat center;
+  background: url('../../images/regeln.webp') no-repeat center;
   background-size: cover;
 }
 
 /*Rules*/
 
 #rules .content {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }
 
 #rules .warning {
-    background: var(--warning-background);
-    padding: 20px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  background: var(--warning-background);
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #rules .warning p {
-    color: var(--warning-color);
-    font-size: 17px;
+  color: var(--warning-color);
+  font-size: 17px;
 }
 
 #rules .warning .icon {
-    border-radius: 5px;
-    background: var(--warning-icon-background);
-    padding: 10px;
-    transition: .2s ease-in-out;
+  border-radius: 5px;
+  background: var(--warning-icon-background);
+  padding: 10px;
+  transition: 0.2s ease-in-out;
 }
 
 #rules .warning .icon i {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    height: 30px;
-    font-size: 20px;
-    position: relative;
-    background: var(--red-color);
-    color: var(--white-color);
-    border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  position: relative;
+  background: var(--red-color);
+  color: var(--white-color);
+  border-radius: 5px;
 }
 
 #rules .warning:hover .icon {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 #rules .rules {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 #rules .rules .rules-title {
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--white-color);
-    position: relative;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--white-color);
+  position: relative;
 }
 
 #rules .rules .rules-title::before {
-    content: "";
-    position: absolute;
-    bottom: -9px;
-    left: 0;
-    width: 150px;
-    height: 1px;
-    border-radius: 5px;
-    background: var(--description-color);
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 0;
+  width: 150px;
+  height: 1px;
+  border-radius: 5px;
+  background: var(--description-color);
 }
 
 #rules .rules .rules-title::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 50px;
-    height: 3px;
-    border-radius: 5px;
-    background: var(--main-color);
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  border-radius: 5px;
+  background: var(--main-color);
 }
 
 #rules .rules .rules-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 40px;
 }
 
 #rules .rules .rules-list .rule {
-    color: var(--white-color);
-    font-size: 17px;
-    line-height: 1.6;
+  color: var(--white-color);
+  font-size: 17px;
+  line-height: 1.6;
 }
 
 #rules .rules .rules-list .rule span {
-    color: inherit;
+  color: inherit;
 }
 
 /*Server Join*/
 #join-server {
-    background: var(--stats-background);
-    min-width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
+  background: var(--stats-background);
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 #join-server .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
 }
 
 #join-server .content .section-title {
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--white-color);
-    position: relative;
-    text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--white-color);
+  position: relative;
+  text-align: center;
 }
 
 #join-server .content .section-title span {
-    color: var(--main-color);
+  color: var(--main-color);
 }
 
 #join-server .content .buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 /* Button styles are unified globally (see global.css). */
 
 #join-server .content .ip-copied {
-    color: var(--green-color);
-    background: var(--ip-copied-background);
-    padding: 10px 20px;
-    width: fit-content;
-    border-radius: 5px;
-    font-size: 17px;
-    display: none;
+  color: var(--green-color);
+  background: var(--ip-copied-background);
+  padding: 10px 20px;
+  width: fit-content;
+  border-radius: 5px;
+  font-size: 17px;
+  display: none;
 }
 
 #join-server .content .ip-copied.active {
-    display: flex;
+  display: flex;
 }
 
 #join-server .content .ip-copied.error {
-    background: var(--warning-background);
-    color: var(--red-color);
+  background: var(--warning-background);
+  color: var(--red-color);
 }
 
 li::marker {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 /*Responsive*/
 @media screen and (max-width: 462px) {
-    #rules .warning {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-    }
+  #rules .warning {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
 }
 
 /*Server Join*/
 @media screen and (max-width: 380px) {
-    #join-server .content .buttons {
-        flex-direction: column;
-        width: 100%;
-    }
+  #join-server .content .buttons {
+    flex-direction: column;
+    width: 100%;
+  }
 }

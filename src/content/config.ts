@@ -10,9 +10,9 @@ const commands = defineCollection({
           z.object({
             command: z.string(),
             description: z.string(),
-          })
+          }),
         ),
-      })
+      }),
     ),
   }),
 });

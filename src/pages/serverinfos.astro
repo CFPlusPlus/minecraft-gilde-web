@@ -5,188 +5,225 @@ import Footer from '../components/Footer.astro';
 ---
 
 <BaseLayout
-  title={"Minecraft Gilde - Server Infos"}
-  canonical={"https://minecraft-gilde.de/serverinfos.html"}
-  description={"Serverinfos der Minecraft Gilde – Folia 1.21.x, Einstellungen, Plugins & Hardware. Vanilla SMP (DE) für Freebuild & Survival ohne Minigames."}
-  keywords={"Minecraft Folia Server, Vanilla SMP deutsch, Serverinfos, Plugins, Hardware, Performance, Freebuild, Survival, 1.21.x, Minecraft Gilde"}
-  author={"Christian Falkner"}
-  bodyClass={"serverinfos-page page--subpage page--content"}
-  styles={["/css/content-page.css", "/css/serverinfos.css"]}
+  title={'Minecraft Gilde - Server Infos'}
+  canonical={'https://minecraft-gilde.de/serverinfos.html'}
+  description={'Serverinfos der Minecraft Gilde – Folia 1.21.x, Einstellungen, Plugins & Hardware. Vanilla SMP (DE) für Freebuild & Survival ohne Minigames.'}
+  keywords={'Minecraft Folia Server, Vanilla SMP deutsch, Serverinfos, Plugins, Hardware, Performance, Freebuild, Survival, 1.21.x, Minecraft Gilde'}
+  author={'Christian Falkner'}
+  bodyClass={'serverinfos-page page--subpage page--content'}
+  styles={['/css/content-page.css', '/css/serverinfos.css']}
   scripts={[]}
 >
-  <meta content="Minecraft Gilde – Serverinfos &amp; Folia-Setup (1.21.x)" property="og:title" slot="head"/>
-  <meta content="Alle technischen Details: Folia 1.21.x, Einstellungen, Plugins &amp; Hardware. Vanilla SMP (DE) – Freebuild &amp; Survival ohne Minigames." property="og:description" slot="head"/>
-  <meta content="https://minecraft-gilde.de/images/logo.webp" property="og:image" slot="head"/>
-  <meta content="https://minecraft-gilde.de/serverinfos.html" property="og:url" slot="head"/>
-  <meta content="article" property="og:type" slot="head"/>
-  <meta content="Minecraft Gilde" property="og:site_name" slot="head"/>
-  <meta content="de_DE" property="og:locale" slot="head"/>
-  <meta content="summary_large_image" name="twitter:card" slot="head"/>
-  <meta content="Minecraft Gilde – Serverinfos &amp; Folia-Setup (1.21.x)" name="twitter:title" slot="head"/>
-  <meta content="Technik, Plugins &amp; Hardware im Überblick. Vanilla SMP (DE) – Freebuild &amp; Survival ohne Minigames." name="twitter:description" slot="head"/>
-  <meta content="https://minecraft-gilde.de/images/logo.webp" name="twitter:image" slot="head"/>
-  <meta content="Minecraft Gilde – Serverinfos &amp; Folia-Setup" name="twitter:image:alt" slot="head"/>
-  <Navbar active={""} />
+  <meta
+    content="Minecraft Gilde – Serverinfos & Folia-Setup (1.21.x)"
+    property="og:title"
+    slot="head"
+  />
+  <meta
+    content="Alle technischen Details: Folia 1.21.x, Einstellungen, Plugins & Hardware. Vanilla SMP (DE) – Freebuild & Survival ohne Minigames."
+    property="og:description"
+    slot="head"
+  />
+  <meta content="https://minecraft-gilde.de/images/logo.webp" property="og:image" slot="head" />
+  <meta content="https://minecraft-gilde.de/serverinfos.html" property="og:url" slot="head" />
+  <meta content="article" property="og:type" slot="head" />
+  <meta content="Minecraft Gilde" property="og:site_name" slot="head" />
+  <meta content="de_DE" property="og:locale" slot="head" />
+  <meta content="summary_large_image" name="twitter:card" slot="head" />
+  <meta
+    content="Minecraft Gilde – Serverinfos & Folia-Setup (1.21.x)"
+    name="twitter:title"
+    slot="head"
+  />
+  <meta
+    content="Technik, Plugins & Hardware im Überblick. Vanilla SMP (DE) – Freebuild & Survival ohne Minigames."
+    name="twitter:description"
+    slot="head"
+  />
+  <meta content="https://minecraft-gilde.de/images/logo.webp" name="twitter:image" slot="head" />
+  <meta
+    content="Minecraft Gilde – Serverinfos & Folia-Setup"
+    name="twitter:image:alt"
+    slot="head"
+  />
+  <Navbar active={''} />
 
   <main id="main-content" tabindex="-1">
-<!--Header-->
-<section id="header">
-<div class="content">
-<div class="info">
-<p class="minecraft-server-ip">Minecraft-Gilde.de</p>
-<h1 class="title">Server <span>Informationen</span></h1>
-</div>
-</div>
-</section>
-<section id="page-content">
-<div class="content">
-<p class="description">
-          Hier findest du alle wichtigen Details rund um unseren Minecraft-Server – von den aktuellen
-          Server-Einstellungen und der eingesetzten Software bis hin zur zugrunde liegenden Hardware. Ideal, wenn du
-          wissen möchtest, was dich bei uns erwartet – technisch und spielerisch.
+    <!--Header-->
+    <section id="header">
+      <div class="content">
+        <div class="info">
+          <p class="minecraft-server-ip">Minecraft-Gilde.de</p>
+          <h1 class="title">Server <span>Informationen</span></h1>
+        </div>
+      </div>
+    </section>
+    <section id="page-content">
+      <div class="content">
+        <p class="description">
+          Hier findest du alle wichtigen Details rund um unseren Minecraft-Server – von den
+          aktuellen Server-Einstellungen und der eingesetzten Software bis hin zur zugrunde
+          liegenden Hardware. Ideal, wenn du wissen möchtest, was dich bei uns erwartet – technisch
+          und spielerisch.
         </p>
-<div class="folia-layout">
-<div class="folia-text">
-<h2 class="section-title">Ein Server mit Folia-Power</h2>
-<p class="description">
+        <div class="folia-layout">
+          <div class="folia-text">
+            <h2 class="section-title">Ein Server mit Folia-Power</h2>
+            <p class="description">
               Seit Mai 2025 spielst du auf der Minecraft Gilde mit
-              <a href="https://papermc.io/software/folia" rel="noopener" target="_blank">Folia</a> – einer modernen
-              Servertechnologie,
-              die dir ein spürbar flüssigeres Erlebnis bietet. Auch wenn viele Spieler online sind oder riesige Farmen
-              laufen, bleibt alles stabil und reagiert schnell. Deine Redstone-Maschinen funktionieren zuverlässig, Mobs
-              spawnen wie im Singleplayer, und selbst große Bauprojekte laufen ohne nervige Lags. So kannst du dich ganz
-              aufs Bauen, Erkunden und gemeinsame Spielen konzentrieren – ohne technische Grenzen.
+              <a href="https://papermc.io/software/folia" rel="noopener" target="_blank">Folia</a> – einer
+              modernen Servertechnologie, die dir ein spürbar flüssigeres Erlebnis bietet. Auch wenn viele
+              Spieler online sind oder riesige Farmen laufen, bleibt alles stabil und reagiert schnell.
+              Deine Redstone-Maschinen funktionieren zuverlässig, Mobs spawnen wie im Singleplayer, und
+              selbst große Bauprojekte laufen ohne nervige Lags. So kannst du dich ganz aufs Bauen, Erkunden
+              und gemeinsame Spielen konzentrieren – ohne technische Grenzen.
             </p>
-</div>
-<img alt="Folia Minecraft Server Performance Grafik" class="folia-image" height="810" loading="lazy" src="images/folia.webp" width="1543"/>
-</div>
-<h2 class="section-title">Server Einstellungen</h2>
-<ul class="server-settings">
-<li><strong>view-distance:</strong> 16</li>
-<li><strong>simulation-distance:</strong> 10</li>
-<li><strong>mob-spawn-range:</strong> 8 <em>(Vanilla: 8)</em></li>
-<li>
-<strong>despawn-ranges:</strong>
-<ul class="server-settings__nested">
-<li><strong>hard:</strong> 128 <em>(Vanilla: 128)</em></li>
-<li><strong>soft:</strong> 32 <em>(Vanilla: 32)</em></li>
-</ul>
-</li>
-<li>
-<strong>entity-activation-range:</strong>
-<ul class="server-settings__nested">
-<li><strong>animals:</strong> 32 <em>(Vanilla: 32)</em></li>
-<li><strong>monsters:</strong> 32 <em>(Vanilla: 32)</em></li>
-<li><strong>raiders:</strong> 64 <em>(Vanilla: 48)</em></li>
-<li><strong>misc:</strong> 16 <em>(Vanilla: 16)</em></li>
-<li><strong>water:</strong> 16 <em>(Vanilla: 16)</em></li>
-<li><strong>villagers:</strong> 32 <em>(Vanilla: 32)</em></li>
-<li><strong>flying-monsters:</strong> 32 <em>(Vanilla: 32)</em></li>
-</ul>
-</li>
-<li><strong>redstone-implementation:</strong> VANILLA</li>
-<li><strong>tick-inactive-villagers:</strong> false <em>(Vanilla: true)</em></li>
-<li><strong>Worldborder:</strong> ±100.000</li>
-</ul>
-<h2 class="section-title">Software</h2>
-<p class="description"><b>Server-Software:</b> Folia 1.21.11 <br/></p>
-<h2 class="section-title">Was ist <span>Folia?</span></h2>
-<div class="folia-section">
-<div class="left">
-<p class="description">
-<strong>Folia</strong> ist eine moderne Minecraft-Server-Software, die auf
-              <em>Multithreading</em> basiert. Anders als klassische Server (wie Spigot oder Paper), verarbeitet Folia
-              Aufgaben in parallelen Threads. Das bedeutet: bessere Leistung, weniger Lag, höhere Stabilität – selbst
-              bei vielen Spielern, Redstone-Farmen oder komplexen Bauwerken.
+          </div>
+          <img
+            alt="Folia Minecraft Server Performance Grafik"
+            class="folia-image"
+            height="810"
+            loading="lazy"
+            src="images/folia.webp"
+            width="1543"
+          />
+        </div>
+        <h2 class="section-title">Server Einstellungen</h2>
+        <ul class="server-settings">
+          <li><strong>view-distance:</strong> 16</li>
+          <li><strong>simulation-distance:</strong> 10</li>
+          <li><strong>mob-spawn-range:</strong> 8 <em>(Vanilla: 8)</em></li>
+          <li>
+            <strong>despawn-ranges:</strong>
+            <ul class="server-settings__nested">
+              <li><strong>hard:</strong> 128 <em>(Vanilla: 128)</em></li>
+              <li><strong>soft:</strong> 32 <em>(Vanilla: 32)</em></li>
+            </ul>
+          </li>
+          <li>
+            <strong>entity-activation-range:</strong>
+            <ul class="server-settings__nested">
+              <li><strong>animals:</strong> 32 <em>(Vanilla: 32)</em></li>
+              <li><strong>monsters:</strong> 32 <em>(Vanilla: 32)</em></li>
+              <li><strong>raiders:</strong> 64 <em>(Vanilla: 48)</em></li>
+              <li><strong>misc:</strong> 16 <em>(Vanilla: 16)</em></li>
+              <li><strong>water:</strong> 16 <em>(Vanilla: 16)</em></li>
+              <li><strong>villagers:</strong> 32 <em>(Vanilla: 32)</em></li>
+              <li><strong>flying-monsters:</strong> 32 <em>(Vanilla: 32)</em></li>
+            </ul>
+          </li>
+          <li><strong>redstone-implementation:</strong> VANILLA</li>
+          <li><strong>tick-inactive-villagers:</strong> false <em>(Vanilla: true)</em></li>
+          <li><strong>Worldborder:</strong> ±100.000</li>
+        </ul>
+        <h2 class="section-title">Software</h2>
+        <p class="description"><b>Server-Software:</b> Folia 1.21.11 <br /></p>
+        <h2 class="section-title">Was ist <span>Folia?</span></h2>
+        <div class="folia-section">
+          <div class="left">
+            <p class="description">
+              <strong>Folia</strong> ist eine moderne Minecraft-Server-Software, die auf
+              <em>Multithreading</em> basiert. Anders als klassische Server (wie Spigot oder Paper), verarbeitet
+              Folia Aufgaben in parallelen Threads. Das bedeutet: bessere Leistung, weniger Lag, höhere
+              Stabilität – selbst bei vielen Spielern, Redstone-Farmen oder komplexen Bauwerken.
             </p>
-<p class="description">
-              Die <strong>Minecraft Gilde</strong> läuft seit Mai 2025 auf <strong>Folia</strong>. Damit sind wir einer
-              der ersten deutschen Minecraft-Server mit dieser Technologie. Spieler profitieren von:
+            <p class="description">
+              Die <strong>Minecraft Gilde</strong> läuft seit Mai 2025 auf <strong>Folia</strong>.
+              Damit sind wir einer der ersten deutschen Minecraft-Server mit dieser Technologie.
+              Spieler profitieren von:
             </p>
-<ul class="folia-benefits">
-<li>
-<i aria-hidden="true" class="fa-solid fa-check folia-benefits__icon"></i> <strong>Redstone &amp; Farmen</strong> laufen
-                unabhängig von anderen Regionen
+            <ul class="folia-benefits">
+              <li>
+                <i aria-hidden="true" class="fa-solid fa-check folia-benefits__icon"></i>
+                <strong>Redstone &amp; Farmen</strong> laufen unabhängig von anderen Regionen
               </li>
-<li>
-<i aria-hidden="true" class="fa-solid fa-check folia-benefits__icon"></i>
-<strong>Höhere Tick-Stabilität</strong> auch bei hoher Auslastung
+              <li>
+                <i aria-hidden="true" class="fa-solid fa-check folia-benefits__icon"></i>
+                <strong>Höhere Tick-Stabilität</strong> auch bei hoher Auslastung
               </li>
-<li>
-<i aria-hidden="true" class="fa-solid fa-check folia-benefits__icon"></i>
-<strong>Regionale Performance-Optimierung</strong> durch Thread-Isolierung
+              <li>
+                <i aria-hidden="true" class="fa-solid fa-check folia-benefits__icon"></i>
+                <strong>Regionale Performance-Optimierung</strong> durch Thread-Isolierung
               </li>
-<li>
-<i aria-hidden="true" class="fa-solid fa-check folia-benefits__icon"></i> Lag wird auf einzelne Gebiete begrenzt –
+              <li>
+                <i aria-hidden="true" class="fa-solid fa-check folia-benefits__icon"></i> Lag wird auf
+                einzelne Gebiete begrenzt –
                 <em>nicht mehr serverweit</em>
-</li>
-</ul>
-</div>
-<br/>
-<div class="right">
-<img alt="Minecraft Folia Server Stresstest Performance-Grafik" class="folia-stress-image" loading="lazy" src="images/folia-stresstest.webp"/>
-<p class="figure-caption">
-              Grafik: Stresstest mit mehreren Regionen &amp; Spielern – stabile TPS trotz hoher Belastung
+              </li>
+            </ul>
+          </div>
+          <br />
+          <div class="right">
+            <img
+              alt="Minecraft Folia Server Stresstest Performance-Grafik"
+              class="folia-stress-image"
+              loading="lazy"
+              src="images/folia-stresstest.webp"
+            />
+            <p class="figure-caption">
+              Grafik: Stresstest mit mehreren Regionen &amp; Spielern – stabile TPS trotz hoher
+              Belastung
             </p>
-</div>
-</div>
-<h2 class="section-title">Hardware</h2>
-<p class="description">
-          Der Server der Minecraft Gilde läuft aktuell auf einem leistungsstarken dedizierten System, das optimale
-          Performance für unsere Community garantiert. Ausgestattet mit zwei Intel-Xeon-Prozessoren (insgesamt 20 Kerne
-          und 40 Threads), satten 128 GB Arbeitsspeicher sowie einer schnellen SSD für alle Spieldaten, ist unsere
-          Hardware bestens gerüstet, um auch bei hoher Spielerzahl und komplexen Bauten stets flüssigen Spielspaß zu
-          ermöglichen. Unser Server befindet sich in einem deutschen Rechenzentrum nahe bei Frankfurt am Main, was für
-          eine schnelle und zuverlässige Anbindung sorgt.
+          </div>
+        </div>
+        <h2 class="section-title">Hardware</h2>
+        <p class="description">
+          Der Server der Minecraft Gilde läuft aktuell auf einem leistungsstarken dedizierten
+          System, das optimale Performance für unsere Community garantiert. Ausgestattet mit zwei
+          Intel-Xeon-Prozessoren (insgesamt 20 Kerne und 40 Threads), satten 128 GB Arbeitsspeicher
+          sowie einer schnellen SSD für alle Spieldaten, ist unsere Hardware bestens gerüstet, um
+          auch bei hoher Spielerzahl und komplexen Bauten stets flüssigen Spielspaß zu ermöglichen.
+          Unser Server befindet sich in einem deutschen Rechenzentrum nahe bei Frankfurt am Main,
+          was für eine schnelle und zuverlässige Anbindung sorgt.
         </p>
-</div>
-</section>
-</main>
+      </div>
+    </section>
+  </main>
 
   <Footer />
   <script slot="afterScripts" type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "WebPage",
-            "@id": "https://minecraft-gilde.de/serverinfos.html",
-            "url": "https://minecraft-gilde.de/serverinfos.html",
-            "name": "Serverinformationen – Minecraft Gilde",
-            "inLanguage": "de",
-            "isPartOf": { "@id": "https://minecraft-gilde.de/#website" }
-          },
-          {
-            "@type": "Organization",
-            "@id": "https://minecraft-gilde.de/#org",
-            "name": "Minecraft Gilde",
-            "url": "https://minecraft-gilde.de/",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://minecraft-gilde.de/images/logo.webp",
-              "width": 512,
-              "height": 512
-            }
-          },
-          {
-            "@type": "TechArticle",
-            "@id": "https://minecraft-gilde.de/serverinfos.html#article",
-            "headline": "Serverinfos & Folia-Setup – Deutsche Minecraft Gilde (Vanilla SMP 1.21.11)",
-            "description": "Alle technischen Details: Folia 1.21.x, Einstellungen, Plugins & Hardware – optimiert für Vanilla SMP, Freebuild & Survival ohne Minigames.",
-            "inLanguage": "de",
-            "articleSection": "Serverinformationen",
-            "about": ["Minecraft Server", "Folia", "Vanilla SMP", "Freebuild", "Survival", "1.21.x"],
-            "image": "https://minecraft-gilde.de/images/logo.webp",
-            "author": {
-              "@type": "Person",
-              "name": "Christian Falkner"
-            },
-            "publisher": { "@id": "https://minecraft-gilde.de/#org" },
-            "mainEntityOfPage": { "@id": "https://minecraft-gilde.de/serverinfos.html" },
-            "datePublished": "2025-05-01",
-            "dateModified": "2025-11-02"
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://minecraft-gilde.de/serverinfos.html",
+          "url": "https://minecraft-gilde.de/serverinfos.html",
+          "name": "Serverinformationen – Minecraft Gilde",
+          "inLanguage": "de",
+          "isPartOf": { "@id": "https://minecraft-gilde.de/#website" }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://minecraft-gilde.de/#org",
+          "name": "Minecraft Gilde",
+          "url": "https://minecraft-gilde.de/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://minecraft-gilde.de/images/logo.webp",
+            "width": 512,
+            "height": 512
           }
-        ]
-      }
-    </script>
+        },
+        {
+          "@type": "TechArticle",
+          "@id": "https://minecraft-gilde.de/serverinfos.html#article",
+          "headline": "Serverinfos & Folia-Setup – Deutsche Minecraft Gilde (Vanilla SMP 1.21.11)",
+          "description": "Alle technischen Details: Folia 1.21.x, Einstellungen, Plugins & Hardware – optimiert für Vanilla SMP, Freebuild & Survival ohne Minigames.",
+          "inLanguage": "de",
+          "articleSection": "Serverinformationen",
+          "about": ["Minecraft Server", "Folia", "Vanilla SMP", "Freebuild", "Survival", "1.21.x"],
+          "image": "https://minecraft-gilde.de/images/logo.webp",
+          "author": {
+            "@type": "Person",
+            "name": "Christian Falkner"
+          },
+          "publisher": { "@id": "https://minecraft-gilde.de/#org" },
+          "mainEntityOfPage": { "@id": "https://minecraft-gilde.de/serverinfos.html" },
+          "datePublished": "2025-05-01",
+          "dateModified": "2025-11-02"
+        }
+      ]
+    }
+  </script>
 </BaseLayout>

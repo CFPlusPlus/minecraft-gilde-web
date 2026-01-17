@@ -22,13 +22,21 @@ const data = entry.data;
   styles={['/css/rules.css']}
 >
   <meta slot="head" property="og:title" content="Minecraft Gilde - Unser Regelwerk" />
-  <meta slot="head" property="og:description" content="Lies das offizielle Regelwerk der Minecraft Gilde. Klare Regeln für Freebuild, Survival und Discord. Griefing und Hacks sind verboten." />
+  <meta
+    slot="head"
+    property="og:description"
+    content="Lies das offizielle Regelwerk der Minecraft Gilde. Klare Regeln für Freebuild, Survival und Discord. Griefing und Hacks sind verboten."
+  />
   <meta slot="head" property="og:image" content="https://minecraft-gilde.de/images/logo.webp" />
   <meta slot="head" property="og:url" content="https://minecraft-gilde.de/rules.html" />
   <meta slot="head" property="og:type" content="website" />
   <meta slot="head" name="twitter:card" content="summary_large_image" />
   <meta slot="head" name="twitter:title" content="Minecraft Gilde - Unser Regelwerk" />
-  <meta slot="head" name="twitter:description" content="Faire Regeln für Freebuild, Survival und Discord. AFK-Farmen erlaubt, Griefing verboten. Erfahre, was bei uns gilt!" />
+  <meta
+    slot="head"
+    name="twitter:description"
+    content="Faire Regeln für Freebuild, Survival und Discord. AFK-Farmen erlaubt, Griefing verboten. Erfahre, was bei uns gilt!"
+  />
   <meta slot="head" name="twitter:image" content="https://minecraft-gilde.de/images/logo.webp" />
 
   <Navbar active={'rules'} />
@@ -42,31 +50,40 @@ const data = entry.data;
 
     <section id="rules">
       <div class="content">
-        <Callout variant="warning" compact ariaLabel="Wichtiger Hinweis" iconClass="fa-solid fa-triangle-exclamation">
+        <Callout
+          variant="warning"
+          compact
+          ariaLabel="Wichtiger Hinweis"
+          iconClass="fa-solid fa-triangle-exclamation"
+        >
           <p>{data.warning}</p>
         </Callout>
 
         <div class="minecraft-rules rules">
           <h2 class="minecraft-rules-title rules-title">{data.minecraft.title}</h2>
           <ol class="rules-list">
-            {data.minecraft.items.map((item) => (
-              <li class="rule">
-                <b>{item.title}</b> <br />
-                <span set:html={item.html} />
-              </li>
-            ))}
+            {
+              data.minecraft.items.map((item) => (
+                <li class="rule">
+                  <b>{item.title}</b> <br />
+                  <span set:html={item.html} />
+                </li>
+              ))
+            }
           </ol>
         </div>
 
         <div class="discord-rules rules">
           <h2 class="discord-rules-title rules-title">{data.discord.title}</h2>
           <ol class="rules-list">
-            {data.discord.items.map((item) => (
-              <li class="rule">
-                <b>{item.title}</b> <br />
-                <span set:html={item.html} />
-              </li>
-            ))}
+            {
+              data.discord.items.map((item) => (
+                <li class="rule">
+                  <b>{item.title}</b> <br />
+                  <span set:html={item.html} />
+                </li>
+              ))
+            }
           </ol>
         </div>
       </div>
@@ -75,7 +92,8 @@ const data = entry.data;
     <section id="join-server">
       <div class="content">
         <h2 class="section-title">
-          Alle <span>Regeln</span> durchgelesen? Super, dann kann der <span>Spaß</span> auf unserem Server beginnen!
+          Alle <span>Regeln</span> durchgelesen? Super, dann kann der <span>Spaß</span> auf unserem Server
+          beginnen!
         </h2>
         <div class="buttons">
           <Button variant="primary" class="copy-ip">IP Kopieren</Button>

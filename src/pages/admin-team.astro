@@ -5,41 +5,54 @@ import Footer from '../components/Footer.astro';
 ---
 
 <BaseLayout
-  title={"Minecraft Gilde - Unser Team"}
-  canonical={"https://minecraft-gilde.de/admin-team.html"}
-  description={"Lerne das Minecraft Gilde Serverteam kennen – erfahrene Admins und hilfsbereite Moderatoren für dein optimales Freebuild & Survival Erlebnis auf unserem deutschen Minecraft-Server."}
-  keywords={"Minecraft Server Team, Minecraft Admins, Minecraft Moderatoren, deutscher Minecraft Server, Freebuild Server, Survival Server, Minecraft Gilde, aktives Serverteam"}
-  author={"Christian Falkner"}
-  bodyClass={"page--subpage"}
-  styles={["/css/admin-team.css"]}
+  title={'Minecraft Gilde - Unser Team'}
+  canonical={'https://minecraft-gilde.de/admin-team.html'}
+  description={'Lerne das Minecraft Gilde Serverteam kennen – erfahrene Admins und hilfsbereite Moderatoren für dein optimales Freebuild & Survival Erlebnis auf unserem deutschen Minecraft-Server.'}
+  keywords={'Minecraft Server Team, Minecraft Admins, Minecraft Moderatoren, deutscher Minecraft Server, Freebuild Server, Survival Server, Minecraft Gilde, aktives Serverteam'}
+  author={'Christian Falkner'}
+  bodyClass={'page--subpage'}
+  styles={['/css/admin-team.css']}
   scripts={[]}
 >
-  <meta content="Unser Team | Minecraft Gilde – Aktive Admins &amp; Moderatoren" property="og:title" slot="head"/>
-  <meta content="Hier findest du das engagierte Team der Minecraft Gilde – Admins und Moderatoren, die für Fairness und Spielspaß sorgen." property="og:description" slot="head"/>
-  <meta content="https://minecraft-gilde.de/images/logo.webp" property="og:image" slot="head"/>
-  <meta content="https://minecraft-gilde.de/admin-team.html" property="og:url" slot="head"/>
-  <meta content="website" property="og:type" slot="head"/>
-  <meta content="summary_large_image" name="twitter:card" slot="head"/>
-  <meta content="Unser Team – Minecraft Gilde" name="twitter:title" slot="head"/>
-  <meta content="Aktive deutsche Admins und Moderatoren für dein Minecraft-Vanilla-Erlebnis." name="twitter:description" slot="head"/>
-  <meta content="https://minecraft-gilde.de/images/logo.webp" name="twitter:image" slot="head"/>
-  <Navbar active={"team"} />
+  <meta
+    content="Unser Team | Minecraft Gilde – Aktive Admins & Moderatoren"
+    property="og:title"
+    slot="head"
+  />
+  <meta
+    content="Hier findest du das engagierte Team der Minecraft Gilde – Admins und Moderatoren, die für Fairness und Spielspaß sorgen."
+    property="og:description"
+    slot="head"
+  />
+  <meta content="https://minecraft-gilde.de/images/logo.webp" property="og:image" slot="head" />
+  <meta content="https://minecraft-gilde.de/admin-team.html" property="og:url" slot="head" />
+  <meta content="website" property="og:type" slot="head" />
+  <meta content="summary_large_image" name="twitter:card" slot="head" />
+  <meta content="Unser Team – Minecraft Gilde" name="twitter:title" slot="head" />
+  <meta
+    content="Aktive deutsche Admins und Moderatoren für dein Minecraft-Vanilla-Erlebnis."
+    name="twitter:description"
+    slot="head"
+  />
+  <meta content="https://minecraft-gilde.de/images/logo.webp" name="twitter:image" slot="head" />
+  <Navbar active={'team'} />
 
   <main id="main-content" tabindex="-1">
-<!--Header-->
-<section id="header">
-<div class="content">
-<div class="info">
-<p class="minecraft-server-ip">mc.example.com</p>
-<h1 class="title">Unser <span>team</span></h1>
-</div>
-<p class="description">Hier findest du das engagierte Team der Minecraft Gilde.</p>
-</div>
-</section>
-<!--Admin-Team-->
-<section id="admin-team">
-<div class="content at-content"></div>
-</section>
-</main>
+    <!--Header-->
+    <section id="header">
+      <div class="content">
+        <div class="info">
+          <p class="minecraft-server-ip">mc.example.com</p>
+          <h1 class="title">Unser <span>team</span></h1>
+        </div>
+        <p class="description">Hier findest du das engagierte Team der Minecraft Gilde.</p>
+      </div>
+    </section>
+    <!--Admin-Team-->
+    <section id="admin-team">
+      <div class="content at-content"></div>
+    </section>
+  </main>
 
-  <Footer /></BaseLayout>
+  <Footer /></BaseLayout
+>

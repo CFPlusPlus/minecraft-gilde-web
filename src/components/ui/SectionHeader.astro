@@ -24,11 +24,15 @@ const contentClasses = ['content', contentClass].filter(Boolean).join(' ');
   <div class={contentClasses}>
     <div class="info">
       <p class="minecraft-server-ip">{serverIp}</p>
-      {titleHtml ? (
-        <h1 class="title" set:html={titleHtml} />
-      ) : (
-        <h1 class="title"><slot name="title" /></h1>
-      )}
+      {
+        titleHtml ? (
+          <h1 class="title" set:html={titleHtml} />
+        ) : (
+          <h1 class="title">
+            <slot name="title" />
+          </h1>
+        )
+      }
     </div>
     {description ? <p class="description">{description}</p> : null}
   </div>

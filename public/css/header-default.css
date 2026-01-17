@@ -6,6 +6,6 @@
 */
 
 body.page--subpage #header {
-  background: url("../../images/datenschutz.webp") no-repeat center;
+  background: url('../../images/datenschutz.webp') no-repeat center;
   background-size: cover;
 }

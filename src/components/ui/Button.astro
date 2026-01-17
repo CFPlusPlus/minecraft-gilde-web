@@ -24,22 +24,19 @@ const {
   ariaLabel,
 } = Astro.props as Props;
 
-const classes = [
-  'btn',
-  variant ? `btn-${variant}` : '',
-  size ? `btn-${size}` : '',
-  className,
-]
+const classes = ['btn', variant ? `btn-${variant}` : '', size ? `btn-${size}` : '', className]
   .filter(Boolean)
   .join(' ');
 ---
 
-{href ? (
-  <a class={classes} href={href} target={target} rel={rel} aria-label={ariaLabel}>
-    <slot />
-  </a>
-) : (
-  <button class={classes} type={type} aria-label={ariaLabel}>
-    <slot />
-  </button>
-)}
+{
+  href ? (
+    <a class={classes} href={href} target={target} rel={rel} aria-label={ariaLabel}>
+      <slot />
+    </a>
+  ) : (
+    <button class={classes} type={type} aria-label={ariaLabel}>
+      <slot />
+    </button>
+  )
+}
