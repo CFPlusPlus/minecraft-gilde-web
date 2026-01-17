@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title={'Minecraft Gilde - Seite nicht gefunden'}
+  bodyClass={'page--sticky-footer page--subpage page--content'}
+  styles={['/css/content-page.css', '/css/header-default.css']}
+>
+  <Navbar active={''} />
+
+  <main id="main-content" tabindex="-1">
+    <section id="header">
+      <div class="content">
+        <div class="info">
+          <p class="minecraft-server-ip">Minecraft-Gilde.de</p>
+          <h1 class="title">404 <span>Seite nicht gefunden</span></h1>
+        </div>
+      </div>
+    </section>
+
+    <section class="container container-pad u-mt-2 u-mb-3">
+      <div class="notice notice--danger">
+        <i aria-hidden="true" class="fa-solid fa-triangle-exclamation"></i>
+        <span class="warning-text"
+          >Diese Seite existiert nicht (mehr) oder der Link ist falsch.</span
+        >
+      </div>
+
+      <div class="u-mt-2" style="display:flex; justify-content:center;">
+        <a class="btn btn-primary btn-sm" href="/index.html">
+          <i aria-hidden="true" class="fa-solid fa-house"></i>
+          Zur Startseite
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

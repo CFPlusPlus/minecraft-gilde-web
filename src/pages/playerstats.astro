@@ -62,6 +62,14 @@ import Footer from '../components/Footer.astro';
       <span class="badge muted" id="player-uuid"></span>
       <div class="muted" id="generated-ts"></div>
     </div>
+
+    <!-- API-Fehler (z. B. wenn /api nicht erreichbar ist) -->
+    <div class="container container-pad u-mb-2">
+      <div class="notice notice--danger notice--compact" id="player-api-error" style="display:none">
+        <i aria-hidden="true" class="fa-solid fa-triangle-exclamation"></i>
+        <span class="warning-text" id="player-api-error-text"></span>
+      </div>
+    </div>
     <div class="player-hero container-pad">
       <div class="card">
         <img alt="" id="player-skin" />

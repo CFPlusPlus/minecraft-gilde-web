@@ -73,6 +73,14 @@ import Footer from '../components/Footer.astro';
         <span class="badge muted" id="generated-ts">Stand: …</span>
       </div>
     </div>
+
+    <!-- API-Fehler (z. B. wenn /api nicht erreichbar ist) -->
+    <div class="panel-inner">
+      <div class="notice notice--danger notice--compact u-mb-2" id="api-error" style="display:none">
+        <i aria-hidden="true" class="fa-solid fa-triangle-exclamation"></i>
+        <span class="warning-text" id="api-error-text"></span>
+      </div>
+    </div>
     <!-- PANELS -->
     <section aria-labelledby="Übersicht" class="tab-panel active" id="tab-uebersicht">
       <div class="panel-inner">

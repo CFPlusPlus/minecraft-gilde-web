@@ -939,3 +939,79 @@ body.stats-page #tab-ranglisten #page-size option {
   background: rgba(30, 30, 30, 0.92);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
 }
+
+/* =====================================
+   Google-like Player Search (Stats Topbar)
+   - Suggestions without scrollbar (limit controlled in JS)
+   ===================================== */
+
+#main-search.search-wrapper {
+  border-radius: 24px;
+  padding: 0.75rem 1rem;
+  background: rgba(32, 33, 36, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  gap: 0.75rem;
+  min-height: 48px;
+  overflow: visible;
+}
+
+#main-search.search-wrapper i {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+#main-search.search-wrapper input {
+  font-size: 1.05rem;
+}
+
+#main-search.search-wrapper input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+#autocomplete-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 50;
+  display: none;
+  background: rgba(32, 33, 36, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  padding: 6px 0;
+  overflow: hidden;
+}
+
+.autocomplete-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* no internal scrollbar */
+}
+
+.autocomplete-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+  user-select: none;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.autocomplete-list li i {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.autocomplete-list li:hover,
+.autocomplete-list li.selected {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Safety: hide old avatar images if any are still rendered */
+.autocomplete-list img {
+  display: none;
+}

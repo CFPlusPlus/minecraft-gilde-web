@@ -5,6 +5,9 @@
     ExpiresActive On
 </IfModule>
 
+# 404-Seite (Astro buildt /404.html)
+ErrorDocument 404 /404.html
+
 # HTML nie aus dem Cache zeigen
 <IfModule mod_headers.c>
   <FilesMatch "\.(?:html?)$">

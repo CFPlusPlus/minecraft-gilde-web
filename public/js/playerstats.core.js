@@ -31,6 +31,20 @@
   const uuidParam = (qp.get('uuid') || '').trim();
   const uuid = uuidParam;
 
+  // --- User-visible Error Banner ---
+  const apiErrorBox = document.getElementById('player-api-error');
+  const apiErrorText = document.getElementById('player-api-error-text');
+  function showApiError(message) {
+    if (!apiErrorBox || !apiErrorText) return;
+    apiErrorText.textContent = message || 'Ein Fehler ist aufgetreten.';
+    apiErrorBox.style.display = 'flex';
+  }
+  function clearApiError() {
+    if (!apiErrorBox || !apiErrorText) return;
+    apiErrorBox.style.display = 'none';
+    apiErrorText.textContent = '';
+  }
+
   function h(tag, attrs = {}, ...children) {
     const el = document.createElement(tag);
     for (const [k, v] of Object.entries(attrs || {})) {
@@ -193,28 +207,38 @@
     if (!uuidParam) {
       document.getElementById('player-name').textContent = 'Keine UUID übergeben';
       document.getElementById('player-uuid').textContent = '';
+      showApiError('Es wurde keine UUID übergeben. Öffne einen Spieler über die Suche auf /stats.');
       return;
     }
 
-    const res = await fetch(`api/player?uuid=${encodeURIComponent(uuidParam)}`, {
-      cache: 'no-store',
-    });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
+    let data;
+    try {
+      const res = await fetch(`api/player?uuid=${encodeURIComponent(uuidParam)}`, {
+        cache: 'no-store',
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      data = await res.json();
+      clearApiError();
+    } catch (e) {
+      console.error(e);
+      document.getElementById('player-name').textContent = 'Fehler beim Laden';
+      document.getElementById('player-uuid').textContent = uuidParam;
+      showApiError(
+        'Spielerstatistiken sind aktuell nicht erreichbar. Bitte versuche es später erneut.',
+      );
+      return;
+    }
 
     const generated = data.__generated || null;
     const uuidFull = data.uuid || uuidParam;
     const found = data.found !== false && !!data.player;
 
     if (!found) {
-      alert(
-        'Die übergebene UUID ist unbekannt.\n\nMögliche Ursachen:\n' +
-          '- Der Spieler hat noch nie auf der Minecraft Gilde gespielt\n' +
-          '- Der Spieler hat weniger als eine Stunde in der Minecraft Gilde gespielt\n' +
-          '- Die UUID ist ungültig',
-      );
       document.getElementById('player-name').textContent = 'Unbekannte UUID';
       document.getElementById('player-uuid').textContent = uuidParam;
+      showApiError(
+        'Die übergebene UUID ist unbekannt. Nutze die Spielersuche auf /stats oder prüfe den Link.',
+      );
       return;
     }
 

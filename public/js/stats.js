@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const playerCountEl = document.getElementById('player-count');
   const generatedEl = document.getElementById('generated-ts');
 
+  const apiErrorBox = document.getElementById('api-error');
+  const apiErrorText = document.getElementById('api-error-text');
+
   const kpiGrid = document.getElementById('kpi-grid');
   const metricsContainer = document.getElementById('metrics-container');
   const noResultsWarning = document.getElementById('no-results-warning');
@@ -28,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const searchInput = document.getElementById('search-name');
   const autocompleteList = document.getElementById('autocomplete-list');
+  const autocompleteContainer = document.getElementById('autocomplete-container');
 
   const welcomeBox = document.getElementById('welcome-box');
 
@@ -104,6 +108,23 @@ document.addEventListener('DOMContentLoaded', () => {
       .replaceAll('>', '&gt;')
       .replaceAll('"', '&quot;')
       .replaceAll("'", '&#039;');
+
+  // --- User-visible Error Banner ---
+  let apiErrorActive = false;
+  const showApiError = (message) => {
+    if (!apiErrorBox || !apiErrorText) return;
+    apiErrorText.textContent = message || 'Ein Fehler ist aufgetreten.';
+    apiErrorBox.style.display = 'flex';
+    apiErrorActive = true;
+  };
+
+  const clearApiError = () => {
+    if (!apiErrorBox || !apiErrorText) return;
+    if (!apiErrorActive) return;
+    apiErrorBox.style.display = 'none';
+    apiErrorText.textContent = '';
+    apiErrorActive = false;
+  };
 
   const fetchJson = async (url) => {
     const res = await fetch(url, { headers: { Accept: 'application/json' } });
@@ -214,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeAutocomplete = () => {
     acItems = [];
     acSelected = -1;
+    if (autocompleteContainer) autocompleteContainer.style.display = 'none';
     if (autocompleteList) {
       autocompleteList.innerHTML = '';
       autocompleteList.style.display = 'none';
@@ -226,15 +248,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!autocompleteList) return;
     autocompleteList.innerHTML = '';
 
-    // Sichtbarkeit steuern (CSS hat default: display:none)
+    // Sichtbarkeit steuern
+    if (autocompleteContainer) {
+      autocompleteContainer.style.display = acItems.length ? 'block' : 'none';
+    }
     autocompleteList.style.display = acItems.length ? 'block' : 'none';
 
     for (let i = 0; i < acItems.length; i++) {
       const it = acItems[i];
       const li = document.createElement('li');
-      const size = 24;
-      const imgUrl = `https://minotar.net/helm/${encodeURIComponent(it.name)}/${size}.png`;
-      li.innerHTML = `<img src="${imgUrl}" alt=""><span>${escapeHtml(it.name)}</span>`;
+      li.innerHTML = `<i aria-hidden="true" class="fa-solid fa-magnifying-glass"></i><span>${escapeHtml(it.name)}</span>`;
       li.addEventListener('mousedown', (e) => {
         // mousedown statt click, damit input blur nicht vorher alles schließt
         e.preventDefault();
@@ -252,12 +275,14 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     try {
-      const data = await fetchJson(`api/players?q=${encodeURIComponent(q)}&limit=8`);
+      const data = await fetchJson(`api/players?q=${encodeURIComponent(q)}&limit=6`);
       setGenerated(data.__generated);
       const items = Array.isArray(data.items) ? data.items : [];
       renderAutocomplete(items);
+      clearApiError();
     } catch (e) {
       console.warn('Autocomplete Fehler', e);
+      showApiError('Statistiken sind aktuell nicht erreichbar. Bitte versuche es später erneut.');
       closeAutocomplete();
     }
   }, 150);
@@ -380,8 +405,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!metricDefs) {
       try {
         await loadMetrics();
+        clearApiError();
       } catch (e) {
         console.error(e);
+        showApiError('Statistiken sind aktuell nicht erreichbar. Bitte versuche es später erneut.');
+        return;
       }
     }
     if (!metricDefs) return;
@@ -705,8 +733,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!metricDefs) {
       try {
         await loadMetrics();
-      } catch {
-        /* ignore */
+        clearApiError();
+      } catch (e) {
+        console.error(e);
+        showApiError('Statistiken sind aktuell nicht erreichbar. Bitte versuche es später erneut.');
+        return;
       }
     }
     if (kingState.loaded && kingState.pages.length) {
@@ -731,6 +762,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updatePager(kingState);
     } catch (e) {
       console.error('Server-König Fehler', e);
+      showApiError('Statistiken sind aktuell nicht erreichbar. Bitte versuche es später erneut.');
       if (kingTbody) {
         kingTbody.innerHTML = `<tr><td colspan="3" class="muted">Fehler beim Laden.</td></tr>`;
       }
@@ -837,15 +869,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // metrics (klein, cachebar) zuerst laden, damit KPI Labels sofort stimmen
     try {
       await loadMetrics();
+      clearApiError();
     } catch (e) {
       console.warn('metrics load failed', e);
+      showApiError('Statistiken sind aktuell nicht erreichbar. Bitte versuche es später erneut.');
     }
 
     // summary (ebenfalls klein)
     try {
       await loadSummary();
+      clearApiError();
     } catch (e) {
       console.warn('summary load failed', e);
+      showApiError('Statistiken sind aktuell nicht erreichbar. Bitte versuche es später erneut.');
       // KPI Labels trotzdem setzen
       updateKpi(null);
     }

@@ -9,7 +9,6 @@
   </a>
 </p>
 
-
 # Minecraft Gilde Web
 
 Offizielle Website von **Minecraft-Gilde.de** (Minecraft-Server: **Minecraft Gilde**) – gebaut mit **Astro**.
