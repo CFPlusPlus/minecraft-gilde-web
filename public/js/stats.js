@@ -542,8 +542,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       const groupEl = document.createElement('details');
+      // Kein Accent-Rahmen um die Kategorie: nur Inhalt (Tabelle) leicht umranden.
       groupEl.className =
-        'metric-group bg-surface border-border rounded-[var(--radius)] border shadow-sm backdrop-blur-md open:shadow-md open:border-accent/15';
+        'metric-group bg-surface rounded-[var(--radius)] shadow-sm backdrop-blur-md open:shadow-md';
       groupEl.dataset.category = cat;
 
       const sum = document.createElement('summary');
@@ -557,8 +558,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       for (const { id, def } of items) {
         const metricEl = document.createElement('details');
+        // Kein gelber Außenrahmen für einzelne Ranglisten – Fokus liegt auf der Tabelle.
         metricEl.className =
-          'metric-card group mt-3 rounded-[var(--radius)] border border-border bg-surface shadow-sm backdrop-blur-md open:shadow-md open:border-accent/20';
+          'metric-card group mt-3 rounded-[var(--radius)] bg-surface shadow-sm backdrop-blur-md open:shadow-md';
         metricEl.dataset.metric = id;
         metricEl.dataset.search = `${id} ${def.label} ${cat}`.toLowerCase();
 
@@ -578,7 +580,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const body = document.createElement('div');
         body.className = 'metric-body px-4 pb-4';
         body.innerHTML = `
-          <div class="table-wrapper group-open:border-accent/20 relative mt-1 overflow-x-auto rounded-[var(--radius)] border border-border bg-surface">
+          <div class="table-wrapper relative mt-1 overflow-x-auto rounded-[var(--radius)] border border-border/60 bg-surface">
             <table class="w-full min-w-[520px] text-sm">
               <thead class="bg-surface-solid/40 text-muted text-xs">
                 <tr>
