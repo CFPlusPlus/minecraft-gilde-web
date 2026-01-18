@@ -1,0 +1,35 @@
+---
+import V2Layout from '../../layouts/V2Layout.astro';
+import Card from '../../components/v2/ui/Card.astro';
+import Button from '../../components/v2/ui/Button.astro';
+import { Scale, ArrowRight } from '@lucide/astro';
+import impressumHtml from '../../partials/impressum.html?raw';
+
+const DISCORD_URL = 'https://discord.minecraft-gilde.de';
+---
+
+<V2Layout
+  title="Minecraft Gilde – Impressum (v2)"
+  canonical="https://minecraft-gilde.de/v2/impressum"
+  description="Impressum gemäß §5 DDG."
+>
+  <section class="v2-container pt-12 pb-16">
+    <div class="flex items-start gap-3">
+      <Scale size={22} />
+      <div>
+        <h1 class="text-3xl font-semibold tracking-tight">Impressum</h1>
+        <p class="text-muted mt-2">Angaben gemäß §5 DDG.</p>
+      </div>
+    </div>
+
+    <div class="mt-6 flex flex-wrap gap-3">
+      <Button href={DISCORD_URL} external variant="secondary" class="gap-2">
+        Discord <ArrowRight size={18} />
+      </Button>
+    </div>
+
+    <Card class="mt-6 p-6">
+      <div class="v2-prose" set:html={impressumHtml} />
+    </Card>
+  </section>
+</V2Layout>

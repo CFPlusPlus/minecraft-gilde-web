@@ -19,7 +19,7 @@ const DISCORD_URL = 'https://discord.minecraft-gilde.de';
       <h1 class="mt-5 text-4xl font-semibold tracking-tight sm:text-5xl">
         Minecraft, aber als Community.
       </h1>
-      <p class="mt-4 text-base leading-relaxed text-muted sm:text-lg">
+      <p class="text-muted mt-4 text-base leading-relaxed sm:text-lg">
         Ein cleanes, modernes Zuhause für Abenteuer, Bauen und Events – mit klaren Regeln,
         Statistiken und einem aktiven Discord.
       </p>
@@ -28,12 +28,10 @@ const DISCORD_URL = 'https://discord.minecraft-gilde.de';
         <Button href={DISCORD_URL} external variant="primary">
           Discord beitreten <ArrowRight size={18} />
         </Button>
-        <Button href="/erststart" variant="secondary">
-          Erststart
-        </Button>
+        <Button href="/erststart" variant="secondary"> Erststart </Button>
       </div>
 
-      <div class="mt-8 flex flex-col gap-3 text-sm text-muted sm:flex-row sm:items-center sm:gap-6">
+      <div class="text-muted mt-8 flex flex-col gap-3 text-sm sm:flex-row sm:items-center sm:gap-6">
         <div class="inline-flex items-center gap-2">
           <ShieldCheck size={18} /> Moderiert & fair
         </div>
@@ -51,19 +49,19 @@ const DISCORD_URL = 'https://discord.minecraft-gilde.de';
         <div class="flex items-start justify-between gap-3">
           <div>
             <h2 class="text-sm font-semibold">Server Status</h2>
-            <p class="mt-1 text-sm text-muted">Anbindung kommt in v2.</p>
+            <p class="text-muted mt-1 text-sm">Anbindung kommt in v2.</p>
           </div>
           <Badge>Preview</Badge>
         </div>
 
         <div class="mt-4 grid grid-cols-2 gap-3 text-sm">
-          <div class="rounded-lg border border-border bg-surface-solid/40 px-3 py-2">
+          <div class="border-border bg-surface-solid/40 rounded-lg border px-3 py-2">
             <div class="text-muted">Online</div>
-            <div class="font-semibold text-fg">—</div>
+            <div class="text-fg font-semibold">—</div>
           </div>
-          <div class="rounded-lg border border-border bg-surface-solid/40 px-3 py-2">
+          <div class="border-border bg-surface-solid/40 rounded-lg border px-3 py-2">
             <div class="text-muted">Spieler</div>
-            <div class="font-semibold text-fg">—</div>
+            <div class="text-fg font-semibold">—</div>
           </div>
         </div>
       </Card>
@@ -73,25 +71,25 @@ const DISCORD_URL = 'https://discord.minecraft-gilde.de';
         <div class="mt-3 grid gap-2 sm:grid-cols-2">
           <a
             href="/serverinfos"
-            class="rounded-lg border border-border bg-surface px-3 py-2 text-sm hover:bg-surface-solid/70 transition-colors"
+            class="border-border bg-surface hover:bg-surface-solid/70 rounded-lg border px-3 py-2 text-sm transition-colors"
           >
             Serverinfos
           </a>
           <a
             href="/rules"
-            class="rounded-lg border border-border bg-surface px-3 py-2 text-sm hover:bg-surface-solid/70 transition-colors"
+            class="border-border bg-surface hover:bg-surface-solid/70 rounded-lg border px-3 py-2 text-sm transition-colors"
           >
             Regeln
           </a>
           <a
             href="/stats"
-            class="rounded-lg border border-border bg-surface px-3 py-2 text-sm hover:bg-surface-solid/70 transition-colors"
+            class="border-border bg-surface hover:bg-surface-solid/70 rounded-lg border px-3 py-2 text-sm transition-colors"
           >
             Statistiken
           </a>
           <a
             href="/befehle"
-            class="rounded-lg border border-border bg-surface px-3 py-2 text-sm hover:bg-surface-solid/70 transition-colors"
+            class="border-border bg-surface hover:bg-surface-solid/70 rounded-lg border px-3 py-2 text-sm transition-colors"
           >
             Befehle
           </a>

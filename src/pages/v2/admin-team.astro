@@ -1,0 +1,79 @@
+---
+import V2Layout from '../../layouts/V2Layout.astro';
+import Card from '../../components/v2/ui/Card.astro';
+import Button from '../../components/v2/ui/Button.astro';
+import Badge from '../../components/v2/ui/Badge.astro';
+import { TEAM_GROUPS, TEAM_MEMBERS } from '../../data/team';
+import { Shield, Users, ArrowRight } from '@lucide/astro';
+
+const DISCORD_URL = 'https://discord.minecraft-gilde.de';
+
+const avatarUrl = (name: string) => `https://minotar.net/helm/${encodeURIComponent(name)}/96.png`;
+
+const groups = TEAM_GROUPS.map((g) => ({
+  ...g,
+  members: TEAM_MEMBERS.filter((m) => m.group === g.key),
+})).filter((g) => g.members.length > 0);
+---
+
+<V2Layout
+  title="Minecraft Gilde – Admin-Team (v2)"
+  canonical="https://minecraft-gilde.de/v2/admin-team"
+  description="Das Team der Minecraft Gilde – Admins und Moderatoren."
+>
+  <section class="v2-container pt-12 pb-6">
+    <div class="flex items-start gap-3">
+      <Users size={22} />
+      <div>
+        <h1 class="text-3xl font-semibold tracking-tight">Admin-Team</h1>
+        <p class="text-muted mt-2">Hier findest du das engagierte Team der Minecraft Gilde.</p>
+      </div>
+    </div>
+
+    <div class="mt-6 flex flex-wrap gap-3">
+      <Button href={DISCORD_URL} external variant="primary" class="gap-2">
+        Discord <ArrowRight size={18} />
+      </Button>
+      <Button href="/v2/erststart" variant="secondary">Erststart</Button>
+      <Button href="/v2/rules" variant="ghost">Regeln</Button>
+    </div>
+  </section>
+
+  <section class="v2-container pb-16">
+    <div class="grid gap-4">
+      {
+        groups.map((g) => (
+          <Card class="p-6">
+            <div class="flex items-center justify-between gap-4">
+              <div class="inline-flex items-center gap-2">
+                <Shield size={18} />
+                <h2 class="text-xl font-semibold tracking-tight">{g.label}</h2>
+              </div>
+              <Badge variant="accent">{g.members.length}</Badge>
+            </div>
+
+            <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {g.members.map((m) => (
+                <div class="v2-card flex items-center gap-3 p-4">
+                  <img
+                    src={avatarUrl(m.inGameName)}
+                    alt={m.inGameName}
+                    width="48"
+                    height="48"
+                    loading="lazy"
+                    decoding="async"
+                    class="border-border bg-surface h-12 w-12 rounded-full border"
+                  />
+                  <div class="min-w-0">
+                    <div class="text-sm font-semibold">{m.inGameName}</div>
+                    <div class="text-muted text-xs">{m.role}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+</V2Layout>

@@ -2,30 +2,35 @@
 const year = new Date().getFullYear();
 
 const LINKS = [
-  { href: '/datenschutz', label: 'Datenschutz' },
-  { href: '/impressum', label: 'Impressum' },
+  { href: '/v2/datenschutz', label: 'Datenschutz' },
+  { href: '/v2/impressum', label: 'Impressum' },
+  { href: '/v2/admin-team', label: 'Admin-Team' },
   { href: 'https://discord.minecraft-gilde.de', label: 'Discord', external: true },
+  { href: 'https://map.minecraft-gilde.de', label: 'Dynmap', external: true },
 ];
 ---
 
 <footer class="mx-auto max-w-6xl px-4 py-10">
   <div class="glass rounded-[var(--radius)] px-4 py-4 shadow-sm">
     <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      <div class="text-sm text-muted">
-        © {year} <span class="text-fg/90 font-medium">Minecraft Gilde</span>
+      <div class="text-muted text-sm">
+        © {year}
+        <span class="text-fg/90 font-medium">Minecraft Gilde</span>
       </div>
 
       <nav aria-label="Footer" class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
-        {LINKS.map((l) => (
-          <a
-            href={l.href}
-            target={l.external ? '_blank' : undefined}
-            rel={l.external ? 'noopener noreferrer' : undefined}
-            class="text-fg/80 hover:text-fg underline decoration-transparent hover:decoration-accent/60 underline-offset-4 transition-colors"
-          >
-            {l.label}
-          </a>
-        ))}
+        {
+          LINKS.map((l) => (
+            <a
+              href={l.href}
+              target={l.external ? '_blank' : undefined}
+              rel={l.external ? 'noopener noreferrer' : undefined}
+              class="text-fg/80 hover:text-fg hover:decoration-accent/60 underline decoration-transparent underline-offset-4 transition-colors"
+            >
+              {l.label}
+            </a>
+          ))
+        }
       </nav>
     </div>
   </div>

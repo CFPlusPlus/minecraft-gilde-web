@@ -39,24 +39,48 @@ const {
     <link rel="icon" href="/images/logo.webp" />
     <title>{title}</title>
 
+    <script is:inline>
+      // Theme bootstrap (prevents flash). Values: 'light' | 'dark' | 'system'
+      try {
+        const stored = localStorage.getItem('theme');
+        const root = document.documentElement;
+        if (stored === 'light' || stored === 'dark') root.dataset.theme = stored;
+        else root.removeAttribute('data-theme');
+      } catch {
+        // ignore
+      }
+    </script>
+
+    <script is:inline>
+      // Expose v2 config to JS (no sensitive data)
+      window.__V2_CONFIG__ = {
+        serverIp: 'minecraft-gilde.de',
+        discordGuildId: '1219625244906754093',
+        discordInvite: 'https://discord.minecraft-gilde.de',
+        dynmapUrl: 'https://map.minecraft-gilde.de',
+      };
+    </script>
+
     <slot name="head" />
   </head>
 
   <body class={`min-h-dvh bg-bg text-fg antialiased ${bodyClass}`.trim()}>
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 rounded-lg bg-surface-solid px-3 py-2 text-sm font-medium text-fg border border-border"
+      class="bg-surface-solid text-fg border-border sr-only rounded-lg border px-3 py-2 text-sm font-medium focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50"
     >
       Zum Inhalt springen
     </a>
 
     <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       <div
-        class="absolute left-1/2 top-[-14rem] h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-accent/10 blur-3xl"
-      ></div>
+        class="bg-accent/10 absolute top-[-14rem] left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full blur-3xl"
+      >
+      </div>
       <div
-        class="absolute right-[-12rem] top-[10rem] h-[24rem] w-[24rem] rounded-full bg-accent/5 blur-3xl"
-      ></div>
+        class="bg-accent/5 absolute top-[10rem] right-[-12rem] h-[24rem] w-[24rem] rounded-full blur-3xl"
+      >
+      </div>
     </div>
 
     {showNav ? <Navbar /> : null}
@@ -66,6 +90,16 @@ const {
     </main>
 
     {showFooter ? <Footer /> : null}
+
+    <div
+      id="v2-toast"
+      class="pointer-events-none fixed bottom-4 left-1/2 z-[60] hidden -translate-x-1/2"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+    </div>
+
+    <script src="/js/v2-global.js" defer></script>
     <slot name="afterScripts" />
   </body>
 </html>

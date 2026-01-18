@@ -1,17 +1,20 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /*
   v2 Design Tokens (clean + subtle glass + minimal)
   - Auto Light/Dark via prefers-color-scheme
+  - Optional manual override via: html[data-theme="light|dark"]
   - Anthrazit (nicht reines Schwarz) + Gold Accent
 */
 
 :root {
   /* Typography */
-  --font-sans: "Geist Variable", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
-    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-display: "Space Grotesk Variable", ui-sans-serif, system-ui, -apple-system, Segoe UI,
-    Roboto, Helvetica, Arial;
+  --font-sans:
+    'Geist Variable', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-display:
+    'Space Grotesk Variable', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+    Arial;
 
   /* Light */
   --bg: #f7f8fb;
@@ -20,7 +23,7 @@
 
   --surface: rgba(255, 255, 255, 0.72);
   --surface-solid: #ffffff;
-  --border: rgba(15, 23, 42, 0.10);
+  --border: rgba(15, 23, 42, 0.1);
 
   --accent: #f2c94c;
   --accent2: #ffd56a;
@@ -36,14 +39,43 @@
     --fg: #e5e7eb;
     --muted: #a1a1aa;
 
-    --surface: rgba(17, 21, 27, 0.60);
+    --surface: rgba(17, 21, 27, 0.6);
     --surface-solid: #11151b;
-    --border: rgba(255, 255, 255, 0.10);
+    --border: rgba(255, 255, 255, 0.1);
 
     --accent: #f2c94c;
     --accent2: #ffd56a;
-    --ring: rgba(242, 201, 76, 0.30);
+    --ring: rgba(242, 201, 76, 0.3);
   }
+}
+
+/* Manual override (set by v2 theme toggle) */
+html[data-theme='light'] {
+  --bg: #f7f8fb;
+  --fg: #0f172a;
+  --muted: #475569;
+
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-solid: #ffffff;
+  --border: rgba(15, 23, 42, 0.1);
+
+  --accent: #f2c94c;
+  --accent2: #ffd56a;
+  --ring: rgba(242, 201, 76, 0.45);
+}
+
+html[data-theme='dark'] {
+  --bg: #0b0f14;
+  --fg: #e5e7eb;
+  --muted: #a1a1aa;
+
+  --surface: rgba(17, 21, 27, 0.6);
+  --surface-solid: #11151b;
+  --border: rgba(255, 255, 255, 0.1);
+
+  --accent: #f2c94c;
+  --accent2: #ffd56a;
+  --ring: rgba(242, 201, 76, 0.3);
 }
 
 /* Map tokens into Tailwind v4 CSS-first theme variables */
@@ -68,8 +100,10 @@
 
 @layer base {
   html {
-    /* makes built-in form controls match Light/Dark */
     color-scheme: light dark;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
@@ -84,9 +118,36 @@
     letter-spacing: -0.02em;
   }
 
-  /* smoother focus styles (we'll use ring-color via --color-ring) */
   :focus-visible {
     outline: none;
+  }
+
+  /* Link defaults */
+  a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  code,
+  kbd {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+      monospace;
+  }
+
+  code {
+    background: color-mix(in oklab, var(--surface-solid) 70%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.12rem 0.45rem;
+  }
+
+  kbd {
+    background: color-mix(in oklab, var(--surface-solid) 70%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.12rem 0.45rem;
+    box-shadow: 0 1px 0 color-mix(in oklab, var(--fg) 10%, transparent);
   }
 }
 
@@ -96,5 +157,92 @@
     background: var(--surface);
     border: 1px solid var(--border);
     backdrop-filter: blur(12px);
+  }
+
+  .v2-container {
+    @apply mx-auto max-w-6xl px-4;
+  }
+
+  .v2-section {
+    @apply py-10;
+  }
+
+  .v2-card {
+    @apply bg-surface border-border rounded-[var(--radius)] border shadow-sm backdrop-blur-md;
+  }
+
+  .v2-muted {
+    color: var(--muted);
+  }
+
+  .v2-prose {
+    line-height: 1.75;
+  }
+
+  .v2-prose h2 {
+    font-size: 1.25rem;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .v2-prose h3 {
+    font-size: 1.05rem;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .v2-prose p {
+    margin: 0.75rem 0;
+    color: color-mix(in oklab, var(--fg) 92%, transparent);
+  }
+
+  .v2-prose ul,
+  .v2-prose ol {
+    margin: 0.75rem 0;
+    padding-left: 1.25rem;
+    color: color-mix(in oklab, var(--fg) 92%, transparent);
+  }
+
+  .v2-prose li {
+    margin: 0.35rem 0;
+  }
+
+  .v2-prose a {
+    color: color-mix(in oklab, var(--accent) 85%, var(--fg) 15%);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent);
+  }
+
+  /* Accordion */
+  .v2-accordion {
+    @apply bg-surface border-border rounded-[var(--radius)] border p-4 shadow-sm backdrop-blur-md;
+  }
+
+  .v2-accordion summary {
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .v2-accordion summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .v2-accordion[open] {
+    box-shadow: 0 12px 30px color-mix(in oklab, var(--fg) 12%, transparent);
+  }
+
+  /* Simple "callout" */
+  .v2-callout {
+    @apply bg-surface border-border rounded-[var(--radius)] border p-4 shadow-sm backdrop-blur-md;
+  }
+
+  .v2-callout[data-variant='warning'] {
+    border-color: color-mix(in oklab, var(--accent) 60%, var(--border) 40%);
+    background: color-mix(in oklab, var(--accent) 10%, var(--surface) 90%);
+  }
+
+  .v2-callout[data-variant='info'] {
+    background: color-mix(in oklab, var(--surface) 85%, transparent);
   }
 }

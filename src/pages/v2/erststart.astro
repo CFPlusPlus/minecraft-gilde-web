@@ -1,0 +1,314 @@
+---
+import V2Layout from '../../layouts/V2Layout.astro';
+import Card from '../../components/v2/ui/Card.astro';
+import Button from '../../components/v2/ui/Button.astro';
+import { ArrowRight, Copy, Wand2, Shield, Hammer, Map, Vote, UserRound } from '@lucide/astro';
+
+const DISCORD_URL = 'https://discord.minecraft-gilde.de';
+const DYMAP_URL = 'https://map.minecraft-gilde.de';
+---
+
+<V2Layout
+  title="Minecraft Gilde – Erststart (v2)"
+  canonical="https://minecraft-gilde.de/v2/erststart"
+  description="Erststart: RTP, Claim, Rollen, Farmwelten, Dynmap und Voten."
+>
+  <section class="v2-container pt-12 pb-6">
+    <h1 class="text-3xl font-semibold tracking-tight">Erststart</h1>
+    <p class="text-muted mt-2">
+      Ein kurzer Guide für neue Spieler: schnell ankommen, sicher bauen, Regeln kennen.
+    </p>
+
+    <div class="mt-6 flex flex-wrap gap-3">
+      <Button variant="primary" class="gap-2" data-copy-ip><Copy size={18} /> IP kopieren</Button>
+      <Button href={DISCORD_URL} external variant="secondary" class="gap-2">
+        Discord <ArrowRight size={18} />
+      </Button>
+      <Button href="/v2/rules" variant="ghost">Regeln</Button>
+    </div>
+  </section>
+
+  <section class="v2-container pb-16">
+    <Card class="p-6">
+      <h2 class="text-xl font-semibold tracking-tight">Schnellstart für Ungeduldige</h2>
+      <p class="text-muted mt-2 text-sm">
+        Du willst sofort spielen? Das reicht für die ersten Minuten:
+      </p>
+      <ul class="text-muted mt-4 space-y-2 text-sm">
+        <li>
+          <span class="text-fg/90 font-medium">/rtp</span> – Teleportiert dich an einen zufälligen Ort
+          in der Hauptwelt.
+        </li>
+        <li>
+          Bau dir ein Zuhause und sichere es anschließend mit einem <span
+            class="text-fg/90 font-medium">Claim</span
+          >.
+        </li>
+        <li>
+          Hilfe im Spiel: <code>/helpop &lt;Nachricht&gt;</code> oder Team direkt anschreiben.
+        </li>
+      </ul>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <Button href="/v2/befehle" variant="secondary">Befehle</Button>
+        <Button href={DYMAP_URL} external variant="ghost" class="gap-2"
+          ><Map size={18} /> Dynmap</Button
+        >
+      </div>
+    </Card>
+
+    <div class="mt-6 space-y-3">
+      <details class="v2-accordion" open>
+        <summary class="flex items-center justify-between gap-3">
+          <span class="inline-flex items-center gap-2 text-sm font-semibold"
+            ><Wand2 size={18} /> Abenteuerstart</span
+          >
+          <span class="text-muted text-xs">/rtp · bauen · ankommen</span>
+        </summary>
+        <div class="v2-prose mt-4">
+          <p>
+            Wenn du neu auf dem Server bist, ist <strong>/rtp</strong> dein bester Freund: Du wirst an
+            einen zufälligen Ort in der Hauptwelt teleportiert und kannst dort direkt starten.
+          </p>
+          <p>
+            Die Hauptwelt wird <strong>nicht zurückgesetzt</strong>. Für Rohstoffe gibt es separate
+            Farmwelten, die regelmäßig resetten.
+          </p>
+        </div>
+      </details>
+
+      <details class="v2-accordion">
+        <summary class="flex items-center justify-between gap-3">
+          <span class="inline-flex items-center gap-2 text-sm font-semibold"
+            ><Shield size={18} /> Grundstück sichern (Claim)</span
+          >
+          <span class="text-muted text-xs">GriefPrevention</span>
+        </summary>
+        <div class="v2-prose mt-4">
+          <p>
+            Um dein Grundstück zu schützen, nutzt die Minecraft Gilde das Plugin <strong
+              >GriefPrevention</strong
+            >. Mit einem Claim kann <strong>niemand</strong> in deinem Grundstück bauen oder abbauen.
+          </p>
+
+          <h3>So erstellst du einen Claim</h3>
+          <ul>
+            <li>Halte einen <strong>Goldenen Spaten</strong> in der Hand.</li>
+            <li>Klicke mit <strong>Rechtsklick</strong> die erste Ecke deines Grundstücks an.</li>
+            <li>Klicke mit <strong>Rechtsklick</strong> die zweite Ecke an.</li>
+            <li>Fertig – dein Grundstück ist geschützt.</li>
+          </ul>
+
+          <p>
+            Du erhältst automatisch <strong>1000 Claim-Blöcke pro Stunde</strong> (maximal <strong
+              >120.000</strong
+            >).
+          </p>
+
+          <div class="v2-callout" data-variant="info">
+            <p class="text-fg/90 text-sm">
+              Du kannst deinen Claim jederzeit größer oder kleiner machen – einfach die Eckpunkte
+              mit dem Goldspaten verschieben.
+            </p>
+          </div>
+
+          <h3>Video: Claim erstellen</h3>
+          <div class="border-border bg-surface mt-3 aspect-video overflow-hidden rounded-xl border">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube-nocookie.com/embed/FuFizVdJ8kI"
+              title="Claim erstellen (Tutorial)"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+
+          <h3>Freunde hinzufügen / Rechte geben</h3>
+          <p>
+            Du kannst anderen Spielern <strong>Rechte</strong> geben – je nach Bedarf:
+          </p>
+          <ul>
+            <li><code>/trust &lt;Spieler&gt;</code> – volle Rechte (bauen, abbauen, öffnen).</li>
+            <li><code>/accesstrust &lt;Spieler&gt;</code> – Türen/Buttons/Schalter nutzen.</li>
+            <li><code>/containertrust &lt;Spieler&gt;</code> – Kisten &amp; Container öffnen.</li>
+            <li>
+              <code>/permissiontrust &lt;Spieler&gt;</code> – darf selbst Trust-Rechte vergeben.
+            </li>
+          </ul>
+
+          <div class="v2-callout" data-variant="warning">
+            <p class="text-fg/90 text-sm">
+              Vergib Rechte nur an Spieler, denen du vertraust. Rechte gelten auch für Truhen &amp;
+              Redstone im Claim.
+            </p>
+          </div>
+
+          <p>
+            Tipp: Mit <code>/trustlist</code> siehst du, wer in deinem Claim welche Rechte hat.
+          </p>
+        </div>
+      </details>
+
+      <details class="v2-accordion">
+        <summary class="flex items-center justify-between gap-3">
+          <span class="inline-flex items-center gap-2 text-sm font-semibold"
+            ><Hammer size={18} /> Wichtige Befehle</span
+          >
+          <span class="text-muted text-xs">Homes · RTP · Hilfe</span>
+        </summary>
+        <div class="v2-prose mt-4">
+          <p>Eine vollständige Liste findest du auf der Befehle-Seite. Hier die wichtigsten:</p>
+          <ul>
+            <li><code>/sethome</code> · <code>/home</code> – Zuhause setzen und teleportieren.</li>
+            <li><code>/rtp</code> – zufälliger Teleport in die Hauptwelt.</li>
+            <li><code>/msg &lt;Spieler&gt; &lt;Nachricht&gt;</code> – private Nachricht.</li>
+            <li>
+              <code>/helpop &lt;Nachricht&gt;</code> – Hilfe an das Team (wenn’s dringend ist).
+            </li>
+          </ul>
+          <div class="mt-3">
+            <Button href="/v2/befehle" variant="secondary">Alle Befehle</Button>
+          </div>
+        </div>
+      </details>
+
+      <details class="v2-accordion">
+        <summary class="flex items-center justify-between gap-3">
+          <span class="inline-flex items-center gap-2 text-sm font-semibold"
+            ><Shield size={18} /> Regeln</span
+          >
+          <span class="text-muted text-xs">fair play</span>
+        </summary>
+        <div class="v2-prose mt-4">
+          <p>
+            Bitte lies dir die Regeln kurz durch – sie sind bewusst übersichtlich gehalten.
+            Griefing, Cheating und toxisches Verhalten sind tabu.
+          </p>
+          <div class="mt-3">
+            <Button href="/v2/rules" variant="secondary">Regeln ansehen</Button>
+          </div>
+        </div>
+      </details>
+
+      <details class="v2-accordion">
+        <summary class="flex items-center justify-between gap-3">
+          <span class="inline-flex items-center gap-2 text-sm font-semibold"
+            ><UserRound size={18} /> Wer ist wer?</span
+          >
+          <span class="text-muted text-xs">Rollen</span>
+        </summary>
+        <div class="v2-prose mt-4">
+          <p>Auf dem Server gibt es verschiedene Rollen:</p>
+          <ul>
+            <li><strong>Admin</strong> – verantwortlich für Technik &amp; Verwaltung.</li>
+            <li><strong>Moderator</strong> – unterstützt Spieler und achtet auf die Regeln.</li>
+            <li><strong>Streamer</strong> – Spieler, die regelmäßig live streamen.</li>
+            <li><strong>Spieler</strong> – normale Mitglieder der Community.</li>
+          </ul>
+          <div class="v2-callout" data-variant="info">
+            <p class="text-fg/90 text-sm">
+              Du kannst Teammitglieder jederzeit im Chat anschreiben. Für private Fragen nutze
+              <code>/msg &lt;Spieler&gt; &lt;Nachricht&gt;</code> oder bei dringender Hilfe <code
+                >/helpop &lt;Nachricht&gt;</code
+              >.
+            </p>
+          </div>
+          <p>Für komplexere Anliegen kannst du dich außerdem auf unserem Discord melden.</p>
+        </div>
+      </details>
+
+      <details class="v2-accordion">
+        <summary class="flex items-center justify-between gap-3">
+          <span class="inline-flex items-center gap-2 text-sm font-semibold"
+            ><Hammer size={18} /> Die Farmwelten</span
+          >
+          <span class="text-muted text-xs">Rohstoffe</span>
+        </summary>
+        <div class="v2-prose mt-4">
+          <p>
+            Für den Abbau von Ressourcen stehen dir drei spezielle <strong>Farmwelten</strong> zur Verfügung:
+          </p>
+          <ul>
+            <li><strong>/farmwelt</strong> – normale Farmwelt für Holz, Steine, Erze usw.</li>
+            <li>
+              <strong>/netherfarm</strong> – Nether-Farmwelt für Netherquarz, Glowstone &amp; Co.
+            </li>
+            <li><strong>/endfarm</strong> – End-Farmwelt für Endstone, Elytra-Shulker-Loot usw.</li>
+          </ul>
+          <div class="v2-callout" data-variant="info">
+            <p class="text-fg/90 text-sm">
+              Die Farmwelten werden regelmäßig <strong>zurückgesetzt</strong>, damit immer genügend
+              Rohstoffe vorhanden sind. Nimm vor einem Reset alle wichtigen Items mit.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="v2-accordion">
+        <summary class="flex items-center justify-between gap-3">
+          <span class="inline-flex items-center gap-2 text-sm font-semibold"
+            ><Map size={18} /> Unsere Dynmap</span
+          >
+          <span class="text-muted text-xs">Karte</span>
+        </summary>
+        <div class="v2-prose mt-4">
+          <p>
+            Unsere <strong>Dynmap</strong> ist eine interaktive Online-Karte, die sich automatisch aktualisiert.
+            Dort kannst du <strong>alle Welten</strong> – einschließlich der Farmwelten – erkunden.
+          </p>
+          <ul>
+            <li>Grundstücke und geschützte Bereiche</li>
+            <li>Positionen von Spieler-Shops</li>
+            <li>Sehenswürdigkeiten und besondere Orte</li>
+          </ul>
+          <p>Über das Menü kannst du unter „Marker“ Zusatzinformationen ein- oder ausblenden.</p>
+          <div class="v2-callout" data-variant="info">
+            <p class="text-fg/90 text-sm">
+              Wenn du auf der Suche nach einem Bauplatz bist, hilft dir die Dynmap, freie Gebiete
+              oder schöne Landschaften zu entdecken.
+            </p>
+          </div>
+          <div class="mt-3">
+            <Button href={DYMAP_URL} external variant="secondary" class="gap-2"
+              ><Map size={18} /> Dynmap öffnen</Button
+            >
+          </div>
+        </div>
+      </details>
+
+      <details class="v2-accordion">
+        <summary class="flex items-center justify-between gap-3">
+          <span class="inline-flex items-center gap-2 text-sm font-semibold"
+            ><Vote size={18} /> Vote für unseren Server</span
+          >
+          <span class="text-muted text-xs">Belohnungen</span>
+        </summary>
+        <div class="v2-prose mt-4">
+          <p>
+            Du möchtest unseren Server unterstützen und dabei selbst eine Belohnung erhalten? Dann <strong
+              >vote</strong
+            > für unseren Server.
+          </p>
+          <p>
+            Unser Server ist aktuell auf drei Vote-Seiten eingetragen. Die Links findest du auf der
+            Startseite. Für jeden Vote erhältst du eine Ingame-Belohnung.
+          </p>
+          <p>
+            Regelmäßiges Voten lohnt sich besonders: Jeden Monat bekommen die Spieler mit den
+            meisten Votes eine exklusive Extra-Belohnung.
+          </p>
+          <div class="mt-3">
+            <Button href="/" variant="secondary">Zur Vote-Sektion</Button>
+          </div>
+        </div>
+      </details>
+
+      <div class="v2-callout" data-variant="info">
+        <p class="text-fg/90 text-sm">
+          Danke, dass du dir die Zeit genommen hast, das Tutorial durchzulesen. Wenn noch Fragen
+          offen sind, frag gerne im Spiel oder auf Discord – die Community hilft.
+        </p>
+      </div>
+    </div>
+  </section>
+</V2Layout>

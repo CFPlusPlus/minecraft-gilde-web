@@ -1,5 +1,5 @@
 ---
-import { Menu, X, ExternalLink } from '@lucide/astro';
+import { Menu, X, ExternalLink, Sun, Moon, Laptop } from '@lucide/astro';
 import Button from './ui/Button.astro';
 import Badge from './ui/Badge.astro';
 
@@ -7,23 +7,27 @@ type NavItem = { href: string; label: string; external?: boolean };
 
 const PRIMARY_LINKS: NavItem[] = [
   { href: '/v2/', label: 'Start' },
-  { href: '/serverinfos', label: 'Serverinfo' },
-  { href: '/rules', label: 'Regeln' },
+  { href: '/v2/erststart', label: 'Erststart' },
+  { href: '/v2/rules', label: 'Regeln' },
   { href: '/stats', label: 'Statistiken' },
 ];
 
 const MORE_LINKS: NavItem[] = [
-  { href: '/erststart', label: 'Erststart' },
-  { href: '/befehle', label: 'Befehle' },
-  { href: '/geschichte', label: 'Geschichte' },
-  { href: '/admin-team', label: 'Admin-Team' },
-  { href: '/playerstats', label: 'Spieler' },
-  { href: '/datenschutz', label: 'Datenschutz' },
-  { href: '/impressum', label: 'Impressum' },
+  { href: '/v2/serverinfos', label: 'Serverinfo' },
+  { href: '/v2/befehle', label: 'Befehle' },
+  { href: '/v2/geschichte', label: 'Geschichte' },
+  { href: '/v2/admin-team', label: 'Admin-Team' },
+  { href: '/v2/datenschutz', label: 'Datenschutz' },
+  { href: '/v2/impressum', label: 'Impressum' },
+  { href: 'https://map.minecraft-gilde.de', label: 'Dynmap', external: true },
   { href: '/', label: 'Aktuelle Seite' },
 ];
 
-const DISCORD: NavItem = { href: 'https://discord.minecraft-gilde.de', label: 'Discord', external: true };
+const DISCORD: NavItem = {
+  href: 'https://discord.minecraft-gilde.de',
+  label: 'Discord',
+  external: true,
+};
 ---
 
 <header class="sticky top-0 z-50" data-v2-nav>
@@ -40,40 +44,48 @@ const DISCORD: NavItem = { href: 'https://discord.minecraft-gilde.de', label: 'D
             loading="eager"
             decoding="async"
           />
-          <div class="hidden sm:block leading-tight">
+          <div class="hidden leading-tight sm:block">
             <div class="flex items-center gap-2">
               <span class="text-sm font-semibold">Minecraft Gilde</span>
               <Badge variant="accent" class="hidden md:inline-flex">v2 preview</Badge>
             </div>
-            <span class="text-xs text-muted">clean · glass · minimal</span>
+            <span class="text-muted text-xs">clean · glass · minimal</span>
           </div>
         </a>
 
-        <nav class="hidden md:flex items-center gap-1" aria-label="Hauptnavigation">
-          {PRIMARY_LINKS.map((item) => (
-            <a
-              href={item.href}
-              class="rounded-lg px-3 py-2 text-sm font-medium text-fg/90 hover:text-fg hover:bg-surface border border-transparent hover:border-border transition-colors"
-            >
-              {item.label}
-            </a>
-          ))}
+        <nav class="hidden items-center gap-1 md:flex" aria-label="Hauptnavigation">
+          {
+            PRIMARY_LINKS.map((item) => (
+              <a
+                href={item.href}
+                class="text-fg/90 hover:text-fg hover:bg-surface hover:border-border rounded-lg border border-transparent px-3 py-2 text-sm font-medium transition-colors"
+              >
+                {item.label}
+              </a>
+            ))
+          }
         </nav>
 
-        <div class="flex items-center gap-2">
-          <Button
-            href={DISCORD.href}
-            external
-            variant="primary"
-            class="hidden sm:inline-flex"
+        <div class="relative flex items-center gap-2">
+          <button
+            type="button"
+            class="border-border bg-surface hover:bg-surface-solid/70 inline-flex h-10 w-10 items-center justify-center rounded-lg border backdrop-blur-md transition-colors"
+            aria-label="Theme wechseln"
+            data-theme-toggle
           >
+            <Sun size={18} class="hidden" data-theme-icon="light" />
+            <Moon size={18} class="hidden" data-theme-icon="dark" />
+            <Laptop size={18} data-theme-icon="system" />
+          </button>
+
+          <Button href={DISCORD.href} external variant="primary" class="hidden sm:inline-flex">
             Discord
             <ExternalLink size={16} />
           </Button>
 
           <button
             type="button"
-            class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface hover:bg-surface-solid/70 backdrop-blur-md transition-colors md:hidden"
+            class="border-border bg-surface hover:bg-surface-solid/70 inline-flex h-10 w-10 items-center justify-center rounded-lg border backdrop-blur-md transition-colors"
             aria-label="Menü öffnen"
             aria-controls="v2-nav-panel"
             aria-expanded="false"
@@ -82,97 +94,54 @@ const DISCORD: NavItem = { href: 'https://discord.minecraft-gilde.de', label: 'D
             <Menu size={20} data-icon-open />
             <X size={20} class="hidden" data-icon-close />
           </button>
-        </div>
-      </div>
-    </div>
 
-    <div
-      id="v2-nav-panel"
-      class="hidden md:hidden mt-3"
-      data-nav-panel
-    >
-      <div class="glass rounded-[var(--radius)] p-3 shadow-sm">
-        <div class="grid gap-1">
-          {PRIMARY_LINKS.map((item) => (
-            <a
-              href={item.href}
-              class="rounded-lg px-3 py-2 text-sm font-medium text-fg hover:bg-surface border border-transparent hover:border-border transition-colors"
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
+          <div
+            id="v2-nav-panel"
+            class="mt-3 hidden md:absolute md:top-[calc(100%+0.75rem)] md:right-0 md:mt-0 md:w-[22rem]"
+            data-nav-panel
+          >
+            <div class="glass rounded-[var(--radius)] p-3 shadow-sm">
+              <div class="grid gap-1 md:hidden">
+                {
+                  PRIMARY_LINKS.map((item) => (
+                    <a
+                      href={item.href}
+                      class="text-fg hover:bg-surface hover:border-border rounded-lg border border-transparent px-3 py-2 text-sm font-medium transition-colors"
+                    >
+                      {item.label}
+                    </a>
+                  ))
+                }
+              </div>
 
-        <div class="my-3 h-px bg-border"></div>
+              <div class="bg-border my-3 h-px md:hidden"></div>
 
-        <div class="grid sm:grid-cols-2 gap-1">
-          {MORE_LINKS.map((item) => (
-            <a
-              href={item.href}
-              class="rounded-lg px-3 py-2 text-sm text-fg/90 hover:text-fg hover:bg-surface border border-transparent hover:border-border transition-colors"
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
+              <div class="grid gap-1 sm:grid-cols-2 md:grid-cols-1">
+                {
+                  MORE_LINKS.map((item) => (
+                    <a
+                      href={item.href}
+                      target={item.external ? '_blank' : undefined}
+                      rel={item.external ? 'noopener noreferrer' : undefined}
+                      class="text-fg/90 hover:text-fg hover:bg-surface hover:border-border rounded-lg border border-transparent px-3 py-2 text-sm transition-colors"
+                    >
+                      {item.label}
+                      {item.external ? <span class="sr-only"> (extern)</span> : null}
+                    </a>
+                  ))
+                }
+              </div>
 
-        <div class="mt-3">
-          <Button href={DISCORD.href} external variant="primary" class="w-full">
-            Discord
-            <ExternalLink size={16} />
-          </Button>
+              <div class="mt-3">
+                <Button href={DISCORD.href} external variant="primary" class="w-full sm:hidden">
+                  Discord
+                  <ExternalLink size={16} />
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <script>
-    (() => {
-      const root = document.querySelector('[data-v2-nav]');
-      if (!root) return;
-
-      const toggle = root.querySelector('[data-nav-toggle]');
-      const panel = root.querySelector('[data-nav-panel]');
-      const iconOpen = root.querySelector('[data-icon-open]');
-      const iconClose = root.querySelector('[data-icon-close]');
-
-      if (!toggle || !panel || !iconOpen || !iconClose) return;
-
-      let open = false;
-
-      const setOpen = (next) => {
-        open = next;
-        panel.classList.toggle('hidden', !open);
-        toggle.setAttribute('aria-expanded', String(open));
-        iconOpen.classList.toggle('hidden', open);
-        iconClose.classList.toggle('hidden', !open);
-      };
-
-      const close = () => setOpen(false);
-
-      toggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        setOpen(!open);
-      });
-
-      // Close on Escape
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') close();
-      });
-
-      // Close when clicking outside
-      document.addEventListener('click', (e) => {
-        if (!open) return;
-        if (e.target instanceof Node && !root.contains(e.target)) close();
-      });
-
-      // Close when switching to desktop layout
-      window.addEventListener('resize', () => {
-        if (window.matchMedia('(min-width: 768px)').matches) close();
-      });
-
-      // Close when a link is clicked
-      panel.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
-    })();
-  </script>
 </header>

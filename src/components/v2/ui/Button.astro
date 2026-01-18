@@ -18,7 +18,8 @@ const {
   size = 'md',
   class: className = '',
   type = 'button',
-} = Astro.props as Props;
+  ...rest
+} = Astro.props as Props & Record<string, any>;
 
 const base =
   'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-[color:var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-bg';
@@ -30,8 +31,7 @@ const sizes: Record<ButtonSize, string> = {
 
 const variants: Record<ButtonVariant, string> = {
   primary: 'bg-accent text-black hover:bg-accent2',
-  secondary:
-    'bg-surface border border-border hover:bg-surface-solid/70 text-fg backdrop-blur-md',
+  secondary: 'bg-surface border border-border hover:bg-surface-solid/70 text-fg backdrop-blur-md',
   ghost: 'bg-transparent hover:bg-surface border border-transparent hover:border-border text-fg',
 };
 
@@ -39,8 +39,9 @@ const attrs = href
   ? {
       href,
       ...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
+      ...rest,
     }
-  : { type };
+  : { type, ...rest };
 ---
 
 {
