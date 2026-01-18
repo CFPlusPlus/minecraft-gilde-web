@@ -114,14 +114,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const showApiError = (message) => {
     if (!apiErrorBox || !apiErrorText) return;
     apiErrorText.textContent = message || 'Ein Fehler ist aufgetreten.';
-    apiErrorBox.style.display = 'flex';
+    apiErrorBox.classList.remove('hidden');
     apiErrorActive = true;
   };
 
   const clearApiError = () => {
     if (!apiErrorBox || !apiErrorText) return;
     if (!apiErrorActive) return;
-    apiErrorBox.style.display = 'none';
+    apiErrorBox.classList.add('hidden');
     apiErrorText.textContent = '';
     apiErrorActive = false;
   };
@@ -144,23 +144,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const createTableLoading = (wrapperEl) => {
     if (!wrapperEl) return () => {};
     const overlay = document.createElement('div');
-    overlay.className = 'loading-overlay';
-    const spinner = document.createElement('div');
-    spinner.className = 'loading';
+    overlay.className =
+      'absolute inset-0 flex items-center justify-center rounded-[var(--radius)] bg-black/20 backdrop-blur-md pointer-events-none';
+    overlay.innerHTML =
+      '<div class="bg-surface border-border text-fg/90 rounded-lg border px-3 py-2 text-sm font-semibold shadow-sm backdrop-blur-md">Lädt…</div>';
     wrapperEl.appendChild(overlay);
-    wrapperEl.appendChild(spinner);
     return () => {
       overlay.remove();
-      spinner.remove();
     };
   };
 
   const renderRow = ({ tbody, rank, uuid, value, def }) => {
     const name = getPlayerName(uuid);
     let rankHtml = String(rank);
-    if (rank === 1) rankHtml = '<span class="medal medal-gold">1</span>';
-    else if (rank === 2) rankHtml = '<span class="medal medal-silver">2</span>';
-    else if (rank === 3) rankHtml = '<span class="medal medal-bronze">3</span>';
+    if (rank === 1)
+      rankHtml =
+        '<span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-accent/20 text-accent font-semibold">1</span>';
+    else if (rank === 2)
+      rankHtml =
+        '<span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-surface-solid/60 text-fg font-semibold">2</span>';
+    else if (rank === 3)
+      rankHtml =
+        '<span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-surface-solid/60 text-fg font-semibold">3</span>';
 
     const size = 32;
     const imgUrl = `https://minotar.net/helm/${encodeURIComponent(name)}/${size}.png`;
@@ -168,9 +173,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const tr = document.createElement('tr');
     tr.dataset.uuid = uuid;
     tr.innerHTML = `
-      <td>${rankHtml}</td>
-      <td><div class="name-cell"><img src="${imgUrl}" alt="${escapeHtml(name)}"><span class="player-name">${escapeHtml(name)}</span></div></td>
-      <td>${escapeHtml(formatMetricValue(value, def))}</td>
+      <td class="whitespace-nowrap">${rankHtml}</td>
+      <td>
+        <div class="flex items-center gap-2">
+          <img class="h-8 w-8 rounded-lg bg-black/20" src="${imgUrl}" alt="${escapeHtml(name)}" loading="lazy" />
+          <button type="button" class="player-name text-fg hover:text-accent font-semibold transition-colors">${escapeHtml(name)}</button>
+        </div>
+      </td>
+      <td class="whitespace-nowrap">${escapeHtml(formatMetricValue(value, def))}</td>
     `;
     tbody.appendChild(tr);
 
@@ -201,8 +211,22 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const activateTab = (tabId, { updateHash = true } = {}) => {
-    tabButtons.forEach((b) => b.classList.toggle('active', b.dataset.tab === tabId));
-    tabPanels.forEach((p) => p.classList.toggle('active', p.id === tabId));
+    const setBtnState = (b, active) => {
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-selected', String(active));
+      b.classList.toggle('bg-surface-solid/60', active);
+      b.classList.toggle('border-border', active);
+      b.classList.toggle('text-fg', active);
+      b.classList.toggle('border-transparent', !active);
+      b.classList.toggle('text-fg/80', !active);
+    };
+
+    tabButtons.forEach((b) => setBtnState(b, b.dataset.tab === tabId));
+    tabPanels.forEach((p) => {
+      const active = p.id === tabId;
+      p.classList.toggle('active', active);
+      p.classList.toggle('hidden', !active);
+    });
 
     const btn = tabButtons.find((b) => b.dataset.tab === tabId);
     const hash = btn?.dataset.hash;
@@ -235,10 +259,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeAutocomplete = () => {
     acItems = [];
     acSelected = -1;
-    if (autocompleteContainer) autocompleteContainer.style.display = 'none';
+    if (autocompleteContainer) autocompleteContainer.classList.add('hidden');
     if (autocompleteList) {
       autocompleteList.innerHTML = '';
-      autocompleteList.style.display = 'none';
     }
   };
 
@@ -249,15 +272,14 @@ document.addEventListener('DOMContentLoaded', () => {
     autocompleteList.innerHTML = '';
 
     // Sichtbarkeit steuern
-    if (autocompleteContainer) {
-      autocompleteContainer.style.display = acItems.length ? 'block' : 'none';
-    }
-    autocompleteList.style.display = acItems.length ? 'block' : 'none';
+    if (autocompleteContainer) autocompleteContainer.classList.toggle('hidden', !acItems.length);
 
     for (let i = 0; i < acItems.length; i++) {
       const it = acItems[i];
       const li = document.createElement('li');
-      li.innerHTML = `<i aria-hidden="true" class="fa-solid fa-magnifying-glass"></i><span>${escapeHtml(it.name)}</span>`;
+      li.className =
+        'cursor-pointer px-3 py-2 text-sm text-fg/90 hover:bg-surface-solid/60 transition-colors flex items-center gap-2';
+      li.innerHTML = `<span class="h-2 w-2 rounded-full bg-accent/70" aria-hidden="true"></span><span class="min-w-0 truncate">${escapeHtml(it.name)}</span>`;
       li.addEventListener('mousedown', (e) => {
         // mousedown statt click, damit input blur nicht vorher alles schließt
         e.preventDefault();
@@ -321,7 +343,11 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    lis.forEach((li, idx) => li.classList.toggle('selected', idx === acSelected));
+    lis.forEach((li, idx) => {
+      const sel = idx === acSelected;
+      li.classList.toggle('bg-surface-solid/60', sel);
+      li.classList.toggle('text-fg', sel);
+    });
   });
 
   document.addEventListener('click', (e) => {
@@ -332,26 +358,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- Overview: KPI Skeleton + Load ---
-  const kpiIcon = {
-    hours: 'fa-clock',
-    distance: 'fa-person-walking',
-    mob_kills: 'fa-skull',
-    creeper: 'fa-bomb',
-  };
-
   const renderKpiSkeleton = () => {
     if (!kpiGrid) return;
     kpiGrid.innerHTML = '';
     for (const m of KPI_METRICS) {
       const card = document.createElement('div');
-      card.className = 'kpi-card';
+      card.className =
+        'bg-surface border-border flex items-center justify-between rounded-[var(--radius)] border p-4 shadow-sm backdrop-blur-md';
+      card.classList.add('kpi-card');
       card.dataset.metric = m;
       card.innerHTML = `
-        <div class="kpi-left">
-          <div class="kpi-label">${escapeHtml(m)}</div>
-          <div class="kpi-value">…</div>
+        <div>
+          <div class="kpi-label text-muted text-xs font-medium">${escapeHtml(m)}</div>
+          <div class="kpi-value text-fg mt-1 text-xl font-semibold">…</div>
         </div>
-        <div class="kpi-icon"><i class="fa-solid ${kpiIcon[m] || 'fa-chart-simple'}" aria-hidden="true"></i></div>
+        <div class="bg-accent/15 text-accent flex h-9 w-9 items-center justify-center rounded-xl text-sm font-semibold" aria-hidden="true">
+          #
+        </div>
       `;
       kpiGrid.appendChild(card);
     }
@@ -439,50 +462,53 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       const groupEl = document.createElement('details');
-      groupEl.className = 'metric-group';
+      groupEl.className =
+        'metric-group bg-surface border-border rounded-[var(--radius)] border shadow-sm backdrop-blur-md open:shadow-md';
       groupEl.dataset.category = cat;
 
       const sum = document.createElement('summary');
+      sum.className =
+        'text-fg flex cursor-pointer items-center justify-between gap-3 px-4 py-3 text-sm font-semibold select-none';
       sum.innerHTML = `
         <span>${escapeHtml(cat)}</span>
-        <span class="group-meta"><span class="group-count">${items.length}</span></span>
+        <span class="bg-surface-solid/30 border-border text-muted inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium">${items.length}</span>
       `;
       groupEl.appendChild(sum);
 
       for (const { id, def } of items) {
         const metricEl = document.createElement('details');
-        metricEl.className = 'metric-card';
+        metricEl.className =
+          'metric-card mt-3 rounded-[var(--radius)] border border-border bg-surface shadow-sm backdrop-blur-md open:shadow-md';
         metricEl.dataset.metric = id;
         metricEl.dataset.search = `${id} ${def.label} ${cat}`.toLowerCase();
 
         const unitLabel = def.unit ? def.unit : 'Wert';
         const s = document.createElement('summary');
+        s.className =
+          'text-fg flex cursor-pointer items-center justify-between gap-3 px-4 py-3 text-sm font-semibold select-none';
         s.innerHTML = `
-          <span class="metric-title">
-            <i class="fa-solid fa-chart-simple" aria-hidden="true"></i>
-            <span>${escapeHtml(def.label)}</span>
-          </span>
-          <span class="metric-chip">${escapeHtml(id)} · ${escapeHtml(unitLabel)}</span>
+          <span class="min-w-0 truncate">${escapeHtml(def.label)}</span>
+          <span class="bg-surface-solid/30 border-border text-muted inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium">${escapeHtml(id)} · ${escapeHtml(unitLabel)}</span>
         `;
         metricEl.appendChild(s);
 
         const body = document.createElement('div');
-        body.className = 'metric-body';
+        body.className = 'metric-body px-4 pb-4';
         body.innerHTML = `
-          <div class="table-wrapper">
-            <table>
-              <thead>
+          <div class="table-wrapper relative mt-1 overflow-x-auto rounded-[var(--radius)] border border-border bg-surface">
+            <table class="w-full min-w-[520px] text-sm">
+              <thead class="bg-surface-solid/40 text-muted text-xs">
                 <tr>
-                  <th>Platz</th>
-                  <th>Spielername</th>
-                  <th>${escapeHtml(unitLabel)}</th>
+                  <th class="px-4 py-3 text-left font-semibold">Platz</th>
+                  <th class="px-4 py-3 text-left font-semibold">Spielername</th>
+                  <th class="px-4 py-3 text-left font-semibold">${escapeHtml(unitLabel)}</th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody class="divide-border [&>tr:hover]:bg-surface-solid/40 divide-y [&>tr>td]:px-4 [&>tr>td]:py-3"></tbody>
             </table>
           </div>
-          <div class="table-footer">
-            <div class="pagination" aria-label="Seiten"></div>
+          <div class="table-footer mt-3 flex items-center justify-between gap-3">
+            <div class="pagination flex flex-wrap gap-2" aria-label="Seiten"></div>
           </div>
         `;
         metricEl.appendChild(body);
@@ -530,12 +556,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Pagination helpers (Vorherige/Nächste + Seitenbuttons) ---
   const buildPager = (root) => {
     if (!root) return null;
+    const btnBase =
+      'pag-btn inline-flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-semibold shadow-sm backdrop-blur-md transition-colors focus-visible:ring-2 focus-visible:ring-[color:var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:opacity-50 disabled:cursor-not-allowed';
+
+    root.classList.add('flex', 'flex-wrap', 'items-center', 'gap-2');
     root.innerHTML = `
-      <div class="pagination-nav">
-        <button type="button" class="btn btn-secondary btn-sm pag-btn pag-prev">Vorherige</button>
-        <button type="button" class="btn btn-secondary btn-sm pag-btn pag-next">Nächste</button>
-      </div>
-      <div class="pagination-pages" aria-label="Seiten"></div>
+      <button type="button" class="pag-prev ${btnBase} bg-surface border-border text-fg/90 hover:bg-surface-solid/60">Vorherige</button>
+      <div class="pagination-pages flex flex-wrap items-center gap-2" aria-label="Seiten"></div>
+      <button type="button" class="pag-next ${btnBase} bg-surface border-border text-fg/90 hover:bg-surface-solid/60">N\u00e4chste</button>
     `;
     return {
       root,
@@ -575,7 +603,11 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let p = start; p <= end; p++) {
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = `btn btn-ghost btn-sm page-btn${p === cur ? ' active' : ''}`;
+      b.className =
+        'page-btn inline-flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-semibold shadow-sm backdrop-blur-md transition-colors focus-visible:ring-2 focus-visible:ring-[color:var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-bg ' +
+        (p === cur
+          ? 'bg-surface-solid/70 border-border text-fg'
+          : 'bg-surface border-border text-fg/80 hover:bg-surface-solid/60');
       b.textContent = String(p + 1);
       b.addEventListener('click', () => st._onPage?.(p));
       pagesEl.appendChild(b);
@@ -664,7 +696,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {
       console.error('Leaderboard Fehler', metricId, e);
       if (st.tbody) {
-        st.tbody.innerHTML = `<tr><td colspan="3" class="muted">Fehler beim Laden.</td></tr>`;
+        st.tbody.innerHTML =
+          '<tr><td colspan="3" class="px-4 py-3 text-sm text-muted">Fehler beim Laden.</td></tr>';
       }
     } finally {
       stopLoading();
@@ -711,14 +744,14 @@ document.addEventListener('DOMContentLoaded', () => {
       for (const c of cards) {
         const text = (c.dataset.search || '').toLowerCase();
         const show = q === '' || text.includes(q);
-        c.style.display = show ? '' : 'none';
+        c.classList.toggle('hidden', !show);
         if (show) groupHas = true;
       }
-      g.style.display = groupHas ? '' : 'none';
+      g.classList.toggle('hidden', !groupHas);
       if (groupHas) anyVisible = true;
     }
 
-    if (noResultsWarning) noResultsWarning.style.display = anyVisible ? 'none' : 'flex';
+    if (noResultsWarning) noResultsWarning.classList.toggle('hidden', anyVisible);
   };
 
   metricFilterIn?.addEventListener(
@@ -764,7 +797,8 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Server-König Fehler', e);
       showApiError('Statistiken sind aktuell nicht erreichbar. Bitte versuche es später erneut.');
       if (kingTbody) {
-        kingTbody.innerHTML = `<tr><td colspan="3" class="muted">Fehler beim Laden.</td></tr>`;
+        kingTbody.innerHTML =
+          '<tr><td colspan="3" class="px-4 py-3 text-sm text-muted">Fehler beim Laden.</td></tr>';
       }
     } finally {
       stopLoading();
@@ -799,13 +833,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const box = document.getElementById('king-info-box');
     const btnClose = document.getElementById('king-info-close');
     const btnToggle = document.getElementById('king-info-toggle');
+    const label = document.getElementById('king-info-toggle-label');
     if (!box || !btnClose || !btnToggle) return;
 
     const KEY = 'kingInfoDismissed';
+    const SHOW_TEXT = 'Info zur Berechnung anzeigen';
+    const HIDE_TEXT = 'Info zur Berechnung ausblenden';
 
-    const hide = (persist = true) => {
-      box.classList.add('is-hidden');
+    const applyLabel = (expanded) => {
+      if (label) label.textContent = expanded ? HIDE_TEXT : SHOW_TEXT;
+    };
+
+    const hide = (persist) => {
+      box.classList.add('hidden');
       btnToggle.setAttribute('aria-expanded', 'false');
+      applyLabel(false);
       if (!persist) return;
       try {
         localStorage.setItem(KEY, '1');
@@ -814,9 +856,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    const show = () => {
-      box.classList.remove('is-hidden');
+    const show = (clearPersist) => {
+      box.classList.remove('hidden');
       btnToggle.setAttribute('aria-expanded', 'true');
+      applyLabel(true);
+      if (!clearPersist) return;
       try {
         localStorage.removeItem(KEY);
       } catch {
@@ -829,20 +873,23 @@ document.addEventListener('DOMContentLoaded', () => {
       if (localStorage.getItem(KEY) === '1') {
         hide(false);
       } else {
-        btnToggle.setAttribute('aria-expanded', 'true');
+        show(false);
       }
     } catch {
       // ignore
     }
 
     btnClose.addEventListener('click', () => hide(true));
-    btnToggle.addEventListener('click', show);
+    btnToggle.addEventListener('click', () => {
+      if (box.classList.contains('hidden')) show(true);
+      else hide(false);
+    });
   })();
 
   // --- Welcome close ---
   if (welcomeBox) {
     welcomeBox.querySelector('.warning-close')?.addEventListener('click', () => {
-      welcomeBox.style.display = 'none';
+      welcomeBox.classList.add('hidden');
     });
   }
 

@@ -1,215 +1,322 @@
 ---
-import LegacyLayout from '../layouts/LegacyLayout.astro';
-import Navbar from '../components/legacy/Navbar.astro';
-import Footer from '../components/legacy/Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Crown, Filter, Search, Sparkles } from '@lucide/astro';
 ---
 
-<LegacyLayout
-  title={'Minecraft Gilde - Statistik'}
-  canonical={'https://minecraft-gilde.de/stats.html'}
-  description={undefined}
-  keywords={undefined}
-  author={undefined}
-  bodyClass={'stats-page page--sticky-footer page--subpage page--content'}
-  styles={['/css/content-page.css', '/css/header-default.css', '/css/stats.css']}
+<BaseLayout
+  title="Minecraft Gilde - Statistik"
+  canonical="https://minecraft-gilde.de/stats.html"
+  description="Live-Spielerstatistiken f\u00fcr Minecraft Gilde \u2013 Ranglisten, Server-K\u00f6nig und Spieler\u00fcbersicht."
   scripts={['/js/stats.js']}
 >
-  <link crossorigin="" href="https://mineskin.eu" rel="preconnect" slot="head" />
-  <link href="//mineskin.eu" rel="dns-prefetch" slot="head" />
-  <Navbar active={'stats'} />
+  <link slot="head" rel="preconnect" href="https://minotar.net" crossorigin />
+  <link slot="head" rel="dns-prefetch" href="//minotar.net" />
 
-  <main id="main-content" tabindex="-1">
-    <!--Header-->
-    <section id="header">
-      <div class="content">
-        <div class="info">
-          <p class="minecraft-server-ip">Minecraft-Gilde.de</p>
-          <h1 class="title">Server <span>Statistiken</span></h1>
-        </div>
-      </div>
-    </section>
+  <section class="mg-container pt-12 pb-6">
+    <div class="max-w-3xl">
+      <p class="text-muted text-sm">Minecraft-Gilde.de</p>
+      <h1 class="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">
+        Server <span class="text-accent">Statistiken</span>
+      </h1>
+      <p class="text-muted mt-3 text-base leading-relaxed">
+        Suche nach Spielern, entdecke Ranglisten und sieh, wer aktuell die meisten Punkte sammelt.
+        Die Daten werden serverseitig generiert und k\u00f6nnen leicht verz\u00f6gert sein.
+      </p>
+    </div>
+
     <!-- Tabs -->
-    <div aria-label="Statistik Tabs" class="tabs" role="tablist">
-      <button
-        aria-controls="tab-uebersicht"
-        class="tab-btn active"
-        data-hash="uebersicht"
-        data-tab="tab-uebersicht"
-        role="tab">ÜBERSICHT</button
+    <div class="mt-8">
+      <div
+        aria-label="Statistik Tabs"
+        role="tablist"
+        class="bg-surface border-border flex flex-wrap gap-2 rounded-[var(--radius)] border p-2 shadow-sm backdrop-blur-md"
       >
-      <button
-        aria-controls="tab-king"
-        class="tab-btn"
-        data-hash="king"
-        data-tab="tab-king"
-        role="tab">SERVER-KÖNIG</button
-      >
-      <button
-        aria-controls="tab-ranglisten"
-        class="tab-btn"
-        data-hash="ranglisten"
-        data-tab="tab-ranglisten"
-        role="tab">RANGLISTEN</button
-      >
-      <button
-        aria-controls="tab-versus"
-        class="tab-btn"
-        data-hash="versus"
-        data-tab="tab-versus"
-        role="tab">VERSUS</button
-      >
-    </div>
-    <!-- Topbar: Spielersuche + Badges -->
-    <div class="stats-topbar">
-      <div class="search-wrapper" id="main-search">
-        <i aria-hidden="true" class="fa-solid fa-magnifying-glass"></i>
-        <input autocomplete="off" id="search-name" placeholder="Spieler suchen…" type="text" />
-        <div id="autocomplete-container">
-          <ul class="autocomplete-list" id="autocomplete-list"></ul>
-        </div>
-      </div>
-      <div class="topbar-badges">
-        <span class="badge muted" id="player-count">Spieler: …</span>
-        <span class="badge muted" id="generated-ts">Stand: …</span>
-      </div>
-    </div>
-
-    <!-- API-Fehler (z. B. wenn /api nicht erreichbar ist) -->
-    <div class="panel-inner">
-      <div class="notice notice--danger notice--compact u-mb-2" id="api-error" style="display:none">
-        <i aria-hidden="true" class="fa-solid fa-triangle-exclamation"></i>
-        <span class="warning-text" id="api-error-text"></span>
-      </div>
-    </div>
-    <!-- PANELS -->
-    <section aria-labelledby="Übersicht" class="tab-panel active" id="tab-uebersicht">
-      <div class="panel-inner">
-        <div class="notice notice--info" id="welcome-box">
-          <i aria-hidden="true" class="fa-solid fa-heart heart-icon"></i>
-          <span class="warning-text">
-            <strong>Willkommen auf der Statistik-Seite der Minecraft Gilde!</strong><br />
-            Nutze die Suche oben, um direkt zu deiner Spielerstatistik zu springen. In den Ranglisten
-            findest du die Top-Werte je Kategorie – von Spielzeit über Distanz bis zu Kreaturen. Viel
-            Spaß beim Stöbern und Vergleichen!
-          </span>
-          <span aria-label="Schließen" class="warning-close">×</span>
-        </div>
-        <div class="section-title">
-          <h2>Die Geschichte unserer Welt – in Zahlen</h2>
-          <p class="muted">
-            Von langen Reisen über gefährliche Nächte bis zu großen Projekten: Hier siehst du den
-            Puls des Servers. Die Werte werden zweimal täglich aktualisiert und wachsen mit jedem
-            neuen Abenteuer weiter. Wenn du wissen willst, was du beigetragen hast, spring per Suche
-            direkt zu deiner Übersicht.
-          </p>
-        </div>
-        <div aria-live="polite" class="kpi-grid" id="kpi-grid"></div>
-      </div>
-    </section>
-    <section aria-labelledby="Server-König" class="tab-panel" id="tab-king">
-      <div class="panel-inner">
-        <!-- Info-Box: Server-König Berechnung (schließbar, ohne Modal) -->
-        <div
-          aria-label="Informationen zur Berechnung des Server-Königs"
-          class="notice notice--info king-info-box"
-          id="king-info-box"
-          role="note"
-        >
-          <i aria-hidden="true" class="fa-solid fa-circle-info heart-icon"></i>
-          <span class="warning-text">
-            <strong>So wird der Server-König berechnet</strong><br />
-            Für jede Rangliste werden Punkte vergeben: <strong>1. Platz = 5</strong>, <strong
-              >2. Platz = 3</strong
-            >,
-            <strong>3. Platz = 1</strong>. Ab Platz 4 gibt es keine Punkte. Die Punkte werden über
-            alle Kategorien addiert – wer insgesamt am meisten sammelt, ist Server-König.
-          </span>
-          <span aria-label="Schließen" class="warning-close" id="king-info-close">×</span>
-        </div>
         <button
-          aria-controls="king-info-box"
-          aria-expanded="true"
-          class="info-box-toggle btn btn-ghost btn-sm"
-          id="king-info-toggle"
+          aria-controls="tab-uebersicht"
+          class="tab-btn text-fg/80 hover:bg-surface-solid/60 hover:border-border hover:text-fg focus-visible:ring-offset-bg active inline-flex items-center gap-2 rounded-lg border border-transparent px-3 py-2 text-sm font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-[color:var(--ring)] focus-visible:ring-offset-2"
+          data-hash="uebersicht"
+          data-tab="tab-uebersicht"
+          role="tab"
           type="button"
         >
-          <i aria-hidden="true" class="fa-solid fa-circle-info"></i>
-          Info zur Berechnung anzeigen
+          <Sparkles size={16} /> \u00dcbersicht
         </button>
-        <div class="table-wrapper" id="wrapper-king">
-          <table id="tbl-king">
-            <caption>
-              <i aria-hidden="true" class="fa-solid fa-crown fa-caption-icon"></i>
-              Server-König
-            </caption>
-            <thead>
-              <tr>
-                <th>Platz</th>
-                <th>Spielername</th>
-                <th>Punkte</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-          <div class="table-footer">
-            <div aria-label="Seiten" class="pagination" id="king-pagination"></div>
-          </div>
-        </div>
+        <button
+          aria-controls="tab-king"
+          class="tab-btn text-fg/80 hover:bg-surface-solid/60 hover:border-border hover:text-fg focus-visible:ring-offset-bg inline-flex items-center gap-2 rounded-lg border border-transparent px-3 py-2 text-sm font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-[color:var(--ring)] focus-visible:ring-offset-2"
+          data-hash="king"
+          data-tab="tab-king"
+          role="tab"
+          type="button"
+        >
+          <Crown size={16} /> Server-K\u00f6nig
+        </button>
+        <button
+          aria-controls="tab-ranglisten"
+          class="tab-btn text-fg/80 hover:bg-surface-solid/60 hover:border-border hover:text-fg focus-visible:ring-offset-bg inline-flex items-center gap-2 rounded-lg border border-transparent px-3 py-2 text-sm font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-[color:var(--ring)] focus-visible:ring-offset-2"
+          data-hash="ranglisten"
+          data-tab="tab-ranglisten"
+          role="tab"
+          type="button"
+        >
+          Ranglisten
+        </button>
+        <button
+          aria-controls="tab-versus"
+          class="tab-btn text-fg/80 hover:bg-surface-solid/60 hover:border-border hover:text-fg focus-visible:ring-offset-bg inline-flex items-center gap-2 rounded-lg border border-transparent px-3 py-2 text-sm font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-[color:var(--ring)] focus-visible:ring-offset-2"
+          data-hash="versus"
+          data-tab="tab-versus"
+          role="tab"
+          type="button"
+        >
+          Versus
+        </button>
       </div>
-    </section>
-    <section aria-labelledby="Ranglisten" class="tab-panel" id="tab-ranglisten">
-      <div class="panel-inner">
-        <div class="notice notice--info notice--compact" id="ranglisten-note">
-          <i aria-hidden="true" class="fa-solid fa-circle-info"></i>
-          <span>
-            Tipp: Nutze die Spielersuche oben, um direkt zu deiner persönlichen Statistik zu
-            springen. In den <strong>Ranglisten</strong> kannst du jede Kategorie einzeln aufklappen.
-          </span>
-        </div>
-        <div class="controls">
-          <div class="search-wrapper metric-filter">
-            <i aria-hidden="true" class="fa-solid fa-filter"></i>
+
+      <!-- Topbar: Spielersuche + Badges -->
+      <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div class="relative w-full sm:max-w-xl" id="main-search">
+          <div
+            class="bg-surface border-border flex items-center gap-2 rounded-[var(--radius)] border px-3 py-2 shadow-sm backdrop-blur-md"
+          >
+            <Search size={18} class="text-muted" />
             <input
-              id="metric-filter"
-              placeholder="Kategorien/Ranglisten filtern… (z. B. creeper, stunden)"
+              id="search-name"
               type="search"
+              autocomplete="off"
+              placeholder="Spieler suchen\u2026"
+              class="placeholder:text-muted/70 text-fg w-full bg-transparent text-sm outline-none"
             />
           </div>
-          <div class="control-group">
-            <label class="entries-label" for="page-size">Einträge</label>
-            <select id="page-size">
-              <option selected="" value="10">10</option>
+
+          <!-- Autocomplete Dropdown -->
+          <div
+            id="autocomplete-container"
+            class="bg-surface border-border absolute right-0 left-0 z-20 mt-2 hidden overflow-hidden rounded-[var(--radius)] border shadow-lg backdrop-blur-md"
+          >
+            <ul id="autocomplete-list" class="max-h-72 overflow-auto"></ul>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <span
+            id="player-count"
+            class="bg-surface border-border inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium backdrop-blur-md"
+            >Spieler: \u2026</span
+          >
+          <span
+            id="generated-ts"
+            class="bg-surface border-border text-muted inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium backdrop-blur-md"
+            >Stand: \u2026</span
+          >
+
+          <label
+            for="page-size"
+            class="bg-surface border-border inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium backdrop-blur-md"
+          >
+            <span class="text-muted">Eintr\u00e4ge</span>
+            <select
+              id="page-size"
+              class="text-fg bg-transparent text-xs font-semibold outline-none"
+              aria-label="Eintr\u00e4ge pro Seite"
+            >
+              <option value="10">10</option>
               <option value="25">25</option>
-              <option value="50">50</option>
+              <option value="50" selected>50</option>
               <option value="100">100</option>
             </select>
-          </div>
-          <span class="tip"
-            ><i aria-hidden="true" class="fa-solid fa-circle-info"></i>
-            Öffne eine Rangliste, um die Tabelle zu sehen. Mit <strong>Vorherige</strong>/<strong
-              >Nächste</strong
-            >
-            kannst du blättern.
-          </span>
-        </div>
-        <div class="notice notice--danger notice--compact" id="no-results-warning">
-          <i aria-hidden="true" class="fa-solid fa-triangle-exclamation warning-icon"></i>
-          <span class="warning-text">Keine Ranglisten gefunden.</span>
-        </div>
-        <div aria-live="polite" class="metrics-container" id="metrics-container"></div>
-      </div>
-    </section>
-    <section aria-labelledby="Versus" class="tab-panel" id="tab-versus">
-      <div class="panel-inner">
-        <div class="notice notice--info">
-          <i aria-hidden="true" class="fa-solid fa-wand-magic-sparkles heart-icon"></i>
-          <span class="warning-text">
-            <strong>Versus</strong> ist geplant, wird aber erst in einem späteren Schritt umgesetzt.
-          </span>
+          </label>
         </div>
       </div>
-    </section>
-  </main>
 
-  <Footer /></LegacyLayout
->
+      <!-- API-Fehler (z. B. wenn /api nicht erreichbar ist) -->
+      <div
+        id="api-error"
+        class="bg-accent/10 border-accent/40 mt-4 flex hidden items-start gap-3 rounded-[var(--radius)] border px-4 py-3 text-sm shadow-sm"
+        role="alert"
+      >
+        <div class="bg-accent mt-0.5 h-2 w-2 flex-none rounded-full" aria-hidden="true"></div>
+        <span id="api-error-text" class="text-fg/90"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANELS -->
+  <section aria-labelledby="\u00dcbersicht" class="tab-panel" id="tab-uebersicht">
+    <div class="mg-container pb-10">
+      <div
+        id="welcome-box"
+        class="bg-surface border-border flex items-start gap-3 rounded-[var(--radius)] border p-4 shadow-sm backdrop-blur-md"
+      >
+        <div
+          class="bg-accent/15 text-accent mt-0.5 flex h-9 w-9 items-center justify-center rounded-xl"
+        >
+          <Sparkles size={18} />
+        </div>
+        <div class="min-w-0 flex-1">
+          <p class="text-fg font-semibold">Willkommen auf der Statistik-Seite!</p>
+          <p class="text-muted mt-1 text-sm leading-relaxed">
+            Nutze die Suche oben, um direkt zur Spielerstatistik zu springen. In den Ranglisten
+            findest du die Top-Werte je Kategorie \u2013 von Spielzeit \u00fcber Distanz bis zu
+            Kreaturen.
+          </p>
+        </div>
+        <button
+          type="button"
+          class="warning-close text-muted hover:text-fg -m-1 rounded-lg p-1 transition-colors"
+          aria-label="Schlie\u00dfen"
+        >
+          \u00d7
+        </button>
+      </div>
+
+      <div class="mt-6">
+        <h2 class="text-lg font-semibold">Die Geschichte unserer Welt \u2013 in Zahlen</h2>
+        <p class="text-muted mt-2 text-sm leading-relaxed">
+          Von langen Reisen \u00fcber gef\u00e4hrliche N\u00e4chte bis zu gro\u00dfen Projekten:
+          Hier siehst du den Puls des Servers.
+        </p>
+      </div>
+
+      <div aria-live="polite" class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" id="kpi-grid">
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="Server-K\u00f6nig" class="tab-panel hidden" id="tab-king">
+    <div class="mg-container pb-10">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 class="text-lg font-semibold">Server-K\u00f6nig</h2>
+          <p class="text-muted mt-1 text-sm">
+            Punkte \u00fcber alle Kategorien \u2013 f\u00fcr die Top 3 je Rangliste.
+          </p>
+        </div>
+
+        <button
+          id="king-info-toggle"
+          type="button"
+          aria-controls="king-info-box"
+          aria-expanded="true"
+          class="bg-surface border-border hover:bg-surface-solid/70 text-fg inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-semibold shadow-sm backdrop-blur-md transition-colors"
+        >
+          <Crown size={16} />
+          <span id="king-info-toggle-label">Info zur Berechnung anzeigen</span>
+        </button>
+      </div>
+
+      <div
+        id="king-info-box"
+        role="note"
+        aria-label="Informationen zur Berechnung des Server-K\u00f6nigs"
+        class="bg-surface border-border mt-4 flex items-start gap-3 rounded-[var(--radius)] border p-4 shadow-sm backdrop-blur-md"
+      >
+        <div
+          class="bg-accent/15 text-accent mt-0.5 flex h-9 w-9 items-center justify-center rounded-xl"
+        >
+          <Crown size={18} />
+        </div>
+        <div class="min-w-0 flex-1">
+          <p class="text-fg font-semibold">So wird der Server-K\u00f6nig berechnet</p>
+          <p class="text-muted mt-1 text-sm leading-relaxed">
+            F\u00fcr jede Rangliste werden Punkte vergeben: <strong class="text-fg"
+              >1. Platz = 5</strong
+            >,
+            <strong class="text-fg">2. Platz = 3</strong>, <strong class="text-fg"
+              >3. Platz = 1</strong
+            >. Ab Platz 4 gibt es keine Punkte. Die Punkte werden \u00fcber alle Kategorien addiert.
+          </p>
+        </div>
+        <button
+          id="king-info-close"
+          type="button"
+          class="text-muted hover:text-fg -m-1 rounded-lg p-1 transition-colors"
+          aria-label="Schlie\u00dfen"
+        >
+          \u00d7
+        </button>
+      </div>
+
+      <div
+        id="wrapper-king"
+        class="bg-surface border-border relative mt-5 overflow-x-auto rounded-[var(--radius)] border shadow-sm backdrop-blur-md"
+      >
+        <table id="tbl-king" class="w-full min-w-[520px] text-sm">
+          <caption class="text-muted px-4 py-3 text-left text-xs font-medium">
+            Rangliste \u2013 Server-K\u00f6nig
+          </caption>
+          <thead class="bg-surface-solid/40 text-muted text-xs">
+            <tr>
+              <th class="px-4 py-3 text-left font-semibold">Platz</th>
+              <th class="px-4 py-3 text-left font-semibold">Spielername</th>
+              <th class="px-4 py-3 text-left font-semibold">Punkte</th>
+            </tr>
+          </thead>
+          <tbody
+            class="divide-border [&>tr:hover]:bg-surface-solid/40 divide-y [&>tr>td]:px-4 [&>tr>td]:py-3"
+          ></tbody>
+        </table>
+
+        <div class="border-border flex items-center justify-between gap-3 border-t px-4 py-3">
+          <div id="king-pagination" class="w-full" aria-label="Seiten"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="Ranglisten" class="tab-panel hidden" id="tab-ranglisten">
+    <div class="mg-container pb-10">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 class="text-lg font-semibold">Ranglisten</h2>
+          <p class="text-muted mt-1 text-sm">\u00d6ffne eine Rangliste, um die Tabelle zu laden.</p>
+        </div>
+
+        <div class="w-full sm:max-w-md">
+          <div
+            class="bg-surface border-border flex items-center gap-2 rounded-[var(--radius)] border px-3 py-2 shadow-sm backdrop-blur-md"
+          >
+            <Filter size={18} class="text-muted" />
+            <input
+              id="metric-filter"
+              type="search"
+              placeholder="Kategorien/Ranglisten filtern\u2026"
+              class="placeholder:text-muted/70 text-fg w-full bg-transparent text-sm outline-none"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="ranglisten-note"
+        class="bg-surface border-border text-muted mt-4 rounded-[var(--radius)] border px-4 py-3 text-sm shadow-sm backdrop-blur-md"
+      >
+        Tipp: Nutze die Spielersuche oben, um direkt zur pers\u00f6nlichen Statistik zu springen.
+      </div>
+
+      <div
+        id="no-results-warning"
+        class="bg-accent/10 border-accent/40 mt-3 flex hidden items-start gap-3 rounded-[var(--radius)] border px-4 py-3 text-sm shadow-sm"
+        role="status"
+      >
+        <div class="bg-accent mt-0.5 h-2 w-2 flex-none rounded-full" aria-hidden="true"></div>
+        <span class="text-fg/90">Keine Ranglisten gefunden.</span>
+      </div>
+
+      <div aria-live="polite" class="mt-5" id="metrics-container"></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="Versus" class="tab-panel hidden" id="tab-versus">
+    <div class="mg-container pb-10">
+      <div
+        class="bg-surface border-border rounded-[var(--radius)] border p-4 shadow-sm backdrop-blur-md"
+      >
+        <p class="text-fg font-semibold">Versus</p>
+        <p class="text-muted mt-1 text-sm">
+          Geplant, wird aber erst in einem sp\u00e4teren Schritt umgesetzt.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

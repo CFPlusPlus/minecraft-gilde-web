@@ -1,194 +1,292 @@
 ---
-import LegacyLayout from '../layouts/LegacyLayout.astro';
-import Navbar from '../components/legacy/Navbar.astro';
-import Footer from '../components/legacy/Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import { ArrowLeft, Info, Languages, Search } from '@lucide/astro';
 ---
 
-<LegacyLayout
-  title={'Minecraft Gilde - Spielerstatistik'}
-  canonical={'https://minecraft-gilde.de/playerstats.html'}
-  description={undefined}
-  keywords={undefined}
-  author={undefined}
-  bodyClass={'page--sticky-footer page--subpage page--content'}
-  styles={[
-    '/css/content-page.css',
-    '/css/header-default.css',
-    '/css/stats.css',
-    '/css/playerstats.css',
-  ]}
+<BaseLayout
+  title="Minecraft Gilde - Spielerstatistik"
+  canonical="https://minecraft-gilde.de/playerstats.html"
+  description="Spielerstatistiken f\u00fcr Minecraft Gilde \u2013 Werte, Items und Kreaturen nach Spieler."
 >
   <link slot="head" rel="modulepreload" href="/js/skin-modal.js" />
+  <link slot="head" rel="preconnect" href="https://minotar.net" crossorigin />
+  <link slot="head" rel="dns-prefetch" href="//minotar.net" />
 
-  <Navbar active={''} />
-
-  <!-- Header (wird von playerstats.core.js erwartet: #player-name) -->
-  <section id="header">
-    <div class="content">
-      <div class="info">
-        <p class="minecraft-server-ip">Minecraft-Gilde.de</p>
-        <h1 class="title">Spieler <span id="player-name">Lädt…</span></h1>
-      </div>
+  <!-- Header (playerstats.core.js erwartet #player-name) -->
+  <section class="mg-container pt-12 pb-6">
+    <div class="max-w-3xl">
+      <p class="text-muted text-sm">Minecraft-Gilde.de</p>
+      <h1 class="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">
+        Spieler <span id="player-name" class="text-accent">Lädt…</span>
+      </h1>
     </div>
   </section>
 
-  <main class="content">
-    <div class="tabs" role="tablist">
+  <section class="mg-container pb-12">
+    <!-- Tabs -->
+    <div
+      class="bg-surface border-border flex flex-wrap gap-2 rounded-[var(--radius)] border p-2 shadow-sm backdrop-blur-md"
+      role="tablist"
+      aria-label="Spielerstatistik Tabs"
+    >
       <button
         aria-controls="tab-allgemein"
-        class="tab-btn active"
+        class="tab-btn text-fg/80 hover:bg-surface-solid/60 hover:border-border hover:text-fg focus-visible:ring-offset-bg active inline-flex items-center justify-center rounded-lg border border-transparent px-3 py-2 text-sm font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-[color:var(--ring)] focus-visible:ring-offset-2"
         data-tab="tab-allgemein"
         role="tab"
-      >
-        ALLGEMEIN
-      </button>
-      <button aria-controls="tab-items" class="tab-btn" data-tab="tab-items" role="tab"
-        >GEGENSTÄNDE</button
-      >
-      <button aria-controls="tab-mobs" class="tab-btn" data-tab="tab-mobs" role="tab"
-        >KREATUREN</button
-      >
-    </div>
-    <!-- Pillenleiste -->
-    <div class="pill-row container-pad">
-      <a
-        aria-label="Zurück zur Statistik"
-        class="btn btn-primary btn-sm back-btn"
-        href="stats.html"
-      >
-        <i aria-hidden="true" class="fa-solid fa-arrow-left"></i>
-        <span>Zurück zur Statistik</span>
-      </a>
-      <span class="badge muted" id="player-uuid"></span>
-      <div class="muted" id="generated-ts"></div>
-    </div>
-
-    <!-- API-Fehler (z. B. wenn /api nicht erreichbar ist) -->
-    <div class="container-pad u-mb-2 container">
-      <div class="notice notice--danger notice--compact" id="player-api-error" style="display:none">
-        <i aria-hidden="true" class="fa-solid fa-triangle-exclamation"></i>
-        <span class="warning-text" id="player-api-error-text"></span>
-      </div>
-    </div>
-    <div class="player-hero container-pad">
-      <div class="card">
-        <img alt="" id="player-skin" />
-      </div>
-    </div>
-    <!-- Filterleiste -->
-    <div class="controls container-pad">
-      <div class="search-wrapper">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input
-          class="search-inp"
-          id="filter"
-          placeholder='Filtern… (z. B. dirt, "zombie", "diamond")'
-          type="search"
-        />
-      </div>
-      <span class="tip"
-        ><i class="fa-solid fa-circle-info"></i> Klicke auf die Spaltenköpfe zum Sortieren.</span
-      >
-      <button
-        aria-pressed="true"
-        class="btn btn-ghost btn-sm back-btn"
-        id="i18n-toggle"
-        title="Zwischen Deutsch und Original wechseln"
         type="button"
       >
-        <i class="fa-solid fa-language"></i>
-        <span class="label">DE</span>
+        Allgemein
+      </button>
+      <button
+        aria-controls="tab-items"
+        class="tab-btn text-fg/80 hover:bg-surface-solid/60 hover:border-border hover:text-fg focus-visible:ring-offset-bg inline-flex items-center justify-center rounded-lg border border-transparent px-3 py-2 text-sm font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-[color:var(--ring)] focus-visible:ring-offset-2"
+        data-tab="tab-items"
+        role="tab"
+        type="button"
+      >
+        Gegenstände
+      </button>
+      <button
+        aria-controls="tab-mobs"
+        class="tab-btn text-fg/80 hover:bg-surface-solid/60 hover:border-border hover:text-fg focus-visible:ring-offset-bg inline-flex items-center justify-center rounded-lg border border-transparent px-3 py-2 text-sm font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-[color:var(--ring)] focus-visible:ring-offset-2"
+        data-tab="tab-mobs"
+        role="tab"
+        type="button"
+      >
+        Kreaturen
       </button>
     </div>
-    <!-- PANELS -->
-    <section aria-labelledby="Allgemein" class="tab-panel active" id="tab-allgemein">
-      <div class="table-wrapper">
-        <table class="player-table" data-sortkey="stat" id="tbl-general">
-          <thead>
-            <tr>
-              <th data-key="label">Eintrag</th>
-              <th data-key="value">Wert</th>
-              <th class="muted" data-key="raw">Technischer Schlüssel</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <div class="notice notice--danger notice--compact no-results container-pad">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        Keine Ergebnisse gefunden.
-      </div>
-      <div class="notice notice--info notice--compact container-pad">
-        <i class="fa-solid fa-circle-info"></i>
-        <span
-          >Einige Werte werden zur besseren Lesbarkeit formatiert (z. B. Spielzeit in Stunden,
-          <em>one_cm</em> in Kilometern).</span
-        >
-      </div>
-    </section>
-    <section aria-labelledby="Gegenstände" class="tab-panel" id="tab-items">
-      <div class="table-wrapper">
-        <table class="player-table" data-sortkey="item" id="tbl-items">
-          <thead>
-            <tr>
-              <th data-key="label">Item</th>
-              <th data-key="mined">Abgebaut</th>
-              <th data-key="broken">Verbraucht</th>
-              <th data-key="crafted">Hergestellt</th>
-              <th data-key="used">Benutzt</th>
-              <th data-key="picked_up">Aufgesammelt</th>
-              <th data-key="dropped">Fallen gelassen</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <!-- Meldung -->
-      <div class="notice notice--danger notice--compact no-results container-pad">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        Keine Ergebnisse gefunden.
-      </div>
-    </section>
-    <section aria-labelledby="Kreaturen" class="tab-panel" id="tab-mobs">
-      <div class="table-wrapper">
-        <table class="player-table" data-sortkey="mob" id="tbl-mobs">
-          <thead>
-            <tr>
-              <th data-key="label">Kreatur</th>
-              <th data-key="killed">Getötet</th>
-              <th data-key="killed_by">Gestorben durch</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <!-- Meldung -->
-      <div class="notice notice--danger notice--compact no-results container-pad">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        Keine Ergebnisse gefunden.
-      </div>
-    </section>
-  </main>
 
-  <!-- Skin Viewer Modal (wird von skin-modal.js erwartet) -->
-  <div class="skin-modal-overlay" id="skin-modal-overlay" inert>
-    <div class="skin-modal" role="dialog" aria-modal="true" aria-labelledby="skin-modal-title">
-      <header>
-        <h3 id="skin-modal-title">Spielerskin</h3>
-        <button type="button" id="skin-modal-close" aria-label="Schließen">×</button>
-      </header>
-      <div class="body">
-        <div class="skin-canvas-wrap">
-          <canvas id="skin-canvas" width="800" height="800" aria-label="3D Skin"></canvas>
+    <!-- Meta row -->
+    <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex flex-wrap items-center gap-2">
+        <Button href="stats.html" variant="primary" size="sm" class="gap-2">
+          <ArrowLeft size={16} /> Zurück zur Statistik
+        </Button>
+
+        <button
+          id="player-uuid"
+          type="button"
+          title="UUID kopieren"
+          class="bg-surface border-border text-fg hover:bg-surface-solid/70 inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold shadow-sm backdrop-blur-md transition-colors"
+        ></button>
+
+        <span id="generated-ts" class="text-muted text-xs"></span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button
+          id="i18n-toggle"
+          type="button"
+          aria-pressed="true"
+          title="Zwischen Deutsch und Original wechseln"
+          class="bg-surface border-border hover:bg-surface-solid/70 text-fg inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-semibold shadow-sm backdrop-blur-md transition-colors"
+        >
+          <Languages size={16} />
+          <span class="label">DE</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- API-Fehler -->
+    <div
+      id="player-api-error"
+      class="bg-accent/10 border-accent/40 mt-4 flex hidden items-start gap-3 rounded-[var(--radius)] border px-4 py-3 text-sm shadow-sm"
+      role="alert"
+    >
+      <div class="bg-accent mt-0.5 h-2 w-2 flex-none rounded-full" aria-hidden="true"></div>
+      <span id="player-api-error-text" class="text-fg/90"></span>
+    </div>
+
+    <!-- Player skin -->
+    <div class="mt-6 grid gap-4 sm:grid-cols-[160px_1fr]">
+      <div
+        class="bg-surface border-border overflow-hidden rounded-[var(--radius)] border p-3 shadow-sm backdrop-blur-md"
+      >
+        <img
+          id="player-skin"
+          alt=""
+          class="aspect-square w-full rounded-[calc(var(--radius)-6px)] bg-black/20 object-cover"
+        />
+        <p class="text-muted mt-3 flex items-center gap-2 text-xs">
+          <Info size={14} /> Klick auf den Kopf öffnet den 3D-Skin-Viewer.
+        </p>
+      </div>
+
+      <!-- Filter & hint -->
+      <div
+        class="bg-surface border-border rounded-[var(--radius)] border p-4 shadow-sm backdrop-blur-md"
+      >
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div class="w-full sm:max-w-xl">
+            <div
+              class="bg-surface-solid/30 border-border flex items-center gap-2 rounded-[var(--radius)] border px-3 py-2"
+            >
+              <Search size={18} class="text-muted" />
+              <input
+                id="filter"
+                type="search"
+                placeholder='Filtern… (z. B. dirt, "zombie", "diamond")'
+                class="placeholder:text-muted/70 text-fg w-full bg-transparent text-sm outline-none"
+              />
+            </div>
+          </div>
+          <p class="text-muted text-xs sm:text-right">
+            Tipp: Klicke auf die Spaltenköpfe zum Sortieren.
+          </p>
         </div>
       </div>
-      <footer>
-        <span class="hint"
-          ><i class="fa-solid fa-circle-info"></i> Ziehen/zoomen zum Drehen und Vergrößern. Drücke ESC
-          zum Schließen.</span
+    </div>
+
+    <!-- PANELS -->
+    <section aria-labelledby="Allgemein" class="tab-panel active mt-6" id="tab-allgemein">
+      <div
+        class="bg-surface border-border overflow-x-auto rounded-[var(--radius)] border shadow-sm backdrop-blur-md"
+      >
+        <table
+          id="tbl-general"
+          class="player-table w-full min-w-[720px] text-sm"
+          data-sortkey="stat"
         >
-        <button class="btn btn-secondary btn-sm" type="button" id="skin-modal-reset">
-          <i class="fa-solid fa-rotate-left"></i> Reset
+          <thead class="bg-surface-solid/40 text-muted text-xs">
+            <tr>
+              <th class="px-4 py-3 text-left font-semibold" data-key="label">Eintrag</th>
+              <th class="px-4 py-3 text-left font-semibold" data-key="value">Wert</th>
+              <th class="px-4 py-3 text-left font-semibold" data-key="raw">Technischer Schlüssel</th
+              >
+            </tr>
+          </thead>
+          <tbody
+            class="divide-border [&>tr:hover]:bg-surface-solid/40 divide-y [&>tr>td]:px-4 [&>tr>td]:py-3"
+          ></tbody>
+        </table>
+      </div>
+
+      <div
+        class="no-results bg-accent/10 border-accent/40 mt-3 flex hidden items-start gap-3 rounded-[var(--radius)] border px-4 py-3 text-sm shadow-sm"
+      >
+        <div class="bg-accent mt-0.5 h-2 w-2 flex-none rounded-full" aria-hidden="true"></div>
+        <span class="text-fg/90">Keine Ergebnisse gefunden.</span>
+      </div>
+
+      <div
+        class="bg-surface border-border text-muted mt-3 rounded-[var(--radius)] border px-4 py-3 text-sm shadow-sm backdrop-blur-md"
+      >
+        Einige Werte werden zur besseren Lesbarkeit formatiert (z. B. Spielzeit in Stunden, <em
+          >one_cm</em
+        > in Kilometern).
+      </div>
+    </section>
+
+    <section aria-labelledby="Gegenstände" class="tab-panel mt-6 hidden" id="tab-items">
+      <div
+        class="bg-surface border-border overflow-x-auto rounded-[var(--radius)] border shadow-sm backdrop-blur-md"
+      >
+        <table id="tbl-items" class="player-table w-full min-w-[920px] text-sm" data-sortkey="item">
+          <thead class="bg-surface-solid/40 text-muted text-xs">
+            <tr>
+              <th class="px-4 py-3 text-left font-semibold" data-key="label">Item</th>
+              <th class="px-4 py-3 text-left font-semibold" data-key="mined">Abgebaut</th>
+              <th class="px-4 py-3 text-left font-semibold" data-key="broken">Verbraucht</th>
+              <th class="px-4 py-3 text-left font-semibold" data-key="crafted">Hergestellt</th>
+              <th class="px-4 py-3 text-left font-semibold" data-key="used">Benutzt</th>
+              <th class="px-4 py-3 text-left font-semibold" data-key="picked_up">Aufgesammelt</th>
+              <th class="px-4 py-3 text-left font-semibold" data-key="dropped">Fallen gelassen</th>
+            </tr>
+          </thead>
+          <tbody
+            class="divide-border [&>tr:hover]:bg-surface-solid/40 divide-y [&>tr>td]:px-4 [&>tr>td]:py-3"
+          ></tbody>
+        </table>
+      </div>
+
+      <div
+        class="no-results bg-accent/10 border-accent/40 mt-3 flex hidden items-start gap-3 rounded-[var(--radius)] border px-4 py-3 text-sm shadow-sm"
+      >
+        <div class="bg-accent mt-0.5 h-2 w-2 flex-none rounded-full" aria-hidden="true"></div>
+        <span class="text-fg/90">Keine Ergebnisse gefunden.</span>
+      </div>
+    </section>
+
+    <section aria-labelledby="Kreaturen" class="tab-panel mt-6 hidden" id="tab-mobs">
+      <div
+        class="bg-surface border-border overflow-x-auto rounded-[var(--radius)] border shadow-sm backdrop-blur-md"
+      >
+        <table id="tbl-mobs" class="player-table w-full min-w-[620px] text-sm" data-sortkey="mob">
+          <thead class="bg-surface-solid/40 text-muted text-xs">
+            <tr>
+              <th class="px-4 py-3 text-left font-semibold" data-key="label">Kreatur</th>
+              <th class="px-4 py-3 text-left font-semibold" data-key="killed">Getötet</th>
+              <th class="px-4 py-3 text-left font-semibold" data-key="killed_by">Gestorben durch</th
+              >
+            </tr>
+          </thead>
+          <tbody
+            class="divide-border [&>tr:hover]:bg-surface-solid/40 divide-y [&>tr>td]:px-4 [&>tr>td]:py-3"
+          ></tbody>
+        </table>
+      </div>
+
+      <div
+        class="no-results bg-accent/10 border-accent/40 mt-3 flex hidden items-start gap-3 rounded-[var(--radius)] border px-4 py-3 text-sm shadow-sm"
+      >
+        <div class="bg-accent mt-0.5 h-2 w-2 flex-none rounded-full" aria-hidden="true"></div>
+        <span class="text-fg/90">Keine Ergebnisse gefunden.</span>
+      </div>
+    </section>
+  </section>
+
+  <!-- Skin Viewer Modal (skin-modal.js erwartet diese IDs/Klassen) -->
+  <div
+    class="skin-modal-overlay fixed inset-0 z-50 items-center justify-center bg-black/60 p-4"
+    id="skin-modal-overlay"
+    inert
+    style="display:none"
+  >
+    <div
+      class="skin-modal bg-bg border-border w-full max-w-3xl overflow-hidden rounded-[var(--radius)] border shadow-xl outline-none"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="skin-modal-title"
+      tabindex="-1"
+    >
+      <header class="border-border flex items-center justify-between gap-3 border-b px-4 py-3">
+        <h3 id="skin-modal-title" class="text-fg text-base font-semibold">Spielerskin</h3>
+        <button
+          type="button"
+          id="skin-modal-close"
+          aria-label="Schließen"
+          class="text-muted hover:text-fg rounded-lg px-2 py-1 text-xl leading-none"
+        >
+          ×
+        </button>
+      </header>
+      <div class="body p-4">
+        <div
+          class="skin-canvas-wrap border-border overflow-hidden rounded-[var(--radius)] border bg-black/20"
+        >
+          <canvas
+            id="skin-canvas"
+            width="800"
+            height="800"
+            aria-label="3D Skin"
+            class="block w-full"></canvas>
+        </div>
+      </div>
+      <footer
+        class="border-border flex flex-col gap-3 border-t px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
+      >
+        <span class="hint text-muted text-xs">
+          Ziehen/zoomen zum Drehen und Vergrößern. Drücke ESC zum Schließen.
+        </span>
+        <button
+          class="bg-surface border-border hover:bg-surface-solid/70 text-fg inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-semibold shadow-sm backdrop-blur-md transition-colors"
+          type="button"
+          id="skin-modal-reset"
+        >
+          Reset
         </button>
       </footer>
     </div>
@@ -196,6 +294,4 @@ import Footer from '../components/legacy/Footer.astro';
 
   <!-- playerstats.core.js nutzt dynamic import -> als Module laden wie im Original -->
   <script slot="afterScripts" type="module" src="/js/playerstats.core.js"></script>
-
-  <Footer /></LegacyLayout
->
+</BaseLayout>

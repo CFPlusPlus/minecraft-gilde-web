@@ -37,11 +37,11 @@
   function showApiError(message) {
     if (!apiErrorBox || !apiErrorText) return;
     apiErrorText.textContent = message || 'Ein Fehler ist aufgetreten.';
-    apiErrorBox.style.display = 'flex';
+    apiErrorBox.classList.remove('hidden');
   }
   function clearApiError() {
     if (!apiErrorBox || !apiErrorText) return;
-    apiErrorBox.style.display = 'none';
+    apiErrorBox.classList.add('hidden');
     apiErrorText.textContent = '';
   }
 
@@ -65,14 +65,32 @@
     }).format(x);
   }
 
-  document.querySelectorAll('.tab-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('active'));
-      document.querySelectorAll('.tab-panel').forEach((p) => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-      document.getElementById('filter').dispatchEvent(new Event('input'));
+  // --- Tabs (Tailwind-only: hidden/active + Button-State) -------------------
+  const tabButtons = Array.from(document.querySelectorAll('.tab-btn[data-tab]'));
+  const tabPanels = Array.from(document.querySelectorAll('.tab-panel'));
+
+  const setBtnState = (b, active) => {
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-selected', String(active));
+    b.classList.toggle('bg-surface-solid/60', active);
+    b.classList.toggle('border-border', active);
+    b.classList.toggle('text-fg', active);
+    b.classList.toggle('border-transparent', !active);
+    b.classList.toggle('text-fg/80', !active);
+  };
+
+  const activateTab = (tabId) => {
+    tabButtons.forEach((b) => setBtnState(b, b.dataset.tab === tabId));
+    tabPanels.forEach((p) => {
+      const active = p.id === tabId;
+      p.classList.toggle('active', active);
+      p.classList.toggle('hidden', !active);
     });
+    document.getElementById('filter')?.dispatchEvent(new Event('input'));
+  };
+
+  tabButtons.forEach((btn) => {
+    btn.addEventListener('click', () => activateTab(btn.dataset.tab));
   });
 
   // --- i18n: Übersetzungen ----------------------------------------------------
@@ -160,6 +178,12 @@
 
   // Button verdrahten & Übersetzungen laden
   window.addEventListener('DOMContentLoaded', async () => {
+    // Initial active tab (Tailwind: "hidden" wird hier gesetzt)
+    const initialTab =
+      tabButtons.find((b) => b.classList.contains('active'))?.dataset.tab ||
+      tabButtons[0]?.dataset.tab;
+    if (initialTab) activateTab(initialTab);
+
     await loadTranslations();
 
     const btn = document.getElementById('i18n-toggle');
@@ -261,7 +285,7 @@
 
     const img = document.getElementById('player-skin');
     if (img) {
-      img.style.cursor = 'zoom-in';
+      img.classList.add('cursor-pointer');
       img.addEventListener(
         'click',
         async () => {
@@ -334,7 +358,7 @@
         {},
         h('td', {}, r.label),
         h('td', {}, r.display),
-        h('td', { class: 'muted' }, r.raw),
+        h('td', { class: 'text-muted text-xs font-medium whitespace-nowrap' }, r.raw),
       );
       tbody.appendChild(tr);
     }
@@ -437,14 +461,16 @@
         );
 
       // Aktives Tab ermitteln
-      const activePanel = document.querySelector('.tab-panel.active');
+      const activePanel =
+        document.querySelector('.tab-panel.active') || document.querySelector('.tab-panel');
+      if (!activePanel) return;
       const rows = activePanel.querySelectorAll('tbody tr');
       const noResults = activePanel.querySelector('.no-results');
 
       // Leere Eingabe → alles zeigen, Meldung aus
       if (queries.length === 0) {
-        rows.forEach((tr) => (tr.style.display = ''));
-        if (noResults) noResults.style.display = 'none';
+        rows.forEach((tr) => tr.classList.remove('hidden'));
+        if (noResults) noResults.classList.add('hidden');
         return;
       }
 
@@ -457,18 +483,19 @@
           q.type === 'exact' ? label === q.value : wholeRow.includes(q.value),
         );
 
-        tr.style.display = match ? '' : 'none';
+        tr.classList.toggle('hidden', !match);
       });
 
       // Meldung ein/aus
-      const anyVisible = Array.from(rows).some((tr) => tr.style.display !== 'none');
-      if (noResults) noResults.style.display = anyVisible ? 'none' : 'flex';
+      const anyVisible = Array.from(rows).some((tr) => !tr.classList.contains('hidden'));
+      if (noResults) noResults.classList.toggle('hidden', anyVisible);
     };
   })();
 
   // Sortier-Logik
   (function () {
     const SORT_STATES = ['none', 'asc', 'desc'];
+    const SORT_HL = ['bg-surface-solid/30', 'font-semibold'];
     const NUMERIC_KEYS = new Set([
       'value',
       'mined',
@@ -526,14 +553,16 @@
         );
       }
 
-      // vorherige Hervorhebung löschen
-      table.querySelectorAll('tbody td').forEach((td) => td.classList.remove('sorted'));
+      // vorherige Hervorhebung löschen (Tailwind-only)
+      table.querySelectorAll('tbody td').forEach((td) => {
+        for (const c of SORT_HL) td.classList.remove(c);
+      });
 
       tbody.innerHTML = '';
       sorted.forEach((r) => {
         // nur wenn aktiv sortiert → Highlight
         if (state !== 'none') {
-          r.cells[colIndex].classList.add('sorted');
+          r.cells[colIndex].classList.add(...SORT_HL);
         }
         tbody.appendChild(r);
       });
@@ -561,16 +590,12 @@
             h.textContent = h.dataset.title;
           });
 
-          // Symbol nur beim aktiven Header setzen
+          // Symbol nur beim aktiven Header setzen (ohne Icon-Font)
           if (next !== 'none') {
             th.dataset.sort = next;
-            th.innerHTML =
-              th.dataset.title +
-              (next === 'asc'
-                ? ' <i class="fa-solid fa-sort-up"></i>'
-                : ' <i class="fa-solid fa-sort-down"></i>');
+            th.textContent = th.dataset.title + (next === 'asc' ? ' ▲' : ' ▼');
           } else {
-            th.innerHTML = th.dataset.title;
+            th.textContent = th.dataset.title;
           }
 
           applySort(table, idx, next);
