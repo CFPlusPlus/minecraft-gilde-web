@@ -1,0 +1,66 @@
+---
+export interface Props {
+  title?: string;
+  canonical?: string;
+  description?: string;
+  keywords?: string;
+  author?: string;
+  bodyClass?: string;
+  styles?: string[];
+  scripts?: string[];
+  includeGlobalScript?: boolean;
+  includeFontAwesome?: boolean;
+}
+
+const {
+  title = 'Minecraft Gilde',
+  canonical,
+  description,
+  keywords,
+  author = 'Christian Falkner',
+  bodyClass = '',
+  styles = [],
+  scripts = [],
+  includeGlobalScript = true,
+  includeFontAwesome = true,
+} = Astro.props as Props;
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    {canonical ? <link rel="canonical" href={canonical} /> : null}
+
+    <link rel="icon" href="/images/logo.webp" />
+
+    <title>{title}</title>
+
+    {description ? <meta name="description" content={description} /> : null}
+    {keywords ? <meta name="keywords" content={keywords} /> : null}
+    {author ? <meta name="author" content={author} /> : null}
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/global.css" />
+    {styles.map((href) => <link rel="stylesheet" href={href} />)}
+
+    <slot name="head" />
+  </head>
+
+  <body class={bodyClass}>
+    <slot />
+
+    {includeGlobalScript ? <script src="/js/script.js" defer /> : null}
+    {scripts.map((src) => <script src={src} defer />)}
+    {
+      includeFontAwesome ? (
+        <script src="https://kit.fontawesome.com/032e8d1ba8.js" crossorigin="anonymous" defer />
+      ) : null
+    }
+
+    <slot name="afterScripts" />
+  </body>
+</html>

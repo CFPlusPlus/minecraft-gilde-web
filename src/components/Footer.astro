@@ -1,27 +1,37 @@
-<footer id="footer">
-  <p class="copyright">
-    &copy;2026
-    <span class="server-name-footer">
-      <a href="https://www.falkner.info" target="_blank" rel="noopener">Christian Falkner</a>
-    </span>. Alle Rechte vorbehalten.<br />
-    Wir sind weder mit Mojang AB noch mit Microsoft verbunden.
-  </p>
+---
+const year = new Date().getFullYear();
 
-  <div class="social-links">
-    <a href="datenschutz.html" class="link instagram-link" aria-label="Datenschutz">
-      <i class="fa-solid fa-lock" aria-hidden="true"></i>
-    </a>
-    <a href="impressum.html" class="link discord-link-footer" aria-label="Impressum">
-      <i class="fa-solid fa-section" aria-hidden="true"></i>
-    </a>
-    <a
-      href="https://discord.minecraft-gilde.de"
-      class="link discord-link-footer"
-      target="_blank"
-      rel="noopener"
-      aria-label="Discord"
-    >
-      <i class="fa-brands fa-discord" aria-hidden="true"></i>
-    </a>
+const LINKS = [
+  { href: '/datenschutz.html', label: 'Datenschutz' },
+  { href: '/impressum.html', label: 'Impressum' },
+  { href: '/admin-team.html', label: 'Admin-Team' },
+  { href: 'https://discord.minecraft-gilde.de', label: 'Discord', external: true },
+  { href: 'https://map.minecraft-gilde.de', label: 'Dynmap', external: true },
+];
+---
+
+<footer class="mx-auto max-w-6xl px-4 py-10">
+  <div class="glass rounded-[var(--radius)] px-4 py-4 shadow-sm">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div class="text-muted text-sm">
+        © {year}
+        <span class="text-fg/90 font-medium">Minecraft Gilde</span>
+      </div>
+
+      <nav aria-label="Footer" class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        {
+          LINKS.map((l) => (
+            <a
+              href={l.href}
+              target={l.external ? '_blank' : undefined}
+              rel={l.external ? 'noopener noreferrer' : undefined}
+              class="text-fg/80 hover:text-fg hover:decoration-accent/60 underline decoration-transparent underline-offset-4 transition-colors"
+            >
+              {l.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
   </div>
 </footer>

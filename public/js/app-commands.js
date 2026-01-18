@@ -1,18 +1,18 @@
 /*
-  v2-commands.js
+  app-commands.js
   -------------
-  Client-side search for /v2/befehle.
+  Client-side search for /befehle.
   Filters command cards inside categories.
 */
 
 (() => {
-  const input = document.getElementById('v2CommandSearch');
-  const root = document.querySelector('[data-v2-commands]');
+  const input = document.getElementById('commandSearch');
+  const root = document.querySelector('[data-commands]');
   if (!input || !root) return;
 
   const norm = (s) => String(s || '').toLowerCase();
 
-  const cats = Array.from(root.querySelectorAll('[data-v2-category]'));
+  const cats = Array.from(root.querySelectorAll('[data-category]'));
 
   const apply = () => {
     const q = norm(input.value).trim();
@@ -21,15 +21,13 @@
     if (!q) {
       cats.forEach((cat) => {
         cat.classList.remove('hidden');
-        cat
-          .querySelectorAll('[data-v2-command]')
-          .forEach((item) => item.classList.remove('hidden'));
+        cat.querySelectorAll('[data-command]').forEach((item) => item.classList.remove('hidden'));
       });
       return;
     }
 
     cats.forEach((cat) => {
-      const items = Array.from(cat.querySelectorAll('[data-v2-command]'));
+      const items = Array.from(cat.querySelectorAll('[data-command]'));
       let visible = 0;
 
       items.forEach((item) => {

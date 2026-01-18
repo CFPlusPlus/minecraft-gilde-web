@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 /*
-  v2 Design Tokens (clean + subtle glass + minimal)
+  Design Tokens (clean + subtle glass + minimal)
   - Auto Light/Dark via prefers-color-scheme
   - Optional manual override via: html[data-theme="light|dark"]
   - Anthrazit (nicht reines Schwarz) + Gold Accent
@@ -49,7 +49,7 @@
   }
 }
 
-/* Manual override (set by v2 theme toggle) */
+/* Manual override (set by theme toggle) */
 html[data-theme='light'] {
   --bg: #f7f8fb;
   --fg: #0f172a;
@@ -159,90 +159,90 @@ html[data-theme='dark'] {
     backdrop-filter: blur(12px);
   }
 
-  .v2-container {
+  .mg-container {
     @apply mx-auto max-w-6xl px-4;
   }
 
-  .v2-section {
+  .mg-section {
     @apply py-10;
   }
 
-  .v2-card {
+  .mg-card {
     @apply bg-surface border-border rounded-[var(--radius)] border shadow-sm backdrop-blur-md;
   }
 
-  .v2-muted {
+  .mg-muted {
     color: var(--muted);
   }
 
-  .v2-prose {
+  .mg-prose {
     line-height: 1.75;
   }
 
-  .v2-prose h2 {
+  .mg-prose h2 {
     font-size: 1.25rem;
     margin-top: 1.75rem;
     margin-bottom: 0.75rem;
   }
 
-  .v2-prose h3 {
+  .mg-prose h3 {
     font-size: 1.05rem;
     margin-top: 1.25rem;
     margin-bottom: 0.5rem;
   }
 
-  .v2-prose p {
+  .mg-prose p {
     margin: 0.75rem 0;
     color: color-mix(in oklab, var(--fg) 92%, transparent);
   }
 
-  .v2-prose ul,
-  .v2-prose ol {
+  .mg-prose ul,
+  .mg-prose ol {
     margin: 0.75rem 0;
     padding-left: 1.25rem;
     color: color-mix(in oklab, var(--fg) 92%, transparent);
   }
 
-  .v2-prose li {
+  .mg-prose li {
     margin: 0.35rem 0;
   }
 
-  .v2-prose a {
+  .mg-prose a {
     color: color-mix(in oklab, var(--accent) 85%, var(--fg) 15%);
     text-decoration: underline;
     text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent);
   }
 
   /* Accordion */
-  .v2-accordion {
+  .mg-accordion {
     @apply bg-surface border-border rounded-[var(--radius)] border p-4 shadow-sm backdrop-blur-md;
   }
 
-  .v2-accordion summary {
+  .mg-accordion summary {
     list-style: none;
     cursor: pointer;
     user-select: none;
   }
 
-  .v2-accordion summary::-webkit-details-marker {
+  .mg-accordion summary::-webkit-details-marker {
     display: none;
   }
 
-  .v2-accordion[open] {
+  .mg-accordion[open] {
     box-shadow: 0 12px 30px color-mix(in oklab, var(--fg) 12%, transparent);
   }
 
   /* Simple "callout" */
-  .v2-callout {
+  .mg-callout {
     @apply bg-surface border-border rounded-[var(--radius)] border p-4 shadow-sm backdrop-blur-md;
   }
 
-  .v2-callout[data-variant='warning'] {
+  .mg-callout[data-variant='warning'] {
     border-color: color-mix(in oklab, var(--accent) 60%, var(--border) 40%);
     background: color-mix(in oklab, var(--accent) 10%, var(--surface) 90%);
   }
 
-  .v2-callout[data-variant='info'] {
+  .mg-callout[data-variant='info'] {
     background: color-mix(in oklab, var(--surface) 85%, transparent);
   }
 }

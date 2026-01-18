@@ -1,0 +1,39 @@
+---
+const { active = '' } = Astro.props;
+const is = (key) => active === key;
+---
+
+<div class="navbar">
+  <div class="menu-mobile">
+    <a href="index.html">
+      <div class="logo">
+        <img
+          src="/images/logo.webp"
+          alt="Minecraft Gilde - Freebuild & Survival Server Logo"
+          class="logo-img"
+          width="700"
+          height="700"
+        />
+        <h3 class="server-name">Minecraft Gilde</h3>
+      </div>
+    </a>
+
+    <div class="hamburger">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </div>
+
+  <div class="links">
+    <a href="index.html" class={'link' + (is('home') ? ' active' : '')}>Home</a>
+    <a href="befehle.html" class={'link' + (is('befehle') ? ' active' : '')}>Befehle</a>
+    <a href="rules.html" class={'link' + (is('rules') ? ' active' : '')}>Regeln</a>
+    <a href="admin-team.html" class={'link' + (is('team') ? ' active' : '')}>Unser Team</a>
+    <a href="stats.html" class={'link' + (is('stats') ? ' active' : '')}>Statistik</a>
+    <a href="https://map.minecraft-gilde.de" class="link" target="_blank" rel="noopener"
+      >Servermap</a
+    >
+    <a href="https://stats.uptimerobot.com/OnyzM9GmG2" class="link" target="_blank" rel="noopener"
+      >Status</a
+    >
+  </div>
+</div>

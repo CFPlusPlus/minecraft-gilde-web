@@ -1,65 +1,35 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
+import { Scale, ArrowRight } from '@lucide/astro';
+import impressumHtml from '../../partials/impressum.html?raw';
+
+const DISCORD_URL = 'https://discord.minecraft-gilde.de';
 ---
 
 <BaseLayout
-  title={'Minecraft Gilde - Impressum'}
-  canonical={'https://minecraft-gilde.de/impressum.html'}
-  description={'Erlebe Freebuild & Survival in der Minecraft Gilde! Keine Minigames – reines Vanilla-Gameplay. Tritt jetzt bei! IP: minecraft-gilde.de'}
-  keywords={undefined}
-  author={'Christian Falkner'}
-  bodyClass={'page--subpage page--content'}
-  styles={['/css/content-page.css', '/css/header-default.css']}
-  scripts={[]}
+  title="Minecraft Gilde - Impressum"
+  canonical="https://minecraft-gilde.de/impressum.html"
+  description="Erlebe Freebuild & Survival in der Minecraft Gilde! Keine Minigames \u2013 reines Vanilla-Gameplay. Tritt jetzt bei! IP: minecraft-gilde.de"
 >
-  <Navbar active={''} />
-
-  <main id="main-content" tabindex="-1">
-    <!--Header-->
-    <section id="header">
-      <div class="content">
-        <div class="info">
-          <p class="minecraft-server-ip">Minecraft-Gilde.de</p>
-          <h1 class="title"><span>Impressum</span></h1>
-        </div>
+  <section class="mg-container pt-12 pb-16">
+    <div class="flex items-start gap-3">
+      <Scale size={22} />
+      <div>
+        <h1 class="text-3xl font-semibold tracking-tight">Impressum</h1>
+        <p class="text-muted mt-2">Angaben gemäß §5 DDG.</p>
       </div>
-    </section>
-    <!--Contacts-->
-    <section id="page-content">
-      <div class="content">
-        <p class="description">
-          Diese Webseite wird betrieben von (Angaben gemäß §5 DDG): <br />
-          Christian Falkner<br />E-Mail: webmaster@minecraft-gilde.de
-        </p>
-        <p class="description"></p>
-        <h2 class="section-title">Haftungsausschluss</h2>
-        <p class="description">
-          Meine Webseite enthält Links zu externen Webseiten Dritter, auf deren Inhalte ich keinen
-          Einfluss habe. Deshalb kann ich für diese fremden Inhalte auch keine Gewähr übernehmen.
-          Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
-          Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf
-          mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der
-          Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten
-          ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar.
-        </p>
-        <h2 class="section-title">Urheberrecht</h2>
-        <p class="description">
-          Die auf meiner gezeigten Webseite veröffentlichten Inhalte und Werke unterliegen meinem
-          Copyright. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung des
-          geistigen Eigentums in ideeller und materieller Sicht ist ohne schriftliche Genehmigung
-          ausdrücklich untersagt.
-        </p>
-        <h2 class="section-title">Widerspruch gegen Werbe-E-Mails</h2>
-        <p class="description">
-          Der Nutzung der im Impressum veröffentlichten Kontaktdaten für nicht ausdrücklich
-          angeforderte Werbung wird widersprochen. Weitere Hinweise sind in der Datenschutzerklärung
-          zu finden.
-        </p>
-      </div>
-    </section>
-  </main>
+    </div>
 
-  <Footer /></BaseLayout
->
+    <div class="mt-6 flex flex-wrap gap-3">
+      <Button href={DISCORD_URL} external variant="secondary" class="gap-2">
+        Discord <ArrowRight size={18} />
+      </Button>
+    </div>
+
+    <Card class="mt-6 p-6">
+      <div class="mg-prose" set:html={impressumHtml} />
+    </Card>
+  </section>
+</BaseLayout>

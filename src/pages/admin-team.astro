@@ -1,58 +1,79 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+import { TEAM_GROUPS, TEAM_MEMBERS } from '../../data/team';
+import { Shield, Users, ArrowRight } from '@lucide/astro';
+
+const DISCORD_URL = 'https://discord.minecraft-gilde.de';
+
+const avatarUrl = (name: string) => `https://minotar.net/helm/${encodeURIComponent(name)}/96.png`;
+
+const groups = TEAM_GROUPS.map((g) => ({
+  ...g,
+  members: TEAM_MEMBERS.filter((m) => m.group === g.key),
+})).filter((g) => g.members.length > 0);
 ---
 
 <BaseLayout
-  title={'Minecraft Gilde - Unser Team'}
-  canonical={'https://minecraft-gilde.de/admin-team.html'}
-  description={'Lerne das Minecraft Gilde Serverteam kennen – erfahrene Admins und hilfsbereite Moderatoren für dein optimales Freebuild & Survival Erlebnis auf unserem deutschen Minecraft-Server.'}
-  keywords={'Minecraft Server Team, Minecraft Admins, Minecraft Moderatoren, deutscher Minecraft Server, Freebuild Server, Survival Server, Minecraft Gilde, aktives Serverteam'}
-  author={'Christian Falkner'}
-  bodyClass={'page--subpage'}
-  styles={['/css/admin-team.css']}
-  scripts={[]}
+  title="Minecraft Gilde - Unser Team"
+  canonical="https://minecraft-gilde.de/admin-team.html"
+  description="Lerne das Minecraft Gilde Serverteam kennen \u2013 erfahrene Admins und hilfsbereite Moderatoren f\u00fcr dein optimales Freebuild & Survival Erlebnis auf unserem deutschen Minecraft-Server."
 >
-  <meta
-    content="Unser Team | Minecraft Gilde – Aktive Admins & Moderatoren"
-    property="og:title"
-    slot="head"
-  />
-  <meta
-    content="Hier findest du das engagierte Team der Minecraft Gilde – Admins und Moderatoren, die für Fairness und Spielspaß sorgen."
-    property="og:description"
-    slot="head"
-  />
-  <meta content="https://minecraft-gilde.de/images/logo.webp" property="og:image" slot="head" />
-  <meta content="https://minecraft-gilde.de/admin-team.html" property="og:url" slot="head" />
-  <meta content="website" property="og:type" slot="head" />
-  <meta content="summary_large_image" name="twitter:card" slot="head" />
-  <meta content="Unser Team – Minecraft Gilde" name="twitter:title" slot="head" />
-  <meta
-    content="Aktive deutsche Admins und Moderatoren für dein Minecraft-Vanilla-Erlebnis."
-    name="twitter:description"
-    slot="head"
-  />
-  <meta content="https://minecraft-gilde.de/images/logo.webp" name="twitter:image" slot="head" />
-  <Navbar active={'team'} />
-
-  <main id="main-content" tabindex="-1">
-    <!--Header-->
-    <section id="header">
-      <div class="content">
-        <div class="info">
-          <p class="minecraft-server-ip">mc.example.com</p>
-          <h1 class="title">Unser <span>team</span></h1>
-        </div>
-        <p class="description">Hier findest du das engagierte Team der Minecraft Gilde.</p>
+  <section class="mg-container pt-12 pb-6">
+    <div class="flex items-start gap-3">
+      <Users size={22} />
+      <div>
+        <h1 class="text-3xl font-semibold tracking-tight">Admin-Team</h1>
+        <p class="text-muted mt-2">Hier findest du das engagierte Team der Minecraft Gilde.</p>
       </div>
-    </section>
-    <!--Admin-Team-->
-    <section id="admin-team">
-      <div class="content at-content"></div>
-    </section>
-  </main>
+    </div>
 
-  <Footer /></BaseLayout
->
+    <div class="mt-6 flex flex-wrap gap-3">
+      <Button href={DISCORD_URL} external variant="primary" class="gap-2">
+        Discord <ArrowRight size={18} />
+      </Button>
+      <Button href="/erststart.html" variant="secondary">Erststart</Button>
+      <Button href="/rules.html" variant="ghost">Regeln</Button>
+    </div>
+  </section>
+
+  <section class="mg-container pb-16">
+    <div class="grid gap-4">
+      {
+        groups.map((g) => (
+          <Card class="p-6">
+            <div class="flex items-center justify-between gap-4">
+              <div class="inline-flex items-center gap-2">
+                <Shield size={18} />
+                <h2 class="text-xl font-semibold tracking-tight">{g.label}</h2>
+              </div>
+              <Badge variant="accent">{g.members.length}</Badge>
+            </div>
+
+            <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {g.members.map((m) => (
+                <div class="mg-card flex items-center gap-3 p-4">
+                  <img
+                    src={avatarUrl(m.inGameName)}
+                    alt={m.inGameName}
+                    width="48"
+                    height="48"
+                    loading="lazy"
+                    decoding="async"
+                    class="border-border bg-surface h-12 w-12 rounded-full border"
+                  />
+                  <div class="min-w-0">
+                    <div class="text-sm font-semibold">{m.inGameName}</div>
+                    <div class="text-muted text-xs">{m.role}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

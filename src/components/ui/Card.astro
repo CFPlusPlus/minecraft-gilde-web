@@ -1,13 +1,19 @@
 ---
+export type CardVariant = 'glass' | 'solid';
+
 export interface Props {
-  as?: keyof HTMLElementTagNameMap;
+  variant?: CardVariant;
   class?: string;
 }
 
-const { as: Tag = 'div', class: className = '' } = Astro.props as Props;
-const classes = ['card', className].filter(Boolean).join(' ');
+const { variant = 'glass', class: className = '' } = Astro.props as Props;
+
+const variants: Record<CardVariant, string> = {
+  glass: 'glass shadow-sm',
+  solid: 'bg-surface-solid border border-border shadow-sm',
+};
 ---
 
-<Tag class={classes}>
+<div class={`${variants[variant]} rounded-[var(--radius)] ${className}`.trim()}>
   <slot />
-</Tag>
+</div>

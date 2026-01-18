@@ -1,41 +1,56 @@
 ---
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
-export type ButtonSize = 'sm' | 'lg';
+export type ButtonSize = 'sm' | 'md';
 
 export interface Props {
   href?: string;
+  external?: boolean;
   variant?: ButtonVariant;
   size?: ButtonSize;
-  type?: 'button' | 'submit' | 'reset';
-  target?: string;
-  rel?: string;
   class?: string;
-  ariaLabel?: string;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 const {
   href,
-  variant = 'primary',
-  size,
-  type = 'button',
-  target,
-  rel,
+  external = false,
+  variant = 'secondary',
+  size = 'md',
   class: className = '',
-  ariaLabel,
-} = Astro.props as Props;
+  type = 'button',
+  ...rest
+} = Astro.props as Props & Record<string, any>;
 
-const classes = ['btn', variant ? `btn-${variant}` : '', size ? `btn-${size}` : '', className]
-  .filter(Boolean)
-  .join(' ');
+const base =
+  'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-[color:var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-bg';
+
+const sizes: Record<ButtonSize, string> = {
+  sm: 'h-9 px-3 text-sm',
+  md: 'h-10 px-4 text-sm',
+};
+
+const variants: Record<ButtonVariant, string> = {
+  primary: 'bg-accent text-black hover:bg-accent2',
+  secondary: 'bg-surface border border-border hover:bg-surface-solid/70 text-fg backdrop-blur-md',
+  ghost: 'bg-transparent hover:bg-surface border border-transparent hover:border-border text-fg',
+};
+
+const attrs = href
+  ? {
+      href,
+      ...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
+      ...rest,
+    }
+  : { type, ...rest };
 ---
 
 {
   href ? (
-    <a class={classes} href={href} target={target} rel={rel} aria-label={ariaLabel}>
+    <a class={`${base} ${sizes[size]} ${variants[variant]} ${className}`.trim()} {...attrs}>
       <slot />
     </a>
   ) : (
-    <button class={classes} type={type} aria-label={ariaLabel}>
+    <button class={`${base} ${sizes[size]} ${variants[variant]} ${className}`.trim()} {...attrs}>
       <slot />
     </button>
   )

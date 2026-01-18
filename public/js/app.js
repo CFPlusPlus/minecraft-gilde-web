@@ -1,7 +1,7 @@
 /*
-  v2-global.js
+  app.js
   ------------
-  Global behavior for /v2 pages:
+  Global behavior for the site:
   - Theme toggle (system/light/dark) with localStorage
   - Navbar "more" menu toggle + click-outside + escape
   - Copy server IP helper
@@ -10,7 +10,7 @@
 */
 
 (() => {
-  const config = window.__V2_CONFIG__ || {
+  const config = window.__APP_CONFIG__ || {
     serverIp: 'minecraft-gilde.de',
     discordGuildId: '1219625244906754093',
     discordInvite: 'https://discord.minecraft-gilde.de',
@@ -23,7 +23,7 @@
   // -------------------------
   // Toast
   // -------------------------
-  const toastEl = qs('#v2-toast');
+  const toastEl = qs('#toast');
   let toastTimer = null;
 
   const showToast = (message, variant = 'default') => {
@@ -33,10 +33,8 @@
     toastEl.classList.remove('hidden');
     toastEl.innerHTML = `
       <div
-        class="pointer-events-auto v2-card px-4 py-3 shadow-sm ${
-          variant === 'error'
-            ? 'border-[color-mix(in_oklab,var(--accent)_60%,var(--border)_40%)]'
-            : ''
+        class="pointer-events-auto mg-card px-4 py-3 shadow-sm ${
+          variant === 'error' ? 'border-accent/30 bg-accent/10' : ''
         }"
         role="status"
       >
@@ -110,7 +108,7 @@
   // -------------------------
   // Navbar menu toggle
   // -------------------------
-  const navRoot = qs('[data-v2-nav]');
+  const navRoot = qs('[data-site-nav]');
   const panel = qs('[data-nav-panel]', navRoot || document);
   const toggle = qs('[data-nav-toggle]', navRoot || document);
   const iconOpen = qs('[data-icon-open]', toggle || document);

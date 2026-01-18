@@ -1,42 +1,38 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
+import Button from '../components/ui/Button.astro';
+import { Home, TriangleAlert } from '@lucide/astro';
 ---
 
 <BaseLayout
-  title={'Minecraft Gilde - Seite nicht gefunden'}
-  bodyClass={'page--sticky-footer page--subpage page--content'}
-  styles={['/css/content-page.css', '/css/header-default.css']}
+  title="Minecraft Gilde - Seite nicht gefunden"
+  description="Diese Seite gibt es nicht (404)."
 >
-  <Navbar active={''} />
+  <section class="mg-container pt-16 pb-16">
+    <div class="mx-auto max-w-2xl">
+      <div class="mg-card p-8">
+        <div class="flex items-start gap-4">
+          <div
+            class="bg-accent/15 text-fg inline-flex h-10 w-10 items-center justify-center rounded-xl"
+          >
+            <TriangleAlert size={20} />
+          </div>
+          <div>
+            <h1 class="text-3xl font-semibold tracking-tight">404 – Seite nicht gefunden</h1>
+            <p class="text-muted mt-3 leading-relaxed">
+              Der Link ist vermutlich veraltet oder du hast dich vertippt.
+            </p>
 
-  <main id="main-content" tabindex="-1">
-    <section id="header">
-      <div class="content">
-        <div class="info">
-          <p class="minecraft-server-ip">Minecraft-Gilde.de</p>
-          <h1 class="title">404 <span>Seite nicht gefunden</span></h1>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <Button href="/" variant="primary" class="gap-2">
+                <Home size={18} /> Zur Startseite
+              </Button>
+              <Button href="/erststart.html" variant="secondary">Erststart</Button>
+              <Button href="/stats.html" variant="ghost">Statistiken</Button>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
-
-    <section class="container-pad u-mt-2 u-mb-3 container">
-      <div class="notice notice--danger">
-        <i aria-hidden="true" class="fa-solid fa-triangle-exclamation"></i>
-        <span class="warning-text"
-          >Diese Seite existiert nicht (mehr) oder der Link ist falsch.</span
-        >
-      </div>
-
-      <div class="u-mt-2" style="display:flex; justify-content:center;">
-        <a class="btn btn-primary btn-sm" href="/index.html">
-          <i aria-hidden="true" class="fa-solid fa-house"></i>
-          Zur Startseite
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <Footer />
+    </div>
+  </section>
 </BaseLayout>

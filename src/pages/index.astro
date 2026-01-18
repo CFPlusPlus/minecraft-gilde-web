@@ -1,724 +1,180 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+import { ArrowRight, Copy, Map, ScrollText, TerminalSquare, Users } from '@lucide/astro';
+
+const DISCORD_URL = 'https://discord.minecraft-gilde.de';
+const DYMAP_URL = 'https://map.minecraft-gilde.de';
 ---
 
 <BaseLayout
-  title={'Minecraft Gilde – Deutscher Minecraft Vanilla SMP Server (1.21.x)'}
-  canonical={'https://minecraft-gilde.de/'}
-  description={'Minecraft Vanilla SMP (DE) – Survival & Freebuild ohne Minigames für 1.21.x. Aktive Community, faire Regeln. IP: minecraft-gilde.de.'}
-  keywords={'Minecraft Vanilla SMP Server, Vanilla Survival Server deutsch, Server ohne Minigames, Minecraft Server deutsch, Freebuild, Survival, 1.21.x, Minecraft Gilde'}
-  author={'Christian Falkner'}
-  bodyClass={''}
-  styles={['/css/home.css']}
-  scripts={['/js/home.js']}
+  title="Minecraft Gilde \u2013 Deutscher Minecraft Vanilla SMP Server (1.21.x)"
+  canonical="https://minecraft-gilde.de/"
+  description="Minecraft Vanilla SMP (DE) \u2013 Survival & Freebuild ohne Minigames f\u00fcr 1.21.x. Aktive Community, faire Regeln. IP: minecraft-gilde.de."
+  keywords="Minecraft Vanilla SMP Server, Vanilla Survival Server deutsch, Server ohne Minigames, Minecraft Server deutsch, Freebuild, Survival, 1.21.x, Minecraft Gilde"
 >
-  <link
-    as="image"
-    fetchpriority="high"
-    href="/images/header.webp"
-    rel="preload"
-    slot="head"
-    type="image/webp"
-  />
-  <link
-    as="image"
-    fetchpriority="high"
-    imagesizes="(max-width: 600px) 300px, 600px"
-    imagesrcset="/images/logo-big-small.webp 600w, /images/logo-big.webp 1200w"
-    rel="preload"
-    slot="head"
-    type="image/webp"
-  />
-  <meta
-    content="Minecraft Gilde – Deutscher Minecraft Vanilla SMP Server (1.21.x)"
-    property="og:title"
-    slot="head"
-  />
-  <meta
-    content="Survival & Freebuild ohne Minigames – deutsch, 1.21.x. Jetzt beitreten: IP minecraft-gilde.de."
-    property="og:description"
-    slot="head"
-  />
-  <meta content="https://minecraft-gilde.de/images/logo.webp" property="og:image" slot="head" />
-  <meta content="https://minecraft-gilde.de/" property="og:url" slot="head" />
-  <meta content="website" property="og:type" slot="head" />
-  <meta content="Minecraft Gilde" property="og:site_name" slot="head" />
-  <meta content="de_DE" property="og:locale" slot="head" />
-  <meta content="summary_large_image" name="twitter:card" slot="head" />
-  <meta
-    content="Minecraft Gilde – Deutscher Minecraft Vanilla SMP Server (1.21.x)"
-    name="twitter:title"
-    slot="head"
-  />
-  <meta
-    content="Survival & Freebuild ohne Minigames – deutsch, 1.21.x. Jetzt beitreten: IP minecraft-gilde.de."
-    name="twitter:description"
-    slot="head"
-  />
-  <meta content="https://minecraft-gilde.de/images/logo.webp" name="twitter:image" slot="head" />
-  <meta content="Minecraft Gilde – Vanilla SMP (DE) Logo" name="twitter:image:alt" slot="head" />
-  <Navbar active={'home'} />
-
-  <main id="main-content" tabindex="-1">
-    <!--Header-->
-    <section id="header">
-      <div class="content">
-        <div class="left">
-          <div class="server-name">
-            <p>Vanilla Server</p>
-            <h1 class="minecraft-server-ip">minecraft-gilde.de</h1>
-          </div>
-          <p class="server-description">
-            Werde Teil einer Community, die echtes Vanilla-Minecraft liebt – ganz ohne
-            Schnickschnack. Starte dein Abenteuer noch heute!
-          </p>
-          <div class="buttons">
-            <button class="btn btn-primary copy-ip">IP Kopieren</button>
-            <a class="btn btn-ghost how-to-join" href="#about">Mehr Infos</a>
-          </div>
-          <p class="ip-copied">IP erfolgreich kopiert!</p>
+  <section class="mg-container pt-12 pb-8">
+    <div class="grid items-center gap-10 md:grid-cols-2">
+      <div>
+        <div class="flex flex-wrap items-center gap-2">
+          <Badge variant="accent">Vanilla SMP (DE)</Badge>
+          <Badge>1.21.x</Badge>
+          <Badge>Ohne Resets</Badge>
         </div>
-        <div class="right">
-          <img
-            alt="Server logo"
-            class="logo-img logo-img-header"
-            fetchpriority="high"
-            height="350"
-            sizes="(max-width: 600px) 300px, 600px"
-            src="images/logo-big.webp"
-            srcset="images/logo-big-small.webp 600w, images/logo-big.webp 1200w"
-            width="480"
-          />
-          <div class="stats">
-            <div class="stat">
-              <div class="icon">
-                <i class="fa-brands fa-discord"></i>
-              </div>
-              <div class="texts">
-                <h2 class="stat-title">Discord server</h2>
-                <p><span class="stat-number discord-online-users">Keine</span> Spieler online</p>
-              </div>
+
+        <h1 class="mt-5 text-4xl font-semibold tracking-tight sm:text-5xl">minecraft-gilde.de</h1>
+        <p class="text-muted mt-4 text-base leading-relaxed sm:text-lg">
+          Werde Teil einer Community, die echtes Vanilla-Minecraft liebt – ganz ohne Schnickschnack.
+          Starte dein Abenteuer noch heute!
+        </p>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          <Button variant="primary" class="gap-2" data-copy-ip>
+            <Copy size={18} /> IP kopieren
+          </Button>
+          <Button href={DISCORD_URL} external variant="secondary" class="gap-2">
+            Discord <ArrowRight size={18} />
+          </Button>
+          <Button href="/erststart.html" variant="ghost" class="gap-2"> Erststart </Button>
+        </div>
+
+        <div class="mt-8 grid gap-3 sm:grid-cols-3">
+          <Card class="p-4">
+            <div class="text-muted text-xs">Discord</div>
+            <div class="mt-1 flex items-center gap-2">
+              <Users size={18} />
+              <span class="text-lg font-semibold" data-discord-online>Keine</span>
+              <span class="text-muted text-sm">online</span>
             </div>
-            <div class="stat">
-              <div class="icon">
-                <i class="fa-solid fa-server"></i>
-              </div>
-              <div class="texts">
-                <h2 class="stat-title">Minecraft server</h2>
-                <p>
-                  <span class="stat-number minecraft-online-players">Keine</span> Spieler online
-                </p>
-              </div>
+          </Card>
+
+          <Card class="p-4">
+            <div class="text-muted text-xs">Minecraft</div>
+            <div class="mt-1 flex items-center gap-2">
+              <Users size={18} />
+              <span class="text-lg font-semibold" data-mc-online>Keine</span>
+              <span class="text-muted text-sm">online</span>
             </div>
-          </div>
+          </Card>
+
+          <Card class="p-4">
+            <div class="text-muted text-xs">Hauptwelt aktiv</div>
+            <div class="mt-1 text-lg font-semibold" id="world-age">—</div>
+            <div class="text-muted text-xs">seit Feb 2024</div>
+          </Card>
+        </div>
+
+        <div class="mt-6">
+          <Card class="p-4">
+            <div class="text-muted text-xs font-medium">Live-Spieler</div>
+            <div class="mt-3" id="player-list">
+              <p class="text-muted text-sm">Lade Spieler…</p>
+            </div>
+          </Card>
         </div>
       </div>
-    </section>
-    <div class="player-container">
-      <div class="scroll-wrapper" id="scroll-wrapper">
-        <div id="player-list">Lade Spieler...</div>
+
+      <div class="grid gap-4">
+        <Card class="p-5">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <div class="text-muted text-xs">Schnellzugriff</div>
+              <h2 class="mt-1 text-base font-semibold">Alles Wichtige auf einen Klick</h2>
+            </div>
+          </div>
+          <div class="mt-4 grid gap-2 sm:grid-cols-2">
+            <a
+              href="/serverinfos.html"
+              class="border-border bg-surface hover:bg-surface-solid/70 rounded-lg border px-3 py-2 text-sm transition-colors"
+            >
+              <span class="inline-flex items-center gap-2"
+                ><ScrollText size={16} /> Serverinfos</span
+              >
+            </a>
+            <a
+              href="/rules.html"
+              class="border-border bg-surface hover:bg-surface-solid/70 rounded-lg border px-3 py-2 text-sm transition-colors"
+            >
+              <span class="inline-flex items-center gap-2"><ScrollText size={16} /> Regeln</span>
+            </a>
+            <a
+              href="/befehle.html"
+              class="border-border bg-surface hover:bg-surface-solid/70 rounded-lg border px-3 py-2 text-sm transition-colors"
+            >
+              <span class="inline-flex items-center gap-2"
+                ><TerminalSquare size={16} /> Befehle</span
+              >
+            </a>
+            <a
+              href={DYMAP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="border-border bg-surface hover:bg-surface-solid/70 rounded-lg border px-3 py-2 text-sm transition-colors"
+            >
+              <span class="inline-flex items-center gap-2"><Map size={16} /> Dynmap</span>
+            </a>
+          </div>
+        </Card>
+
+        <Card class="p-5">
+          <h2 class="text-base font-semibold">Kurz erklärt</h2>
+          <div class="text-muted mt-3 space-y-3 text-sm">
+            <p>
+              Die Minecraft Gilde ist ein deutscher Vanilla-Server, der sich auf pures Survival und
+              kreatives Freebuild konzentriert. Keine Minigames, kein Citybuild.
+            </p>
+            <p>
+              Die Hauptwelt besteht seit Februar 2024 und wurde nie zurückgesetzt. Neue Spieler
+              bekommen ein kleines Starter-Kit – danach liegt alles in deiner Hand.
+            </p>
+          </div>
+        </Card>
+
+        <Card class="p-5">
+          <h2 class="text-base font-semibold">Community-Partner</h2>
+          <p class="text-muted mt-2 text-sm">
+            Seit April 2024 ist die Minecraft-Gilde Partner des ANTI-CORONA-KARTELL.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <Button
+              href="https://www.anti-corona-kartell.de"
+              external
+              variant="secondary"
+              class="gap-2"
+            >
+              Zur Community <ArrowRight size={18} />
+            </Button>
+          </div>
+        </Card>
       </div>
     </div>
-    <!-- About us -->
-    <section id="about">
-      <div class="content">
-        <div class="left">
-          <h2 class="section-title">Hier spielst du Minecraft, wie es gedacht war</h2>
-          <p class="about-us">
-            Die Minecraft Gilde ist ein deutscher Vanilla-Server, der sich ganz auf pures Survival
-            und kreatives Freebuild konzentriert. Keine Minigames, kein Citybuild, kein
-            Schnickschnack – hier steht das klassische Minecraft-Erlebnis im Mittelpunkt.
-          </p>
-          <p class="about-us">
-            Baue, erkunde und gestalte frei nach deinen Vorstellungen in einer Welt, die wirklich
-            Bestand hat. Ohne Resets – deine Projekte wachsen hier dauerhaft weiter und werden Teil
-            einer lebendigen Serverlandschaft. Unsere Hauptwelt besteht seit Februar 2024 und wurde
-            seitdem nie zurückgesetzt – sie ist nun schon seit
-            <span class="world-age-highlight" id="world-age"></span> aktiv.
-          </p>
-          <p class="about-us">
-            Neue Spieler erhalten ein kleines Starter-Kit für den leichten Einstieg – danach liegt
-            alles in deiner Hand. Bei uns spielt sich Survival wie im Singleplayer: 16 Chunks
-            Sichtweite, Vanilla-nahe Spawnraten und keine Baubeschränkungen. Auch bei Mobs,
-            Villagern und Farmen gibt es keine künstlichen Einschränkungen – alles funktioniert, wie
-            es soll. Keine kaufbaren Ränge oder Items, kein Reset-Stress – einfach pures Minecraft,
-            das bleibt.
-          </p>
-        </div>
-        <div class="right">
-          <img
-            alt="Minecraft Gilde Logo"
-            height="700"
-            loading="lazy"
-            src="images/logo.webp"
-            width="700"
-          />
-        </div>
-      </div>
-    </section>
-    <!-- Survival & Freebuild, Community -->
-    <section id="survival-community">
-      <div class="content features-list">
-        <div class="game">
-          <img
-            alt="Survival image"
-            height="1440"
-            loading="lazy"
-            src="images/survival-alt.webp"
-            width="2560"
-          />
-          <div class="info">
-            <h2 class="section-title">Survival &amp; Freebuild ohne Grenzen</h2>
-            <div class="game-description">
-              <p class="game-description">
-                Auf der Minecraft Gilde kannst du bauen, wie und wo du willst – ganz ohne
-                Citybuild-Vorgaben oder künstliche Einschränkungen. Ob kleines Starterhaus oder
-                riesiges Community-Projekt: Du entscheidest, wie deine Welt aussieht. Deine Bauwerke
-                kannst du einfach selbst schützen, sodass dir nichts verloren geht.
-              </p>
-              <p class="game-description">
-                Redstone, Villager, Farmen oder außergewöhnliche Baustile – bei uns gibt es keine
-                Einschränkungen. Du kannst dich kreativ und technisch frei entfalten, genau wie im
-                Singleplayer.
-              </p>
-              <p class="game-description">
-                Gemeinsam mit anderen Spielern entstehen so einzigartige Dörfer, Basen und
-                Landschaften, die dauerhaft bestehen bleiben – kein ständiger Reset, keine
-                kurzlebigen Welten. Hier zählt Kreativität, Teamgeist und echtes Vanilla-Survival.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="game">
-          <img
-            alt="Survival image"
-            height="1440"
-            loading="lazy"
-            src="images/community.webp"
-            width="2560"
-          />
-          <div class="info">
-            <h2 class="section-title">Werde Teil unserer Community auf Discord!</h2>
-            <div class="game-description">
-              <p class="game-description">
-                Auf unserem Discord dreht sich alles um Austausch, Zusammenarbeit und gemeinsames
-                Spielen. Triff andere Spielerinnen und Spieler, finde Mitstreiter für Abenteuer oder
-                lass dir von erfahrenen Mitgliedern helfen.
-              </p>
-              <p class="game-description">
-                In unserer stetig wachsenden Community erwarten dich regelmäßige Events, gemeinsame
-                Spielrunden und eine offene, freundliche Atmosphäre. Über Ankündigungen bleibst du
-                immer auf dem Laufenden und verpasst keine Neuigkeiten.
-              </p>
-              <p class="discord-love">
-                <i aria-hidden="true" class="fa-solid fa-heart icon-heart"></i>
-                <i> Wir freuen uns auf dich! </i>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="game">
-          <img
-            alt="Survival image"
-            class="ack"
-            height="200"
-            loading="lazy"
-            src="images/ack.webp"
-            width="200"
-          />
-          <div class="info">
-            <h2 class="section-title">Unser Community-Partner</h2>
-            <div class="game-description">
-              <p>
-                Seit April 2024 ist die Minecraft-Gilde stolzer Partner des
-                <a href="https://www.anti-corona-kartell.de" rel="noopener" target="_blank"
-                  >ANTI-CORONA-KARTELL</a
-                >
-                – einer engagierten, jungen Gaming-Community, die verschiedenste Spiele spielt und eigene
-                Game-Server betreibt. Durch unsere Partnerschaft finden regelmäßig Community-Events, Spielsessions
-                und gemütliche Treffen statt, bei denen du Mitspieler*innen kennenlernen und gemeinsam
-                Spaß haben kannst. Egal ob im Spiel oder im Voice-Chat – Teamgeist und Miteinander stehen
-                hier immer im Mittelpunkt.
+  </section>
 
-                <br />Neugierig geworden? Dann schau doch einfach mal vorbei und werde Teil einer
-                aktiven und freundlichen Community!
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--Discord-->
-    <section id="discord">
-      <div class="content">
-        <h2 class="section-title">
-          Neugierig geworden? <br />
-          Tritt noch heute unserem <span>Discord</span> bei!
-        </h2>
-        <a
-          class="discord-link btn btn-primary join-discord"
-          href="https://discord.minecraft-gilde.de"
-          rel="noopener"
-          target="_blank">Discord beitreten</a
-        >
-      </div>
-    </section>
-    <!--Vote-->
-    <section id="vote">
-      <div class="content">
-        <div class="info">
-          <h2 class="section-title">Voting</h2>
-          <p class="section-description">
-            Mit jedem Vote machst du die Minecraft Gilde bekannter und lockst neue Spieler auf den
-            Server. Ein leerer Server macht nur halb so viel Spaß! Durch regelmäßiges Voting steigt
-            unser Rang, mehr Spieler finden zu uns, und die Community bleibt aktiv. Deine
-            Unterstützung zählt!
-          </p>
-          <p class="section-description">
-            Ab sofort lohnt sich das Voten noch mehr! Jeder Vote bringt dir eine zufällige Belohnung
-            – von Diamanten bis hin zu Elytras. Zusätzlich sammelst du Vote-Punkte, die du im
-            Vote-Shop gegen exklusive Items wie Netherite-Barren oder Leuchtfeuer eintauschen
-            kannst. Also, unterstütze den Server und sichere dir coole Belohnungen!
-          </p>
-        </div>
-        <div class="links voteLinks">
-          <div class="url">
-            <a class="link" href="#vote">
-              <h2>findmcserver.com</h2>
-              <div class="link-description">
-                <p class="description">
-                  Hier könnt ihr bald auf der offiziellen Minecraft-Serverliste voten.
-                </p>
-                <div class="icon">
-                  <i class="fa-solid fa-award"></i>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="url">
-            <a
-              class="link"
-              href="https://minecraft-server.eu/vote/index/2321D"
-              rel="noopener"
-              target="_blank"
-            >
-              <h2>minecraft-server.eu</h2>
-              <div class="link-description">
-                <p class="description">Hier könnt ihr auf minecraft-server.eu voten.</p>
-                <div class="icon">
-                  <i class="fa-solid fa-check-to-slot"></i>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="url">
-            <a
-              class="link"
-              href="https://www.minecraft-serverlist.net/vote/59253"
-              rel="noopener"
-              target="_blank"
-            >
-              <h2>minecraft-serverlist.net</h2>
-              <div class="link-description">
-                <p class="description">Hier könnt ihr auf minecraft-serverlist.net voten.</p>
-                <div class="icon">
-                  <i class="fa-solid fa-check-to-slot"></i>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="url">
-            <a class="link" href="https://serverliste.net/vote/5142" rel="noopener" target="_blank">
-              <h2>serverliste.net</h2>
-              <div class="link-description">
-                <p class="description">Hier könnt ihr auf serverliste.net voten.</p>
-                <div class="icon">
-                  <i class="fa-solid fa-check-to-slot"></i>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--FAQs-->
-    <section id="faq">
-      <div class="content">
-        <div class="info">
-          <h2 class="section-title">Server <span>FAQs</span></h2>
-          <p class="section-description">
-            Du hast noch Fragen zur Minecraft Gilde? Hier findest du einige häufige Fragen zum
-            Server.
-          </p>
-        </div>
-        <div class="accordion faqList">
-          <div class="accordion-item">
-            <div class="accordion-item-header">
-              Ich bin neu auf dem Server - Gibt es ein Tutorial?
-            </div>
-            <div class="accordion-item-body">
-              <div class="accordion-item-body-content">
-                Damit du dich schnell zurechtfindest, haben wir ein Tutorial für den
-                <a href="erststart.html" rel="noopener" target="_blank">Erststart</a>
-                vorbereitet – dort erfährst du alles Wichtige rund um Regeln, Gameplay und Features. Außerdem
-                findest du am Spawn überall Infotafeln, die dich Schritt für Schritt begleiten. Und wenn
-                du trotzdem mal nicht weiterkommst, hilft dir die Community gerne im Chat weiter!
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <div class="accordion-item-header">Ist die Nutzung des Servers kostenlos?</div>
-            <div class="accordion-item-body">
-              <div class="accordion-item-body-content">
-                Die Nutzung des Servers ist vollständig kostenlos! In der Minecraft Gilde gibt es
-                keinerlei kaufbare Ränge oder Items – alle Spieler haben die gleichen Chancen und
-                Möglichkeiten.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <div class="accordion-item-header">Seit wann gibt es die Minecraft Gilde?</div>
-            <div class="accordion-item-body">
-              <div class="accordion-item-body-content">
-                Die Minecraft Gilde gibt es seit dem 1. Januar 2025. In dieser Zeit ist eine
-                lebendige Community rund um echtes Vanilla-Gameplay entstanden. Wenn du mehr über
-                unsere Entwicklung und besondere Meilensteine erfahren möchtest, schau dir gerne
-                unsere
-                <a href="geschichte.html" rel="noopener" target="_blank">Geschichte</a>
-                an.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <div class="accordion-item-header">Wie erstelle ich ein Grundstück?</div>
-            <div class="accordion-item-body">
-              <div class="accordion-item-body-content">
-                Mit einer Holzschaufel kannst du dir Grundstücke erstellen. Markiere dafür die zwei
-                gegenüberliegenden Ecken von deinem neuen Grundstück mit einem Rechtsklick.
-                Platzierst du erstmalig eine Truhe, wird automatisch ein Grundstück für dich
-                erstellt, welches du später erweitern kannst. Eine Anleitung zum Erstellen von
-                Grundstücken findest du in der
-                <a
-                  href="https://www.youtube.com/watch?v=tK15LgTwvjI"
-                  rel="noopener"
-                  target="_blank"
-                >
-                  Video-Anleitung zum Erstellen von Grundstücken (YouTube)</a
-                >.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <div class="accordion-item-header">
-              Wie groß können meine Grundstücke werden und wie viele darf ich erstellen?
-            </div>
-            <div class="accordion-item-body">
-              <div class="accordion-item-body-content">
-                Du kannst beliebig viele Grundstücke erstellen – es gibt kein Limit bei der Anzahl.
-                Entscheidend ist die Gesamtfläche: Alle deine Grundstücke zusammen dürfen maximal
-                120.000 Blöcke groß sein. Außerdem bekommst du pro Spielstunde 1.000 Claim-Blöcke
-                dazu, bis du das Maximum von 120.000 Claim-Blöcken erreicht hast. Du kannst diese
-                Blöcke frei auf mehrere Claims verteilen (z. B. ein großes oder viele kleinere).
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <div class="accordion-item-header">Gibt es Vorgaben wie ich bauen muss?</div>
-            <div class="accordion-item-body">
-              <div class="accordion-item-body-content">
-                <p>
-                  Auf unserem Minecraft-Server gibt es keine festen Vorgaben, wie oder in welchem
-                  Stil du bauen sollst. Du kannst deiner Kreativität freien Lauf lassen – egal, ob
-                  du ein kleines Häuschen, eine riesige Burg oder etwas ganz anderes bauen möchtest.
-                  Bei uns ist grundsätzlich alles erlaubt!
-                </p>
-                <p>
-                  Beachte aber bitte, dass bestimmte Bauwerke nicht gerne gesehen sind und eventuell
-                  entfernt werden können. Dazu zählen zum Beispiel:
-                </p>
-                <ul class="faq-list">
-                  <li>1x1-Säulen (“Pillars”)</li>
-                  <li>
-                    Gebäude, die hauptsächlich aus Erde oder anderen “unfertig” wirkenden
-                    Materialien bestehen
-                  </li>
-                  <li>
-                    Unnatürliche Höhlen oder Tunnel, die offen liegen und nicht schön verbaut sind
-                  </li>
-                  <li>Riesige Farmen, die nicht dekorativ eingebaut sind</li>
-                  <li>
-                    Offene, verlassene Baustellen (halbfertige Bauten, die ewig nicht fertig werden)
-                  </li>
-                </ul>
-                <p>
-                  Wenn du dir unsicher bist, ob dein Bauwerk in Ordnung ist, kannst du dich
-                  jederzeit an das <a href="admin-team.html">Team</a> wenden. Viel Spaß beim Bauen!
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <div class="accordion-item-header">
-              Kann ich mit einem "gecracktem" Minecraft auf der Minecraft-Gilde spielen?
-            </div>
-            <div class="accordion-item-body">
-              <div class="accordion-item-body-content">
-                Nein, das ist leider nicht möglich. Auf unseren Server können ausschließlich Spieler
-                joinen, die einen legal erworbenen Premium-Account besitzen. Wir möchten keine
-                Software-Piraterie unterstützen – wer ein Spiel mag, sollte es auch ehrlich kaufen.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <div class="accordion-item-header">
-              Darf ich ein Youtube-Video/Twitch-Stream auf dem Server machen und die Server-Adresse
-              zeigen?
-            </div>
-            <div class="accordion-item-body">
-              <div class="accordion-item-body-content">
-                Sehr gerne! Du darfst die IP-Adresse des Servers in deinen Videos oder Streams
-                selbstverständlich zeigen. Wenn du Interesse hast, offizieller Streamer der
-                Minecraft-Gilde zu werden, kannst du dich jederzeit an einen Admin wenden.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <div class="accordion-item-header">
-              Es gibt eine neue Minecraft-Version. Soll ich das Update direkt durchführen?
-            </div>
-            <div class="accordion-item-body">
-              <div class="accordion-item-body-content">
-                Bitte warte zunächst mit dem Update. Wir arbeiten stets daran, unseren Server so
-                schnell wie möglich auf die neueste Version zu bringen. Allerdings müssen wir vorher
-                abwarten, bis alle wichtigen Plugins und die Server-Software aktualisiert werden und
-                stabil laufen. Das kann manchmal schneller gehen, manchmal aber auch etwas länger
-                dauern. Aktuelle Informationen zu Updates findest du jederzeit auf unserem
-                Discord-Server.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <div class="accordion-item-header">Können mich andere Spieler angreifen?</div>
-            <div class="accordion-item-body">
-              <div class="accordion-item-body-content">
-                Das kommt darauf an. Auf deinem eigenen Grundstück bist du vor Angriffen durch
-                andere Spieler geschützt. Befindest du dich jedoch außerhalb deines Grundstücks oder
-                in einer Farmwelt, können Spieler sich gegenseitig angreifen.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <div class="accordion-item-header">
-              Wo finde ich Informationen zu den Server-Einstellungen?
-            </div>
-            <div class="accordion-item-body">
-              <div class="accordion-item-body-content">
-                Detailierte Informationen zu den Server-Einstellungen findest du auf der Seite
-                <a href="serverinfos.html">Server-Einstellungen</a>.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+  <section class="mg-container pb-16">
+    <div class="grid gap-4 md:grid-cols-3">
+      <Card class="p-6">
+        <h3 class="text-base font-semibold">Survival & Freebuild</h3>
+        <p class="text-muted mt-2 text-sm">
+          Baue, erkunde und gestalte frei – ohne Citybuild-Vorgaben oder künstliche Einschränkungen.
+        </p>
+      </Card>
+      <Card class="p-6">
+        <h3 class="text-base font-semibold">Singleplayer-Feeling</h3>
+        <p class="text-muted mt-2 text-sm">
+          16 Chunks Sichtweite, Vanilla-nahe Spawnraten und keine Einschränkungen bei Farmen,
+          Villagern oder Redstone.
+        </p>
+      </Card>
+      <Card class="p-6">
+        <h3 class="text-base font-semibold">Fair & ohne Pay2Win</h3>
+        <p class="text-muted mt-2 text-sm">
+          Keine kaufbaren Ränge oder Items, kein Reset-Stress – pures Minecraft, das bleibt.
+        </p>
+      </Card>
+    </div>
+  </section>
 
-  <Footer />
-  <script slot="afterScripts" type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "@id": "https://minecraft-gilde.de/#website",
-          "url": "https://minecraft-gilde.de/",
-          "name": "Minecraft Gilde – Vanilla SMP (DE)",
-          "inLanguage": "de",
-          "about": "Deutscher Minecraft Vanilla SMP Server ohne Minigames (Survival & Freebuild, 1.21.x).",
-          "isAccessibleForFree": true,
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://minecraft-gilde.de/?s={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
-        },
-        {
-          "@type": "Organization",
-          "@id": "https://minecraft-gilde.de/#org",
-          "name": "Minecraft Gilde",
-          "url": "https://minecraft-gilde.de/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://minecraft-gilde.de/images/logo.webp",
-            "width": 512,
-            "height": 512
-          },
-          "sameAs": [
-            "https://discord.minecraft-gilde.de",
-            "https://map.minecraft-gilde.de",
-            "https://minecraft-server.eu/server/index/2321D/Minecraft-Gildede-Vanilla-Survival-und-Freebuild-121x",
-            "https://www.minecraft-serverlist.net/server/59253",
-            "https://serverliste.net/server/5142"
-          ],
-          "contactPoint": [
-            {
-              "@type": "ContactPoint",
-              "contactType": "Community / Support",
-              "url": "https://discord.minecraft-gilde.de",
-              "availableLanguage": ["de"]
-            }
-          ]
-        },
-        {
-          "@type": "VideoGame",
-          "@id": "https://minecraft-gilde.de/#game",
-          "name": "Minecraft",
-          "url": "https://minecraft-gilde.de/",
-          "inLanguage": "de",
-          "genre": ["Sandbox", "Multiplayer", "Survival"],
-          "gamePlatform": ["PC", "macOS", "Linux"],
-          "isAccessibleForFree": true,
-          "image": "https://minecraft-gilde.de/images/logo.webp",
-          "keywords": [
-            "Minecraft Vanilla SMP Server",
-            "Vanilla Survival Server deutsch",
-            "Server ohne Minigames",
-            "1.21.x",
-            "Survival Multiplayer",
-            "Freebuild",
-            "Deutsch"
-          ],
-          "about": "Deutscher Vanilla SMP Server ohne Minigames – Survival & Freebuild für Version 1.21.x.",
-          "publisher": { "@id": "https://minecraft-gilde.de/#org" },
-          "mainEntityOfPage": { "@id": "https://minecraft-gilde.de/#website" },
-          "gameServer": { "@id": "https://minecraft-gilde.de/#gameserver" }
-        },
-        {
-          "@type": "GameServer",
-          "@id": "https://minecraft-gilde.de/#gameserver",
-          "name": "Minecraft Gilde – Vanilla SMP (DE)",
-          "url": "https://minecraft-gilde.de/",
-          "game": { "@id": "https://minecraft-gilde.de/#game" },
-          "serverStatus": "Online",
-          "playersOnline": 0,
-          "maximumPlayers": 100,
-          "availableLanguage": ["de"],
-          "serverLocation": {
-            "@type": "Place",
-            "address": { "@type": "PostalAddress", "addressCountry": "DE" }
-          },
-          "additionalProperty": [
-            { "@type": "PropertyValue", "name": "IP/Host", "value": "minecraft-gilde.de" },
-            { "@type": "PropertyValue", "name": "Port", "value": "25565" },
-            { "@type": "PropertyValue", "name": "Version", "value": "1.21.x" },
-            {
-              "@type": "PropertyValue",
-              "name": "Modus",
-              "value": "Vanilla SMP / Survival / Freebuild"
-            },
-            { "@type": "PropertyValue", "name": "Whitelist", "value": "nein" }
-          ],
-          "provider": { "@id": "https://minecraft-gilde.de/#org" }
-        }
-      ]
-    }
-  </script>
-  <script slot="afterScripts" type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Ist die Nutzung des Servers kostenlos?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Ja. Es gibt keine kaufbaren Ränge oder Items – alle Spieler haben die gleichen Chancen."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Wie lautet die IP/Adresse des Servers?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "minecraft-gilde.de (Standard-Port 25565)."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Welche Version wird unterstützt?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Wir spielen auf 1.21.x (Vanilla SMP, Survival & Freebuild)."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Gibt es eine Whitelist?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Nein. Du kannst jederzeit beitreten."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Gibt es Minigames?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Nein. Der Fokus liegt auf Vanilla SMP: Survival & Freebuild ohne Minigames."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Gibt es eine Karte (Dynmap) oder Discord?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Ja, Community und Infos findest du auf Discord; zusätzlich gibt es eine Live-Map (Dynmap)."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Seit wann gibt es die Minecraft Gilde?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Seit dem 01. Januar 2025."
-          }
-        }
-      ]
-    }
-  </script>
-  <script slot="afterScripts" type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://minecraft-gilde.de/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Regeln",
-          "item": "https://minecraft-gilde.de/rules.html"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Unser Team",
-          "item": "https://minecraft-gilde.de/admin-team.html"
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "name": "Serverinfos",
-          "item": "https://minecraft-gilde.de/serverinfos.html"
-        }
-      ]
-    }
-  </script>
+  <script slot="afterScripts" src="/js/app-home.js" defer></script>
 </BaseLayout>

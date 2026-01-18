@@ -1,157 +1,86 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import SectionHeader from '../components/ui/SectionHeader.astro';
-import Callout from '../components/ui/Callout.astro';
+import Card from '../components/ui/Card.astro';
 import Button from '../components/ui/Button.astro';
 import { getEntry } from 'astro:content';
+import { AlertTriangle, Book, MessageSquareText, Copy } from '@lucide/astro';
 
-const entry = await getEntry('rules', 'main');
-if (!entry) throw new Error('Missing rules content: src/content/rules/main.json');
-const data = entry.data;
+const rules = await getEntry('rules', 'main');
+if (!rules) throw new Error('Rules entry "main" not found');
+
+const { warning, minecraft, discord, serverIp } = rules.data;
+const ip = serverIp || 'minecraft-gilde.de';
 ---
 
 <BaseLayout
-  title={'Minecraft Gilde - Unser Regelwerk'}
-  canonical={'https://minecraft-gilde.de/rules.html'}
-  description={'Alle Regeln für den Minecraft Vanilla Server der Gilde – fair, klar und verständlich. Griefing, Hacks, Spam & Werbung verboten. Jetzt Regelwerk lesen!'}
-  keywords={'Minecraft Regeln, Serverregeln, Minecraft Vanilla Regeln, Survival Server Regeln, Discord Regeln, deutscher Minecraft Server, Freebuild Regeln, griefing verboten, afk farmen erlaubt, Minecraft Gilde Regeln'}
-  author={'Christian Falkner'}
-  bodyClass={'page--sticky-footer page--subpage'}
-  styles={['/css/rules.css']}
+  title="Minecraft Gilde - Unser Regelwerk"
+  canonical="https://minecraft-gilde.de/rules.html"
+  description="Alle Regeln f\u00fcr den Minecraft Vanilla Server der Gilde \u2013 fair, klar und verst\u00e4ndlich. Griefing, Hacks, Spam & Werbung verboten. Jetzt Regelwerk lesen!"
 >
-  <meta slot="head" property="og:title" content="Minecraft Gilde - Unser Regelwerk" />
-  <meta
-    slot="head"
-    property="og:description"
-    content="Lies das offizielle Regelwerk der Minecraft Gilde. Klare Regeln für Freebuild, Survival und Discord. Griefing und Hacks sind verboten."
-  />
-  <meta slot="head" property="og:image" content="https://minecraft-gilde.de/images/logo.webp" />
-  <meta slot="head" property="og:url" content="https://minecraft-gilde.de/rules.html" />
-  <meta slot="head" property="og:type" content="website" />
-  <meta slot="head" name="twitter:card" content="summary_large_image" />
-  <meta slot="head" name="twitter:title" content="Minecraft Gilde - Unser Regelwerk" />
-  <meta
-    slot="head"
-    name="twitter:description"
-    content="Faire Regeln für Freebuild, Survival und Discord. AFK-Farmen erlaubt, Griefing verboten. Erfahre, was bei uns gilt!"
-  />
-  <meta slot="head" name="twitter:image" content="https://minecraft-gilde.de/images/logo.webp" />
+  <section class="mg-container pt-12 pb-6">
+    <h1 class="text-3xl font-semibold tracking-tight">Regeln</h1>
+    <p class="text-muted mt-2">Fair play. Wenig Bürokratie. Klare Grenzen.</p>
 
-  <Navbar active={'rules'} />
-
-  <main id="main-content" tabindex="-1">
-    <SectionHeader
-      serverIp={data.serverIp}
-      description="Liste aller Minecraft- und Discord-Serverregeln."
-      titleHtml="Unser <span>Regelwerk</span>"
-    />
-
-    <section id="rules">
-      <div class="content">
-        <Callout
-          variant="warning"
-          compact
-          ariaLabel="Wichtiger Hinweis"
-          iconClass="fa-solid fa-triangle-exclamation"
-        >
-          <p>{data.warning}</p>
-        </Callout>
-
-        <div class="minecraft-rules rules">
-          <h2 class="minecraft-rules-title rules-title">{data.minecraft.title}</h2>
-          <ol class="rules-list">
-            {
-              data.minecraft.items.map((item) => (
-                <li class="rule">
-                  <b>{item.title}</b> <br />
-                  <span set:html={item.html} />
-                </li>
-              ))
-            }
-          </ol>
-        </div>
-
-        <div class="discord-rules rules">
-          <h2 class="discord-rules-title rules-title">{data.discord.title}</h2>
-          <ol class="rules-list">
-            {
-              data.discord.items.map((item) => (
-                <li class="rule">
-                  <b>{item.title}</b> <br />
-                  <span set:html={item.html} />
-                </li>
-              ))
-            }
-          </ol>
+    <div class="mg-callout mt-6" data-variant="warning">
+      <div class="flex gap-3">
+        <AlertTriangle size={20} class="mt-0.5" />
+        <div>
+          <p class="text-sm font-semibold">Wichtiger Hinweis</p>
+          <p class="text-fg/90 mt-1 text-sm">{warning}</p>
         </div>
       </div>
-    </section>
+    </div>
 
-    <section id="join-server">
-      <div class="content">
-        <h2 class="section-title">
-          Alle <span>Regeln</span> durchgelesen? Super, dann kann der <span>Spaß</span> auf unserem Server
-          beginnen!
-        </h2>
-        <div class="buttons">
-          <Button variant="primary" class="copy-ip">IP Kopieren</Button>
-          <Button
-            href="https://discord.minecraft-gilde.de"
-            variant="secondary"
-            class="discord-link join-discord"
-            target="_blank"
-            rel="noopener"
-          >
-            Discord beitreten
-          </Button>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <Button variant="primary" class="gap-2" data-copy-ip>
+        <Copy size={18} /> IP kopieren
+      </Button>
+      <Button href="/erststart.html" variant="secondary"> Erststart </Button>
+      <Button href="/stats.html" variant="ghost"> Statistiken </Button>
+    </div>
+
+    <p class="text-muted mt-3 text-xs">IP: <span class="text-fg/90 font-medium">{ip}</span></p>
+  </section>
+
+  <section class="mg-container pb-16">
+    <div class="grid gap-4 lg:grid-cols-2">
+      <Card class="p-6">
+        <div class="flex items-start gap-3">
+          <Book size={20} />
+          <div>
+            <h2 class="text-xl font-semibold tracking-tight">{minecraft.title}</h2>
+            <ol class="mt-4 space-y-4">
+              {
+                minecraft.items.map((it) => (
+                  <li class="border-border bg-surface rounded-lg border p-4">
+                    <div class="text-sm font-semibold">{it.title}</div>
+                    <div class="text-muted mt-2 text-sm leading-relaxed" set:html={it.html} />
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
         </div>
-        <p class="ip-copied">IP erfolgreich kopiert!</p>
-      </div>
-    </section>
-  </main>
+      </Card>
 
-  <Footer />
-
-  <script slot="afterScripts" type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Darf ich Redstone-Maschinen auf dem Server bauen?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Ja, Redstone-Maschinen sind erlaubt, solange sie die Serverperformance nicht merklich beeinträchtigen und abschaltbar sind."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Sind AFK-Farmen auf dem Server erlaubt?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "AFK-Farmen sind erlaubt, solange sie keine Lags verursachen oder automatisierte Systeme mit unfairen Vorteilen beinhalten."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Ist Griefing erlaubt?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Nein, Griefing ist streng verboten. Dazu zählt das Zerstören oder Verändern von fremden Bauwerken oder Eigentum."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Was passiert bei Regelverstößen?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Je nach Schwere des Verstoßes kann es Verwarnungen, Banns oder den Verlust von Gegenständen geben. Admins haben das letzte Wort."
-          }
-        }
-      ]
-    }
-  </script>
+      <Card class="p-6">
+        <div class="flex items-start gap-3">
+          <MessageSquareText size={20} />
+          <div>
+            <h2 class="text-xl font-semibold tracking-tight">{discord.title}</h2>
+            <ol class="mt-4 space-y-4">
+              {
+                discord.items.map((it) => (
+                  <li class="border-border bg-surface rounded-lg border p-4">
+                    <div class="text-sm font-semibold">{it.title}</div>
+                    <div class="text-muted mt-2 text-sm leading-relaxed" set:html={it.html} />
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+        </div>
+      </Card>
+    </div>
+  </section>
 </BaseLayout>

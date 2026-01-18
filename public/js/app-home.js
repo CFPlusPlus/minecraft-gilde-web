@@ -1,15 +1,15 @@
 /*
-  v2-home.js
+  app-home.js
   ----------
-  Home-specific behavior for /v2:
+  Home-specific behavior:
   - Player list (mcsrvstat.us)
   - World age counter (based on world start date)
 
-  Uses window.__V2_CONFIG__ from V2Layout.
+  Uses window.__APP_CONFIG__ from V2Layout.
 */
 
 (() => {
-  const config = window.__V2_CONFIG__ || { serverIp: 'minecraft-gilde.de' };
+  const config = window.__APP_CONFIG__ || { serverIp: 'minecraft-gilde.de' };
   const qs = (sel, root = document) => root.querySelector(sel);
 
   const POLL_MS = 12_000;
@@ -30,7 +30,7 @@
   // Player list
   // -------------------------
   const renderPlayers = (data) => {
-    const mount = qs('#v2-player-list');
+    const mount = qs('#player-list');
     if (!mount) return;
 
     const hasPlayers =
@@ -62,8 +62,8 @@
 
       const btn = document.createElement('a');
       btn.href = uuid
-        ? `/playerstats?uuid=${encodeURIComponent(uuid)}`
-        : `/playerstats?name=${encodeURIComponent(name)}`;
+        ? `/playerstats.html?uuid=${encodeURIComponent(uuid)}`
+        : `/playerstats.html?name=${encodeURIComponent(name)}`;
       btn.className =
         'group inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-2 text-sm text-fg/90 hover:text-fg hover:bg-surface-solid/70 transition-colors';
 
@@ -98,7 +98,7 @@
   };
 
   const fetchPlayers = async () => {
-    const mount = qs('#v2-player-list');
+    const mount = qs('#player-list');
     if (!mount) return;
 
     if (isFetchInFlight) return;
@@ -137,7 +137,7 @@
   const formatUnit = (n, s, p) => `${n} ${n === 1 ? s : p}`;
 
   const renderWorldAge = async () => {
-    const el = qs('#v2-world-age');
+    const el = qs('#world-age');
     if (!el) return;
 
     const worldStart = new Date(2024, 1, 26); // 26 Feb 2024

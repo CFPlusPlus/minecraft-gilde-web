@@ -1,4 +1,12 @@
 ---
+// BaseLayout: Tailwind + local fonts + no Font Awesome
+import '../styles/tailwind.css';
+import '@fontsource-variable/geist';
+import '@fontsource-variable/space-grotesk';
+
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
 export interface Props {
   title?: string;
   canonical?: string;
@@ -6,10 +14,9 @@ export interface Props {
   keywords?: string;
   author?: string;
   bodyClass?: string;
-  styles?: string[];
+  showNav?: boolean;
+  showFooter?: boolean;
   scripts?: string[];
-  includeGlobalScript?: boolean;
-  includeFontAwesome?: boolean;
 }
 
 const {
@@ -19,10 +26,9 @@ const {
   keywords,
   author = 'Christian Falkner',
   bodyClass = '',
-  styles = [],
+  showNav = true,
+  showFooter = true,
   scripts = [],
-  includeGlobalScript = true,
-  includeFontAwesome = true,
 } = Astro.props as Props;
 ---
 
@@ -30,37 +36,79 @@ const {
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
 
     {canonical ? <link rel="canonical" href={canonical} /> : null}
-
-    <link rel="icon" href="/images/logo.webp" />
-
-    <title>{title}</title>
-
     {description ? <meta name="description" content={description} /> : null}
     {keywords ? <meta name="keywords" content={keywords} /> : null}
     {author ? <meta name="author" content={author} /> : null}
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/global.css" />
-    {styles.map((href) => <link rel="stylesheet" href={href} />)}
+    <link rel="icon" href="/images/logo.webp" />
+    <title>{title}</title>
+
+    <script is:inline>
+      // Theme bootstrap (prevents flash). Values: 'light' | 'dark' | 'system'
+      try {
+        const stored = localStorage.getItem('theme');
+        const root = document.documentElement;
+        if (stored === 'light' || stored === 'dark') root.dataset.theme = stored;
+        else root.removeAttribute('data-theme');
+      } catch {
+        // ignore
+      }
+    </script>
+
+    <script is:inline>
+      // Expose v2 config to JS (no sensitive data)
+      window.__APP_CONFIG__ = {
+        serverIp: 'minecraft-gilde.de',
+        discordGuildId: '1219625244906754093',
+        discordInvite: 'https://discord.minecraft-gilde.de',
+        dynmapUrl: 'https://map.minecraft-gilde.de',
+      };
+    </script>
 
     <slot name="head" />
   </head>
 
-  <body class={bodyClass}>
-    <slot />
+  <body class={`min-h-dvh bg-bg text-fg antialiased ${bodyClass}`.trim()}>
+    <a
+      href="#main"
+      class="bg-surface-solid text-fg border-border sr-only rounded-lg border px-3 py-2 text-sm font-medium focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50"
+    >
+      Zum Inhalt springen
+    </a>
 
-    {includeGlobalScript ? <script src="/js/script.js" defer /> : null}
+    <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <div
+        class="bg-accent/10 absolute top-[-14rem] left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full blur-3xl"
+      >
+      </div>
+      <div
+        class="bg-accent/5 absolute top-[10rem] right-[-12rem] h-[24rem] w-[24rem] rounded-full blur-3xl"
+      >
+      </div>
+    </div>
+
+    {showNav ? <Navbar /> : null}
+
+    <main id="main">
+      <slot />
+    </main>
+
+    {showFooter ? <Footer /> : null}
+
+    <div
+      id="toast"
+      class="pointer-events-none fixed bottom-4 left-1/2 z-[60] hidden -translate-x-1/2"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+    </div>
+
+    <script src="/js/app.js" defer></script>
     {scripts.map((src) => <script src={src} defer />)}
-    {
-      includeFontAwesome ? (
-        <script src="https://kit.fontawesome.com/032e8d1ba8.js" crossorigin="anonymous" defer />
-      ) : null
-    }
-
     <slot name="afterScripts" />
   </body>
 </html>

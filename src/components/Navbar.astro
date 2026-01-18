@@ -1,39 +1,155 @@
 ---
-const { active = '' } = Astro.props;
-const is = (key) => active === key;
+import { Menu, X, ExternalLink, Sun, Moon, Laptop } from '@lucide/astro';
+import Button from './ui/Button.astro';
+
+type NavItem = { href: string; label: string; external?: boolean };
+
+const PRIMARY_LINKS: NavItem[] = [
+  { href: '/', label: 'Start' },
+  { href: '/erststart.html', label: 'Erststart' },
+  { href: '/rules.html', label: 'Regeln' },
+  { href: '/stats.html', label: 'Statistiken' },
+];
+
+const MORE_LINKS: NavItem[] = [
+  { href: '/serverinfos.html', label: 'Serverinfo' },
+  { href: '/befehle.html', label: 'Befehle' },
+  { href: '/geschichte.html', label: 'Geschichte' },
+  { href: '/admin-team.html', label: 'Admin-Team' },
+  { href: '/datenschutz.html', label: 'Datenschutz' },
+  { href: '/impressum.html', label: 'Impressum' },
+  { href: 'https://map.minecraft-gilde.de', label: 'Dynmap', external: true },
+];
+
+const DISCORD: NavItem = {
+  href: 'https://discord.minecraft-gilde.de',
+  label: 'Discord',
+  external: true,
+};
+
+const stripHtml = (p: string) => (p.endsWith('.html') ? p.slice(0, -5) : p);
+const pathname = Astro.url?.pathname || '/';
+const current = stripHtml(pathname);
+const isActive = (href: string, external?: boolean) => {
+  if (external) return false;
+  const h = stripHtml(href);
+  if (h === '/') return current === '/' || current === '';
+  return h === current;
+};
+
+const linkClass = (active: boolean) =>
+  `rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
+    active
+      ? 'bg-surface border-border text-fg'
+      : 'text-fg/90 border-transparent hover:text-fg hover:bg-surface hover:border-border'
+  }`;
 ---
 
-<div class="navbar">
-  <div class="menu-mobile">
-    <a href="index.html">
-      <div class="logo">
-        <img
-          src="/images/logo.webp"
-          alt="Minecraft Gilde - Freebuild & Survival Server Logo"
-          class="logo-img"
-          width="700"
-          height="700"
-        />
-        <h3 class="server-name">Minecraft Gilde</h3>
-      </div>
-    </a>
+<header class="sticky top-0 z-50" data-site-nav>
+  <div class="mx-auto max-w-6xl px-4 pt-4">
+    <div class="glass rounded-[var(--radius)] px-4 py-3 shadow-sm">
+      <div class="flex items-center justify-between gap-4">
+        <a href="/" class="flex items-center gap-3" aria-label="Minecraft Gilde (Start)">
+          <img
+            src="/images/logo.webp"
+            width="36"
+            height="36"
+            alt="Minecraft Gilde"
+            class="h-9 w-9 rounded-lg"
+            loading="eager"
+            decoding="async"
+          />
+          <div class="hidden leading-tight sm:block">
+            <span class="text-sm font-semibold">Minecraft Gilde</span>
+            <div class="text-muted text-xs">Vanilla SMP · 1.21.x</div>
+          </div>
+        </a>
 
-    <div class="hamburger">
-      <i class="fa-solid fa-bars"></i>
+        <nav class="hidden items-center gap-1 md:flex" aria-label="Hauptnavigation">
+          {
+            PRIMARY_LINKS.map((item) => (
+              <a href={item.href} class={linkClass(isActive(item.href, item.external))}>
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+
+        <div class="relative flex items-center gap-2">
+          <button
+            type="button"
+            class="border-border bg-surface hover:bg-surface-solid/70 inline-flex h-10 w-10 items-center justify-center rounded-lg border backdrop-blur-md transition-colors"
+            aria-label="Theme wechseln"
+            data-theme-toggle
+          >
+            <Sun size={18} class="hidden" data-theme-icon="light" />
+            <Moon size={18} class="hidden" data-theme-icon="dark" />
+            <Laptop size={18} data-theme-icon="system" />
+          </button>
+
+          <Button href={DISCORD.href} external variant="primary" class="hidden sm:inline-flex">
+            Discord
+            <ExternalLink size={16} />
+          </Button>
+
+          <button
+            type="button"
+            class="border-border bg-surface hover:bg-surface-solid/70 inline-flex h-10 w-10 items-center justify-center rounded-lg border backdrop-blur-md transition-colors"
+            aria-label="Menü öffnen"
+            aria-controls="nav-panel"
+            aria-expanded="false"
+            data-nav-toggle
+          >
+            <Menu size={20} data-icon-open />
+            <X size={20} class="hidden" data-icon-close />
+          </button>
+
+          <div
+            id="nav-panel"
+            class="mt-3 hidden md:absolute md:top-[calc(100%+0.75rem)] md:right-0 md:mt-0 md:w-[22rem]"
+            data-nav-panel
+          >
+            <div class="glass rounded-[var(--radius)] p-3 shadow-sm">
+              <div class="grid gap-1 md:hidden">
+                {
+                  PRIMARY_LINKS.map((item) => (
+                    <a href={item.href} class={linkClass(isActive(item.href, item.external))}>
+                      {item.label}
+                    </a>
+                  ))
+                }
+              </div>
+
+              <div class="bg-border my-3 h-px md:hidden"></div>
+
+              <div class="grid gap-1 sm:grid-cols-2 md:grid-cols-1">
+                {
+                  MORE_LINKS.map((item) => (
+                    <a
+                      href={item.href}
+                      target={item.external ? '_blank' : undefined}
+                      rel={item.external ? 'noopener noreferrer' : undefined}
+                      class={
+                        'text-fg/90 hover:text-fg hover:bg-surface hover:border-border rounded-lg border border-transparent px-3 py-2 text-sm transition-colors'
+                      }
+                    >
+                      {item.label}
+                      {item.external ? <span class="sr-only"> (extern)</span> : null}
+                    </a>
+                  ))
+                }
+              </div>
+
+              <div class="mt-3">
+                <Button href={DISCORD.href} external variant="primary" class="w-full sm:hidden">
+                  Discord
+                  <ExternalLink size={16} />
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="links">
-    <a href="index.html" class={'link' + (is('home') ? ' active' : '')}>Home</a>
-    <a href="befehle.html" class={'link' + (is('befehle') ? ' active' : '')}>Befehle</a>
-    <a href="rules.html" class={'link' + (is('rules') ? ' active' : '')}>Regeln</a>
-    <a href="admin-team.html" class={'link' + (is('team') ? ' active' : '')}>Unser Team</a>
-    <a href="stats.html" class={'link' + (is('stats') ? ' active' : '')}>Statistik</a>
-    <a href="https://map.minecraft-gilde.de" class="link" target="_blank" rel="noopener"
-      >Servermap</a
-    >
-    <a href="https://stats.uptimerobot.com/OnyzM9GmG2" class="link" target="_blank" rel="noopener"
-      >Status</a
-    >
-  </div>
-</div>
+</header>
