@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '../../components/ui/Card.astro';
 import Button from '../../components/ui/Button.astro';
+import JsonLd from '../../components/seo/JsonLd.astro';
+import { buildHowTo } from '../../lib/structuredData';
 import { ArrowRight, BadgeCheck, Gift, ShoppingBag, ExternalLink, Info } from '@lucide/astro';
 
 const voteSites = [
@@ -30,13 +32,40 @@ const voteSites = [
     active: false,
   },
 ];
+
+const canonicalUrl = 'https://minecraft-gilde.de/voten/';
+const howToLd = buildHowTo({
+  canonicalUrl,
+  name: 'Für Minecraft Gilde voten',
+  description:
+    'So votest du auf Serverlisten, verbesserst das Ranking und erhältst Vote-Belohnungen sowie Vote-Punkte für den Vote-Shop.',
+  steps: [
+    {
+      name: 'Vote-Link öffnen',
+      text: 'Öffne eine der Serverlisten und gehe zur Vote-Seite der Minecraft Gilde.',
+    },
+    {
+      name: 'Vote abschließen',
+      text: 'Bestätige den Vote auf der jeweiligen Seite (ggf. mit Captcha) und warte, bis die Bestätigung angezeigt wird.',
+    },
+    {
+      name: 'Optional: auf mehreren Listen voten',
+      text: 'Wenn du mehrere Listen nutzt, sammelst du schneller Vote-Punkte für den Vote-Shop.',
+    },
+    {
+      name: 'Belohnung ingame erhalten',
+      text: 'Komm danach ingame – die Vote-Belohnung wird automatisch gutgeschrieben (zufällig) und Vote-Punkte werden gesammelt.',
+    },
+  ],
+});
 ---
 
 <BaseLayout
   title="Minecraft Gilde - Voten"
-  canonical="https://minecraft-gilde.de/voten/"
+  canonical={canonicalUrl}
   description="Voten für Minecraft Gilde: Unterstütze den Server, verbessere das Ranking und erhalte Belohnungen sowie Vote-Punkte für den Vote-Shop."
 >
+  <JsonLd slot="head" data={howToLd} />
   <section class="mg-container pt-12 pb-8">
     <h1 class="text-3xl font-semibold tracking-tight">Voten</h1>
     <p class="text-muted mt-2 max-w-3xl">

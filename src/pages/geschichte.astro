@@ -2,16 +2,34 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/ui/Card.astro';
 import Button from '../components/ui/Button.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { buildArticle } from '../lib/structuredData';
 import { History, ArrowRight } from '@lucide/astro';
 
 const DISCORD_URL = 'https://discord.minecraft-gilde.de';
+
+const site = new URL('https://minecraft-gilde.de');
+const canonicalUrl = 'https://minecraft-gilde.de/geschichte/';
+const articleLd = buildArticle({
+  site,
+  canonicalUrl,
+  type: 'Article',
+  headline: 'Unsere Geschichte – Minecraft Gilde',
+  description:
+    'Wie sich die Minecraft Gilde von den Anfängen bis zum Folia-Vanilla-Server entwickelt hat – ohne Reset, community-first.',
+  image: 'https://minecraft-gilde.de/images/logo.webp',
+  authorName: 'Christian Falkner',
+  authorUrl: 'https://www.falkner.info',
+  articleSection: 'Geschichte',
+});
 ---
 
 <BaseLayout
   title="Minecraft Gilde - Geschichte - Von den Anf\u00e4ngen bis Folia"
-  canonical="https://minecraft-gilde.de/geschichte/"
+  canonical={canonicalUrl}
   description="Erfahre alles \u00fcber die Geschichte der Minecraft Gilde \u2013 vom kleinen Privatserver bis zum ersten deutschen Vanilla Freebuild Server auf Folia-Basis. Seit 2024, ohne Reset, mit Zukunft!"
 >
+  <JsonLd slot="head" data={articleLd} />
   <section class="mg-container pt-12 pb-6">
     <div class="flex items-start gap-3">
       <History size={22} />

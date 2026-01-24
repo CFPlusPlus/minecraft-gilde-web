@@ -2,13 +2,48 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/ui/Card.astro';
 import Button from '../components/ui/Button.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { buildHowTo } from '../lib/structuredData';
 import { ArrowRight, Copy, Wand2, Shield, Hammer, Map, Vote, UserRound } from '@lucide/astro';
 
 const DISCORD_URL = 'https://discord.minecraft-gilde.de';
 const DYMAP_URL = 'https://map.minecraft-gilde.de';
+
+const canonicalUrl = 'https://minecraft-gilde.de/tutorial/';
+const howToLd = buildHowTo({
+  canonicalUrl,
+  name: 'Minecraft Gilde beitreten – Schnellstart',
+  description:
+    'Kurzer Guide für den Erststart: verbinden, /rtp nutzen, Grundstück (Claim) schützen und wichtige Befehle kennen.',
+  steps: [
+    {
+      name: 'Mit dem Server verbinden',
+      text: 'Starte Minecraft Java (1.21.x) und verbinde dich mit der Adresse minecraft-gilde.de (Standard-Port 25565).',
+    },
+    {
+      name: 'Mit /rtp einen Startpunkt wählen',
+      text: 'Nutze /rtp, um dich an einen zufälligen Ort in der Hauptwelt zu teleportieren und direkt zu starten.',
+    },
+    {
+      name: 'Grundstück sichern (Claim)',
+      text: 'Halte einen Goldenen Spaten und markiere zwei Ecken mit Rechtsklick, um deinen Claim zu erstellen.',
+    },
+    {
+      name: 'Wichtige Befehle nutzen',
+      text: 'Setze Homes (/sethome, /home) und nutze Hilfe bei Bedarf (/helpop <Nachricht>).',
+      url: 'https://minecraft-gilde.de/befehle/',
+    },
+    {
+      name: 'Regeln & Community checken',
+      text: 'Lies kurz die Regeln und hol dir Updates sowie Support auf Discord.',
+      url: 'https://minecraft-gilde.de/regeln/',
+    },
+  ],
+});
 ---
 
-<BaseLayout title="Minecraft Gilde - Tutorial" canonical="https://minecraft-gilde.de/tutorial/">
+<BaseLayout title="Minecraft Gilde - Tutorial" canonical={canonicalUrl}>
+  <JsonLd slot="head" data={howToLd} />
   <section class="mg-container pt-12 pb-6">
     <h1 class="text-3xl font-semibold tracking-tight">Tutorial</h1>
     <p class="text-muted mt-2">

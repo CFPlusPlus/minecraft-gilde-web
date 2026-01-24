@@ -6,6 +6,8 @@ import '@fontsource-variable/space-grotesk';
 
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { buildBaseGraph } from '../lib/structuredData';
 
 export interface Props {
   title?: string;
@@ -66,6 +68,18 @@ const finalOgTitle = ogTitle ?? metaTitle;
 const finalOgDescription = ogDescription ?? metaDescription;
 
 const finalOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, site).toString();
+
+// ---
+// Structured data (JSON-LD)
+// ---
+const ldBase = buildBaseGraph({
+  site,
+  canonicalUrl,
+  pathname: Astro.url.pathname,
+  title: metaTitle,
+  description: metaDescription,
+  ogImage: finalOgImage,
+});
 ---
 
 <!doctype html>
@@ -112,6 +126,9 @@ const finalOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, sit
     <meta name="twitter:title" content={finalOgTitle} />
     <meta name="twitter:description" content={finalOgDescription} />
     <meta name="twitter:image" content={finalOgImage} />
+
+    {/* Structured data (global + WebPage + Breadcrumbs) */}
+    <JsonLd data={ldBase} />
 
     <script is:inline>
       // Theme bootstrap (prevents flash). Values: 'light' | 'dark' | 'system'

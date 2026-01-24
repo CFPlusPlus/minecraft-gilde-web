@@ -3,17 +3,45 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/ui/Card.astro';
 import Button from '../components/ui/Button.astro';
 import Badge from '../components/ui/Badge.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { buildArticle, buildGameServer } from '../lib/structuredData';
 import { Cpu, Shield, Gamepad2, Copy, Map, ArrowRight } from '@lucide/astro';
 
 const DISCORD_URL = 'https://discord.minecraft-gilde.de';
 const DYMAP_URL = 'https://map.minecraft-gilde.de';
+
+const site = new URL('https://minecraft-gilde.de');
+const canonicalUrl = 'https://minecraft-gilde.de/serverinfos/';
+const gameServerLd = buildGameServer({
+  site,
+  canonicalUrl,
+  ip: 'minecraft-gilde.de',
+  port: 25565,
+  version: '1.21.x',
+  maxPlayers: 100,
+});
+
+const articleLd = buildArticle({
+  site,
+  canonicalUrl,
+  type: 'TechArticle',
+  headline: 'Serverinfos & Folia-Setup – Minecraft Gilde (Vanilla SMP 1.21.x)',
+  description:
+    'Technische Details zum Setup der Minecraft Gilde: Folia 1.21.x, Hardware & Kernfeatures – optimiert für Vanilla Survival & Freebuild ohne Pay2Win.',
+  image: 'https://minecraft-gilde.de/images/logo.webp',
+  authorName: 'Christian Falkner',
+  authorUrl: 'https://www.falkner.info',
+  articleSection: 'Serverinformationen',
+});
 ---
 
 <BaseLayout
   title="Minecraft Gilde - Server Infos"
-  canonical="https://minecraft-gilde.de/serverinfos/"
+  canonical={canonicalUrl}
   description="Serverinfos der Minecraft Gilde \u2013 Folia 1.21.x, Einstellungen, Plugins & Hardware. Vanilla SMP (DE) f\u00fcr Freebuild & Survival ohne Minigames."
 >
+  <JsonLd slot="head" data={gameServerLd} />
+  <JsonLd slot="head" data={articleLd} />
   <section class="mg-container pt-12 pb-6">
     <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div>

@@ -1,0 +1,19 @@
+---
+export interface Props {
+  /** JSON-LD object or array of JSON-LD objects */
+  data: unknown;
+}
+
+const { data } = Astro.props as Props;
+
+// Prevent accidental </script> breaks (very defensive)
+// Note: JSON.stringify(undefined) returns undefined, so we coerce to null.
+const json = JSON.stringify(data ?? null).replace(/</g, '\\u003c');
+---
+
+<!--
+  IMPORTANT: use `set:html` so the JSON is injected as raw text.
+  This avoids cases where templating/escaping can lead to invalid JSON-LD.
+  Astro docs: https://docs.astro.build/en/reference/directives-reference/#sethtml
+-->
+<script type="application/ld+json" set:html={json} />

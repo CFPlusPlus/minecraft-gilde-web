@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '../../components/ui/Card.astro';
 import Button from '../../components/ui/Button.astro';
+import JsonLd from '../../components/seo/JsonLd.astro';
+import { buildFaqPage } from '../../lib/structuredData';
 import { ArrowRight, BookOpen, Hammer, Shield, Cpu, Users, ScrollText } from '@lucide/astro';
 
 type FaqItem = { q: string; a: string };
@@ -89,6 +91,14 @@ const linkify = (text: string) => {
       return `${p1}<a href="${p2}" class="text-accent underline decoration-transparent underline-offset-4 hover:decoration-accent/60">${p2}</a>`;
     });
 };
+
+const site = new URL('https://minecraft-gilde.de');
+const canonicalUrl = 'https://minecraft-gilde.de/faq/';
+const faqLd = buildFaqPage({
+  site,
+  canonicalUrl,
+  items: groups.flatMap((g) => g.items),
+});
 ---
 
 <BaseLayout
@@ -96,6 +106,7 @@ const linkify = (text: string) => {
   canonical="https://minecraft-gilde.de/faq/"
   description="FAQ zur Minecraft Gilde: Erststart, Grundstücke, Updates, PvP, Technik & Community – übersichtlich gruppiert."
 >
+  <JsonLd slot="head" data={faqLd} />
   <section class="mg-container pt-12 pb-8">
     <h1 class="text-3xl font-semibold tracking-tight">FAQ</h1>
     <p class="text-muted mt-2 max-w-3xl">
