@@ -231,7 +231,9 @@
     if (!uuidParam) {
       document.getElementById('player-name').textContent = 'Keine UUID übergeben';
       document.getElementById('player-uuid').textContent = '';
-      showApiError('Es wurde keine UUID übergeben. Öffne einen Spieler über die Suche auf /statistiken.');
+      showApiError(
+        'Es wurde keine UUID übergeben. Öffne einen Spieler über die Suche auf /statistiken.',
+      );
       return;
     }
 

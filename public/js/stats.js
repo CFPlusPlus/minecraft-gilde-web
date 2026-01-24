@@ -398,7 +398,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (e.key === 'Enter') {
       e.preventDefault();
       const chosen = acItems[Math.max(acSelected, 0)];
-      if (chosen) window.location.href = `/statistiken/spieler/?uuid=${encodeURIComponent(chosen.uuid)}`;
+      if (chosen)
+        window.location.href = `/statistiken/spieler/?uuid=${encodeURIComponent(chosen.uuid)}`;
       return;
     } else {
       return;

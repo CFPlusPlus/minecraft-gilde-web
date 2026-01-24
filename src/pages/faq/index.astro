@@ -81,7 +81,10 @@ const linkify = (text: string) => {
   // very small helper: replace "→ ...: /path/" lines with real links
   return text
     .replace(/\n\n/g, '\n')
-    .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-accent underline decoration-transparent underline-offset-4 hover:decoration-accent/60">$1</a>')
+    .replace(
+      /(https?:\/\/[^\s]+)/g,
+      '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-accent underline decoration-transparent underline-offset-4 hover:decoration-accent/60">$1</a>',
+    )
     .replace(/(→\s*[^:]+:\s*)(\/[a-z0-9\-\/]+\/?)/gi, (_m, p1, p2) => {
       return `${p1}<a href="${p2}" class="text-accent underline decoration-transparent underline-offset-4 hover:decoration-accent/60">${p2}</a>`;
     });
@@ -96,7 +99,8 @@ const linkify = (text: string) => {
   <section class="mg-container pt-12 pb-8">
     <h1 class="text-3xl font-semibold tracking-tight">FAQ</h1>
     <p class="text-muted mt-2 max-w-3xl">
-      Häufige Fragen – kurz, klar und übersichtlich. Wenn etwas fehlt: schreib uns gerne auf Discord.
+      Häufige Fragen – kurz, klar und übersichtlich. Wenn etwas fehlt: schreib uns gerne auf
+      Discord.
     </p>
 
     <div class="mt-6 flex flex-wrap gap-2">
@@ -118,9 +122,7 @@ const linkify = (text: string) => {
         groups.map((g) => (
           <Card class="p-6">
             <div class="flex items-start gap-4">
-              <div
-                class="border-border/70 bg-accent/10 text-accent mt-0.5 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border"
-              >
+              <div class="border-border/70 bg-accent/10 text-accent mt-0.5 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border">
                 <g.icon class="h-7 w-7" />
               </div>
 
@@ -128,22 +130,23 @@ const linkify = (text: string) => {
                 <h2 class="text-lg font-semibold tracking-tight">{g.title}</h2>
 
                 <div class="mt-4 grid gap-2">
-                  {
-                    g.items.map((it) => (
-                      <details class="border-border bg-surface/55 rounded-[var(--radius)] border px-4 py-3">
-                        <summary class="cursor-pointer list-none text-sm font-semibold outline-none">
-                          <span class="inline-flex items-center gap-2">
-                            <span class="bg-accent mt-0.5 h-2 w-2 flex-none rounded-full" aria-hidden="true"></span>
-                            {it.q}
-                          </span>
-                        </summary>
-                        <div
-                          class="text-muted mt-3 text-sm leading-relaxed"
-                          set:html={linkify(it.a)}
-                        />
-                      </details>
-                    ))
-                  }
+                  {g.items.map((it) => (
+                    <details class="border-border bg-surface/55 rounded-[var(--radius)] border px-4 py-3">
+                      <summary class="cursor-pointer list-none text-sm font-semibold outline-none">
+                        <span class="inline-flex items-center gap-2">
+                          <span
+                            class="bg-accent mt-0.5 h-2 w-2 flex-none rounded-full"
+                            aria-hidden="true"
+                          />
+                          {it.q}
+                        </span>
+                      </summary>
+                      <div
+                        class="text-muted mt-3 text-sm leading-relaxed"
+                        set:html={linkify(it.a)}
+                      />
+                    </details>
+                  ))}
                 </div>
               </div>
             </div>
@@ -165,7 +168,13 @@ const linkify = (text: string) => {
             <Button href="/serverinfos" variant="secondary" size="sm" class="gap-2">
               <ScrollText size={16} /> Serverinfos
             </Button>
-            <Button href="https://discord.minecraft-gilde.de" external variant="primary" size="sm" class="gap-2">
+            <Button
+              href="https://discord.minecraft-gilde.de"
+              external
+              variant="primary"
+              size="sm"
+              class="gap-2"
+            >
               <Users size={16} /> Discord <ArrowRight size={16} />
             </Button>
           </div>

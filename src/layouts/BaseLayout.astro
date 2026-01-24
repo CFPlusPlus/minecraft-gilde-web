@@ -13,6 +13,18 @@ export interface Props {
   description?: string;
   keywords?: string;
   author?: string;
+
+  /** If true: add robots noindex/nofollow */
+  noindex?: boolean;
+
+  /** OpenGraph / Twitter */
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string; // relative (/og/...) or absolute
+  ogType?: 'website' | 'article';
+  twitterCard?: 'summary' | 'summary_large_image';
+  twitterSite?: string;
+
   bodyClass?: string;
   showNav?: boolean;
   showFooter?: boolean;
@@ -25,11 +37,35 @@ const {
   description,
   keywords,
   author = 'Christian Falkner',
+
+  noindex = false,
+
+  ogTitle,
+  ogDescription,
+  ogImage = '/og/og-default.jpg',
+  ogType = 'website',
+  twitterCard = 'summary_large_image',
+  twitterSite,
+
   bodyClass = '',
   showNav = true,
   showFooter = true,
   scripts = [],
 } = Astro.props as Props;
+
+// Absolute URLs (important for OG/Twitter)
+const site = Astro.site ?? new URL('https://minecraft-gilde.de');
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site).toString();
+
+const metaTitle = title;
+const metaDescription =
+  description ??
+  'Minecraft Gilde – Langzeitwelt ohne Resets. Fair ohne Pay-to-Win. Vanilla+ Komfort.';
+
+const finalOgTitle = ogTitle ?? metaTitle;
+const finalOgDescription = ogDescription ?? metaDescription;
+
+const finalOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, site).toString();
 ---
 
 <!doctype html>
@@ -39,14 +75,43 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
 
-    {canonical ? <link rel="canonical" href={canonical} /> : null}
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    {description ? <meta name="description" content={description} /> : null}
+
+    <title>{metaTitle}</title>
+    <meta name="description" content={metaDescription} />
     {keywords ? <meta name="keywords" content={keywords} /> : null}
     {author ? <meta name="author" content={author} /> : null}
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
 
-    <link rel="icon" href="/images/logo.webp" />
-    <title>{title}</title>
+    {/* Theme color (updated dynamically to match --bg) */}
+    <meta name="theme-color" content="#0b0f14" />
+
+    {/* Icons / PWA */}
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    {/* OpenGraph */}
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Minecraft Gilde" />
+    <meta property="og:title" content={finalOgTitle} />
+    <meta property="og:description" content={finalOgDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={finalOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Minecraft Gilde" />
+
+    {/* Twitter */}
+    <meta name="twitter:card" content={twitterCard} />
+    {twitterSite ? <meta name="twitter:site" content={twitterSite} /> : null}
+    <meta name="twitter:title" content={finalOgTitle} />
+    <meta name="twitter:description" content={finalOgDescription} />
+    <meta name="twitter:image" content={finalOgImage} />
 
     <script is:inline>
       // Theme bootstrap (prevents flash). Values: 'light' | 'dark' | 'system'
@@ -55,6 +120,34 @@ const {
         const root = document.documentElement;
         if (stored === 'light' || stored === 'dark') root.dataset.theme = stored;
         else root.removeAttribute('data-theme');
+      } catch {
+        // ignore
+      }
+    </script>
+
+    <script is:inline>
+      // Keep theme-color in sync with the active theme (uses CSS variable --bg)
+      try {
+        const meta = document.querySelector('meta[name="theme-color"]');
+        const root = document.documentElement;
+
+        const update = () => {
+          const bg = getComputedStyle(root).getPropertyValue('--bg').trim();
+          if (meta && bg) meta.setAttribute('content', bg);
+        };
+
+        // Initial update (after theme bootstrap above)
+        update();
+
+        // React to manual theme toggles (data-theme changes)
+        const obs = new MutationObserver(update);
+        obs.observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+        // React to system theme changes (when no manual override is set)
+        const mq = window.matchMedia('(prefers-color-scheme: dark)');
+        mq.addEventListener?.('change', update);
+
+        window.addEventListener('DOMContentLoaded', update);
       } catch {
         // ignore
       }
