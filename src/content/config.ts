@@ -32,5 +32,15 @@ const rules = defineCollection({
     }),
   }),
 });
+const faq = defineCollection({
+  type: 'data',
+  schema: z.array(
+    z.object({
+      title: z.string(),
+      icon: z.enum(['BookOpen', 'Hammer', 'Shield', 'Cpu']),
+      items: z.array(z.object({ q: z.string(), a: z.string() })),
+    }),
+  ),
+});
 
-export const collections = { commands, rules };
+export const collections = { commands, rules, faq };

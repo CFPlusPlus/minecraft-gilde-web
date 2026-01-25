@@ -1,83 +1,30 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Card from '../../components/ui/Card.astro';
-import Button from '../../components/ui/Button.astro';
-import JsonLd from '../../components/seo/JsonLd.astro';
-import { buildFaqPage } from '../../lib/structuredData';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { buildFaqPage } from '../lib/structuredData';
 import { ArrowRight, BookOpen, Hammer, Shield, Cpu, Users, ScrollText } from '@lucide/astro';
+import { getEntry } from 'astro:content';
 
 type FaqItem = { q: string; a: string };
 
-const groups: Array<{ title: string; icon: any; items: FaqItem[] }> = [
-  {
-    title: 'Erststart & Grundlagen',
-    icon: BookOpen,
-    items: [
-      {
-        q: 'Ich bin neu auf dem Server – Gibt es ein Tutorial?',
-        a: 'Damit du dich schnell zurechtfindest, haben wir ein Tutorial für den Erststart vorbereitet. Dort erfährst du alles Wichtige rund um Regeln, Gameplay und Features. Außerdem findest du am Spawn überall Infotafeln – und im Chat hilft dir die Community gerne weiter.\n\n→ Tutorial: /tutorial/',
-      },
-      {
-        q: 'Ist die Nutzung des Servers kostenlos?',
-        a: 'Ja! Die Nutzung ist vollständig kostenlos. Es gibt keinerlei kaufbare Ränge oder Items – alle Spieler haben die gleichen Chancen und Möglichkeiten.',
-      },
-      {
-        q: 'Kann ich mit einem „gecrackten“ Minecraft spielen?',
-        a: 'Nein. Es können ausschließlich Spieler mit legal erworbenem Premium-Account joinen. Wir möchten keine Software-Piraterie unterstützen.',
-      },
-    ],
-  },
-  {
-    title: 'Grundstücke & Bauen',
-    icon: Hammer,
-    items: [
-      {
-        q: 'Wie erstelle ich ein Grundstück?',
-        a: 'Mit einer Holzschaufel kannst du dir Grundstücke erstellen. Markiere die zwei gegenüberliegenden Ecken deines Grundstücks per Rechtsklick. Wenn du erstmalig eine Truhe platzierst, wird automatisch ein Grundstück erstellt, das du später erweitern kannst.\n\nVideo-Anleitung: https://www.youtube.com/watch?v=tK15LgTwvjI',
-      },
-      {
-        q: 'Wie groß können meine Grundstücke werden und wie viele darf ich erstellen?',
-        a: 'Du kannst beliebig viele Grundstücke erstellen – es gibt kein Limit bei der Anzahl. Entscheidend ist die Gesamtfläche: Alle deine Grundstücke zusammen dürfen maximal 120.000 Blöcke groß sein. Pro Spielstunde bekommst du 1.000 Claim-Blöcke dazu, bis du das Maximum erreicht hast. Du kannst die Blöcke frei auf mehrere Claims verteilen.',
-      },
-      {
-        q: 'Gibt es Vorgaben, wie ich bauen muss?',
-        a: 'Es gibt keine festen Vorgaben – du kannst frei bauen, wie du möchtest. Bestimmte „unschöne“ Bauwerke können aber entfernt werden (z. B. 1x1-Säulen, Erdklötze als Dauerlösung, offen liegende Tunnel, riesige unintegrierte Farmen oder verlassene Baustellen). Wenn du unsicher bist, frag gern das Team.',
-      },
-    ],
-  },
-  {
-    title: 'Gameplay & Sicherheit',
-    icon: Shield,
-    items: [
-      {
-        q: 'Können mich andere Spieler angreifen?',
-        a: 'Das kommt darauf an: Auf deinem eigenen Grundstück bist du vor Angriffen geschützt. Außerhalb deines Grundstücks oder in einer Farmwelt können Spieler sich gegenseitig angreifen.',
-      },
-      {
-        q: 'Wo finde ich Informationen zu den Server-Einstellungen?',
-        a: 'Detaillierte Infos findest du auf der Seite „Server-Einstellungen“.\n\n→ Serverinfos: /serverinfos/',
-      },
-    ],
-  },
-  {
-    title: 'Technik, Updates & Community',
-    icon: Cpu,
-    items: [
-      {
-        q: 'Es gibt eine neue Minecraft-Version. Soll ich das Update direkt durchführen?',
-        a: 'Bitte warte zunächst mit dem Update. Wir bringen den Server so schnell wie möglich auf die neueste Version, müssen aber erst abwarten, bis wichtige Plugins und die Server-Software stabil aktualisiert sind. Aktuelle Infos findest du immer auf Discord.',
-      },
-      {
-        q: 'Seit wann gibt es die Minecraft Gilde?',
-        a: 'Seit dem 1. Januar 2025. Wenn du mehr über unsere Entwicklung und Meilensteine erfahren möchtest, schau gern in die Geschichte.',
-      },
-      {
-        q: 'Darf ich ein YouTube-Video/Twitch-Stream machen und die Server-Adresse zeigen?',
-        a: 'Sehr gerne! Du darfst die IP-Adresse in deinen Videos oder Streams selbstverständlich zeigen. Wenn du Interesse hast, offizieller Streamer zu werden, melde dich gern bei einem Admin.',
-      },
-    ],
-  },
-];
+type FaqGroupJson = {
+  title: string;
+  icon: 'BookOpen' | 'Hammer' | 'Shield' | 'Cpu';
+  items: FaqItem[];
+};
+const ICONS = { BookOpen, Hammer, Shield, Cpu } as const;
+
+const faqEntry = await getEntry('faq', 'main');
+if (!faqEntry) {
+  throw new Error('FAQ-Content (src/content/faq/main.json) konnte nicht geladen werden.');
+}
+
+const groups = (faqEntry.data as FaqGroupJson[]).map((g) => ({
+  ...g,
+  icon: ICONS[g.icon],
+}));
 
 const linkify = (text: string) => {
   // very small helper: replace "→ ...: /path/" lines with real links
