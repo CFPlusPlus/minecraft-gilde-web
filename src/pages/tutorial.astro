@@ -2,40 +2,41 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/ui/Card.astro';
 import Button from '../components/ui/Button.astro';
+import RoleBadge from '../components/ui/RoleBadge.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import { buildHowTo } from '../lib/structuredData';
 import { ArrowRight, Copy, Wand2, Shield, Hammer, Map, Vote, UserRound } from '@lucide/astro';
 
 const DISCORD_URL = 'https://discord.minecraft-gilde.de';
-const DYMAP_URL = 'https://map.minecraft-gilde.de';
+const DYNMAP_URL = 'https://map.minecraft-gilde.de';
 
 const canonicalUrl = 'https://minecraft-gilde.de/tutorial/';
+
 const howToLd = buildHowTo({
   canonicalUrl,
-  name: 'Minecraft Gilde beitreten – Schnellstart',
+  name: 'Minecraft Gilde beitreten – Erststart in 2 Minuten',
   description:
-    'Kurzer Guide für den Erststart: verbinden, /rtp nutzen, Grundstück (Claim) schützen und wichtige Befehle kennen.',
+    'Kompakter Einstieg: verbinden, /rtp nutzen, Zuhause setzen, Grundstück (Claim) schützen und wichtige Regeln kennen.',
   steps: [
     {
       name: 'Mit dem Server verbinden',
       text: 'Starte Minecraft Java (1.21.x) und verbinde dich mit der Adresse minecraft-gilde.de (Standard-Port 25565).',
     },
     {
-      name: 'Mit /rtp einen Startpunkt wählen',
-      text: 'Nutze /rtp, um dich an einen zufälligen Ort in der Hauptwelt zu teleportieren und direkt zu starten.',
+      name: 'Startpunkt wählen',
+      text: 'Nutze /rtp, um dich an einen zufälligen Ort in der Hauptwelt zu teleportieren (perfekt für den ersten Bauplatz).',
+    },
+    {
+      name: 'Zuhause setzen',
+      text: 'Sobald du ankommst: /sethome <Name>. So kommst du jederzeit mit /home <Name> zurück.',
     },
     {
       name: 'Grundstück sichern (Claim)',
-      text: 'Halte einen Goldenen Spaten und markiere zwei Ecken mit Rechtsklick, um deinen Claim zu erstellen.',
+      text: 'Halte eine Holzschaufel und markiere zwei Ecken mit Rechtsklick, um deinen Claim zu erstellen.',
     },
     {
-      name: 'Wichtige Befehle nutzen',
-      text: 'Setze Homes (/sethome, /home) und nutze Hilfe bei Bedarf (/helpop <Nachricht>).',
-      url: 'https://minecraft-gilde.de/befehle/',
-    },
-    {
-      name: 'Regeln & Community checken',
-      text: 'Lies kurz die Regeln und hol dir Updates sowie Support auf Discord.',
+      name: 'Regeln & Farmwelten checken',
+      text: 'Rohstoffe werden in den Farmwelten gesammelt (werden regelmäßig zurückgesetzt). Regeln findest du hier.',
       url: 'https://minecraft-gilde.de/regeln/',
     },
   ],
@@ -44,10 +45,11 @@ const howToLd = buildHowTo({
 
 <BaseLayout title="Minecraft Gilde - Tutorial" canonical={canonicalUrl}>
   <JsonLd slot="head" data={howToLd} />
+
   <section class="mg-container pt-12 pb-6">
     <h1 class="text-3xl font-semibold tracking-tight">Tutorial</h1>
     <p class="text-muted mt-2">
-      Ein kurzer Guide für neue Spieler: schnell ankommen, sicher bauen, Regeln kennen.
+      Schnellstart für den Einstieg – darunter findest du alle Themen als Kapitel zum Nachschlagen.
     </p>
 
     <div class="mt-6 flex flex-wrap gap-3">
@@ -61,29 +63,35 @@ const howToLd = buildHowTo({
 
   <section class="mg-container pb-16">
     <Card class="p-6">
-      <h2 class="text-xl font-semibold tracking-tight">Schnellstart für Ungeduldige</h2>
-      <p class="text-muted mt-2 text-sm">
-        Du willst sofort spielen? Das reicht für die ersten Minuten:
-      </p>
-      <ul class="text-muted mt-4 space-y-2 text-sm">
+      <h2 class="text-xl font-semibold tracking-tight">Schnellstart (2 Minuten)</h2>
+      <p class="text-muted mt-2 text-sm">Das reicht für den ersten Abend:</p>
+
+      <ol class="text-muted mt-4 list-decimal space-y-2 pl-5 text-sm">
         <li>
-          <span class="text-fg/90 font-medium">/rtp</span> – Teleportiert dich an einen zufälligen Ort
-          in der Hauptwelt.
+          <span class="text-fg/90 font-medium">Verbinden</span> mit <code>minecraft-gilde.de</code>.
+          Wenn du neu bist: kurz am Spawn umschauen, dann <code>/rtp</code>.
         </li>
         <li>
-          Bau dir ein Zuhause und sichere es anschließend mit einem <span
-            class="text-fg/90 font-medium">Claim</span
-          >.
+          <span class="text-fg/90 font-medium">Zuhause setzen</span>: <code
+            >/sethome &lt;Name&gt;</code
+          > &rarr; zurück mit <code>/home &lt;Name&gt;</code>.
         </li>
         <li>
-          Hilfe im Spiel: <code>/helpop &lt;Nachricht&gt;</code> oder Team direkt anschreiben.
+          <span class="text-fg/90 font-medium">Claim erstellen</span>: Holzschaufel nehmen, zwei
+          Ecken per Rechtsklick markieren.
         </li>
-      </ul>
-      <div class="mt-4 flex flex-wrap gap-2">
-        <Button href="/befehle" variant="secondary">Befehle</Button>
-        <Button href={DYMAP_URL} external variant="ghost" class="gap-2"
+        <li>
+          <span class="text-fg/90 font-medium">Rohstoffe</span> nur in Farmwelten sammeln (werden resetet):
+          <code>/farmwelt</code>, <code>/netherfarm</code>, <code>/endfarm</code>.
+        </li>
+      </ol>
+
+      <div class="mt-5 flex flex-wrap gap-2">
+        <Button href={DYNMAP_URL} external variant="ghost" class="gap-2"
           ><Map size={18} /> Dynmap</Button
         >
+        <Button href="/befehle" variant="secondary">Befehle</Button>
+        <Button href="/voten" variant="ghost">Voten</Button>
       </div>
     </Card>
 
@@ -93,16 +101,33 @@ const howToLd = buildHowTo({
           <span class="inline-flex items-center gap-2 text-sm font-semibold"
             ><Wand2 size={18} /> Abenteuerstart</span
           >
-          <span class="text-muted text-xs">/rtp · bauen · ankommen</span>
+          <span class="text-muted text-xs">/rtp · home · ankommen</span>
         </summary>
         <div class="mg-prose mt-4">
           <p>
-            Wenn du neu auf dem Server bist, ist <strong>/rtp</strong> dein bester Freund: Du wirst an
-            einen zufälligen Ort in der Hauptwelt teleportiert und kannst dort direkt starten.
+            Am Spawn kannst du kurz schauen, was es gibt &ndash; für den richtigen Start empfehlen
+            wir dann
+            <strong>/rtp</strong>. Du landest irgendwo in der Hauptwelt und kannst direkt losbauen.
           </p>
           <p>
-            Die Hauptwelt wird <strong>nicht zurückgesetzt</strong>. Für Rohstoffe gibt es separate
-            Farmwelten, die regelmäßig resetten.
+            Sobald du einen Ort gefunden hast: <strong><code>/sethome &lt;Name&gt;</code></strong> setzen.
+            Damit kommst du mit
+            <code>/home &lt;Name&gt;</code> jederzeit zurück.
+          </p>
+          <div class="mg-callout" data-variant="info">
+            <p class="text-fg/90 text-sm">
+              Tipp (Folia): Baue deine Basis nicht direkt neben anderen Spielern &ndash; besonders
+              nicht mit großen Farmen. Ein paar hundert Blöcke Abstand helfen, die Performance
+              stabil zu halten.
+            </p>
+          </div>
+          <p>
+            Du willst einen Bauplatz vorher anschauen? Nutze die <a
+              href={DYNMAP_URL}
+              target="_blank"
+              rel="noopener noreferrer">Dynmap</a
+            >
+            (Marker ein-/ausblenden) und such dir eine schöne Gegend.
           </p>
         </div>
       </details>
@@ -116,54 +141,54 @@ const howToLd = buildHowTo({
         </summary>
         <div class="mg-prose mt-4">
           <p>
-            Um dein Grundstück zu schützen, nutzt die Minecraft Gilde das Plugin <strong
+            Damit deine Kisten, Tiere und Bauten geschützt sind, nutzt die Minecraft Gilde <strong
               >GriefPrevention</strong
-            >. Mit einem Claim kann <strong>niemand</strong> in deinem Grundstück bauen oder abbauen.
+            >. Ein Claim verhindert, dass andere Spieler in deinem Bereich bauen, abbauen oder
+            Container öffnen.
           </p>
 
           <h3>So erstellst du einen Claim</h3>
           <ul>
-            <li>Halte einen <strong>Goldenen Spaten</strong> in der Hand.</li>
-            <li>Klicke mit <strong>Rechtsklick</strong> die erste Ecke deines Grundstücks an.</li>
-            <li>Klicke mit <strong>Rechtsklick</strong> die zweite Ecke an.</li>
-            <li>Fertig – dein Grundstück ist geschützt.</li>
+            <li>Halte eine <strong>Holzschaufel</strong> in der Hand.</li>
+            <li>Rechtsklick &rarr; erste Ecke.</li>
+            <li>Rechtsklick &rarr; zweite Ecke (diagonal gegenüber).</li>
+            <li>Fertig &ndash; dein Grundstück ist geschützt (Ecken werden kurz markiert).</li>
           </ul>
 
           <p>
-            Du erhältst automatisch <strong>1000 Claim-Blöcke pro Stunde</strong> (maximal <strong
+            Du erhältst automatisch <strong>1.000 Claim-Blöcke pro Stunde</strong> (maximal <strong
               >120.000</strong
-            >).
+            >). Größe anpassen? Einfach die Eckpunkte mit der Holzschaufel verschieben.
           </p>
 
-          <div class="mg-callout" data-variant="info">
-            <p class="text-fg/90 text-sm">
-              Du kannst deinen Claim jederzeit größer oder kleiner machen – einfach die Eckpunkte
-              mit dem Goldspaten verschieben.
-            </p>
+          <h3>Video: Grundstücks-Verwaltung</h3>
+          <div class="border-border bg-surface mt-3 overflow-hidden rounded-xl border">
+            <div class="relative w-full pt-[56.25%]">
+              <iframe
+                class="absolute inset-0 h-full w-full"
+                src="https://www.youtube-nocookie.com/embed/tK15LgTwvjI"
+                title="Grundstücks-Verwaltung (Tutorial)"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
           </div>
 
-          <h3>Video: Claim erstellen</h3>
-          <div class="border-border bg-surface mt-3 aspect-video overflow-hidden rounded-xl border">
-            <iframe
-              width="100%"
-              height="100%"
-              src="https://www.youtube-nocookie.com/embed/FuFizVdJ8kI"
-              title="Claim erstellen (Tutorial)"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-          </div>
-
-          <h3>Freunde hinzufügen / Rechte geben</h3>
-          <p>
-            Du kannst anderen Spielern <strong>Rechte</strong> geben – je nach Bedarf:
-          </p>
+          <h3 class="mt-6">Freunde hinzufügen / Rechte geben</h3>
+          <p>Du kannst anderen Spielern Rechte geben &ndash; je nach Bedarf:</p>
           <ul>
-            <li><code>/trust &lt;Spieler&gt;</code> – volle Rechte (bauen, abbauen, öffnen).</li>
-            <li><code>/accesstrust &lt;Spieler&gt;</code> – Türen/Buttons/Schalter nutzen.</li>
-            <li><code>/containertrust &lt;Spieler&gt;</code> – Kisten &amp; Container öffnen.</li>
             <li>
-              <code>/permissiontrust &lt;Spieler&gt;</code> – darf selbst Trust-Rechte vergeben.
+              <code>/trust &lt;Spieler&gt;</code> &ndash; volle Rechte (bauen, abbauen, öffnen).
+            </li>
+            <li>
+              <code>/accesstrust &lt;Spieler&gt;</code> &ndash; Türen/Buttons/Schalter nutzen.
+            </li>
+            <li>
+              <code>/containertrust &lt;Spieler&gt;</code> &ndash; Kisten &amp; Container öffnen.
+            </li>
+            <li>
+              <code>/permissiontrust &lt;Spieler&gt;</code> &ndash; darf selbst Trust-Rechte vergeben.
             </li>
           </ul>
 
@@ -175,7 +200,9 @@ const howToLd = buildHowTo({
           </div>
 
           <p>
-            Tipp: Mit <code>/trustlist</code> siehst du, wer in deinem Claim welche Rechte hat.
+            Mit <code>/trustlist</code> siehst du, wer in deinem Claim welche Rechte hat. Tipp: Wenn du
+            einem Spieler Rechte auf <strong>allen</strong> Claims geben willst, gib den Befehl außerhalb
+            eines Claims ein &ndash; innerhalb gilt er nur für den aktuellen Claim.
           </p>
         </div>
       </details>
@@ -190,11 +217,16 @@ const howToLd = buildHowTo({
         <div class="mg-prose mt-4">
           <p>Eine vollständige Liste findest du auf der Befehle-Seite. Hier die wichtigsten:</p>
           <ul>
-            <li><code>/sethome</code> · <code>/home</code> – Zuhause setzen und teleportieren.</li>
-            <li><code>/rtp</code> – zufälliger Teleport in die Hauptwelt.</li>
-            <li><code>/msg &lt;Spieler&gt; &lt;Nachricht&gt;</code> – private Nachricht.</li>
+            <li><code>/spawn</code> &ndash; zurück zum Spawn.</li>
             <li>
-              <code>/helpop &lt;Nachricht&gt;</code> – Hilfe an das Team (wenn’s dringend ist).
+              <code>/sethome &lt;Name&gt;</code> · <code>/home &lt;Name&gt;</code> &ndash; Zuhause setzen
+              und teleportieren.
+            </li>
+            <li><code>/rtp</code> &ndash; zufälliger Teleport in die Hauptwelt.</li>
+            <li><code>/msg &lt;Spieler&gt; &lt;Nachricht&gt;</code> &ndash; private Nachricht.</li>
+            <li>
+              <code>/helpop &lt;Nachricht&gt;</code> &ndash; Hilfe an das Team (wenn&rsquo;s dringend
+              ist).
             </li>
           </ul>
           <div class="mt-3">
@@ -212,9 +244,15 @@ const howToLd = buildHowTo({
         </summary>
         <div class="mg-prose mt-4">
           <p>
-            Bitte lies dir die Regeln kurz durch – sie sind bewusst übersichtlich gehalten.
+            Bitte lies dir die Regeln kurz durch &ndash; sie sind bewusst übersichtlich gehalten.
             Griefing, Cheating und toxisches Verhalten sind tabu.
           </p>
+          <div class="mg-callout" data-variant="warning">
+            <p class="text-fg/90 text-sm">
+              Wichtig am Anfang: Ressourcenabbau ist <strong>nur in den Farmwelten</strong> erlaubt. Die
+              Hauptwelt bleibt als Langzeitwelt erhalten.
+            </p>
+          </div>
           <div class="mt-3">
             <Button href="/regeln" variant="secondary">Regeln ansehen</Button>
           </div>
@@ -229,22 +267,33 @@ const howToLd = buildHowTo({
           <span class="text-muted text-xs">Rollen</span>
         </summary>
         <div class="mg-prose mt-4">
-          <p>Auf dem Server gibt es verschiedene Rollen:</p>
-          <ul>
-            <li><strong>Admin</strong> – verantwortlich für Technik &amp; Verwaltung.</li>
-            <li><strong>Moderator</strong> – unterstützt Spieler und achtet auf die Regeln.</li>
-            <li><strong>Streamer</strong> – Spieler, die regelmäßig live streamen.</li>
-            <li><strong>Spieler</strong> – normale Mitglieder der Community.</li>
-          </ul>
-          <div class="mg-callout" data-variant="info">
+          <p>Im Chat erkennst du Rollen an farbigen Namen. Kurz erklärt:</p>
+          <div class="mt-4 space-y-3">
+            <div class="flex flex-wrap items-center gap-3">
+              <RoleBadge role="admin" />
+              <span class="text-muted text-sm">Technik &amp; Verwaltung.</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-3">
+              <RoleBadge role="moderator" />
+              <span class="text-muted text-sm">Hilft Spielern und achtet auf die Regeln.</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-3">
+              <RoleBadge role="streamer" />
+              <span class="text-muted text-sm">Spieler, die regelmäßig live streamen.</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-3">
+              <RoleBadge role="player" />
+              <span class="text-muted text-sm">Normale Mitglieder der Community.</span>
+            </div>
+          </div>
+          <div class="mg-callout mt-4" data-variant="info">
             <p class="text-fg/90 text-sm">
-              Du kannst Teammitglieder jederzeit im Chat anschreiben. Für private Fragen nutze
-              <code>/msg &lt;Spieler&gt; &lt;Nachricht&gt;</code> oder bei dringender Hilfe <code
-                >/helpop &lt;Nachricht&gt;</code
-              >.
+              Hilfe bekommen: Team im Chat anschreiben. Privat: <code
+                >/msg &lt;Spieler&gt; &lt;Nachricht&gt;</code
+              >. Dringend: <code>/helpop &lt;Nachricht&gt;</code>.
             </p>
           </div>
-          <p>Für komplexere Anliegen kannst du dich außerdem auf unserem Discord melden.</p>
+          <p>Für längere Themen: einfach auf Discord melden.</p>
         </div>
       </details>
 
@@ -257,19 +306,19 @@ const howToLd = buildHowTo({
         </summary>
         <div class="mg-prose mt-4">
           <p>
-            Für den Abbau von Ressourcen stehen dir drei spezielle <strong>Farmwelten</strong> zur Verfügung:
+            Für den Abbau von Ressourcen gibt es separate <strong>Farmwelten</strong>. Nutze diese
+            Befehle:
           </p>
           <ul>
-            <li><strong>/farmwelt</strong> – normale Farmwelt für Holz, Steine, Erze usw.</li>
-            <li>
-              <strong>/netherfarm</strong> – Nether-Farmwelt für Netherquarz, Glowstone &amp; Co.
-            </li>
-            <li><strong>/endfarm</strong> – End-Farmwelt für Endstone, Elytra-Shulker-Loot usw.</li>
+            <li><strong>/farmwelt</strong> &ndash; Holz, Steine, Erze usw.</li>
+            <li><strong>/netherfarm</strong> &ndash; Netherquarz, Glowstone &amp; Co.</li>
+            <li><strong>/endfarm</strong> &ndash; Endstone, Elytra-/Shulker-Loot usw.</li>
           </ul>
           <div class="mg-callout" data-variant="info">
             <p class="text-fg/90 text-sm">
-              Die Farmwelten werden regelmäßig <strong>zurückgesetzt</strong>, damit immer genügend
-              Rohstoffe vorhanden sind. Nimm vor einem Reset alle wichtigen Items mit.
+              Die Farmwelten werden regelmäßig <strong>zurückgesetzt</strong>. Nimm vor einem Reset
+              alle wichtigen Items mit. Baue dort am besten nichts, was du langfristig behalten
+              möchtest.
             </p>
           </div>
         </div>
@@ -284,23 +333,20 @@ const howToLd = buildHowTo({
         </summary>
         <div class="mg-prose mt-4">
           <p>
-            Unsere <strong>Dynmap</strong> ist eine interaktive Online-Karte, die sich automatisch aktualisiert.
-            Dort kannst du <strong>alle Welten</strong> – einschließlich der Farmwelten – erkunden.
+            Die <strong>Dynmap</strong> ist unsere interaktive Online-Karte. Du kannst dort alle Welten
+            erkunden und Marker ein- oder ausblenden.
           </p>
           <ul>
-            <li>Grundstücke und geschützte Bereiche</li>
-            <li>Positionen von Spieler-Shops</li>
             <li>Sehenswürdigkeiten und besondere Orte</li>
+            <li>Shops / Marker (wenn aktiv)</li>
+            <li>Orientierung bei der Bauplatz-Suche</li>
           </ul>
-          <p>Über das Menü kannst du unter „Marker“ Zusatzinformationen ein- oder ausblenden.</p>
-          <div class="mg-callout" data-variant="info">
-            <p class="text-fg/90 text-sm">
-              Wenn du auf der Suche nach einem Bauplatz bist, hilft dir die Dynmap, freie Gebiete
-              oder schöne Landschaften zu entdecken.
-            </p>
-          </div>
+          <p>
+            Wenn du einen freien Bauplatz suchst, ist die Dynmap oft der schnellste Weg, schöne
+            Gegenden zu entdecken.
+          </p>
           <div class="mt-3">
-            <Button href={DYMAP_URL} external variant="secondary" class="gap-2"
+            <Button href={DYNMAP_URL} external variant="secondary" class="gap-2"
               ><Map size={18} /> Dynmap öffnen</Button
             >
           </div>
@@ -310,34 +356,26 @@ const howToLd = buildHowTo({
       <details class="mg-accordion">
         <summary class="flex items-center justify-between gap-3">
           <span class="inline-flex items-center gap-2 text-sm font-semibold"
-            ><Vote size={18} /> Vote für unseren Server</span
+            ><Vote size={18} /> Voten</span
           >
           <span class="text-muted text-xs">Belohnungen</span>
         </summary>
         <div class="mg-prose mt-4">
           <p>
-            Du möchtest unseren Server unterstützen und dabei selbst eine Belohnung erhalten? Dann <strong
-              >vote</strong
-            > für unseren Server.
+            Du möchtest den Server unterstützen und dabei selbst eine Belohnung erhalten? Dann vote
+            für die Minecraft Gilde.
           </p>
-          <p>
-            Unser Server ist aktuell auf drei Vote-Seiten eingetragen. Die Links findest du auf der
-            Startseite. Für jeden Vote erhältst du eine Ingame-Belohnung.
-          </p>
-          <p>
-            Regelmäßiges Voten lohnt sich besonders: Jeden Monat bekommen die Spieler mit den
-            meisten Votes eine exklusive Extra-Belohnung.
-          </p>
+          <p>Auf der Vote-Seite findest du die aktuellen Links und Infos zu den Belohnungen.</p>
           <div class="mt-3">
-            <Button href="/" variant="secondary">Zur Vote-Sektion</Button>
+            <Button href="/voten" variant="secondary">Zur Vote-Seite</Button>
           </div>
         </div>
       </details>
 
       <div class="mg-callout" data-variant="info">
         <p class="text-fg/90 text-sm">
-          Danke, dass du dir die Zeit genommen hast, das Tutorial durchzulesen. Wenn noch Fragen
-          offen sind, frag gerne im Spiel oder auf Discord – die Community hilft.
+          Danke, dass du dir die Zeit genommen hast. Wenn noch Fragen offen sind: frag gerne im
+          Spiel oder auf Discord &ndash; die Community hilft.
         </p>
       </div>
     </div>
