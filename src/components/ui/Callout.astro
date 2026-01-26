@@ -1,0 +1,36 @@
+---
+import { Info, Lightbulb, TriangleAlert, CheckCircle2 } from '@lucide/astro';
+
+const { variant = 'info', title, icon = true, class: className = '' } = Astro.props;
+
+const hasIcon = Astro.slots.has('icon');
+
+const DefaultIcon =
+  variant === 'warning'
+    ? TriangleAlert
+    : variant === 'tip'
+      ? Lightbulb
+      : variant === 'success'
+        ? CheckCircle2
+        : Info;
+
+const showIcon = icon || hasIcon;
+---
+
+<div class={`mg-callout ${className}`.trim()} data-variant={variant}>
+  <div class="flex items-start gap-3">
+    {
+      showIcon && (
+        <div class="mg-callout__icon" aria-hidden="true">
+          {hasIcon ? <slot name="icon" /> : <DefaultIcon size={18} />}
+        </div>
+      )
+    }
+    <div class="min-w-0">
+      {title && <p class="text-fg mb-1 text-sm font-semibold">{title}</p>}
+      <div class="text-fg/90 text-sm">
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>

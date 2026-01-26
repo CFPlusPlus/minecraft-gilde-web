@@ -306,7 +306,16 @@ html[data-theme='dark'] {
   /* Simple "callout" */
   .v2-callout,
   .mg-callout {
+    /* Match the site's "glass card" language: uniform border, soft shadow, readable content. */
     @apply bg-surface border-border rounded-[var(--radius)] border p-4 shadow-sm backdrop-blur-md;
+  }
+
+  .mg-callout__icon {
+    @apply bg-accent/15 text-accent mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl;
+  }
+
+  .mg-callout[data-variant='warning'] .mg-callout__icon {
+    @apply bg-accent/20;
   }
 
   .v2-callout[data-variant='warning'],
@@ -317,6 +326,7 @@ html[data-theme='dark'] {
 
   .v2-callout[data-variant='info'],
   .mg-callout[data-variant='info'] {
+    border-color: color-mix(in oklab, var(--accent) 18%, var(--border) 82%);
     background: color-mix(in oklab, var(--surface) 85%, transparent);
   }
 }

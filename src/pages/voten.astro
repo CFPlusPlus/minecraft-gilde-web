@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/ui/Card.astro';
 import Button from '../components/ui/Button.astro';
+import Callout from '../components/ui/Callout.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import { buildHowTo } from '../lib/structuredData';
 import { ArrowRight, BadgeCheck, Gift, ShoppingBag, ExternalLink, Info } from '@lucide/astro';
@@ -175,19 +176,11 @@ const howToLd = buildHowTo({
       }
     </div>
 
-    <div class="mt-6">
-      <div class="mg-callout" data-variant="info">
-        <div class="flex gap-3">
-          <Info size={20} class="mt-0.5" />
-          <div>
-            <p class="text-sm font-semibold">Tipp</p>
-            <p class="text-fg/90 mt-1 text-sm">
-              Wenn du mehrere Listen nutzt, lohnt sich Voting besonders – du sammelst schneller
-              Vote-Punkte für den Vote-Shop.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Callout variant="info" title="Tipp" class="mt-6">
+      <p>
+        Wenn du mehrere Listen nutzt, lohnt sich Voting besonders – du sammelst schneller
+        Vote-Punkte für den Vote-Shop.
+      </p>
+    </Callout>
   </section>
 </BaseLayout>

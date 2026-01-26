@@ -2,8 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/ui/Card.astro';
 import Button from '../components/ui/Button.astro';
+import Callout from '../components/ui/Callout.astro';
 import { getEntry } from 'astro:content';
-import { AlertTriangle, Book, MessageSquareText, Copy, ArrowRight } from '@lucide/astro';
+import { Book, MessageSquareText, Copy, ArrowRight } from '@lucide/astro';
 
 const rules = await getEntry('rules', 'main');
 if (!rules) throw new Error('Rules entry "main" not found');
@@ -21,15 +22,9 @@ const ip = serverIp || 'minecraft-gilde.de';
     <h1 class="text-3xl font-semibold tracking-tight">Regeln</h1>
     <p class="text-muted mt-2">Fair play. Wenig Bürokratie. Klare Grenzen.</p>
 
-    <div class="mg-callout mt-6" data-variant="warning">
-      <div class="flex gap-3">
-        <AlertTriangle size={20} class="mt-0.5" />
-        <div>
-          <p class="text-sm font-semibold">Wichtiger Hinweis</p>
-          <p class="text-fg/90 mt-1 text-sm">{warning}</p>
-        </div>
-      </div>
-    </div>
+    <Callout variant="warning" title="Wichtiger Hinweis" class="mt-6">
+      <p>{warning}</p>
+    </Callout>
 
     <div class="mt-6 flex flex-wrap gap-3">
       <Button variant="primary" class="gap-2" data-copy-ip>

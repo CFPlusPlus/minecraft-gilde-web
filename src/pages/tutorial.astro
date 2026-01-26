@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/ui/Card.astro';
 import Button from '../components/ui/Button.astro';
 import RoleBadge from '../components/ui/RoleBadge.astro';
+import Callout from '../components/ui/Callout.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import { buildHowTo } from '../lib/structuredData';
 import { ArrowRight, Copy, Wand2, Shield, Hammer, Map, Vote, UserRound } from '@lucide/astro';
@@ -49,7 +50,7 @@ const howToLd = buildHowTo({
   <section class="mg-container pt-12 pb-6">
     <h1 class="text-3xl font-semibold tracking-tight">Tutorial</h1>
     <p class="text-muted mt-2">
-      Schnellstart für den Einstieg – darunter findest du alle Themen als Kapitel zum Nachschlagen.
+      In 2 Minuten startklar – darunter findest du alle Themen als Kapitel zum Nachschlagen.
     </p>
 
     <div class="mt-6 flex flex-wrap gap-3">
@@ -81,7 +82,7 @@ const howToLd = buildHowTo({
           Ecken per Rechtsklick markieren.
         </li>
         <li>
-          <span class="text-fg/90 font-medium">Rohstoffe</span> nur in Farmwelten sammeln (werden resetet):
+          <span class="text-fg/90 font-medium">Rohstoffe</span> nur in Farmwelten sammeln (werden zurückgesetzt):
           <code>/farmwelt</code>, <code>/netherfarm</code>, <code>/endfarm</code>.
         </li>
       </ol>
@@ -105,22 +106,23 @@ const howToLd = buildHowTo({
         </summary>
         <div class="mg-prose mt-4">
           <p>
-            Am Spawn kannst du kurz schauen, was es gibt &ndash; für den richtigen Start empfehlen
-            wir dann
+            Am Spawn kannst du kurz ankommen &ndash; für den richtigen Start empfehlen wir dann
             <strong>/rtp</strong>. Du landest irgendwo in der Hauptwelt und kannst direkt losbauen.
+            Wenn du dich zwischendurch verlaufen solltest, bringt dich <code>/spawn</code> jederzeit zurück.
           </p>
           <p>
             Sobald du einen Ort gefunden hast: <strong><code>/sethome &lt;Name&gt;</code></strong> setzen.
             Damit kommst du mit
             <code>/home &lt;Name&gt;</code> jederzeit zurück.
           </p>
-          <div class="mg-callout" data-variant="info">
-            <p class="text-fg/90 text-sm">
-              Tipp (Folia): Baue deine Basis nicht direkt neben anderen Spielern &ndash; besonders
-              nicht mit großen Farmen. Ein paar hundert Blöcke Abstand helfen, die Performance
-              stabil zu halten.
+          <Callout variant="info" title="Performance-Hinweis (Folia)">
+            <Wand2 size={18} slot="icon" />
+            <p>
+              Damit der Server für alle flüssig bleibt: Baue deine Basis nicht direkt neben anderen
+              Spielern &ndash; besonders nicht mit großen Farmen. Ein paar hundert Blöcke Abstand
+              helfen, die Performance stabil zu halten.
             </p>
-          </div>
+          </Callout>
           <p>
             Du willst einen Bauplatz vorher anschauen? Nutze die <a
               href={DYNMAP_URL}
@@ -153,6 +155,15 @@ const howToLd = buildHowTo({
             <li>Rechtsklick &rarr; erste Ecke.</li>
             <li>Rechtsklick &rarr; zweite Ecke (diagonal gegenüber).</li>
             <li>Fertig &ndash; dein Grundstück ist geschützt (Ecken werden kurz markiert).</li>
+          </ul>
+
+          <h3>Claim prüfen</h3>
+          <ul>
+            <li>Halte einen <strong>Stock</strong> in der Hand.</li>
+            <li>
+              Rechtsklick auf einen Block &ndash; du siehst, ob du in einem Claim bist und wem er
+              gehört.
+            </li>
           </ul>
 
           <p>
@@ -192,12 +203,13 @@ const howToLd = buildHowTo({
             </li>
           </ul>
 
-          <div class="mg-callout" data-variant="warning">
-            <p class="text-fg/90 text-sm">
-              Vergib Rechte nur an Spieler, denen du vertraust. Rechte gelten auch für Truhen &amp;
-              Redstone im Claim.
+          <Callout variant="warning" title="Sei vorsichtig bei Berechtigungen">
+            <Shield size={18} slot="icon" />
+            <p>
+              Vergib Rechte nur an Spieler, denen du vertraust. Trust-Rechte gelten auch für Truhen
+              &amp; Redstone im Claim.
             </p>
-          </div>
+          </Callout>
 
           <p>
             Mit <code>/trustlist</code> siehst du, wer in deinem Claim welche Rechte hat. Tipp: Wenn du
@@ -247,12 +259,13 @@ const howToLd = buildHowTo({
             Bitte lies dir die Regeln kurz durch &ndash; sie sind bewusst übersichtlich gehalten.
             Griefing, Cheating und toxisches Verhalten sind tabu.
           </p>
-          <div class="mg-callout" data-variant="warning">
-            <p class="text-fg/90 text-sm">
-              Wichtig am Anfang: Ressourcenabbau ist <strong>nur in den Farmwelten</strong> erlaubt. Die
-              Hauptwelt bleibt als Langzeitwelt erhalten.
+          <Callout variant="warning" title="Wichtig am Anfang">
+            <Shield size={18} slot="icon" />
+            <p>
+              Ressourcenabbau ist <strong>nur in den Farmwelten</strong> erlaubt. Die Hauptwelt bleibt
+              als Langzeitwelt erhalten.
             </p>
-          </div>
+          </Callout>
           <div class="mt-3">
             <Button href="/regeln" variant="secondary">Regeln ansehen</Button>
           </div>
@@ -286,13 +299,13 @@ const howToLd = buildHowTo({
               <span class="text-muted text-sm">Normale Mitglieder der Community.</span>
             </div>
           </div>
-          <div class="mg-callout mt-4" data-variant="info">
-            <p class="text-fg/90 text-sm">
-              Hilfe bekommen: Team im Chat anschreiben. Privat: <code
-                >/msg &lt;Spieler&gt; &lt;Nachricht&gt;</code
-              >. Dringend: <code>/helpop &lt;Nachricht&gt;</code>.
+          <Callout class="mt-4" variant="info" title="Hilfe bekommen">
+            <UserRound size={18} slot="icon" />
+            <p>
+              Team im Chat anschreiben. Privat: <code>/msg &lt;Spieler&gt; &lt;Nachricht&gt;</code>.
+              Dringend: <code>/helpop &lt;Nachricht&gt;</code>.
             </p>
-          </div>
+          </Callout>
           <p>Für längere Themen: einfach auf Discord melden.</p>
         </div>
       </details>
@@ -314,13 +327,14 @@ const howToLd = buildHowTo({
             <li><strong>/netherfarm</strong> &ndash; Netherquarz, Glowstone &amp; Co.</li>
             <li><strong>/endfarm</strong> &ndash; Endstone, Elytra-/Shulker-Loot usw.</li>
           </ul>
-          <div class="mg-callout" data-variant="info">
-            <p class="text-fg/90 text-sm">
+          <Callout variant="info" title="Hinweis">
+            <Map size={18} slot="icon" />
+            <p>
               Die Farmwelten werden regelmäßig <strong>zurückgesetzt</strong>. Nimm vor einem Reset
               alle wichtigen Items mit. Baue dort am besten nichts, was du langfristig behalten
               möchtest.
             </p>
-          </div>
+          </Callout>
         </div>
       </details>
 
@@ -372,12 +386,12 @@ const howToLd = buildHowTo({
         </div>
       </details>
 
-      <div class="mg-callout" data-variant="info">
-        <p class="text-fg/90 text-sm">
-          Danke, dass du dir die Zeit genommen hast. Wenn noch Fragen offen sind: frag gerne im
-          Spiel oder auf Discord &ndash; die Community hilft.
+      <Callout variant="info" title="Noch Fragen?">
+        <p>
+          Danke, dass du dir die Zeit genommen hast. Wenn noch etwas offen ist: frag gerne im Spiel
+          oder auf Discord &ndash; die Community hilft.
         </p>
-      </div>
+      </Callout>
     </div>
   </section>
 </BaseLayout>
