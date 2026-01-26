@@ -12,14 +12,16 @@
   },
   "dependencies": {
     "@lucide/astro": "^0.515.0",
-    "astro": "^5.16.9"
+    "astro": "^5.16.9",
+    "isomorphic-dompurify": "^2.35.0",
+    "marked": "^17.0.1"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
     "@astrojs/sitemap": "^3.5.0",
     "@fontsource-variable/geist": "^5.1.0",
     "@fontsource-variable/space-grotesk": "^5.1.0",
     "@tailwindcss/vite": "^4.1.13",
+    "@types/node": "^22.0.0",
     "prettier": "^3.8.0",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.14",

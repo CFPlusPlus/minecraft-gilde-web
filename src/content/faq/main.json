@@ -5,7 +5,7 @@
     "items": [
       {
         "q": "Ich bin neu auf dem Server – Gibt es ein Tutorial?",
-        "a": "Damit du dich schnell zurechtfindest, haben wir ein Tutorial für den Erststart vorbereitet. Dort erfährst du alles Wichtige rund um Regeln, Gameplay und Features. Außerdem findest du am Spawn überall Infotafeln – und im Chat hilft dir die Community gerne weiter.\n\n→ Tutorial: /tutorial/"
+        "a": "Damit du dich schnell zurechtfindest, haben wir ein Tutorial für den Erststart vorbereitet. Dort erfährst du alles Wichtige rund um Regeln, Gameplay und Features. Außerdem findest du am Spawn überall Infotafeln – und im Chat hilft dir die Community gerne weiter.\n\nMehr dazu im [Tutorial](/tutorial/)."
       },
       {
         "q": "Ist die Nutzung des Servers kostenlos?",
@@ -14,6 +14,18 @@
       {
         "q": "Kann ich mit einem „gecrackten“ Minecraft spielen?",
         "a": "Nein. Es können ausschließlich Spieler mit legal erworbenem Premium-Account joinen. Wir möchten keine Software-Piraterie unterstützen."
+      },
+      {
+        "q": "Welche Minecraft-Version wird unterstützt?",
+        "a": "Aktuell unterstützen wir ausschließlich Minecraft: Java Edition."
+      },
+      {
+        "q": "Brauche ich Discord, um zu spielen?",
+        "a": "Discord ist nicht verpflichtend, aber sehr empfohlen – dort posten wir wichtige Infos, Updates und News zum Server."
+      },
+      {
+        "q": "Gibt es eine Karte (Live-Map/Dynmap/BlueMap)?",
+        "a": "Ja – hier findest du unsere Live-Map: [map.minecraft-gilde.de](https://map.minecraft-gilde.de)."
       }
     ]
   },
@@ -23,11 +35,15 @@
     "items": [
       {
         "q": "Wie erstelle ich ein Grundstück?",
-        "a": "Mit einer Holzschaufel kannst du dir Grundstücke erstellen. Markiere die zwei gegenüberliegenden Ecken deines Grundstücks per Rechtsklick. Wenn du erstmalig eine Truhe platzierst, wird automatisch ein Grundstück erstellt, das du später erweitern kannst.\n\nVideo-Anleitung: https://www.youtube.com/watch?v=tK15LgTwvjI"
+        "a": "Mit einer Holzschaufel kannst du dir Grundstücke erstellen. Markiere die zwei gegenüberliegenden Ecken deines Grundstücks per Rechtsklick. Wenn du erstmalig eine Truhe platzierst, wird automatisch ein Grundstück erstellt, das du später erweitern kannst.\n\nVideo-Anleitung: [YouTube-Video](https://www.youtube.com/watch?v=tK15LgTwvjI)"
       },
       {
         "q": "Wie groß können meine Grundstücke werden und wie viele darf ich erstellen?",
         "a": "Du kannst beliebig viele Grundstücke erstellen – es gibt kein Limit bei der Anzahl. Entscheidend ist die Gesamtfläche: Alle deine Grundstücke zusammen dürfen maximal 120.000 Blöcke groß sein. Pro Spielstunde bekommst du 1.000 Claim-Blöcke dazu, bis du das Maximum erreicht hast. Du kannst die Blöcke frei auf mehrere Claims verteilen."
+      },
+      {
+        "q": "Wie gebe ich anderen Zugriff auf meinen Claim?",
+        "a": "Du kannst andere Spieler zu deinem Grundstück hinzufügen, damit sie z. B. bauen oder Kisten öffnen können.\n\nBefehl: `/trust Spielername`\n\nMehr Details findest du auf der Seite [Befehle](/befehle) und im [Tutorial](/tutorial/)."
       },
       {
         "q": "Gibt es Vorgaben, wie ich bauen muss?",
@@ -44,8 +60,12 @@
         "a": "Das kommt darauf an: Auf deinem eigenen Grundstück bist du vor Angriffen geschützt. Außerhalb deines Grundstücks oder in einer Farmwelt können Spieler sich gegenseitig angreifen."
       },
       {
+        "q": "Gibt es KeepInventory / Was passiert beim Tod?",
+        "a": "Ja – KeepInventory ist aktiv. Du behältst deine Items beim Tod."
+      },
+      {
         "q": "Wo finde ich Informationen zu den Server-Einstellungen?",
-        "a": "Detaillierte Infos findest du auf der Seite „Server-Einstellungen“.\n\n→ Serverinfos: /serverinfos/"
+        "a": "Detaillierte Infos findest du auf der Seite [Server-Einstellungen](/serverinfos/)."
       }
     ]
   },
@@ -56,6 +76,14 @@
       {
         "q": "Es gibt eine neue Minecraft-Version. Soll ich das Update direkt durchführen?",
         "a": "Bitte warte zunächst mit dem Update. Wir bringen den Server so schnell wie möglich auf die neueste Version, müssen aber erst abwarten, bis wichtige Plugins und die Server-Software stabil aktualisiert sind. Aktuelle Infos findest du immer auf Discord."
+      },
+      {
+        "q": "Gibt es eine Farmwelt – und wird sie resettet?",
+        "a": "Ja, für Ressourcen gibt es eine Farmwelt. Diese wird in unregelmäßigen Abständen zurückgesetzt (Infos dazu teilen wir rechtzeitig)."
+      },
+      {
+        "q": "Welche Mods/Clients sind erlaubt?",
+        "a": "Erlaubt sind z. B. Performance- und UI-Mods. Nicht erlaubt sind Cheats wie X-Ray, Auto-Aim oder Scaffold."
       },
       {
         "q": "Seit wann gibt es die Minecraft Gilde?",

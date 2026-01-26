@@ -175,13 +175,32 @@ export const buildFaqPage = (args: {
   const { canonicalUrl, site, items } = args;
 
   const absolutizeInternal = (text: string) => {
-    return String(text)
-      .replace(/\n\n/g, '\n')
-      .replace(/\s+\n/g, '\n')
-      .replace(/(\s|^)(\/[a-z0-9\-\/]+\/?)(?=\s|$)/gi, (_m, p1, p2) => {
-        const abs = new URL(p2, site).toString();
-        return `${p1}${abs}`;
-      });
+    const src = String(text ?? '');
+
+    const toAbs = (href: string) => {
+      const h = String(href ?? '').trim();
+      return h.startsWith('/') ? new URL(h, site).toString() : h;
+    };
+
+    // Convert Markdown links to readable plain text (and absolutize relative URLs).
+    const withMdLinks = src.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_m, label, href) => {
+      const url = toAbs(href);
+      return `${String(label).trim()}: ${url}`;
+    });
+
+    return (
+      withMdLinks
+        // Inline code -> plain
+        .replace(/`([^`]+)`/g, '$1')
+        // Keep answers compact for JSON-LD
+        .replace(/\n\n/g, '\n')
+        .replace(/\s+\n/g, '\n')
+        // Absolutize remaining bare internal paths like "/tutorial"
+        .replace(/(\s|^)(\/[a-z0-9\-\/]+\/?)(?=\s|$)/gi, (_m, p1, p2) => {
+          const abs = new URL(p2, site).toString();
+          return `${p1}${abs}`;
+        })
+    );
   };
 
   return {

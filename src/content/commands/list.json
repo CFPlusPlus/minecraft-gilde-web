@@ -17,7 +17,7 @@
         },
         {
           "command": "/afk",
-          "description": "Mit diesem Befehl setzt ihr euch abwesend (Achtung: Monster können euch immer noch angreifen!) Hinweis: Wenn ihr Abwesend seit können andere Spieler schlafen gehen, ohne dass ihr schlafen gehen müsst"
+          "description": "Mit diesem Befehl setzt ihr euch abwesend (Achtung: Monster können euch immer noch angreifen!)"
         },
         {
           "command": "/back",
@@ -174,7 +174,7 @@
           "description": "Befreit dich aus einem Claim, in dem du gefangen bist"
         },
         {
-          "command": "/expandclaim <+/- wert>",
+          "command": "/expandclaim <+/- Wert>",
           "description": "Erweitert den Claim um die angegebene Distanz (Der Befehl ist nur möglich, wenn eine Holz-Schaufel in der Hand gehalten wird)"
         },
         {

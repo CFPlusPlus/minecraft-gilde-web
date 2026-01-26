@@ -57,7 +57,10 @@ const ip = serverIp || 'minecraft-gilde.de';
                 minecraft.items.map((it) => (
                   <li class="border-border bg-surface rounded-lg border p-4">
                     <div class="text-sm font-semibold">{it.title}</div>
-                    <div class="text-muted mt-2 text-sm leading-relaxed" set:html={it.html} />
+                    <div
+                      class="mg-prose text-muted mt-2 text-sm leading-relaxed"
+                      set:html={it.html}
+                    />
                   </li>
                 ))
               }
@@ -80,7 +83,10 @@ const ip = serverIp || 'minecraft-gilde.de';
                 discord.items.map((it) => (
                   <li class="border-border bg-surface rounded-lg border p-4">
                     <div class="text-sm font-semibold">{it.title}</div>
-                    <div class="text-muted mt-2 text-sm leading-relaxed" set:html={it.html} />
+                    <div
+                      class="mg-prose text-muted mt-2 text-sm leading-relaxed"
+                      set:html={it.html}
+                    />
                   </li>
                 ))
               }

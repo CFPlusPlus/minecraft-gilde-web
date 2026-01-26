@@ -274,10 +274,29 @@ html[data-theme='dark'] {
   }
 
   .v2-prose a,
-  .mg-prose a {
+  .mg-prose a,
+  a.mg-link {
     color: color-mix(in oklab, var(--accent) 85%, var(--fg) 15%);
     text-decoration: underline;
     text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent);
+    transition:
+      color 150ms ease,
+      text-decoration-color 150ms ease;
+  }
+
+  .v2-prose a:hover,
+  .mg-prose a:hover,
+  a.mg-link:hover {
+    color: color-mix(in oklab, var(--accent2) 92%, var(--fg) 8%);
+    text-decoration-color: color-mix(in oklab, var(--accent) 70%, transparent);
+  }
+
+  .v2-prose a:focus-visible,
+  .mg-prose a:focus-visible,
+  a.mg-link:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 8px;
   }
 
   /* Accordion */

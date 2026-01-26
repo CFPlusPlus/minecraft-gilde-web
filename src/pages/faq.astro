@@ -6,6 +6,7 @@ import JsonLd from '../components/seo/JsonLd.astro';
 import { buildFaqPage } from '../lib/structuredData';
 import { ArrowRight, BookOpen, Hammer, Shield, Cpu, Users, ScrollText } from '@lucide/astro';
 import { getEntry } from 'astro:content';
+import { renderMarkdown } from '../utils/renderMarkdown';
 
 type FaqItem = { q: string; a: string };
 
@@ -25,19 +26,6 @@ const groups = (faqEntry.data as FaqGroupJson[]).map((g) => ({
   ...g,
   icon: ICONS[g.icon],
 }));
-
-const linkify = (text: string) => {
-  // very small helper: replace "→ ...: /path/" lines with real links
-  return text
-    .replace(/\n\n/g, '\n')
-    .replace(
-      /(https?:\/\/[^\s]+)/g,
-      '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-accent underline decoration-transparent underline-offset-4 hover:decoration-accent/60">$1</a>',
-    )
-    .replace(/(→\s*[^:]+:\s*)(\/[a-z0-9\-\/]+\/?)/gi, (_m, p1, p2) => {
-      return `${p1}<a href="${p2}" class="text-accent underline decoration-transparent underline-offset-4 hover:decoration-accent/60">${p2}</a>`;
-    });
-};
 
 const site = new URL('https://minecraft-gilde.de');
 const canonicalUrl = 'https://minecraft-gilde.de/faq/';
@@ -100,8 +88,8 @@ const faqLd = buildFaqPage({
                         </span>
                       </summary>
                       <div
-                        class="text-muted mt-3 text-sm leading-relaxed"
-                        set:html={linkify(it.a)}
+                        class="faq-answer mg-prose mt-3 text-sm leading-relaxed"
+                        set:html={renderMarkdown(it.a)}
                       />
                     </details>
                   ))}
@@ -140,4 +128,18 @@ const faqLd = buildFaqPage({
       </Card>
     </div>
   </section>
+
+  <style is:global>
+    /*
+      FAQ nutzt die gleichen "mg-prose" Link-Styles wie der Rest der Seite.
+      Hier halten wir nur den Abstand im Accordion kompakt.
+    */
+    .faq-answer.mg-prose > :first-child {
+      margin-top: 0;
+    }
+
+    .faq-answer.mg-prose > :last-child {
+      margin-bottom: 0;
+    }
+  </style>
 </BaseLayout>
