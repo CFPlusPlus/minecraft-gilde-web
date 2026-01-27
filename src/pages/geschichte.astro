@@ -2,101 +2,258 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/ui/Card.astro';
 import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+import Callout from '../components/ui/Callout.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import { buildArticle } from '../lib/structuredData';
-import { History, ArrowRight } from '@lucide/astro';
+import { ArrowRight, Flag, Globe, Rocket, Cpu, Paintbrush } from '@lucide/astro';
 
 const DISCORD_URL = 'https://discord.minecraft-gilde.de';
 
 const site = new URL('https://minecraft-gilde.de');
 const canonicalUrl = 'https://minecraft-gilde.de/geschichte/';
+
 const articleLd = buildArticle({
   site,
   canonicalUrl,
   type: 'Article',
   headline: 'Unsere Geschichte – Minecraft Gilde',
   description:
-    'Wie sich die Minecraft Gilde von den Anfängen bis zum Folia-Vanilla-Server entwickelt hat – ohne Reset, community-first.',
+    'Von minecraft.falkner.info zum Folia-Vanilla-Server: die wichtigsten Meilensteine der Minecraft Gilde seit Februar 2024.',
   image: 'https://minecraft-gilde.de/images/logo.webp',
   authorName: 'Christian Falkner',
   authorUrl: 'https://www.falkner.info',
   articleSection: 'Geschichte',
 });
+
+type Milestone = {
+  id: string;
+  date: string;
+  title: string;
+  paragraphs: string[];
+  image?: {
+    src: string;
+    alt: string;
+  };
+  cta?: boolean;
+};
+
+// Tipp: Wenn du Bilder integrieren willst, lege sie z. B. unter
+// /public/images/geschichte/ ab und setze pro Milestone optional `image`.
+const milestones: Milestone[] = [
+  {
+    id: 'feb-2024',
+    date: 'Februar 2024',
+    title: 'Die Stunde Null',
+    paragraphs: [
+      'Im Februar 2024 ging unter dem Namen minecraft.falkner.info ein kleiner Server mit sieben Slots online. Eine frisch generierte Welt, pures Vanilla-Feeling – und schnell fanden sich die ersten Stammspieler:innen ein, die den Ton setzten: freundlich, hilfsbereit und entspannt.',
+      'Mit jedem neuen Projekt und jeder größeren Basis wuchsen Anspruch und Technik. Noch 2024 folgte ein Hardware-Upgrade, damit der Server stabil blieb und weiter wachsen konnte.',
+    ],
+  },
+  {
+    id: 'herbst-2024',
+    date: 'Herbst 2024',
+    title: 'Der Wunsch nach einem klaren Auftritt',
+    paragraphs: [
+      'Als immer mehr Spieler mitspielten, wurde klar: Der Server brauchte auch nach außen einen klaren Auftritt. Der alte Name war praktisch, aber sperrig – und ohne eigene Webseite fehlte ein zentraler Ort für Regeln, Infos und Updates.',
+    ],
+  },
+  {
+    id: 'winter-2024',
+    date: 'Herbst/Winter 2024',
+    title: '„Minecraft Gilde“ entsteht',
+    paragraphs: [
+      'In vielen Gesprächen und langen Discord-Abenden – zusammen mit unserem Partner, dem Anti‑Corona‑Kartell – suchten wir nach einem Namen, der hängen bleibt. Am Ende setzte sich „Minecraft Gilde“ durch: kurz, einprägsam und genau das, was wir sein wollten.',
+      'Parallel nahmen wir Domain und Logo in Angriff. Aus einer Idee wurde Schritt für Schritt eine Webseite, die den Server künftig begleiten sollte.',
+    ],
+  },
+  {
+    id: 'jan-2025',
+    date: '01. Januar 2025',
+    title: 'Die Minecraft Gilde geht online',
+    paragraphs: [
+      'Am 1. Januar 2025 war es so weit: Unter dem neuen Namen, mit Logo und eigener Domain ging die Minecraft Gilde offiziell online. Damit gab es endlich einen festen Anlaufpunkt für alles, was rund um den Server wichtig ist.',
+    ],
+  },
+  {
+    id: 'fruehjahr-2025',
+    date: 'Frühjahr 2025',
+    title: 'Leistungsgrenzen & Ursachenforschung',
+    paragraphs: [
+      'Mit größeren Basen und mehr gleichzeitigen Spieler:innen zeigten sich die Grenzen der bisherigen Technik deutlich. Wir optimierten Einstellungen und testeten verschiedene Ansätze – doch für die Qualität, die wir bieten wollten, reichte das langfristig nicht aus.',
+    ],
+  },
+  {
+    id: 'maerz-2025',
+    date: 'März 2025',
+    title: 'Erste Tests mit Folia',
+    paragraphs: [
+      'Bei der Suche nach einer Lösung stießen wir auf Folia, eine Server-Software mit regionsbasiertem Multithreading. Im März 2025 begannen die ersten Tests – und die Ergebnisse fühlten sich wie ein echter Schritt nach vorn an: deutlich flüssiger, besonders in stark bebauten Bereichen.',
+    ],
+  },
+  {
+    id: 'mai-2025',
+    date: '01. Mai 2025',
+    title: 'Der Wechsel auf Folia',
+    paragraphs: [
+      'Am 1. Mai 2025 zogen wir um: Seitdem läuft die Minecraft Gilde auf Folia. Das Ziel blieb dasselbe – ein möglichst grenzenloses Vanilla‑Erlebnis ohne Reset, aber mit mehr Performance-Reserven für alles, was die Community baut.',
+    ],
+  },
+  {
+    id: 'weiter',
+    date: 'Ausblick',
+    title: 'Und wie geht es weiter?',
+    paragraphs: [
+      'Und das war erst der Anfang. Wenn du die nächsten Kapitel miterleben willst, komm gern auf unseren Discord – dort teilen wir Updates, Events und neue Ideen zuerst.',
+    ],
+    cta: true,
+  },
+];
 ---
 
 <BaseLayout
-  title="Minecraft Gilde - Geschichte - Von den Anf\u00e4ngen bis Folia"
+  title="Minecraft Gilde - Geschichte - Von den Anfängen bis Folia"
   canonical={canonicalUrl}
-  description="Erfahre alles \u00fcber die Geschichte der Minecraft Gilde \u2013 vom kleinen Privatserver bis zum ersten deutschen Vanilla Freebuild Server auf Folia-Basis. Seit 2024, ohne Reset, mit Zukunft!"
+  description="Erfahre alles über die Geschichte der Minecraft Gilde – vom kleinen Privatserver bis zum ersten deutschen Vanilla Freebuild Server auf Folia-Basis. Seit 2024, ohne Reset, mit Zukunft!"
 >
   <JsonLd slot="head" data={articleLd} />
+
   <section class="mg-container pt-12 pb-6">
-    <div class="flex items-start gap-3">
-      <History size={22} />
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div>
         <h1 class="text-3xl font-semibold tracking-tight">Geschichte</h1>
-        <p class="text-muted mt-2">Ein paar Eckdaten – kurz &amp; ehrlich.</p>
+        <p class="text-muted mt-2">
+          Von <span class="text-fg font-medium">minecraft.falkner.info</span> bis Folia – unsere Reise
+          seit Februar 2024.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        <Button href={DISCORD_URL} external variant="secondary" class="gap-2">
+          Discord <ArrowRight size={18} />
+        </Button>
+        <Button href="/serverinfos" variant="ghost">Serverinfos</Button>
       </div>
     </div>
 
-    <div class="mt-6 flex flex-wrap gap-3">
-      <Button href={DISCORD_URL} external variant="secondary" class="gap-2">
-        Discord <ArrowRight size={18} />
-      </Button>
-      <Button href="/serverinfos" variant="ghost">Serverinfos</Button>
+    <div class="mt-6 flex flex-wrap gap-2">
+      <Badge variant="accent">Start: Feb 2024</Badge>
+      <Badge>Website: 01.01.2025</Badge>
+      <Badge>Folia: seit 01.05.2025</Badge>
+      <Badge>Ohne Reset seit 2024</Badge>
     </div>
   </section>
 
   <section class="mg-container pb-16">
-    <div class="grid gap-4">
-      <Card class="p-6">
-        <h2 class="text-xl font-semibold tracking-tight">2021 – Der Anfang</h2>
-        <p class="text-muted mt-3 text-sm leading-relaxed">
-          In 2021 wurde der erste Minecraft-Server von der Minecraft Gilde gegründet.
-        </p>
-      </Card>
+    <div class="grid gap-4 lg:grid-cols-3">
+      <div class="grid gap-4 lg:col-span-2">
+        <Card class="p-6">
+          <Callout variant="tip" title="Kurz erklärt">
+            Hier findest du die wichtigsten Stationen unserer Entwicklung – kompakt, nachvollziehbar
+            und mit den Dingen, die den Server geprägt haben.
+          </Callout>
+        </Card>
 
-      <Card class="p-6">
-        <h2 class="text-xl font-semibold tracking-tight">Mai 2022 – Neustart</h2>
-        <p class="text-muted mt-3 text-sm leading-relaxed">
-          Im Mai 2022 wurde der erste Server dann jedoch wieder zurückgesetzt. Der Neustart war ein
-          Erfolg: Der Server konnte eine Vielzahl an Spielern anlocken.
-        </p>
-      </Card>
+        <Card class="p-6">
+          <h2 class="text-base font-semibold tracking-tight">Meilensteine</h2>
 
-      <Card class="p-6">
-        <h2 class="text-xl font-semibold tracking-tight">
-          Februar 2024 – Survival &amp; Freebuild
-        </h2>
-        <p class="text-muted mt-3 text-sm leading-relaxed">
-          Anfang Februar 2024 fand ein weiterer, grundlegender Neustart statt: Seitdem liegt der
-          Fokus auf purem Survival und kreativem Freebuild. Der Server bietet ein
-          Singleplayer-Feeling – 16 Chunks Sichtweite, Vanilla-nahe Spawnraten und keine
-          Einschränkungen bei Mobs, Villagern oder Farmen.
-        </p>
-        <p class="text-muted mt-3 text-sm leading-relaxed">
-          Die Welt wird dabei nicht zurückgesetzt – gebautes bleibt.
-        </p>
-      </Card>
+          <div class="relative mt-6">
+            <div
+              class="bg-border/70 absolute top-2 bottom-2 left-4 w-px [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"
+              aria-hidden="true"
+            >
+            </div>
 
-      <Card class="p-6">
-        <h2 class="text-xl font-semibold tracking-tight">April 2024 – Community-Partner</h2>
-        <p class="text-muted mt-3 text-sm leading-relaxed">
-          Seit April 2024 ist die Minecraft-Gilde Partner des ANTI-CORONA-KARTELL.
-        </p>
-        <p class="text-muted mt-3 text-sm leading-relaxed">
-          Das ANTI-CORONA-KARTELL ist eine Socialmedia-Community mit Discord, Community-Server und
-          einem eigenen Minecraft-Server.
-        </p>
-      </Card>
+            <ol class="list-none space-y-4 pl-0">
+              {
+                milestones.map((m) => (
+                  <li id={m.id} class="relative pl-12">
+                    <div class="absolute top-6 left-4 -translate-x-1/2">
+                      <div class="border-border/60 bg-accent/10 ring-accent/25 flex h-10 w-10 items-center justify-center rounded-full border ring-1 backdrop-blur-md">
+                        <div class="bg-accent h-2.5 w-2.5 rounded-full shadow-[0_0_0_8px_rgba(242,201,76,0.10)]" />
+                      </div>
+                    </div>
 
-      <Card class="p-6">
-        <h2 class="text-xl font-semibold tracking-tight">Heute</h2>
-        <p class="text-muted mt-3 text-sm leading-relaxed">
-          Die Minecraft Gilde bietet neben dem Survival-Server (Folia) und der Dynmap auch eine
-          moderne Statistik-Seite. Zudem werden über die Zeit weitere Features ergänzt.
-        </p>
-      </Card>
+                    <Card class="hover:border-accent/30 p-5 transition will-change-transform hover:-translate-y-0.5">
+                      <div class="flex flex-wrap items-center gap-2">
+                        <Badge variant={m.cta ? 'neutral' : 'accent'}>{m.date}</Badge>
+                      </div>
+
+                      <h3 class="mt-3 text-lg font-semibold tracking-tight">{m.title}</h3>
+
+                      {m.paragraphs.map((p) => (
+                        <p class="text-muted mt-2 text-sm leading-relaxed">{p}</p>
+                      ))}
+
+                      {m.image ? (
+                        <img
+                          src={m.image.src}
+                          alt={m.image.alt}
+                          loading="lazy"
+                          decoding="async"
+                          class="border-border/60 mt-4 aspect-[16/9] w-full rounded-[calc(var(--radius)-6px)] border object-cover"
+                        />
+                      ) : null}
+
+                      {m.cta ? (
+                        <div class="mt-4">
+                          <Button href={DISCORD_URL} external variant="primary" class="gap-2">
+                            Auf Discord dabei sein <ArrowRight size={18} />
+                          </Button>
+                        </div>
+                      ) : null}
+                    </Card>
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+        </Card>
+      </div>
+
+      <div class="grid gap-4">
+        <Card class="p-6">
+          <h2 class="text-base font-semibold tracking-tight">Was uns geprägt hat</h2>
+          <ul class="text-muted mt-4 space-y-3 text-sm">
+            <li class="flex gap-3">
+              <Flag size={18} class="shrink-0" />
+              <span>Eine freundliche Atmosphäre und ein engagiertes Miteinander als Grundlage.</span
+              >
+            </li>
+            <li class="flex gap-3">
+              <Globe size={18} class="shrink-0" />
+              <span>Wachstum, neue Funktionen und Skalierung – inklusive Hardware-Upgrade.</span>
+            </li>
+            <li class="flex gap-3">
+              <Paintbrush size={18} class="shrink-0" />
+              <span>Ein klarer Auftritt: neuer Name, Logo, Domain und eigene Webseite.</span>
+            </li>
+            <li class="flex gap-3">
+              <Cpu size={18} class="shrink-0" />
+              <span
+                >Hoher Anspruch an Performance – Ursachenforschung statt „einfach so lassen“.</span
+              >
+            </li>
+            <li class="flex gap-3">
+              <Rocket size={18} class="shrink-0" />
+              <span>Pionierarbeit mit Folia – der Schritt zu regionsbasiertem Multithreading.</span>
+            </li>
+          </ul>
+        </Card>
+
+        <Card class="p-6">
+          <h2 class="text-base font-semibold tracking-tight">Noch mehr Details?</h2>
+          <p class="text-muted mt-3 text-sm leading-relaxed">
+            Wenn dich das Setup interessiert oder du wissen willst, wie wir Folia betreiben, findest
+            du die wichtigsten Infos auf der Serverinfos-Seite.
+          </p>
+          <div class="mt-4">
+            <Button href="/serverinfos" variant="secondary" class="gap-2">
+              Serverinfos öffnen <ArrowRight size={18} />
+            </Button>
+          </div>
+        </Card>
+      </div>
     </div>
   </section>
 </BaseLayout>
