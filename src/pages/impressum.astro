@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/ui/Card.astro';
 import Button from '../components/ui/Button.astro';
-import { Scale, ArrowRight } from '@lucide/astro';
+import { ArrowRight } from '@lucide/astro';
 import impressumHtml from '../partials/impressum.html?raw';
 
 const DISCORD_URL = 'https://discord.minecraft-gilde.de';
@@ -15,12 +15,9 @@ const DISCORD_URL = 'https://discord.minecraft-gilde.de';
   description="Erlebe Freebuild & Survival in der Minecraft Gilde! Keine Minigames \u2013 reines Vanilla-Gameplay. Tritt jetzt bei! IP: minecraft-gilde.de"
 >
   <section class="mg-container pt-12 pb-16">
-    <div class="flex items-start gap-3">
-      <Scale size={22} class="mt-1 shrink-0" />
-      <div>
-        <h1 class="text-3xl font-semibold tracking-tight">Impressum</h1>
-        <p class="text-muted mt-2">Angaben gemäß §5 DDG.</p>
-      </div>
+    <div>
+      <h1 class="text-3xl font-semibold tracking-tight">Impressum</h1>
+      <p class="text-muted mt-2">Angaben gemäß §5 DDG.</p>
     </div>
 
     <div class="mt-6 flex flex-wrap gap-3">
@@ -33,4 +30,6 @@ const DISCORD_URL = 'https://discord.minecraft-gilde.de';
       <div class="mg-prose" set:html={impressumHtml} />
     </Card>
   </section>
+
+  <script src="/js/email-obfuscate.js" defer></script>
 </BaseLayout>
